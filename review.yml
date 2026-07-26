@@ -1,0 +1,685 @@
+aid: goodlord
+name: Goodlord
+review:
+  question: Does Goodlord publish a reachable public developer surface, and what is its
+    RESO posture?
+  answer: true
+  date: '2026-07-26'
+  reviewer: API Evangelist
+  homeMarket: United Kingdom
+  tier: property-management
+  legalEntity: Oh Goodlord Limited (company number 8933499, VAT 274970368), The Hickman,
+    2-4 Whitechapel Rd, London E1 1EW. Appointed Representative of Goodlord Protect
+    Limited, authorised and regulated by the Financial Conduct Authority for insurance
+    distribution activities, Firm Reference Number 836727 (taken verbatim from the
+    www.goodlord.com footer, 2026-07-26).
+  summary: |
+    Goodlord is a UK lettings platform for residential letting agents, landlords and
+    tenants, covering referencing, contracts, tenant payments, deposits, rent protection
+    insurance, guarantors, PEPs/sanctions checks, inventories, utilities and end of
+    tenancy. It sits between the agency CRM and the regulated deposit schemes, insurers
+    and utility suppliers — deliberately NOT on the listings side of the UK market, which
+    is controlled by the Rightmove/Zoopla portal duopoly.
+
+    Goodlord DOES publish a real, reachable public developer portal — the strongest
+    developer surface found so far in the UK lettings CRM/platform tier. It is a Tyk
+    Developer Portal at https://portal.goodlord.co with a Public Catalogue containing one
+    product (Referencing Product) exposing two APIs (Sandbox Referencing API and Live
+    Referencing API). Documentation, authentication instructions, webhook event
+    catalogue, glossary and the OpenAPI documents themselves are all readable and
+    downloadable ANONYMOUSLY — no login required. Three genuine OpenAPI 3.1.0 documents
+    were fetched and saved verbatim into openapi/.
+
+    But the contract being public is not the same as the API being open. The portal's own
+    registration page renders the message "Registration is not allowed" and requires an
+    invite code, and Goodlord's own getting-started guide routes developers through a
+    sales manager for sandbox and an account manager for production. Public docs,
+    partner-gated keys.
+
+    A separate, second API surface was found outside the developer portal: the Goodlord
+    Insurance App at insurance-app.goodlord.co serves a complete OpenAPI 3.1.0 document
+    publicly and unauthenticated at /api/v1/docs with the application/vnd.openapi+json
+    media type. It is a rent-protection insurance claims API. It is not catalogued, not
+    documented in prose, and has no onboarding path — the contract is public, the API is
+    not offered.
+
+    A significant false positive was avoided. developer.goodlord.co, developers.goodlord.co,
+    docs.goodlord.co, status.goodlord.co, help.goodlord.co, public-api.goodlord.co,
+    partner-api.goodlord.co, integrations.goodlord.co, webhooks.goodlord.co and
+    sandbox.goodlord.co ALL return HTTP 200 — and all return the identical 8,160-byte
+    document (MD5 bc1447f277997272a0f21ee88571a5ee), which is the Goodlord Core tenant
+    SPA served by a wildcard DNS record. A nonsense subdomain returns the same page.
+    None of them is a developer portal, a docs site, a status page or a help centre.
+    Recording any of those 200s as a developer surface would have been wrong. The real
+    portal is on a hostname that never appears in the marketing site's 385-URL sitemap:
+    portal.goodlord.co.
+
+resoPosture:
+  certified: false
+  posture: No RESO reference found — RESO is a US NAR/MLS construct with no United
+    Kingdom counterpart
+  webApiCertification: none
+  dataDictionaryCertification: none
+  dataDictionaryVersion: null
+  resoDirectoryListing: none found
+  upiSupport: false
+  odataMetadataDocument: not served
+  evidence: |
+    Goodlord makes no RESO claim of any kind. A word-boundary search for "RESO",
+    "Real Estate Standards", "Data Dictionary", "Universal Property Identifier", "UPI",
+    "OData" and "$metadata" across every Goodlord artifact fetched on 2026-07-26 —
+    the marketing site, the integrations and partners pages, the developer portal home,
+    the product catalogue, the Referencing Product documentation page, both Referencing
+    API OpenAPI documents, the Insurance App OpenAPI document, and the OIDC discovery
+    document — returned ZERO hits. (An early loose grep matched "Reposit", a deposit
+    alternative partner whose name merely contains the substring "reso"; that is not a
+    RESO reference.) No RESO certification-directory listing for Goodlord was found.
+
+    OData was ruled out by probe, not by inference. $metadata returned HTTP 404 at
+    api-sandbox.goodlord.co, core-api.goodlord.co, insurance-app.goodlord.co and
+    insurance-app.goodlord.co/api/v1, and connection failed at api.goodoverlord.com.
+    www.goodlord.com/$metadata returned HTTP 404 and portal.goodlord.co/$metadata
+    returned the portal's soft-404 HTML page (HTTP 200, 5,280 bytes, identical to
+    /robots.txt and every other unknown path on that host — a Tyk portal catch-all, not
+    a metadata document). Both published contract families are plain JSON REST described
+    by OpenAPI 3.1.0, not OData.
+
+    This absence is the expected and honest answer for the United Kingdom. The UK has no
+    MLS and no cooperative listing database, so no industry body mandates a
+    machine-readable listing contract the way NAR mandates RESO in the US. Goodlord in
+    particular is not a listings company at all — it never touches the portal feed. Its
+    contracts are tenancy-lifecycle contracts (applications, subjects, referencing
+    outcomes, claims, rent schedules), a domain RESO's Data Dictionary does not model.
+    The UK substitute for a standard here is not a standard: it is a set of bilateral
+    commercial integrations with CRMs (Reapit, Alto, Street, Qube) and with the
+    government-approved deposit schemes (TDS, DPS, mydeposits).
+
+accessGate:
+  gate: partner-only
+  gated: true
+  selfServe: false
+  documentationPublic: true
+  specsPublic: true
+  whatADeveloperMustSignOrJoin: |
+    A developer can READ everything and DOWNLOAD every contract with no account. What a
+    developer cannot do is get a key.
+
+    The Tyk portal's account creation page at
+    https://portal.goodlord.co/auth/password/register returns HTTP 200 and renders the
+    heading "Create an account" immediately followed by the message "Registration is not
+    allowed". The form still exposes an "Invite code" field (form field invite_id)
+    alongside email, first, last, password1 and password2 — i.e. the only path into the
+    portal is an invite issued by Goodlord. There is no public application form, no
+    "request access" flow, and no reviewed-then-approved queue.
+
+    Goodlord's own published getting-started guide states the route in plain language:
+    "If you have already spoken to Goodlord, good to see you again! ... Our teams will be
+    working together to get you set up with your sandbox account. You should already have
+    access. If you do not, please contact your sales manager. Ready to go-live? Simply
+    contact your account manager, and we'll enable your full access to production and let
+    you know when it's ready." Developers who have not yet spoken to Goodlord are directed
+    to "Get in touch today to set up a call."
+
+    Classified partner-only rather than application-approval because there is nothing to
+    apply to — access is negotiated commercially through sales and enabled per account by
+    Goodlord staff, and the self-serve registration route is explicitly disabled. There is
+    no MLS membership requirement, no IDX/VOW data licence, and no requirement to be a
+    licensed agent or broker-sponsored: the gate is a commercial relationship with the
+    vendor. Webhook subscriptions are gated the same way — Goodlord's documentation says
+    "Please contact us if you would like to subscribe to webhook events. When requesting
+    access to an account, you must let us know which events you wish to subscribe to and
+    what endpoints you would like us to call."
+  portalConfirmed: true
+  portalURL: https://portal.goodlord.co/
+  portalNote: |
+    Confirmed as a REAL developer portal, not a member login. https://portal.goodlord.co/
+    returned HTTP 200 with the title "Welcome to the Goodlord Developer Portal" and the
+    body text "Here you can find all the tools and resources you need to build your
+    integration with the Goodlord API." It is a Tyk Developer Portal (footer: "Powered by
+    © Tyk Technologies") rendering OpenAPI through Stoplight Elements. The product
+    catalogue, the full Referencing Product documentation, the getting-started blog posts
+    and both OpenAPI JSON documents were all retrieved anonymously with no cookie or
+    credential. Only /portal/catalogue-apis, /portal/private, /portal/login and the
+    subscription surfaces redirect to the Tyk login page.
+
+openData:
+  publishesOpenData: false
+  note: |
+    Goodlord publishes no open, unlicensed, publicly callable dataset. Every API found is
+    tenant-scoped, credential-gated commercial SaaS data belonging to Goodlord's letting
+    agency customers, and the domain is personal data of the highest sensitivity —
+    identity documents, credit checks, income and affordability, address history.
+    A word-boundary search for "Land Registry", "Ordnance Survey", "Price Paid",
+    "open data" and "open licence/license" across all fetched Goodlord artifacts returned
+    zero hits.
+
+    The UK's genuinely open property layer sits in the public sector, not with the
+    PropTech vendors: HM Land Registry (Price Paid Data, ownership data) and Ordnance
+    Survey (addressing and mapping) publish open-licensed data with real APIs. That is
+    the UK counterweight to the private Rightmove/Zoopla duopoly, and none of it is
+    Goodlord's. The only adjacent public-data touchpoint found is a partner, not a
+    publication: Goodlord's partners page describes Perse as providing "access to energy
+    and carbon data for all buildings and vehicles in Britain; data which helps drive
+    Goodlord's energy notification service" — Goodlord consumes that, it does not publish
+    it. Kamma is likewise consumed for property licensing intelligence across "over 370
+    selective, additional and HMO licensing schemes".
+
+authModel:
+  referencingApi:
+    scheme: OAuth 2.0 client_credentials (machine-to-machine)
+    tokenEndpointSandbox: https://api-sandbox.goodlord.co/auth/token
+    tokenEndpointLive: https://api.goodoverlord.com/auth/token
+    grantType: client_credentials
+    credentials: client_id and client_secret, posted as JSON
+    tokenFormat: JWT
+    tokenType: Bearer
+    tokenLifetimeSeconds: 3600
+    additionalRequiredHeader: 'Company-ID: <issued Company ID> on every request'
+    observedScopeString: 'free_plan referencing_product (from the example token response
+      in Goodlord''s own published authentication documentation)'
+    declaredScopesInSpec: 'empty — components.securitySchemes.OAuth2.flows.clientCredentials.scopes
+      is {} in both the live and sandbox OpenAPI documents'
+    openidConnect: false
+    source: OpenAPI 3.1.0 securitySchemes plus the Authentication section of
+      https://portal.goodlord.co/portal/catalogue-products/referencing-product-1
+  insuranceAppApi:
+    scheme: JWT bearer in the Authorization header
+    securitySchemeType: 'apiKey (in header, name Authorization) — declared as type apiKey
+      rather than http/bearer in the published spec'
+    schemeName: JWT
+    openidConnect: false
+    source: components.securitySchemes.JWT in
+      https://insurance-app.goodlord.co/api/v1/docs
+  endUserPlatformAuth:
+    scheme: OpenID Connect / OAuth 2.0 via Microsoft Entra External ID (Azure AD B2C)
+      custom policy
+    tenantId: 7ddbafdc-ee33-46fb-968a-3011e2a0a825
+    policy: B2C_1A_2_SIGNUPORSIGNIN (sign-up-only variant B2C_1A_2_SIGNUPONLY)
+    issuer: https://login.goodlord.co/7ddbafdc-ee33-46fb-968a-3011e2a0a825/v2.0/
+    authorizationEndpoint: https://login.goodlord.co/7ddbafdc-ee33-46fb-968a-3011e2a0a825/b2c_1a_2_signuporsignin/oauth2/v2.0/authorize
+    tokenEndpoint: https://login.goodlord.co/7ddbafdc-ee33-46fb-968a-3011e2a0a825/b2c_1a_2_signuporsignin/oauth2/v2.0/token
+    jwksUri: https://login.goodlord.co/7ddbafdc-ee33-46fb-968a-3011e2a0a825/b2c_1a_2_signuporsignin/discovery/v2.0/keys
+    scopesSupported:
+    - openid
+    idTokenSigningAlgs:
+    - RS256
+    subjectTypes:
+    - pairwise
+    customClaims:
+    - companies
+    - userRoles
+    - userTypes
+    - currentUserIdentities
+    resourceScopePrefix: https://vouchauth.onmicrosoft.com/gl-api (declared in the Goodlord
+      Core SPA msalConfig; the "vouchauth" tenant name reflects Goodlord's Vouch
+      referencing lineage, corroborated by the OpenAPI contact address devs@vouch.co.uk)
+    wellKnownOpenidConfiguration: 'HTTP 200 — fetched anonymously from
+      https://login.goodlord.co/7ddbafdc-ee33-46fb-968a-3011e2a0a825/B2C_1A_2_SIGNUPORSIGNIN/v2.0/.well-known/openid-configuration
+      on 2026-07-26. Note this is the END-USER platform login for letting agents and
+      tenants, NOT the developer API auth; the Referencing API uses its own
+      client_credentials token endpoint.'
+    note: 'Anonymous probes of /.well-known/openid-configuration at login.goodlord.co
+      root, insurance-app.goodlord.co, core-api.goodlord.co, api-sandbox.goodlord.co and
+      www.goodlord.com all returned HTTP 404 — only the policy-scoped B2C path serves a
+      discovery document.'
+
+findings:
+  developerPortalIsRealButUncatalogued: |
+    The single most important finding. Goodlord's real developer portal lives at
+    portal.goodlord.co — a hostname that appears NOWHERE in the marketing site. The
+    www.goodlord.com sitemap contains 385 URLs and not one /api, /developers or /docs
+    entry; /api, /developers, /docs and /integrations on www.goodlord.com all return
+    HTTP 404. The portal was found via web search, not by crawling the company's own
+    site. A developer arriving at goodlord.co has no signposted route to it.
+  wildcardDnsFalsePositiveTrap: |
+    Ten subdomains of goodlord.co return HTTP 200 with byte-identical content
+    (8,160 bytes, MD5 bc1447f277997272a0f21ee88571a5ee): developer, developers, docs,
+    status, help, app, public-api, partner-api, integrations, webhooks and sandbox. A
+    control probe of zzzznotreal.goodlord.co also returned 200. All are the Goodlord Core
+    tenant SPA served by a wildcard record — the page title is "goodlord" and the only
+    visible text is "Copy to Clipboard". There is consequently NO public status page and
+    NO public help centre on goodlord.co, despite both hostnames answering 200.
+  publiclyServedOpenapiOutsideThePortal: |
+    insurance-app.goodlord.co is an API Platform (Symfony) service that serves its
+    complete OpenAPI 3.1.0 document publicly and unauthenticated. GET /api/v1 returns a
+    resourceNameCollection listing the internal DTO/model class names
+    (App\InsuranceClaim\Domain\Dto\*, App\RentSchedule\Domain\Model\*, App\User\Domain\*,
+    App\Company\*, App\File\*, App\Payment\*), and GET /api/v1/docs returns the full
+    187,522-byte spec with 21 paths and 96 schemas. The same document is reachable at
+    /api/v1/docs.jsonopenapi and /api/v1/docs?format=json. Content negotiation is strict:
+    Accept: application/json returns HTTP 406 and only application/vnd.openapi+json is
+    accepted. Every data operation is gated — /api/v1/companies and
+    /api/v1/insurance_claims both returned HTTP 401 with an RFC-style error body. The
+    spec's servers block also discloses Goodlord's non-production hostnames verbatim
+    (insurance-app.staging.goodoverlord.com, insurance-app.qa1.goodoverlord.com,
+    insurance-app.demo.goodlord.co) and mislabels the production host
+    insurance-app.goodlord.co as "Development".
+  liveServerIsOnADifferentDomain: |
+    The live Referencing API's declared server is https://api.goodoverlord.com, not a
+    goodlord.co host. goodoverlord.com is Goodlord's internal/engineering domain (it also
+    carries the staging and QA hosts named in the Insurance App spec). That host did not
+    answer anonymous probes at all (connection failure, curl code 000) — consistent with
+    network-level allow-listing for partners. The sandbox host api-sandbox.goodlord.co IS
+    publicly reachable: / returned HTTP 404 with a 9-byte text/plain body and
+    /referencing/application returned HTTP 403 with a JSON body, confirming a live,
+    credential-gated gateway rather than a dead name.
+  webhooksExistAndAreDocumented: |
+    Genuinely documented, which is rare in this sector. Three events are published with
+    their exact event.name values — V2.subject.report.generated (final report generated),
+    V2.subject.reference.form.generated (reference form generated) and
+    V2.subject.outcome.updated (an outcome section changes status) — together with a
+    literal example payload showing the referer, context.source (name "vouch", version
+    "2"), context.event (name, version, timestamp) and data (customerId, applicationId,
+    subjectId, type) envelope. There is no webhook management API and no self-serve
+    subscription UI: Goodlord configures endpoints and event selection on request. No
+    AsyncAPI document is published — the portal loads the AsyncAPI React component
+    stylesheet as generic Tyk portal furniture, but no AsyncAPI artifact is served.
+  documentationDepth: |
+    Well beyond a bare reference. The Referencing Product page publishes a Getting
+    Started guide, a Glossary, an Authentication walkthrough with working curl examples,
+    the Webhooks catalogue, an API Specification section, and topic guides for Guarantor
+    Collection, Guarantor-only referencing, API Outcomes, "Conditional Pass and
+    Conditions Met: Explained", Touchpoints overview, Touchpoints vs. Milestones, Emails
+    and Document Types. The domain model is explained in prose: Applications contain
+    Subjects (Applicant, Guarantor, Employer, Accountant, Landlord referees), Rental
+    Details carry Price Share and Affordability Ratio (recommended 2.5 for applicants,
+    3 for guarantors), and Products are tiered Essential / Pro / Priority.
+  sdks: |
+    None. No first-party SDK in any language was found. An npm registry search for
+    "goodlord" returned exactly one package and it is unrelated (helix-js, a front-end
+    framework by an individual publisher). No GitHub organisation named goodlord or
+    goodlord-uk exists (api.github.com/orgs/goodlord returned HTTP 404;
+    github.com/GoodlordUK returned HTTP 404). github.com/goodlord returned HTTP 200 but
+    was not verified as the company.
+  postman: none found
+  asyncapi: none found
+  graphql: none found
+  mcp: none found
+  llmsTxt: 'HTTP 404 at https://www.goodlord.com/llms.txt'
+  securityTxt: 'HTTP 404 at https://www.goodlord.com/.well-known/security.txt'
+  statusPage: 'none — status.goodlord.co is the wildcard SPA, not a status page'
+  rateLimits: none published
+  productApiFamily: |
+    Published and machine-readable (the two Referencing OpenAPIs, 10 paths each):
+      - Authentication: POST /auth/token
+      - Applications: POST /referencing/application;
+        GET|PATCH|DELETE /referencing/application/{applicationId}
+      - Subjects: PUT /referencing/subject/application/{applicationId};
+        GET|PATCH|DELETE /referencing/subject/{subjectId};
+        GET|POST /referencing/subject/{subjectId}/auth/token
+      - Outcomes: PATCH /referencing/subject/{subjectId}/outcome/conditions
+      - Touchpoints: GET /referencing/subject/{subjectId}/touchpoints
+      - Emails: GET /referencing/subject/{subjectId}/emails
+      - Media: GET /referencing/media/document/{documentId}
+    Published and machine-readable (Insurance App OpenAPI, 21 paths, tags Company, File,
+    InsuranceClaim, Payment, RentSchedule, RentScheduleRow, RentScheduleRowUpdate,
+    RentScheduleRowPostDto, Agent, Role, RoleGroup):
+      - Claims: GET|POST /api/v1/insurance_claims; GET|PATCH /api/v1/insurance_claims/{id};
+        POST /api/v1/insurance_claims/{id}/submit
+      - Claim files: GET|POST .../files; GET|DELETE .../files/{id}
+      - Claim payments: GET .../payments; GET .../payments/{id}
+      - Rent schedules: GET .../rent_schedule; POST .../rent_schedule_row;
+        GET|PATCH|DELETE .../rent_schedule_row/{id}; POST .../rent_schedule_rows;
+        POST .../rent_schedule/{rentScheduleId}/submit
+      - Identity and org: GET /api/v1/me; GET|POST /api/v1/agents;
+        GET|PATCH /api/v1/agents/{id}; GET /api/v1/companies; GET /api/v1/companies/{id};
+        GET|POST|PATCH|DELETE /api/v1/roles and /api/v1/role_groups
+    Marketed but with NO published contract (product surface only, taken verbatim from
+    www.goodlord.com navigation): Core Platform, Tenant Referencing, Rent Protection
+    Insurance, Tenant Payments, Goodlord Guarantor, PEPs & Sanction Checks, Contracts,
+    Utility Management, CRM Integrations, Tenancy Progression, Tenancy Management,
+    End of Tenancy, Property Protection, Buildings & Contents Insurance, Landlord Hub,
+    Build to Rent, Tenant Support, Contents and Liability Insurance, Broadband and Media.
+  valueChainPosition: |
+    Goodlord is a tenancy-lifecycle platform, not a listings platform, which is why the
+    UK portal duopoly never appears in its surface. Rightmove and Zoopla are mentioned
+    nowhere on its integrations or partners pages. Its named integration partners are
+    the CRM layer above it and the regulated/utility layer below it:
+      - CRM / PMS: Reapit, Street.co.uk, Alto, Qube
+      - Deposit schemes: The Tenancy Deposit Scheme (insured and custodial), The Deposit
+        Protection Service (custodial), mydeposits; plus deposit alternative Reposit
+      - Insurance: Paymentshield
+      - Utilities / media: Home Telecom, OVO Energy, Sky UK, Perse (energy and carbon data)
+      - Compliance / end of tenancy: Kamma (property licensing), The Depositary
+    None of these are described as developer integrations; the integrations pages contain
+    zero occurrences of the word "API" and describe commercial partnerships activated by
+    Goodlord during customer onboarding ("during onboarding we work with you to
+    understand who your other suppliers are, and if we're connected with them we can make
+    sure the integrations are activated").
+
+probes:
+  - url: https://goodlord.co/
+    status: 200
+    note: Redirects to https://www.goodlord.com/. The .co domain is the application and
+      API domain; the .com domain is the marketing site.
+  - url: https://www.goodlord.com/
+    status: 200
+  - url: https://www.goodlord.com/platform
+    status: 200
+  - url: https://www.goodlord.com/platform/integrations
+    status: 200
+    note: Zero occurrences of "API". Describes commercial integrations only.
+  - url: https://www.goodlord.com/platform/integrations/crm-integrations
+    status: 200
+    note: Names Reapit, Street, Alto.
+  - url: https://www.goodlord.com/platform/integrations/payments-integrations
+    status: 200
+    note: Names mydeposits, Reposit, TDS (insured and custodial), DPS (custodial).
+  - url: https://www.goodlord.com/about/our-partners
+    status: 200
+    note: Full partner roster; source of the value-chain mapping above.
+  - url: https://www.goodlord.com/partners
+    status: 200
+    note: Redirects to /about/our-partners.
+  - url: https://www.goodlord.com/contact-us
+    status: 200
+  - url: https://www.goodlord.com/newsagent
+    status: 200
+  - url: https://www.goodlord.com/robots.txt
+    status: 200
+    note: Disallows only HubSpot preview/sample paths.
+  - url: https://www.goodlord.com/sitemap.xml
+    status: 200
+    note: 385 URLs. Zero /api, /developer or /docs entries. portal.goodlord.co is never
+      referenced.
+  - url: https://www.goodlord.com/api
+    status: 404
+  - url: https://www.goodlord.com/developers
+    status: 404
+  - url: https://www.goodlord.com/docs
+    status: 404
+  - url: https://www.goodlord.com/integrations
+    status: 404
+  - url: https://www.goodlord.com/llms.txt
+    status: 404
+  - url: https://www.goodlord.com/.well-known/security.txt
+    status: 404
+  - url: https://www.goodlord.com/.well-known/openid-configuration
+    status: 404
+  - url: https://www.goodlord.com/$metadata
+    status: 404
+  - url: https://portal.goodlord.co/
+    status: 200
+    note: 'THE REAL DEVELOPER PORTAL. Title "Welcome to the Goodlord Developer Portal".
+      Tyk Developer Portal, renders OpenAPI via Stoplight Elements. Sets portal-session
+      and csrf_token cookies but requires no login to read.'
+  - url: https://portal.goodlord.co/portal/catalogue-products
+    status: 200
+    note: '"Goodlord Product Catalogues" — Public Catalogue with one product, Referencing
+      Product, tagged jwt, exposing Sandbox Referencing API and Live Referencing API.'
+  - url: https://portal.goodlord.co/portal/catalogue-products/referencing-product-1
+    status: 200
+    note: Full public documentation — Getting Started, Glossary, Authentication, Webhooks,
+      API Specification, Guarantor Collection, Guarantor-only referencing, API Outcomes,
+      Touchpoints, Emails, Document Types.
+  - url: https://portal.goodlord.co/portal/catalogue-products/referencing-product-1/dHlrL3Byb2QtcmVmZXJlbmNpbmctYXBp/docs
+    status: 200
+    note: 'Live API docs page. Base64 id decodes to tyk/prod-referencing-api. Declares
+      apiDescriptionUrl for the OpenAPI document.'
+  - url: https://portal.goodlord.co/portal/catalogue-products/referencing-product-1/dHlrL3Byb2Qtc2FuZGJveC1yZWZlcmVuY2luZy1hcGk/docs
+    status: 200
+    note: 'Sandbox API docs page. Base64 id decodes to tyk/prod-sandbox-referencing-api.'
+  - url: https://portal.goodlord.co/system/api_details/dHlrL3Byb2QtcmVmZXJlbmNpbmctYXBp/oasdocument/live-referencing-api.20260602142430937915.json
+    status: 200
+    note: 'HARVESTED. OpenAPI 3.1.0, 121,862 bytes, 10 paths, 12 schemas. Saved to
+      openapi/goodlord-referencing-api-openapi.json. Fetched anonymously.'
+  - url: https://portal.goodlord.co/system/api_details/dHlrL3Byb2Qtc2FuZGJveC1yZWZlcmVuY2luZy1hcGk/oasdocument/sandbox-referencing-api.20260602142430294824.json
+    status: 200
+    note: 'HARVESTED. OpenAPI 3.1.0, 121,871 bytes, 10 paths, 12 schemas. Saved to
+      openapi/goodlord-referencing-api-sandbox-openapi.json. Fetched anonymously.'
+  - url: https://portal.goodlord.co/auth/password/register
+    status: 200
+    note: 'THE ACCESS GATE. Renders "Create an account" then "Registration is not
+      allowed". Form fields include invite_id (Invite code). Self-serve signup disabled.'
+  - url: https://portal.goodlord.co/auth/password/new
+    status: 200
+    note: Password reset for existing invited accounts only.
+  - url: https://portal.goodlord.co/portal/login
+    status: 200
+    note: Tyk Developer Portal login page.
+  - url: https://portal.goodlord.co/portal/catalogue-apis
+    status: 200
+    note: Serves the login page — the API-level catalogue is members-only, unlike the
+      product catalogue.
+  - url: https://portal.goodlord.co/portal/private
+    status: 200
+    note: Serves the login page.
+  - url: https://portal.goodlord.co/blog
+    status: 200
+    note: Two posts, both about the Referencing API.
+  - url: https://portal.goodlord.co/blog/2024/8/22/getting-started-with-goodlords-referencing-api
+    status: 200
+    note: 'Source of the access-gate quote — sandbox via "your sales manager", production
+      via "your account manager".'
+  - url: https://portal.goodlord.co/blog/2024/8/20/getting-started-with-goodlord-referencing-api
+    status: 200
+    note: '"Understanding Goodlord''s Referencing API" — the domain model in prose.'
+  - url: https://portal.goodlord.co/robots.txt
+    status: 200
+    note: Returns the portal soft-404 HTML page (5,280 bytes), not a robots file.
+  - url: https://portal.goodlord.co/$metadata
+    status: 200
+    note: Same 5,280-byte soft-404 HTML page. NOT an OData metadata document.
+  - url: https://insurance-app.goodlord.co/api/v1
+    status: 200
+    note: 'API Platform entrypoint. Content-Type application/vnd.openapi+json. Returns
+      resourceNameCollection of internal DTO/model class names.'
+  - url: https://insurance-app.goodlord.co/api/v1/docs
+    status: 200
+    note: 'HARVESTED. OpenAPI 3.1.0, 187,522 bytes, 21 paths, 96 schemas. Saved to
+      openapi/goodlord-insurance-app-api-openapi.json. Fetched anonymously, no credential.'
+  - url: https://insurance-app.goodlord.co/api/v1/docs.jsonopenapi
+    status: 200
+    note: Same document, byte-identical size.
+  - url: https://insurance-app.goodlord.co/api/v1/docs.json
+    status: 404
+  - url: https://insurance-app.goodlord.co/api/v1/docs.jsonld
+    status: 404
+  - url: https://insurance-app.goodlord.co/api/v1/companies
+    status: 401
+    note: 'Body is an RFC-style error: "Full authentication is required to access this
+      resource."'
+  - url: https://insurance-app.goodlord.co/api/v1/insurance_claims
+    status: 401
+  - url: https://insurance-app.goodlord.co/api/v1/$metadata
+    status: 404
+  - url: https://insurance-app.goodlord.co/$metadata
+    status: 404
+  - url: https://insurance-app.goodlord.co/.well-known/openid-configuration
+    status: 404
+  - url: https://api-sandbox.goodlord.co/
+    status: 404
+    note: Live gateway. 9-byte text/plain body.
+  - url: https://api-sandbox.goodlord.co/referencing/application
+    status: 403
+    note: 'Confirms the sandbox gateway is live and credential-gated, not a dead name.'
+  - url: https://api-sandbox.goodlord.co/openapi.json
+    status: 404
+  - url: https://api-sandbox.goodlord.co/swagger.json
+    status: 404
+  - url: https://api-sandbox.goodlord.co/docs
+    status: 404
+  - url: https://api-sandbox.goodlord.co/$metadata
+    status: 404
+  - url: https://api-sandbox.goodlord.co/.well-known/openid-configuration
+    status: 404
+  - url: https://api.goodoverlord.com/
+    status: 000
+    note: 'Connection failed — the live Referencing server declared in the OpenAPI does
+      not answer anonymous probes.'
+  - url: https://api.goodoverlord.com/$metadata
+    status: 000
+  - url: https://core-api.goodlord.co/
+    status: 404
+    note: 'Live JSON host. Body {"message":"Not Found"}. Declared in the Goodlord Core SPA
+      as goodlordLettingsAccountsApiUrl. No docs endpoint of any kind.'
+  - url: https://core-api.goodlord.co/lettings-accounts/
+    status: 404
+    note: 'Body reveals internal routing: "No route found for GET
+      https://lettings-accounts.goodlord.co/api/". Symfony backend, undocumented.'
+  - url: https://core-api.goodlord.co/openapi.json
+    status: 404
+  - url: https://core-api.goodlord.co/swagger.json
+    status: 404
+  - url: https://core-api.goodlord.co/api/v1/docs
+    status: 404
+  - url: https://core-api.goodlord.co/$metadata
+    status: 404
+  - url: https://core-api.goodlord.co/.well-known/openid-configuration
+    status: 404
+  - url: https://lettings-accounts.goodlord.co/api/v1/docs
+    status: 404
+  - url: https://login.goodlord.co/7ddbafdc-ee33-46fb-968a-3011e2a0a825/B2C_1A_2_SIGNUPORSIGNIN/v2.0/.well-known/openid-configuration
+    status: 200
+    note: 'HARVESTED AS EVIDENCE (not saved as a spec). Real OIDC discovery document,
+      1,544 bytes. Microsoft Entra External ID / Azure AD B2C custom policy. End-user
+      platform login, not developer API auth.'
+  - url: https://login.goodlord.co/.well-known/openid-configuration
+    status: 404
+  - url: https://login.goodlord.co/
+    status: 404
+  - url: https://api.goodlord.co/
+    status: 404
+    note: text/plain. Not the API host.
+  - url: https://developer.goodlord.co/
+    status: 200
+    note: 'WILDCARD FALSE POSITIVE. 8,160 bytes, MD5 bc1447f277997272a0f21ee88571a5ee —
+      the Goodlord Core tenant SPA, title "goodlord". NOT a developer portal.'
+  - url: https://developers.goodlord.co/
+    status: 200
+    note: Byte-identical wildcard SPA.
+  - url: https://docs.goodlord.co/
+    status: 200
+    note: Byte-identical wildcard SPA.
+  - url: https://status.goodlord.co/
+    status: 200
+    note: Byte-identical wildcard SPA. There is NO public status page.
+  - url: https://help.goodlord.co/
+    status: 200
+    note: Byte-identical wildcard SPA. There is NO public help centre on this domain.
+  - url: https://app.goodlord.co/
+    status: 200
+    note: Byte-identical wildcard SPA — the Goodlord Core application shell.
+  - url: https://public-api.goodlord.co/
+    status: 200
+    note: Byte-identical wildcard SPA. Not an API.
+  - url: https://partner-api.goodlord.co/
+    status: 200
+    note: Byte-identical wildcard SPA. Not an API.
+  - url: https://integrations.goodlord.co/
+    status: 200
+    note: Byte-identical wildcard SPA.
+  - url: https://webhooks.goodlord.co/
+    status: 200
+    note: Byte-identical wildcard SPA.
+  - url: https://sandbox.goodlord.co/
+    status: 200
+    note: Byte-identical wildcard SPA. The real sandbox is api-sandbox.goodlord.co.
+  - url: https://zzzznotreal.goodlord.co/
+    status: 200
+    note: 'CONTROL PROBE. A nonsense subdomain returns 200, proving the wildcard.'
+  - url: https://referencing.goodlord.co/
+    status: 404
+  - url: https://payments.goodlord.co/
+    status: 000
+  - url: https://api.github.com/orgs/goodlord
+    status: 404
+  - url: https://api.github.com/orgs/goodlord-uk
+    status: 404
+  - url: https://github.com/GoodlordUK
+    status: 404
+  - url: https://registry.npmjs.org/-/v1/search?text=goodlord
+    status: 200
+    note: 'One result and it is unrelated (helix-js). No Goodlord-published package.'
+  - url: https://www.linkedin.com/company/goodlord
+    status: 200
+
+sources:
+  - url: https://www.goodlord.com/
+    type: Website
+    note: Company identity, product family, UK market, legal entity and FCA registration.
+  - url: https://portal.goodlord.co/
+    type: DeveloperPortal
+    note: Confirmed real, public, anonymously readable Tyk Developer Portal.
+  - url: https://portal.goodlord.co/portal/catalogue-products/referencing-product-1
+    type: Documentation
+    note: Authentication walkthrough, webhook event catalogue and payload, domain guides.
+  - url: https://portal.goodlord.co/blog/2024/8/22/getting-started-with-goodlords-referencing-api
+    type: GettingStarted
+    note: Definitive statement of the access gate (sales manager / account manager).
+  - url: https://portal.goodlord.co/blog/2024/8/20/getting-started-with-goodlord-referencing-api
+    type: Documentation
+    note: Referencing domain model — Applications, Subjects, Price Share, Affordability
+      Ratio, Essential/Pro/Priority products.
+  - url: https://insurance-app.goodlord.co/api/v1/docs
+    type: OpenAPI
+    note: Publicly served OpenAPI 3.1.0 for the rent protection insurance claims service.
+  - url: https://login.goodlord.co/7ddbafdc-ee33-46fb-968a-3011e2a0a825/B2C_1A_2_SIGNUPORSIGNIN/v2.0/.well-known/openid-configuration
+    type: OpenIDConnectDiscovery
+    note: End-user platform auth — Azure AD B2C custom policy, RS256, pairwise subjects.
+  - url: https://www.goodlord.com/about/our-partners
+    type: Partners
+    note: Value-chain mapping — CRMs above, deposit schemes and utilities below.
+  - url: https://www.goodlord.com/platform/integrations
+    type: Integrations
+    note: Commercial integrations, zero API language.
+
+actions:
+  openapiHarvested: true
+  specsSaved: 3
+  openapiDirectoryCreated: true
+  specs:
+    - path: openapi/goodlord-referencing-api-openapi.json
+      sourceURL: https://portal.goodlord.co/system/api_details/dHlrL3Byb2QtcmVmZXJlbmNpbmctYXBp/oasdocument/live-referencing-api.20260602142430937915.json
+      httpStatus: 200
+      fetchDate: '2026-07-26'
+      bytes: 121862
+      format: OpenAPI 3.1.0 (JSON)
+      parsed: true
+      paths: 10
+      schemas: 12
+      declaredServer: https://api.goodoverlord.com
+      note: Saved verbatim, byte-for-byte as served. Fetched anonymously, no credential.
+    - path: openapi/goodlord-referencing-api-sandbox-openapi.json
+      sourceURL: https://portal.goodlord.co/system/api_details/dHlrL3Byb2Qtc2FuZGJveC1yZWZlcmVuY2luZy1hcGk/oasdocument/sandbox-referencing-api.20260602142430294824.json
+      httpStatus: 200
+      fetchDate: '2026-07-26'
+      bytes: 121871
+      format: OpenAPI 3.1.0 (JSON)
+      parsed: true
+      paths: 10
+      schemas: 12
+      declaredServer: https://api-sandbox.goodlord.co
+      note: Saved verbatim. Operation surface identical to live; differs in server and
+        token URL.
+    - path: openapi/goodlord-insurance-app-api-openapi.json
+      sourceURL: https://insurance-app.goodlord.co/api/v1/docs
+      httpStatus: 200
+      fetchDate: '2026-07-26'
+      bytes: 187522
+      format: OpenAPI 3.1.0 (JSON)
+      parsed: true
+      paths: 21
+      schemas: 96
+      declaredServers:
+        - https://insurance-app.goodlord.co/ (labelled "Development" in the spec, but it
+          is the live host)
+        - https://insurance-app.staging.goodoverlord.com/ (Staging)
+        - https://insurance-app.qa1.goodoverlord.com/ (QA1)
+        - https://insurance-app.demo.goodlord.co/ (Demo)
+      note: Saved verbatim. Served publicly by API Platform with the
+        application/vnd.openapi+json media type; not listed in the developer portal.
+  odataMetadataSaved: 0
+  asyncapiSaved: 0
+  postmanSaved: 0
+  apisYmlUpdated: true
+  reason: |
+    Three genuine, complete, anonymously fetched OpenAPI 3.1.0 documents were saved
+    verbatim with provenance recorded above. Nothing was synthesised, derived or inferred.
+    No OData $metadata document exists to save — every $metadata probe returned 404 (or
+    the Tyk portal's soft-404 HTML on portal.goodlord.co), consistent with the complete
+    absence of RESO in the United Kingdom market. No AsyncAPI was saved despite webhooks
+    being documented, because Goodlord publishes the events as prose and an example
+    payload only, not as a machine-readable event contract; deriving one is left to the
+    enrichment pipeline, where it will be labelled AE-derived rather than
+    provider-published.

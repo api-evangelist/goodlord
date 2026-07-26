@@ -1,0 +1,3389 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Referencing API",
+    "description": "Here you can find the Public API information of the Goodlord Referencing product. This API will allow you to create rental applications, assess Applicants and Guarantors through the rental process and manage them along the way.",
+    "termsOfService": "http://swagger.io/terms/",
+    "contact": {
+      "email": "devs@vouch.co.uk",
+      "name": "Goodlord"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version": "1.0.0"
+  },
+  "externalDocs": {
+    "description": "Understanding Goodlord's Referencing API",
+    "url": "https://portal.goodlord.co/blog/2024/8/20/getting-started-with-goodlord-referencing-api"
+  },
+  "servers": [
+    {
+      "url": "https://api-sandbox.goodlord.co",
+      "description": "Sandbox Server"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Authentication",
+      "description": "Authentication operations"
+    },
+    {
+      "name": "Application",
+      "description": "An application contains rental information and all of the applicants/guarantors which are applying for a tenancy.",
+      "externalDocs": {
+        "description": "What's an Application?",
+        "url": "https://portal.goodlord.co/blog/2024/8/20/getting-started-with-goodlord-referencing-api#applications"
+      }
+    },
+    {
+      "name": "Subject",
+      "description": "A person who exists on an application.",
+      "externalDocs": {
+        "description": "What's a Subject?",
+        "url": "https://portal.goodlord.co/blog/2024/8/20/getting-started-with-goodlord-referencing-api#subjects"
+      }
+    },
+    {
+      "name": "Media",
+      "description": "Operations which are concerned around retrieving files"
+    }
+  ],
+  "paths": {
+    "/auth/token": {
+      "post": {
+        "security": [],
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Obtain a JWT token",
+        "description": "Obtain a JWT token to authenticate your requests.\nThe `access_token` property of the response contains the Bearer token that should be included in the Authorization header of all requests to the API.\nIt is recommended to use the `expires_in` property to determine when the token will expire and to request a new token before it expires.",
+        "operationId": "getAuthToken",
+        "requestBody": {
+          "description": "Client credentials to obtain a JWT token",
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Token Request",
+                "type": "object",
+                "properties": {
+                  "client_id": {
+                    "type": "string",
+                    "example": "example-client-id"
+                  },
+                  "client_secret": {
+                    "type": "string",
+                    "example": "example-client-secret"
+                  },
+                  "grant_type": {
+                    "type": "string",
+                    "enum": [
+                      "client_credentials"
+                    ]
+                  }
+                },
+                "required": [
+                  "client_id",
+                  "client_secret",
+                  "grant_type"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Token Response",
+                  "type": "object",
+                  "properties": {
+                    "access_token": {
+                      "type": "string",
+                      "example": "your_jwt_access_token"
+                    },
+                    "scope": {
+                      "type": "string",
+                      "example": "some_scope some_other_scope"
+                    },
+                    "expires_in": {
+                      "type": "number",
+                      "example": 86400
+                    },
+                    "token_type": {
+                      "type": "string",
+                      "example": "Bearer"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": []
+    },
+    "/referencing/application": {
+      "post": {
+        "externalDocs": {
+          "description": "Find out more about Applications",
+          "url": "https://portal.goodlord.co/blog/2024/8/20/getting-started-with-goodlord-referencing-api#applications"
+        },
+        "tags": [
+          "Application"
+        ],
+        "summary": "Create a new application",
+        "description": "Create a new rental application to reference tenants and guarantors",
+        "operationId": "createApplication",
+        "requestBody": {
+          "description": "Application object that needs to be created",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateApplicationRequest"
+              },
+              "examples": {
+                "Example 1 - Create a 12 month tenancy": {
+                  "value": {
+                    "tenancy": {
+                      "moveInDate": "2024-10-01",
+                      "term": 12,
+                      "monthlyCost": 1000,
+                      "address": {
+                        "line1": "22 Street",
+                        "city": "Sheffield",
+                        "postcode": "S6 3GJ",
+                        "country": "Wales"
+                      }
+                    },
+                    "agency": {
+                      "companyName": "John Smith Lettings",
+                      "agentName": "John Smith",
+                      "agentMobile": "07293838394",
+                      "agentEmail": "john.smith@example.com"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application"
+                },
+                "examples": {
+                  "Example 1 - Create a 12 month tenancy": {
+                    "value": {
+                      "id": "644e4a2b-e2cc-4269-9022-91eaada1592e",
+                      "subjects": [],
+                      "createdAt": "2025-07-22T14:35:12.1893525+00:00",
+                      "tenancy": {
+                        "moveInDate": "2024-10-01",
+                        "monthlyCost": 1000,
+                        "term": 12,
+                        "address": {
+                          "id": "01dad872-3428-4dc1-b911-3a0da3bbc1fc",
+                          "line1": "22 Street",
+                          "line2": null,
+                          "city": "Sheffield",
+                          "postcode": "S6 3GJ",
+                          "country": "Wales"
+                        }
+                      },
+                      "agency": {
+                        "companyName": "John Smith Lettings",
+                        "agentName": "John Smith",
+                        "agentMobile": "07293838394",
+                        "agentEmail": "john.smith@example.com"
+                      },
+                      "status": "Active",
+                      "documents": []
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiMessageResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/CompanyId"
+        }
+      ]
+    },
+    "/referencing/application/{applicationId}": {
+      "get": {
+        "externalDocs": {
+          "description": "Find out more about Applications",
+          "url": "https://portal.goodlord.co/blog/2024/8/20/getting-started-with-goodlord-referencing-api#applications"
+        },
+        "tags": [
+          "Application"
+        ],
+        "summary": "Get Application",
+        "description": "Retrieve a copy of an application which you have already created",
+        "operationId": "getApplication",
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Could not find requested application {applicationId}"
+                    }
+                  },
+                  "xml": {
+                    "name": "##default"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiMessageResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "externalDocs": {
+          "description": "Find out more about Applications",
+          "url": "https://portal.goodlord.co/blog/2024/8/20/getting-started-with-goodlord-referencing-api#application"
+        },
+        "tags": [
+          "Application"
+        ],
+        "summary": "Patch Application",
+        "description": "Patch an application which you have previously created",
+        "operationId": "patchApplication",
+        "requestBody": {
+          "description": "Properties which need to be patched on the application",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PatchApplicationRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Could not find requested application {applicationId}"
+                    }
+                  },
+                  "xml": {
+                    "name": "##default"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiMessageResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "externalDocs": {
+          "description": "Find out more about Applications",
+          "url": "https://portal.goodlord.co/blog/2024/8/20/getting-started-with-goodlord-referencing-api#application"
+        },
+        "tags": [
+          "Application"
+        ],
+        "summary": "Delete Application",
+        "description": "Delete an application which you have already created",
+        "operationId": "deleteApplication",
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Could not find requested application {applicationId}"
+                    }
+                  },
+                  "xml": {
+                    "name": "##default"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiMessageResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "applicationId",
+          "in": "path",
+          "description": "The applicationId of the application you wish to retrieve",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "$ref": "#/components/parameters/CompanyId"
+        }
+      ]
+    },
+    "/referencing/subject/{subjectId}/auth/token": {
+      "get": {
+        "externalDocs": {
+          "description": "Find out more about Subjects",
+          "url": "https://portal.goodlord.co/blog/2024/8/20/getting-started-with-goodlord-referencing-api#subjects"
+        },
+        "tags": [
+          "Subject"
+        ],
+        "summary": "Get Bot JWT Token",
+        "description": "Deprecated: Use the POST method on this endpoint instead.\n\nGenerate a new JWT token, which can be used as a redirect URL to send your user down the bot flow.",
+        "operationId": "getBotToken",
+        "deprecated": true,
+        "parameters": [
+          {
+            "name": "subjectId",
+            "in": "path",
+            "description": "SubjectId you wish to generate a token for",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "token": {
+                      "type": "string",
+                      "description": "A JWT encoded secret you can return to your clients",
+                      "example": "secretsecretsecret"
+                    },
+                    "url": {
+                      "type": "string",
+                      "description": "A fully qualified URL to the referencing bot with the token included, ready to redirect your user to",
+                      "example": "https://bot.references.goodlord.co?token={token}"
+                    }
+                  },
+                  "xml": {
+                    "name": "##default"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Could not find requested subject {subjectId}"
+                    }
+                  },
+                  "xml": {
+                    "name": "##default"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "An unknown error occurred when trying to generate token for {subjectId}"
+                    }
+                  },
+                  "xml": {
+                    "name": "##default"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "externalDocs": {
+          "description": "Find out more about Subjects",
+          "url": "https://portal.goodlord.co/blog/2024/8/20/getting-started-with-goodlord-referencing-api#subjects"
+        },
+        "tags": [
+          "Subject"
+        ],
+        "summary": "Create Bot JWT Token",
+        "description": "Generate a new JWT token, which can be used as a redirect URL to send your user down the bot flow.\nThis endpoint replaces the deprecated GET method on the same path.",
+        "operationId": "createBotToken",
+        "parameters": [
+          {
+            "name": "subjectId",
+            "in": "path",
+            "description": "SubjectId you wish to generate a token for",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Optional request body to specify who is going to use the bot",
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "authorType": {
+                    "type": "string",
+                    "description": "The type of user requesting the token. When set to a value other than 'Applicant', the `requestedBy` and `requestedByEmail` fields are included in the generated token.",
+                    "enum": [
+                      "Applicant",
+                      "Agent"
+                    ],
+                    "example": "Agent"
+                  },
+                  "requestedBy": {
+                    "type": "string",
+                    "description": "The name of the person who is going to use the bot. Only used when `authorType` is not 'Applicant'.",
+                    "example": "Jane Smith"
+                  },
+                  "requestedByEmail": {
+                    "type": "string",
+                    "description": "The email of the person who is going to use the bot. Only used when `authorType` is not 'Applicant'.",
+                    "example": "jane.smith@example.com"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "token": {
+                      "type": "string",
+                      "description": "A JWT encoded secret you can return to your clients",
+                      "example": "secretsecretsecret"
+                    },
+                    "url": {
+                      "type": "string",
+                      "description": "A fully qualified URL to the referencing bot with the token included, ready to redirect your user to",
+                      "example": "https://bot.references.goodlord.co?token={token}"
+                    }
+                  },
+                  "xml": {
+                    "name": "##default"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Could not find requested subject {subjectId}"
+                    }
+                  },
+                  "xml": {
+                    "name": "##default"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "An unknown error occurred when trying to generate token for {subjectId}"
+                    }
+                  },
+                  "xml": {
+                    "name": "##default"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/referencing/subject/{subjectId}": {
+      "get": {
+        "externalDocs": {
+          "description": "Find out more about Subjects",
+          "url": "https://portal.goodlord.co/blog/2024/8/20/getting-started-with-goodlord-referencing-api#subjects"
+        },
+        "tags": [
+          "Subject"
+        ],
+        "summary": "Get Subject",
+        "description": "Retrieve a created subject",
+        "operationId": "getSubject",
+        "parameters": [
+          {
+            "name": "subjectId",
+            "in": "path",
+            "description": "SubjectId you wish to generate a token for",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Subject"
+                },
+                "examples": {
+                  "Example 1 - Applicant": {
+                    "value": {
+                      "externalId": "1234",
+                      "rentalDetails": {
+                        "priceShare": 1000,
+                        "affordabilityRatio": 2.5
+                      },
+                      "context": {
+                        "name": "John Smith",
+                        "firstName": "John",
+                        "lastName": "Smith",
+                        "email": "john@smith.com",
+                        "mobile": "07912345678",
+                        "redirectUrlOnJourneyComplete": "https://www.myapp.com/complete",
+                        "tenancyRenewal": false,
+                        "product": "Pro",
+                        "addresses": [
+                          {
+                            "id": "1234",
+                            "addressType": "current",
+                            "bedroomIdentifier": "Room A",
+                            "name": "22",
+                            "startDate": "2024-10-01",
+                            "status": "Renting",
+                            "line1": "Street",
+                            "normalizedLine1": "22 Street",
+                            "line2": "Crookesmoore",
+                            "city": "Sheffield",
+                            "county": null,
+                            "postcode": "S1 123",
+                            "country": "England",
+                            "countryCodeAlpha2": "GB",
+                            "referee": {
+                              "id": "1234",
+                              "name": "Jane Smith",
+                              "email": "jane@smith.com",
+                              "mobile": "07912345678",
+                              "createdAt": "2024-10-01"
+                            }
+                          }
+                        ],
+                        "incomes": [
+                          {
+                            "company": "Tesco",
+                            "position": "Manager",
+                            "contractType": "Permanent",
+                            "contractSchedule": "Full Time",
+                            "guaranteedBonus": null,
+                            "startDate": "2024-10-01",
+                            "endDate": null,
+                            "address": {
+                              "id": null,
+                              "addressType": "string",
+                              "name": null,
+                              "startDate": null,
+                              "status": null,
+                              "line1": "string",
+                              "normalizedLine1": "string",
+                              "line2": "string",
+                              "line3": null,
+                              "city": "string",
+                              "county": null,
+                              "postcode": "string",
+                              "country": "string",
+                              "countryCodeAlpha2": null
+                            },
+                            "referee": {
+                              "id": "1234",
+                              "name": "Jane Smith",
+                              "email": "jane@smith.com",
+                              "mobile": "07912345678",
+                              "createdAt": "2024-10-01"
+                            },
+                            "type": "string",
+                            "evidenceType": "Open Banking",
+                            "income": {
+                              "value": 0,
+                              "currency": "string",
+                              "frequency": "string"
+                            },
+                            "id": "string"
+                          }
+                        ],
+                        "incomeSummary": {
+                          "totalVerifiedIncome": 1000,
+                          "maximumAffordabilityPercentage": 123
+                        },
+                        "credit": {
+                          "hasAdverseCredit": false,
+                          "adverseCreditDeclared": false
+                        },
+                        "documents": [
+                          {
+                            "id": "1234",
+                            "fileName": "file.pdf",
+                            "thumbnail": "file.png",
+                            "documentType": "Proof of Address"
+                          }
+                        ],
+                        "identity": {
+                          "nationality": "UK",
+                          "nationalInsuranceNumber": "AB123456C",
+                          "r2rShareCode": "A12B3DEFG",
+                          "idvt": {
+                            "idCheckStatus": "Pass",
+                            "r2rCheckStatus": "Pass"
+                          },
+                          "pepsSanctions": {
+                            "pepsStatus": "NotFound",
+                            "sanctionsStatus": "Match"
+                          }
+                        }
+                      },
+                      "outcome": {
+                        "status": "Accepted",
+                        "comments": "This application has been accepted",
+                        "rpi": {
+                          "eligibility": "eligible",
+                          "comments": "This application is eligible for RPI"
+                        },
+                        "sections": [
+                          {
+                            "name": "Income",
+                            "status": "Accepted"
+                          }
+                        ]
+                      },
+                      "id": "1234",
+                      "type": "applicant",
+                      "attachedSubjects": [
+                        {
+                          "id": "string",
+                          "type": "string"
+                        }
+                      ],
+                      "milestones": [
+                        {
+                          "type": "FinalOutcome",
+                          "event": "subject.accepted",
+                          "createdAt": "2024-10-01",
+                          "updatedAt": "2024-10-01"
+                        }
+                      ],
+                      "recommendations": [
+                        null
+                      ]
+                    }
+                  },
+                  "Example 2 - Guarantor": {
+                    "value": {
+                      "rentalDetails": {
+                        "priceShare": 100,
+                        "affordabilityRatio": 2.5
+                      },
+                      "context": {
+                        "name": "Brian Davies",
+                        "firstName": "Brian",
+                        "lastName": "Davies",
+                        "email": "brian.davies@test.com",
+                        "mobile": "07123456789",
+                        "product": "Essential",
+                        "financial": {
+                          "affordability": {
+                            "rent": 100,
+                            "term": 12,
+                            "affordabilityRatio": 2.5,
+                            "affordabilityAmount": 3000
+                          }
+                        },
+                        "documents": [],
+                        "idvt": "NotRequired"
+                      },
+                      "outcome": {
+                        "status": "Pending Submission"
+                      },
+                      "id": "2a44ed99-ce42-4fba-aac9-78e3123af5bf",
+                      "type": "guarantor",
+                      "attachedSubjects": [
+                        {
+                          "id": "5a697798-304f-4738-8b62-01cbbe69bad9",
+                          "type": "applicant"
+                        }
+                      ],
+                      "milestones": [
+                        {
+                          "type": "event",
+                          "event": "subject.created",
+                          "createdAt": "2025-07-22T14:41:50.7650622+00:00",
+                          "updatedAt": "2025-07-22T14:41:50.7650623+00:00"
+                        }
+                      ],
+                      "recommendations": []
+                    }
+                  },
+                  "Example 3 - Corporate Let": {
+                    "value": {
+                      "rentalDetails": {
+                        "priceShare": 100,
+                        "affordabilityRatio": 2.5
+                      },
+                      "context": {
+                        "name": "Rizwan Ahmed",
+                        "firstName": "Rizwan",
+                        "lastName": "Ahmed",
+                        "email": "info@abcboatbuilding.com",
+                        "mobile": null,
+                        "product": "Corporate",
+                        "financial": {
+                          "affordability": {
+                            "rent": 100,
+                            "term": 12,
+                            "affordabilityRatio": 2.5,
+                            "affordabilityAmount": 3000
+                          }
+                        },
+                        "documents": [],
+                        "company": {
+                          "name": "Acme Corporation",
+                          "companyNumber": "12345678"
+                        },
+                        "idvt": "NotRequired"
+                      },
+                      "outcome": {
+                        "status": "Pending Submission"
+                      },
+                      "id": "e05e6416-21f2-4340-83f2-1105e902cb6b",
+                      "type": "applicant",
+                      "attachedSubjects": [],
+                      "milestones": [
+                        {
+                          "type": "event",
+                          "event": "subject.created",
+                          "createdAt": "2025-07-22T14:55:16.8613265+00:00",
+                          "updatedAt": "2025-07-22T14:55:16.8613267+00:00"
+                        }
+                      ],
+                      "recommendations": []
+                    }
+                  },
+                  "Example 4 - Report Customisation": {
+                    "value": {
+                      "externalId": "1234",
+                      "rentalDetails": {
+                        "priceShare": 1000,
+                        "affordabilityRatio": 2.5
+                      },
+                      "context": {
+                        "name": "John Smith",
+                        "firstName": "John",
+                        "lastName": "Smith",
+                        "email": "john@smith.com",
+                        "mobile": "07912345678",
+                        "redirectUrlOnJourneyComplete": "https://www.myapp.com/complete",
+                        "tenancyRenewal": false,
+                        "product": "Pro",
+                        "communicationPreferences": {
+                          "sendInitialTenantEmail": false,
+                          "disableRentProtectionComms": true,
+                          "disableTCLIComms": true,
+                          "disableTenancyServicesComms": true
+                        },
+                        "addresses": [
+                          {
+                            "id": "1234",
+                            "addressType": "current",
+                            "name": "22",
+                            "startDate": "2024-10-01",
+                            "status": "Renting",
+                            "line1": "Street",
+                            "normalizedLine1": "22 Street",
+                            "line2": "Crookesmoore",
+                            "city": "Sheffield",
+                            "county": null,
+                            "postcode": "S1 123",
+                            "country": "England",
+                            "countryCodeAlpha2": "GB",
+                            "referee": {
+                              "id": "1234",
+                              "name": "Jane Smith",
+                              "email": "jane@smith.com",
+                              "mobile": "07912345678",
+                              "createdAt": "2024-10-01"
+                            }
+                          }
+                        ],
+                        "incomes": [
+                          {
+                            "company": "Tesco",
+                            "position": "Manager",
+                            "contractType": "Permanent",
+                            "contractSchedule": "Full Time",
+                            "guaranteedBonus": null,
+                            "startDate": "2024-10-01",
+                            "endDate": null,
+                            "address": {
+                              "id": null,
+                              "addressType": "string",
+                              "name": null,
+                              "startDate": null,
+                              "status": null,
+                              "line1": "string",
+                              "normalizedLine1": "string",
+                              "line2": "string",
+                              "line3": null,
+                              "city": "string",
+                              "county": null,
+                              "postcode": "string",
+                              "country": "string",
+                              "countryCodeAlpha2": null
+                            },
+                            "referee": {
+                              "id": "1234",
+                              "name": "Jane Smith",
+                              "email": "jane@smith.com",
+                              "mobile": "07912345678",
+                              "createdAt": "2024-10-01"
+                            },
+                            "type": "string",
+                            "evidenceType": "Open Banking",
+                            "income": {
+                              "value": 0,
+                              "currency": "string",
+                              "frequency": "string"
+                            },
+                            "id": "string"
+                          }
+                        ],
+                        "incomeSummary": {
+                          "totalVerifiedIncome": 1000,
+                          "maximumAffordabilityPercentage": 123
+                        },
+                        "credit": {
+                          "hasAdverseCredit": false,
+                          "adverseCreditDeclared": false
+                        },
+                        "documents": [
+                          {
+                            "id": "1234",
+                            "fileName": "file.pdf",
+                            "thumbnail": "file.png",
+                            "documentType": "Proof of Address"
+                          }
+                        ]
+                      },
+                      "outcome": {
+                        "status": "Accepted",
+                        "comments": "This application has been accepted",
+                        "rpi": {
+                          "eligibility": "eligible",
+                          "comments": "This application is eligible for RPI"
+                        },
+                        "sections": [
+                          {
+                            "name": "Income",
+                            "status": "Accepted"
+                          }
+                        ]
+                      },
+                      "id": "1234",
+                      "type": "applicant",
+                      "attachedSubjects": [
+                        {
+                          "id": "string",
+                          "type": "string"
+                        }
+                      ],
+                      "milestones": [
+                        {
+                          "type": "FinalOutcome",
+                          "event": "subject.accepted",
+                          "createdAt": "2024-10-01",
+                          "updatedAt": "2024-10-01"
+                        }
+                      ],
+                      "recommendations": [
+                        null
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "An unknown error occurred when trying to retrieve {subjectId}"
+                    }
+                  },
+                  "xml": {
+                    "name": "##default"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "An unknown error occurred when trying to generate token for {subjectId}"
+                    }
+                  },
+                  "xml": {
+                    "name": "##default"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "externalDocs": {
+          "description": "Find out more about Subjects",
+          "url": "https://portal.goodlord.co/blog/2024/8/20/getting-started-with-goodlord-referencing-api#subjects"
+        },
+        "tags": [
+          "Subject"
+        ],
+        "summary": "Patch Subject",
+        "description": "Patch a subject you have already created",
+        "operationId": "patchSubject",
+        "parameters": [
+          {
+            "name": "subjectId",
+            "in": "path",
+            "description": "SubjectId you wish to generate a token for",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Patch object of properties you wish to change",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PatchSubjectRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Subject"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "An unknown error occurred when trying to retrieve {subjectId}"
+                    }
+                  },
+                  "xml": {
+                    "name": "##default"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "An unknown error occurred when trying to generate token for {subjectId}"
+                    }
+                  },
+                  "xml": {
+                    "name": "##default"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "externalDocs": {
+          "description": "Find out more about Subjects",
+          "url": "https://portal.goodlord.co/blog/2024/8/20/getting-started-with-goodlord-referencing-api#subjects"
+        },
+        "tags": [
+          "Subject"
+        ],
+        "summary": "Delete Subject",
+        "description": "Soft delete a subject which you have already created",
+        "operationId": "deleteSubject",
+        "parameters": [
+          {
+            "name": "subjectId",
+            "in": "path",
+            "description": "SubjectId you wish to generate a token for",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Subject"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "An unknown error occurred when trying to retrieve {subjectId}"
+                    }
+                  },
+                  "xml": {
+                    "name": "##default"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "An unknown error occurred when trying to delete {subjectId}"
+                    }
+                  },
+                  "xml": {
+                    "name": "##default"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/CompanyId"
+        }
+      ]
+    },
+    "/referencing/subject/application/{applicationId}": {
+      "put": {
+        "externalDocs": {
+          "description": "Find out more about Subjects",
+          "url": "https://portal.goodlord.co/blog/2024/8/20/getting-started-with-goodlord-referencing-api#subjects"
+        },
+        "tags": [
+          "Subject"
+        ],
+        "summary": "Create Subject",
+        "description": "Create a new subject",
+        "operationId": "createSubject",
+        "parameters": [
+          {
+            "name": "applicationId",
+            "in": "path",
+            "description": "ApplicationId you wish to add the new subject to",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateSubjectRequest"
+              },
+              "examples": {
+                "Example 1 - Create an applicant": {
+                  "value": {
+                    "type": "applicant",
+                    "attachedSubjects": [],
+                    "context": {
+                      "firstName": "Terry",
+                      "lastName": "Smith",
+                      "mobile": "07383838383",
+                      "email": "test-again@test.com",
+                      "product": "Essential"
+                    },
+                    "rentalDetails": {
+                      "priceShare": 100,
+                      "affordabilityRatio": 2.5
+                    }
+                  }
+                },
+                "Example 2 - Create a guarantor for an existing applicant": {
+                  "value": {
+                    "type": "guarantor",
+                    "attachedSubjects": [
+                      {
+                        "id": "5a697798-304f-4738-8b62-01cbbe69bad9",
+                        "type": "applicant"
+                      }
+                    ],
+                    "context": {
+                      "firstName": "Brian",
+                      "lastName": "Davies",
+                      "mobile": "07123456789",
+                      "email": "brian.davies@test.com",
+                      "product": "Essential"
+                    },
+                    "rentalDetails": {
+                      "priceShare": 100,
+                      "affordabilityRatio": 2.5
+                    }
+                  }
+                },
+                "Example 3 - Corporate Let": {
+                  "value": {
+                    "type": "applicant",
+                    "attachedSubjects": [],
+                    "context": {
+                      "email": "info@abcboatbuilding.com",
+                      "firstName": "Rizwan",
+                      "lastName": "Ahmed",
+                      "company": {
+                        "name": "Acme Corporation",
+                        "companyNumber": "12345678"
+                      },
+                      "product": "Corporate"
+                    },
+                    "rentalDetails": {
+                      "priceShare": 100,
+                      "affordabilityRatio": 2.5
+                    }
+                  }
+                },
+                "Example 4 - Applicant requiring a guarantor": {
+                  "value": {
+                    "type": "applicant",
+                    "attachedSubjects": [],
+                    "context": {
+                      "firstName": "Sarah",
+                      "lastName": "Hughes",
+                      "mobile": "07123456789",
+                      "email": "sarah.hughes@test.com",
+                      "product": "Pro",
+                      "guarantorCollection": {
+                        "required": true,
+                        "product": "Pro",
+                        "affordabilityRatio": 3.0
+                      }
+                    },
+                    "rentalDetails": {
+                      "priceShare": 1200,
+                      "affordabilityRatio": 2.5
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Subject"
+                },
+                "examples": {
+                  "Example 1 - Create an applicant": {
+                    "value": {
+                      "rentalDetails": {
+                        "priceShare": 100,
+                        "affordabilityRatio": 2.5
+                      },
+                      "context": {
+                        "name": "Terry Smith",
+                        "firstName": "Terry",
+                        "lastName": "Smith",
+                        "email": "test-again@test.com",
+                        "mobile": "07383838383",
+                        "product": "Essential",
+                        "financial": {},
+                        "documents": [],
+                        "idvt": "NotRequired"
+                      },
+                      "outcome": {
+                        "status": "Pending Submission"
+                      },
+                      "id": "a6770136-63f0-4315-9d9e-3700329a4b91",
+                      "type": "applicant",
+                      "attachedSubjects": [],
+                      "milestones": [
+                        {
+                          "type": "event",
+                          "event": "subject.created",
+                          "createdAt": "2025-07-22T14:38:15.6511962+00:00",
+                          "updatedAt": "2025-07-22T14:38:15.6511963+00:00"
+                        }
+                      ],
+                      "recommendations": []
+                    }
+                  },
+                  "Example 2 - Guarantor": {
+                    "value": {
+                      "rentalDetails": {
+                        "priceShare": 100,
+                        "affordabilityRatio": 2.5
+                      },
+                      "context": {
+                        "name": "Brian Davies",
+                        "firstName": "Brian",
+                        "lastName": "Davies",
+                        "email": "brian.davies@test.com",
+                        "mobile": "07123456789",
+                        "product": "Essential",
+                        "financial": {},
+                        "documents": [],
+                        "idvt": "NotRequired"
+                      },
+                      "outcome": {
+                        "status": "Pending Submission"
+                      },
+                      "id": "2a44ed99-ce42-4fba-aac9-78e3123af5bf",
+                      "type": "guarantor",
+                      "attachedSubjects": [
+                        {
+                          "id": "5a697798-304f-4738-8b62-01cbbe69bad9",
+                          "type": "applicant"
+                        }
+                      ],
+                      "milestones": [
+                        {
+                          "type": "event",
+                          "event": "subject.created",
+                          "createdAt": "2025-07-22T14:41:50.7650622+00:00",
+                          "updatedAt": "2025-07-22T14:41:50.7650623+00:00"
+                        }
+                      ],
+                      "recommendations": []
+                    }
+                  },
+                  "Example 3 - Corporate Let": {
+                    "value": {
+                      "rentalDetails": {
+                        "priceShare": 100,
+                        "affordabilityRatio": 2.5
+                      },
+                      "context": {
+                        "name": "Rizwan Ahmed",
+                        "firstName": "Rizwan",
+                        "lastName": "Ahmed",
+                        "email": "info@abcboatbuilding.com",
+                        "mobile": null,
+                        "product": "Corporate",
+                        "financial": {},
+                        "documents": [],
+                        "company": {
+                          "name": "Acme Corporation",
+                          "companyNumber": "12345678"
+                        },
+                        "idvt": "NotRequired"
+                      },
+                      "outcome": {
+                        "status": "Pending Submission"
+                      },
+                      "id": "e05e6416-21f2-4340-83f2-1105e902cb6b",
+                      "type": "applicant",
+                      "attachedSubjects": [],
+                      "milestones": [
+                        {
+                          "type": "event",
+                          "event": "subject.created",
+                          "createdAt": "2025-07-22T14:55:16.8613265+00:00",
+                          "updatedAt": "2025-07-22T14:55:16.8613267+00:00"
+                        }
+                      ],
+                      "recommendations": []
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Could not find requested application '{applicationId}"
+                    }
+                  },
+                  "xml": {
+                    "name": "##default"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "An unknown error occurred when trying to retrieve '{applicationId}'. Please try again later"
+                    }
+                  },
+                  "xml": {
+                    "name": "##default"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/CompanyId"
+        }
+      ]
+    },
+    "/referencing/subject/{subjectId}/touchpoints": {
+      "get": {
+        "externalDocs": {
+          "description": "Find out more about Subjects",
+          "url": "https://portal.goodlord.co/blog/2024/8/20/getting-started-with-goodlord-referencing-api#subjects"
+        },
+        "tags": [
+          "Subject"
+        ],
+        "summary": "Get Subject Touchpoints",
+        "description": "Retrieve all touchpoints for a subject, including communications and interactions",
+        "operationId": "getSubjectTouchpoints",
+        "parameters": [
+          {
+            "name": "subjectId",
+            "in": "path",
+            "description": "SubjectId you wish to retrieve touchpoints for",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/APITouchpoint"
+                  }
+                },
+                "examples": {
+                  "Example 1 - System touchpoints": {
+                    "value": [
+                      {
+                        "id": "78230093-8035-4aad-81db-9221cd5019a0",
+                        "subjectId": "a6770136-63f0-4315-9d9e-3700329a4b91",
+                        "category": "residential",
+                        "author": {
+                          "type": "system"
+                        },
+                        "message": "We're awaiting additional information from applicant.",
+                        "createdAt": "2024-10-01T14:35:12.189Z"
+                      },
+                      {
+                        "id": "92a4f8c1-7b2d-4e5f-8c3a-1a2b3c4d5e6f",
+                        "subjectId": "a6770136-63f0-4315-9d9e-3700329a4b91",
+                        "category": "identity",
+                        "author": {
+                          "type": "system"
+                        },
+                        "message": "Identity verification completed successfully.",
+                        "createdAt": "2024-10-01T16:22:45.321Z"
+                      }
+                    ]
+                  },
+                  "Example 2 - Referencing executive touchpoint": {
+                    "value": [
+                      {
+                        "id": "3f8a2d5e-9c1b-4a7f-b2e8-7d4c6b9a1f3e",
+                        "subjectId": "a6770136-63f0-4315-9d9e-3700329a4b91",
+                        "category": "income",
+                        "author": {
+                          "type": "person",
+                          "id": "1c8cd21d-ace9-46a3-9300-e595c61e78be"
+                        },
+                        "message": "Please download the savings document and upload the whole file for us to review.",
+                        "createdAt": "2024-10-02T11:45:18.789Z"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Could not find requested subject {subjectId}"
+                    }
+                  },
+                  "xml": {
+                    "name": "##default"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "An unknown error occurred when trying to retrieve touchpoints for {subjectId}"
+                    }
+                  },
+                  "xml": {
+                    "name": "##default"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/referencing/subject/{subjectId}/outcome/conditions": {
+      "patch": {
+        "externalDocs": {
+          "description": "Find out more about Subjects",
+          "url": "https://portal.goodlord.co/blog/2024/8/20/getting-started-with-goodlord-referencing-api#subjects"
+        },
+        "tags": [
+          "Subject"
+        ],
+        "summary": "Patch Subject Outcome Conditions",
+        "operationId": "patchSubjectOutcomeConditions",
+        "description": "Patch the outcome conditions of a subject you have already created",
+        "parameters": [
+          {
+            "name": "subjectId",
+            "in": "path",
+            "description": "SubjectId you wish to patch outcome conditions for.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Patch object of properties you wish to change. At least one confirmation required.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PatchSubjectOutcomeConditionsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Subject"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Could not find subject {subjectId}"
+                    }
+                  },
+                  "xml": {
+                    "name": "##default"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "An unknown error occurred when trying to patch outcome conditions for subject {subjectId}"
+                    }
+                  },
+                  "xml": {
+                    "name": "##default"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/referencing/media/document/{documentId}": {
+      "get": {
+        "tags": [
+          "Media"
+        ],
+        "summary": "Get Authenticated File Url",
+        "description": "Generates an authenticated link, which allows you to access a users document for up to 10 minutes",
+        "operationId": "getAuthenticatedFile",
+        "parameters": [
+          {
+            "name": "documentId",
+            "in": "path",
+            "description": "documentId you wish to view",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "authenticatedUrl": {
+                      "type": "string",
+                      "description": "An authenticated file URL which allows you to view a document attached to one of your subjects",
+                      "example": "www.goodlorddocs.co.uk/user-image.png?token=secret"
+                    }
+                  },
+                  "xml": {
+                    "name": "##default"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Could not find requested subject {subjectId}"
+                    }
+                  },
+                  "xml": {
+                    "name": "##default"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "An unknown error occurred when trying to generate token for {subjectId}"
+                    }
+                  },
+                  "xml": {
+                    "name": "##default"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/referencing/subject/{subjectId}/emails": {
+      "get": {
+        "externalDocs": {
+          "description": "Find out more about Subjects",
+          "url": "https://portal.goodlord.co/blog/2024/8/20/getting-started-with-goodlord-referencing-api#subjects"
+        },
+        "tags": [
+          "Subject"
+        ],
+        "summary": "Get Subject Emails",
+        "operationId": "getSubjectEmails",
+        "description": "Get information about emails sent to the requested subject",
+        "parameters": [
+          {
+            "name": "subjectId",
+            "in": "path",
+            "description": "subjectId for which, you wish to view email information",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/APIEmail"
+                  }
+                },
+                "examples": {
+                  "Example 1 - Tenant Emails": {
+                    "value": [
+                      {
+                        "emailAddress": "test@example.com",
+                        "emailSubject": "Start your referencing for 22 Street, Sheffield, S6 3GJ",
+                        "date": "2025-10-01T12:34:56.789Z",
+                        "status": "Delivered"
+                      },
+                      {
+                        "emailAddress": "test@example.com",
+                        "emailSubject": "TENANT Action Required: Additional information for your referencing application",
+                        "date": "2025-10-01T14:00:00.000Z",
+                        "status": "Sent"
+                      }
+                    ]
+                  },
+                  "Example 2 - Guarantor Emails": {
+                    "value": [
+                      {
+                        "emailAddress": "guarantor@example.com",
+                        "emailSubject": "Goodlord | Guarantor Reference Required",
+                        "date": "2025-10-05T09:10:00.000Z",
+                        "status": "Failed"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Could not find requested subject {subjectId}"
+                    }
+                  },
+                  "xml": {
+                    "name": "##default"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "An unknown error occurred when trying to retrieve emails for {subjectId}"
+                    }
+                  },
+                  "xml": {
+                    "name": "##default"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CreateSubjectRequest": {
+        "title": "Create Subject Request",
+        "type": "object",
+        "required": [
+          "rentalDetails",
+          "context",
+          "type",
+          "attachedSubjects"
+        ],
+        "properties": {
+          "externalId": {
+            "type": "string"
+          },
+          "rentalDetails": {
+            "type": "object",
+            "required": [
+              "priceShare"
+            ],
+            "properties": {
+              "priceShare": {
+                "type": "number",
+                "description": "The portion of the monthly rent attributed to this subject, in GBP. For sole tenants this equals the property's monthly rent; for shared tenancies it is the per-tenant share."
+              },
+              "affordabilityRatio": {
+                "type": "number",
+                "minimum": 1,
+                "description": "Minimum income-to-rent multiplier the subject's income must satisfy. Typical values: 2.5 for applicants, 3.0 for guarantors. Must be >= 1. Note: API consumers always operate within a company that has a pre-configured affordability ratio (`TenantAffordabilityRatio` for applicants, `GuarantorAffordabilityRatio` for guarantors), so the value supplied here will be silently replaced by the company-configured value before storage. The request still returns 200, but the stored value is the company-configured one and is what subsequent GETs will return. To confirm or change your company's configured value, contact your Goodlord account manager."
+              }
+            }
+          },
+          "context": {
+            "type": "object",
+            "required": [
+              "firstName",
+              "lastName",
+              "email",
+              "product"
+            ],
+            "properties": {
+              "firstName": {
+                "type": "string"
+              },
+              "lastName": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
+              },
+              "mobile": {
+                "type": "string"
+              },
+              "redirectUrlOnJourneyComplete": {
+                "type": "string"
+              },
+              "tenancyRenewal": {
+                "type": "boolean"
+              },
+              "product": {
+                "type": "string",
+                "enum": [
+                  "Pro",
+                  "Essential",
+                  "Priority",
+                  "Corporate",
+                  "None"
+                ]
+              },
+              "idvt": {
+                "type": "string",
+                "enum": [
+                  "Required",
+                  "NotRequired"
+                ],
+                "description": "Whether IDVT (Identity document validation technolgy) is Required to be used against the subjects provided documents",
+                "default": "NotRequired",
+                "example": "NotRequired"
+              },
+              "pepSanctions": {
+                "type": "string",
+                "enum": [
+                  "Required",
+                  "NotRequired"
+                ],
+                "description": "Whether PEP and Sanction checks will be run against the subject",
+                "default": "NotRequired",
+                "example": "NotRequired"
+              },
+              "communicationPreferences": {
+                "type": "object",
+                "properties": {
+                  "sendInitialTenantEmail": {
+                    "type": "boolean",
+                    "example": false,
+                    "description": "Whether to send the initial tenant email. This is used to notify the tenant that they have been added to a referencing application. You may wish to disable this if you wish to send your own emails rather than relying on Goodlord to send them. Please note that this email does include a link to the referencing bot journey that an applicant is required to fill out to submit their application."
+                  },
+                  "disableRentProtectionComms": {
+                    "type": "boolean",
+                    "example": true,
+                    "description": "Whether to show Rent Protection Insurance (RPI) copy & coverage in the subject referencing PDF report"
+                  },
+                  "disableTCLIComms": {
+                    "type": "boolean",
+                    "example": true,
+                    "description": "Whether to show Tenant Contents and Liability Insurance (TCLI) banner in subject referencing PDF report"
+                  },
+                  "disableTenancyServicesComms": {
+                    "type": "boolean",
+                    "example": true,
+                    "description": "Whether to show tenancy services banner in subject referencing PDF report"
+                  }
+                }
+              },
+              "company": {
+                "examples": [
+                  null
+                ],
+                "description": "Company information, only required when ProductType is Corporate",
+                "type": "object",
+                "nullable": true,
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "The name of the company to be referenced for the Corporate Let",
+                    "example": "Acme Corporation"
+                  },
+                  "companyNumber": {
+                    "type": "string",
+                    "description": "The company number of the company to be referenced for the Corporate Let",
+                    "example": "12345678"
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              },
+              "guarantorCollection": {
+                "type": "object",
+                "nullable": true,
+                "description": "Indicates that this applicant requires a guarantor. When `required` is `true`, Goodlord will trigger guarantor collection workflows: a recommendation is created on the applicant and a 'guarantor required' email is sent. The actual guarantor subject is created later, either by the tenant via the bot journey or by you via a follow-up Create Subject call. Only valid on subjects with `type: applicant` - supplying this on a guarantor subject will return a 400 with error code `GuarantorCollectionInvalidSubjectType`.",
+                "required": [
+                  "required",
+                  "product",
+                  "affordabilityRatio"
+                ],
+                "properties": {
+                  "required": {
+                    "type": "boolean",
+                    "description": "Whether a guarantor is required for this applicant. Set to `true` to trigger guarantor collection workflows. When `false`, the other fields are still validated against their schema but no recommendation or email is generated.",
+                    "example": true
+                  },
+                  "product": {
+                    "type": "string",
+                    "description": "The referencing product the guarantor will go through when they begin their journey.",
+                    "enum": [
+                      "Pro",
+                      "Essential",
+                      "Priority",
+                      "Corporate"
+                    ],
+                    "example": "Pro"
+                  },
+                  "affordabilityRatio": {
+                    "type": "number",
+                    "minimum": 1,
+                    "description": "Minimum income-to-rent multiplier the guarantor's income must satisfy. Typically 3.0 (guarantors are usually held to a higher standard than the tenant). Must be >= 1. Note: API consumers always operate within a company that has a pre-configured `GuarantorAffordabilityRatio`, so the value supplied here will be silently replaced by the company-configured value before storage. The request still returns 200, but the stored value is the company-configured one and is what subsequent GETs will return. To confirm or change your company's configured value, contact your Goodlord account manager.",
+                    "example": 3.0
+                  }
+                }
+              }
+            }
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "applicant",
+              "guarantor",
+              "supplementary"
+            ]
+          },
+          "attachedSubjects": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "id",
+                "type"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "PatchSubjectRequest": {
+        "title": "Patch Subject Request",
+        "type": "object",
+        "description": "Supply only the properties you wish to change. The `context` block is required and must include at least one property; `rentalDetails` is optional.",
+        "required": [
+          "context"
+        ],
+        "properties": {
+          "context": {
+            "type": "object",
+            "description": "Subject context fields to update. Omitted fields remain unchanged. Must include at least one property.",
+            "minProperties": 1,
+            "properties": {
+              "email": {
+                "type": "string",
+                "description": "The new email address you would like to change the subject to have",
+                "example": "john@smith.com"
+              },
+              "product": {
+                "type": "string",
+                "description": "The product you wish to change the subject to have. Must be one of `Pro`, `Essential`, or `Priority`. PATCH only supports tier upgrades (e.g. Essential -> Pro -> Priority); switching to/from Corporate or None is not supported via PATCH and requires a new subject.",
+                "enum": [
+                  "Pro",
+                  "Essential",
+                  "Priority"
+                ],
+                "example": "Pro"
+              },
+              "mobile": {
+                "type": "string",
+                "description": "The new mobile you would like to change the subject to have",
+                "example": "07123456789"
+              },
+              "firstName": {
+                "type": "string",
+                "description": "The new first name you would like to change the subject to have",
+                "example": "Simon"
+              },
+              "lastName": {
+                "type": "string",
+                "description": "The new last name you would like to change the subject to have",
+                "example": "Shaw"
+              },
+              "guarantorCollection": {
+                "type": "object",
+                "nullable": true,
+                "description": "Update the guarantor collection configuration on an applicant. Omit from context to leave unchanged. Supply with `required: true` to add or update the requirement (creates a recommendation and sends a 'guarantor required' email when transitioning to true); supply with `required: false` to mark as not-required (expires active guarantor recommendations); or supply `null` to remove the guarantorCollection from the subject entirely. Only meaningful on subjects with `type: applicant`. Note: changes to `product` or `affordabilityRatio` alone (without a change in `required`) do not re-trigger the workflow.",
+                "required": [
+                  "required",
+                  "product",
+                  "affordabilityRatio"
+                ],
+                "properties": {
+                  "required": {
+                    "type": "boolean",
+                    "description": "Whether a guarantor is required for this applicant.",
+                    "example": true
+                  },
+                  "product": {
+                    "type": "string",
+                    "description": "The referencing product the guarantor will go through.",
+                    "enum": [
+                      "Pro",
+                      "Essential",
+                      "Priority",
+                      "Corporate"
+                    ],
+                    "example": "Pro"
+                  },
+                  "affordabilityRatio": {
+                    "type": "number",
+                    "minimum": 1,
+                    "description": "Minimum income-to-rent multiplier the guarantor's income must satisfy. Must be >= 1. Note: API consumers always operate within a company that has a pre-configured `GuarantorAffordabilityRatio`, so the value supplied here will be silently replaced by the company-configured value before storage.",
+                    "example": 3.0
+                  }
+                }
+              }
+            }
+          },
+          "rentalDetails": {
+            "type": "object",
+            "description": "Update the subject's rental details. Omitted fields remain unchanged.",
+            "properties": {
+              "priceShare": {
+                "type": "number",
+                "exclusiveMinimum": 0,
+                "description": "The new monthly rent share for this subject, in GBP. Must be > 0 and <= the application's monthly cost.",
+                "example": 1000
+              },
+              "affordabilityRatio": {
+                "type": "number",
+                "minimum": 1,
+                "description": "New minimum income-to-rent multiplier. Must be >= 1. Note: API consumers always operate within a company that has a pre-configured affordability ratio (`TenantAffordabilityRatio` for applicants, `GuarantorAffordabilityRatio` for guarantors), so the value supplied here will be silently replaced by the company-configured value before storage. The PATCH still returns 200, but the stored ratio will snap back to the company-configured value.",
+                "example": 3.0
+              }
+            }
+          }
+        }
+      },
+      "PatchApplicationRequest": {
+        "title": "Patch Application Request",
+        "type": "object",
+        "properties": {
+          "tenancy": {
+            "type": "object",
+            "description": "One of moveInDate, term or monthlyCost are required",
+            "properties": {
+              "moveInDate": {
+                "type": "string",
+                "description": "Move in date in YYYY-MM-DD format. This must be a date in the future, but no longer than 14 months in the future.",
+                "example": "2024-10-01"
+              },
+              "term": {
+                "type": "number",
+                "example": 12,
+                "description": "Term of rental tenancy in months. Maximum 120 months (10 years)"
+              },
+              "monthlyCost": {
+                "type": "number",
+                "example": 1000,
+                "description": "Monthly cost in GBP"
+              },
+              "address": {
+                "type": "object",
+                "description": "Address of application",
+                "required": [
+                  "line1",
+                  "country",
+                  "postcode",
+                  "city"
+                ],
+                "properties": {
+                  "line1": {
+                    "type": "string"
+                  },
+                  "line2": {
+                    "type": "string"
+                  },
+                  "city": {
+                    "type": "string"
+                  },
+                  "postcode": {
+                    "type": "string"
+                  },
+                  "country": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "required": []
+          }
+        },
+        "required": [
+          "tenancy"
+        ]
+      },
+      "CreateApplicationRequest": {
+        "title": "Create Application Request",
+        "type": "object",
+        "properties": {
+          "tenancy": {
+            "type": "object",
+            "properties": {
+              "moveInDate": {
+                "type": "string",
+                "description": "Move in date in YYYY-MM-DD format. This must be a date in the future, but no longer than 14 months in the future.",
+                "example": "2024-10-01"
+              },
+              "term": {
+                "type": "number",
+                "example": 12,
+                "description": "Term of rental tenancy in months. Maximum 120 months (10 years)"
+              },
+              "monthlyCost": {
+                "type": "number",
+                "example": 1000,
+                "description": "Monthly cost in GBP"
+              },
+              "address": {
+                "type": "object",
+                "properties": {
+                  "line1": {
+                    "example": "22 Street",
+                    "type": "string"
+                  },
+                  "city": {
+                    "example": "Sheffield",
+                    "type": "string"
+                  },
+                  "postcode": {
+                    "example": "S1 123",
+                    "type": "string"
+                  },
+                  "country": {
+                    "example": "England",
+                    "description": "Must be one of: 'England' | 'Scotland' | 'Wales'. Tenancies created within England are subject to right to rent checks and sharecode collection",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "line1",
+                  "city",
+                  "postcode",
+                  "country"
+                ]
+              }
+            },
+            "required": [
+              "moveInDate",
+              "term",
+              "monthlyCost",
+              "address"
+            ]
+          },
+          "agency": {
+            "type": "object",
+            "properties": {
+              "companyName": {
+                "type": "string",
+                "description": "The name of your lettings agency. This is used by our referencing team to identify your agency",
+                "example": "John Smith Lettings"
+              },
+              "agentName": {
+                "type": "string",
+                "description": "The name of your estate agent who is assigned to this application",
+                "example": "John Smith"
+              },
+              "agentMobile": {
+                "type": "string",
+                "description": "The mobile number of your estate agent who is assigned to this application. We require this as our referencing may need to contact them to provide updates and chasers.",
+                "example": "07293838394"
+              },
+              "agentEmail": {
+                "type": "string",
+                "description": "The email address of your estate agent who is assigned to this application. We require this as our referencing may need to contact them to provide updates and chasers.",
+                "example": "john.smith@example.com"
+              }
+            },
+            "required": [
+              "companyName",
+              "agentName"
+            ]
+          }
+        },
+        "required": [
+          "tenancy",
+          "agency"
+        ]
+      },
+      "Application": {
+        "title": "Application",
+        "type": "object",
+        "description": "An application contains rental information and all of the applicants/guarantors which are applying for a tenancy.",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "tenancy": {
+            "type": "object",
+            "properties": {
+              "moveInDate": {
+                "type": "string",
+                "example": "2024-10-01"
+              },
+              "term": {
+                "type": "number",
+                "example": 12
+              },
+              "monthlyCost": {
+                "type": "number",
+                "example": 1000
+              },
+              "address": {
+                "type": "object",
+                "properties": {
+                  "line1": {
+                    "type": "string",
+                    "example": "22 Street"
+                  },
+                  "city": {
+                    "type": "string",
+                    "example": "Sheffield"
+                  },
+                  "postcode": {
+                    "type": "string",
+                    "example": "S1 123"
+                  },
+                  "country": {
+                    "type": "string",
+                    "example": "England"
+                  }
+                }
+              }
+            }
+          },
+          "subjects": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Subject"
+            }
+          },
+          "agency": {
+            "type": "object",
+            "properties": {
+              "companyName": {
+                "type": "string",
+                "example": "John Smith Lettings"
+              },
+              "agentName": {
+                "type": "string",
+                "example": "John Smith"
+              },
+              "agentMobile": {
+                "type": "string",
+                "example": "07912345678"
+              },
+              "agentEmail": {
+                "type": "string",
+                "example": "john.smith@example.com"
+              }
+            }
+          },
+          "createdAt": {
+            "type": "string"
+          }
+        },
+        "required": []
+      },
+      "PatchSubjectOutcomeConditionsRequest": {
+        "title": "Patch Subject Outcome Conditions Request",
+        "type": "object",
+        "description": "Patch a subject's outcome conditions",
+        "properties": {
+          "conditions": {
+            "type": "object",
+            "description": "Dictionary mapping condition type to confirmation status. Valid keys are `confirmedIdOnPerson` and `confirmedProofOfAddress`.",
+            "properties": {
+              "confirmedIdOnPerson": {
+                "type": "boolean",
+                "description": "Whether the individual's ID has been confirmed in person."
+              },
+              "confirmedProofOfAddress": {
+                "type": "boolean",
+                "description": "Whether proof of address has been confirmed."
+              }
+            },
+            "example": {
+              "confirmedProofOfAddress": true
+            }
+          },
+          "requestedBy": {
+            "type": "string",
+            "example": "User123",
+            "description": "Identifier of the user or system that made the confirmation request."
+          }
+        },
+        "required": [
+          "conditions",
+          "requestedBy"
+        ]
+      },
+      "Subject": {
+        "title": "Subject",
+        "type": "object",
+        "description": "A subject is a person who is part of an application.",
+        "properties": {
+          "externalId": {
+            "type": "string",
+            "example": "1234"
+          },
+          "rentalDetails": {
+            "type": "object",
+            "properties": {
+              "priceShare": {
+                "type": "number",
+                "description": "The portion of the monthly rent attributed to this subject, in GBP.",
+                "example": 1000
+              },
+              "affordabilityRatio": {
+                "type": "number",
+                "description": "Minimum income-to-rent multiplier the subject's income must satisfy. The stored value reflects company-config precedence: if your company has a configured affordability ratio (`TenantAffordabilityRatio` for applicants, `GuarantorAffordabilityRatio` for guarantors), the response shows that value rather than any value originally supplied at creation/patch time.",
+                "example": 2.5
+              }
+            }
+          },
+          "context": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "example": "John Smith"
+              },
+              "firstName": {
+                "type": "string",
+                "example": "John"
+              },
+              "lastName": {
+                "type": "string",
+                "example": "Smith"
+              },
+              "email": {
+                "type": "string",
+                "example": "john@smith.com"
+              },
+              "mobile": {
+                "type": "string",
+                "example": "07912345678"
+              },
+              "redirectUrlOnJourneyComplete": {
+                "type": "string",
+                "example": "https://www.myapp.com/complete"
+              },
+              "tenancyRenewal": {
+                "type": "boolean",
+                "example": false
+              },
+              "product": {
+                "type": "string",
+                "example": "Pro"
+              },
+              "addresses": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "1234"
+                    },
+                    "addressType": {
+                      "type": "string",
+                      "example": "current"
+                    },
+                    "bedroomIdentifier": {
+                      "type": "string",
+                      "example": "Room A"
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "22"
+                    },
+                    "startDate": {
+                      "type": "string",
+                      "example": "2024-10-01"
+                    },
+                    "status": {
+                      "type": "string",
+                      "example": "Renting"
+                    },
+                    "line1": {
+                      "type": "string",
+                      "example": "Street"
+                    },
+                    "normalizedLine1": {
+                      "type": "string",
+                      "example": "22 Street"
+                    },
+                    "line2": {
+                      "type": "string",
+                      "example": "Crookesmoore"
+                    },
+                    "city": {
+                      "type": "string",
+                      "example": "Sheffield"
+                    },
+                    "county": {},
+                    "postcode": {
+                      "type": "string",
+                      "example": "S1 123"
+                    },
+                    "country": {
+                      "type": "string",
+                      "example": "England"
+                    },
+                    "countryCodeAlpha2": {
+                      "type": "string",
+                      "example": "GB"
+                    },
+                    "referee": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "example": "1234"
+                        },
+                        "name": {
+                          "type": "string",
+                          "example": "Jane Smith"
+                        },
+                        "email": {
+                          "type": "string",
+                          "example": "jane@smith.com"
+                        },
+                        "mobile": {
+                          "type": "string",
+                          "example": "07912345678"
+                        },
+                        "createdAt": {
+                          "type": "string",
+                          "example": "2024-10-01"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "incomes": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "company": {
+                      "type": "string",
+                      "example": "Tesco"
+                    },
+                    "position": {
+                      "type": "string",
+                      "example": "Manager"
+                    },
+                    "contractType": {
+                      "type": "string",
+                      "example": "Permanent"
+                    },
+                    "contractSchedule": {
+                      "type": "string",
+                      "example": "Full Time"
+                    },
+                    "guaranteedBonus": {},
+                    "startDate": {
+                      "type": "string",
+                      "example": "2024-10-01"
+                    },
+                    "endDate": {},
+                    "address": {
+                      "type": "object",
+                      "properties": {
+                        "id": {},
+                        "addressType": {
+                          "type": "string"
+                        },
+                        "name": {},
+                        "startDate": {},
+                        "status": {},
+                        "line1": {
+                          "type": "string"
+                        },
+                        "normalizedLine1": {
+                          "type": "string"
+                        },
+                        "line2": {
+                          "type": "string"
+                        },
+                        "line3": {},
+                        "city": {
+                          "type": "string"
+                        },
+                        "county": {},
+                        "postcode": {
+                          "type": "string"
+                        },
+                        "country": {
+                          "type": "string"
+                        },
+                        "countryCodeAlpha2": {}
+                      }
+                    },
+                    "referee": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "example": "1234"
+                        },
+                        "name": {
+                          "type": "string",
+                          "example": "Jane Smith"
+                        },
+                        "email": {
+                          "type": "string",
+                          "example": "jane@smith.com"
+                        },
+                        "mobile": {
+                          "type": "string",
+                          "example": "07912345678"
+                        },
+                        "createdAt": {
+                          "type": "string",
+                          "example": "2024-10-01"
+                        },
+                        "isNonProfessionalEmail": {
+                          "type": "boolean",
+                          "nullable": true,
+                          "description": "True when the referee's email domain has been flagged as a free or non-professional email provider (e.g. gmail.com, yahoo.com). Null when the value cannot be determined or is not evaluated for this referee type.",
+                          "example": true
+                        }
+                      }
+                    },
+                    "type": {
+                      "type": "string"
+                    },
+                    "evidenceType": {
+                      "type": "string",
+                      "example": "Open Banking"
+                    },
+                    "income": {
+                      "type": "object",
+                      "properties": {
+                        "value": {
+                          "type": "number"
+                        },
+                        "currency": {
+                          "type": "string"
+                        },
+                        "frequency": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "id": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "incomeSummary": {
+                "type": "object",
+                "properties": {
+                  "totalIncome": {
+                    "type": "number",
+                    "example": 2000
+                  },
+                  "totalVerifiedIncome": {
+                    "type": "number",
+                    "example": 1000
+                  },
+                  "maximumAffordabilityPercentage": {
+                    "type": "number",
+                    "example": 123
+                  },
+                  "openBanking": {
+                    "type": "object",
+                    "properties": {
+                      "provider": {
+                        "type": "string",
+                        "example": "tink"
+                      },
+                      "status": {
+                        "type": "string",
+                        "example": "Connected"
+                      },
+                      "outcome": {
+                        "type": "object",
+                        "properties": {
+                          "estimatedAnnualNetIncome": {
+                            "type": "number",
+                            "example": 1000
+                          },
+                          "estimatedAnnualGrossIncome": {
+                            "type": "number",
+                            "example": 1500
+                          }
+                        }
+                      },
+                      "optOutReason": {
+                        "type": "object",
+                        "properties": {
+                          "category": {
+                            "type": "string",
+                            "example": "bankNotListed",
+                            "enum": [
+                              "bankNotListed",
+                              "connectionFailed",
+                              "privacyConcerns",
+                              "incomeAccuracy",
+                              "somethingElse",
+                              "userOptedOut"
+                            ]
+                          },
+                          "additionalInformation": {
+                            "type": "string",
+                            "example": "Additional information here."
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "credit": {
+                "type": "object",
+                "properties": {
+                  "hasAdverseCredit": {
+                    "type": "boolean",
+                    "example": false
+                  },
+                  "adverseCreditDeclared": {
+                    "type": "boolean",
+                    "example": false
+                  }
+                }
+              },
+              "documents": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "1234"
+                    },
+                    "fileName": {
+                      "type": "string",
+                      "example": "file.pdf"
+                    },
+                    "thumbnail": {
+                      "type": "string",
+                      "example": "file.png"
+                    },
+                    "documentType": {
+                      "type": "string",
+                      "example": "Proof of Address"
+                    }
+                  }
+                }
+              },
+              "communicationPreferences": {
+                "type": "object",
+                "properties": {
+                  "sendInitialTenantEmail": {
+                    "type": "boolean",
+                    "example": false,
+                    "description": "Whether to send the initial tenant email. This is used to notify the tenant that they have been added to a referencing application. You may wish to disable this if you wish to send your own emails rather than relying on Goodlord to send them. Please note that this email does include a link to the referencing bot journey that an applicant is required to fill out to submit their application."
+                  },
+                  "disableRentProtectionComms": {
+                    "type": "boolean",
+                    "example": true,
+                    "description": "Whether to show Rent Protection Insurance (RPI) copy & coverage in the subject referencing PDF report"
+                  },
+                  "disableTCLIComms": {
+                    "type": "boolean",
+                    "example": true,
+                    "description": "Whether to show Tenant Contents and Liability Insurance (TCLI) banner in subject referencing PDF report"
+                  },
+                  "disableTenancyServicesComms": {
+                    "type": "boolean",
+                    "example": true,
+                    "description": "Whether to show tenancy services banner in subject referencing PDF report"
+                  }
+                }
+              },
+              "guarantorCollection": {
+                "type": "object",
+                "nullable": true,
+                "description": "Reflects the guarantor collection configuration on this subject. Only populated when present on the stored subject - applicants with a guarantor requirement will have this populated; applicants without and all guarantors will not. The `affordabilityRatio` shown here reflects the resolved value after company-config precedence is applied.",
+                "properties": {
+                  "required": {
+                    "type": "boolean",
+                    "description": "Whether a guarantor is required for this applicant.",
+                    "example": true
+                  },
+                  "product": {
+                    "type": "string",
+                    "description": "The referencing product the guarantor will go through.",
+                    "enum": [
+                      "Pro",
+                      "Essential",
+                      "Priority",
+                      "Corporate"
+                    ],
+                    "example": "Pro"
+                  },
+                  "affordabilityRatio": {
+                    "type": "number",
+                    "minimum": 1,
+                    "description": "Minimum income-to-rent multiplier the guarantor's income must satisfy. Reflects company-config precedence (see request schema for details).",
+                    "example": 3.0
+                  }
+                }
+              },
+              "identity": {
+                "type": "object",
+                "nullable": true,
+                "properties": {
+                  "nationality": {
+                    "type": "string",
+                    "example": "UK",
+                    "description": "The tenant's nationality"
+                  },
+                  "nationalInsuranceNumber": {
+                    "type": "string",
+                    "example": "AB123456C",
+                    "description": "The tenant's National Insurance Number"
+                  },
+                  "r2rShareCode": {
+                    "type": "string",
+                    "example": "A12 B3D EFG",
+                    "description": "The tenant's Right to Rent Share Code"
+                  },
+                  "idvt": {
+                    "type": "object",
+                    "nullable": true,
+                    "properties": {
+                      "idCheckStatus": {
+                        "type": "string",
+                        "enum": [
+                          "Pending",
+                          "Pass",
+                          "Fail",
+                          "Refer"
+                        ]
+                      },
+                      "r2rCheckStatus": {
+                        "type": "string",
+                        "enum": [
+                          "NotPerformed",
+                          "Pending",
+                          "Pass",
+                          "Fail",
+                          "Refer"
+                        ]
+                      }
+                    }
+                  },
+                  "pepsSanctions": {
+                    "type": "object",
+                    "nullable": true,
+                    "properties": {
+                      "pepsStatus": {
+                        "type": "string",
+                        "enum": [
+                          "NotFound",
+                          "Match",
+                          "ActionRequired"
+                        ]
+                      },
+                      "sanctionsStatus": {
+                        "type": "string",
+                        "enum": [
+                          "NotFound",
+                          "Match",
+                          "ActionRequired"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "outcome": {
+            "type": "object",
+            "properties": {
+              "status": {
+                "type": "string",
+                "example": "Accepted"
+              },
+              "comments": {
+                "type": "string",
+                "example": "This application has been accepted"
+              },
+              "rpi": {
+                "type": "object",
+                "properties": {
+                  "eligibility": {
+                    "type": "string",
+                    "example": "eligible"
+                  },
+                  "comments": {
+                    "type": "string",
+                    "example": "This application is eligible for RPI"
+                  }
+                }
+              },
+              "sections": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "example": "Income"
+                    },
+                    "status": {
+                      "type": "string",
+                      "example": "Accepted"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "id": {
+            "type": "string",
+            "example": "1234"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "applicant",
+              "guarantor"
+            ],
+            "example": "applicant"
+          },
+          "attachedSubjects": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "milestones": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "FinalOutcome"
+                },
+                "event": {
+                  "type": "string",
+                  "example": "subject.accepted"
+                },
+                "createdAt": {
+                  "type": "string",
+                  "example": "2024-10-01"
+                },
+                "updatedAt": {
+                  "type": "string",
+                  "example": "2024-10-01"
+                }
+              }
+            }
+          },
+          "recommendations": {
+            "type": "array",
+            "items": {}
+          }
+        },
+        "required": []
+      },
+      "ApiMessageResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Something happened that I need to alert you about"
+          }
+        },
+        "xml": {
+          "name": "##default"
+        }
+      },
+      "APITouchpoint": {
+        "title": "API Touchpoint",
+        "type": "object",
+        "description": "A touchpoint represents a communication or interaction point for a subject.",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "12345"
+          },
+          "subjectId": {
+            "type": "string",
+            "example": "a6770136-63f0-4315-9d9e-3700329a4b91"
+          },
+          "category": {
+            "type": "string",
+            "example": "email"
+          },
+          "author": {
+            "$ref": "#/components/schemas/APITouchpointAuthor"
+          },
+          "message": {
+            "type": "string",
+            "example": "Application has been received and is being processed"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The date and time the touchpoint was created, in ISO 8601 format. All timestamps are in UTC (indicated by the Z suffix).",
+            "example": "2024-10-01T14:35:12.189Z"
+          }
+        },
+        "required": [
+          "id",
+          "subjectId",
+          "category",
+          "author",
+          "message",
+          "createdAt"
+        ]
+      },
+      "APITouchpointAuthor": {
+        "title": "API Touchpoint Author",
+        "type": "object",
+        "description": "The author of a touchpoint.",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true,
+            "example": "author-123"
+          },
+          "type": {
+            "type": "string",
+            "example": "system"
+          },
+          "email": {
+            "type": "string",
+            "nullable": true,
+            "example": "noreply@goodlord.co"
+          }
+        },
+        "required": [
+          "type"
+        ]
+      },
+      "APIErrorResponse": {
+        "type": "object",
+        "properties": {
+          "errors": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "reason": {
+                  "type": "string",
+                  "example": "PropertyIsInvalid"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Request.Property is Invalid"
+                }
+              },
+              "required": [
+                "reason",
+                "description"
+              ]
+            }
+          }
+        },
+        "required": [
+          "errors"
+        ]
+      },
+      "APIEmail": {
+        "type": "object",
+        "description": "The information about an email sent to an applicant",
+        "properties": {
+          "emailAddress": {
+            "type": "string",
+            "nullable": "true",
+            "example": "test@example.com"
+          },
+          "emailSubject": {
+            "type": "string",
+            "nullable": "false",
+            "example": "Start your referencing."
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The date and time the email was sent, in ISO 8601 format. All timestamps are in UTC (indicated by the Z suffix).",
+            "example": "2025-10-01T12:34:56.789Z"
+          },
+          "status": {
+            "type": "string",
+            "nullable": "true",
+            "description": "The delivery status of the email.",
+            "enum": [
+              "Draft",
+              "Sent",
+              "Delivered",
+              "Failed",
+              "Opened"
+            ],
+            "example": "Sent"
+          }
+        }
+      }
+    },
+    "parameters": {
+      "CompanyId": {
+        "name": "Company-ID",
+        "in": "header",
+        "description": "A unique GUID identifying your company, issued alongside your API keys. This value may differ between production and sandbox environments. This is a mandatory header for all application and subject endpoints.",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "example": "e2baa1a0-1234-5678-9abc-def012345678"
+      }
+    },
+    "securitySchemes": {
+      "OAuth2": {
+        "description": "This API uses OAuth2 to authenticate requests. You must use your client credentials to obtain a token.\nRead [Obtain a JWT Token](./operations/getAuthToken) for more information.",
+        "type": "oauth2",
+        "flows": {
+          "clientCredentials": {
+            "tokenUrl": "https://api-sandbox.goodlord.co/auth/token",
+            "scopes": {}
+          }
+        }
+      }
+    }
+  },
+  "security": [
+    {
+      "OAuth2": []
+    }
+  ]
+}
