@@ -1,0 +1,90 @@
+generated: '2026-07-26'
+method: searched
+source: https://portal.goodlord.co/portal/catalogue-products/referencing-product-1
+spec_type: Webhooks
+asyncapi_published: false
+asyncapi_note: >-
+  Goodlord publishes NO AsyncAPI document. The Tyk developer portal loads the AsyncAPI React
+  component stylesheet as generic portal furniture, but no AsyncAPI artifact is served on any
+  host. What Goodlord does publish — and this is rare in UK PropTech — is a real webhook
+  catalogue with exact event.name values and a literal example payload, captured verbatim below.
+api: Goodlord Referencing API
+transport: HTTP POST to a customer-supplied endpoint
+subscription:
+  self_serve: false
+  management_api: false
+  how: >-
+    The customer supplies endpoint URLs and selects which events they want; Goodlord configures
+    the subscription on request. There is no webhook management operation in the OpenAPI, no
+    subscription UI in the developer portal, and no way to add, list or remove a subscription
+    programmatically.
+security:
+  signature_scheme: none published
+  verification_guidance: none published
+  replay_protection: none published
+  note: >-
+    No HMAC signature header, shared secret, mTLS requirement or timestamp/nonce scheme is
+    documented for verifying that a delivery genuinely came from Goodlord. For a payload that
+    announces the availability of a completed tenant reference — identity, income and credit
+    data on a named individual — that is a material gap.
+delivery:
+  retry_policy: none published
+  ordering_guarantees: none published
+  at_least_once: unknown
+events:
+- name: V2.subject.report.generated
+  summary: The final referencing report has been generated for a subject.
+  follow_up_operations: [getSubject, getAuthenticatedFile]
+  note: >-
+    The report itself is not in the payload — the consumer calls
+    GET /referencing/media/document/{documentId} to obtain an authenticated file URL.
+- name: V2.subject.reference.form.generated
+  summary: A reference form has been generated for a subject (for example a form issued to an employer, accountant or landlord referee).
+  follow_up_operations: [getSubject, getSubjectTouchpoints]
+- name: V2.subject.outcome.updated
+  summary: An outcome section for a subject has changed status.
+  follow_up_operations: [getSubject, patchSubjectOutcomeConditions]
+  note: >-
+    Outcome states published in the portal are Pending Submission, In Review, Awaiting
+    Response, Accepted, Rejected and Cancelled; outcome kinds are Pass, Conditional Pass and Fail.
+payload_envelope:
+  documented: true
+  structure:
+    referer: string
+    context:
+      source:
+        name: vouch
+        version: '2'
+      event:
+        name: 'one of the three event names above'
+        version: string
+        timestamp: string
+    data:
+      customerId: string
+      applicationId: string
+      subjectId: string
+      type: string
+  note: >-
+    context.source.name is literally "vouch" — the referencing engine Goodlord acquired and
+    rebadged — and the V2 event prefix is that platform's version, not Goodlord's API version.
+    The payload is a thin notification: it carries identifiers only, so every consumer must
+    call back into the REST API to obtain state.
+consumer_pattern:
+  description: Receive notification, then read state back over REST.
+  steps:
+  - Receive the POST and match context.event.name.
+  - Read data.subjectId (and data.applicationId).
+  - Call getSubject to read the current outcome, milestones and recommendations.
+  - On V2.subject.report.generated, call getAuthenticatedFile with the report documentId to fetch the report.
+  - On V2.subject.outcome.updated, optionally call patchSubjectOutcomeConditions to record how conditions were met.
+related:
+  openapi: openapi/goodlord-referencing-api-openapi.json
+  conventions: conventions/goodlord-conventions.yml
+  skills: skills/_index.yml
+coverage:
+  events_published: 3
+  apis_with_events: 1
+  apis_without_events: 1
+  note: >-
+    The Insurance App API publishes no event or webhook surface at all — claim state changes
+    (claimStatus, rentScheduleStatus, payment status) are poll-only.

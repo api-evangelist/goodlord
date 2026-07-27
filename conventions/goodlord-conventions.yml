@@ -1,0 +1,147 @@
+generated: '2026-07-26'
+method: searched
+source: https://portal.goodlord.co/portal/catalogue-products/referencing-product-1
+derived_from: openapi/goodlord-referencing-api-openapi.json, openapi/goodlord-insurance-app-api-openapi.json
+note: >-
+  Goodlord publishes no cross-cutting "API conventions" page. This artifact is assembled from
+  the Authentication walkthrough in the developer portal and from what the three published
+  OpenAPI 3.1.0 documents actually declare. The two API surfaces do NOT share conventions —
+  the Referencing API is a hand-authored Tyk-fronted service and the Insurance App is a
+  generated API Platform (Symfony) service — so each is recorded separately rather than
+  averaged into a single house style.
+apis:
+- name: Goodlord Referencing API
+  source: openapi/goodlord-referencing-api-openapi.json
+  authentication:
+    style: OAuth 2.0 client_credentials (machine-to-machine)
+    token_endpoint_live: https://api.goodoverlord.com/auth/token
+    token_endpoint_sandbox: https://api-sandbox.goodlord.co/auth/token
+    credentials: client_id + client_secret posted as JSON with grant_type client_credentials
+    token_format: JWT
+    token_type: Bearer
+    token_lifetime_seconds: 3600
+    request_headers:
+    - {name: Authorization, value: 'Bearer <access_token>', required: true}
+    - {name: Company-ID, value: '<issued Company ID>', required: true,
+       note: tenant selector carried on every request; documented in the portal but NOT declared in the OpenAPI}
+    - {name: Content-Type, value: application/json, required: true}
+    detail: authentication/goodlord-authentication.yml
+  idempotency:
+    supported: false
+    evidence: >-
+      No Idempotency-Key header, parameter or extension appears anywhere in either Referencing
+      OpenAPI document, and the portal documents none. Subject creation is a PUT against the
+      parent application (PUT /referencing/subject/application/{applicationId}) which is not
+      idempotent in the RFC 9110 sense because the subject id is server-assigned; application
+      creation is a plain POST. Retrying a failed create can produce a duplicate.
+  pagination:
+    supported: false
+    evidence: >-
+      No list endpoint exists. Every read is either a single resource by id or a bounded
+      child collection of one subject (touchpoints, emails) with no page, limit, cursor or
+      offset parameter declared.
+  filtering_and_sorting:
+    supported: false
+  field_expansion:
+    supported: false
+  metadata:
+    supported: false
+    note: Subject carries externalId, which is the only caller-supplied correlation field in the contract.
+  request_tracing:
+    request_id_header: null
+    evidence: no request-id, correlation-id or trace header is declared or documented
+  versioning:
+    scheme: none-in-path
+    detail: >-
+      The base path carries no version segment (/referencing/..., /auth/token) and info.version
+      is 1.0.0. Version discipline shows up instead in the webhook event names, which are
+      prefixed V2 (V2.subject.report.generated), and in context.source.version "2" inside the
+      webhook envelope — a legacy of the Vouch platform Goodlord acquired.
+  error_envelope:
+    media_type: application/json
+    schema: APIErrorResponse
+    statuses: [400, 404, 500]
+    rfc9457: false
+    detail: errors/goodlord-problem-types.yml
+  rate_limits:
+    published: false
+    signalling_headers: none declared
+    note: >-
+      The API is fronted by a Tyk gateway, which is capable of quota and rate-limit
+      enforcement, but Goodlord publishes no limits and declares no 429 response in the spec.
+  content_types:
+    request: [application/json]
+    response: [application/json]
+  webhooks:
+    documented: true
+    self_serve: false
+    detail: asyncapi/goodlord-referencing-webhooks.yml
+- name: Goodlord Insurance App API
+  source: openapi/goodlord-insurance-app-api-openapi.json
+  framework: API Platform (Symfony)
+  authentication:
+    style: JWT bearer in the Authorization header
+    declared_as: 'apiKey in header, name Authorization (the spec models a bearer token as an apiKey)'
+    discovery: none — no token endpoint, authorization server or scope surface is published for this API
+  idempotency:
+    supported: false
+    evidence: no Idempotency-Key header or parameter is declared on any of the 35 operations
+  pagination:
+    style: page-number
+    parameters: [page, itemsPerPage]
+    response_shape: >-
+      API Platform collection envelope. JsonApiCollectionBaseSchema and
+      JsonApiCollectionBaseSchemaNoPagination are declared, so JSON:API top-level links/meta
+      pagination applies when the vnd.api+json representation is requested.
+  filtering_and_sorting:
+    filters: [claimStatus, 'claimStatus[]', company.externalId, 'company.externalId[]',
+      policyUniqueReferenceNumber, 'policyUniqueReferenceNumber[]', propertyAddress]
+    sorting: ['order[claimDate]', 'order[latestPaymentDate]', 'order[totalPaymentAmount]']
+    style: API Platform bracket syntax
+  field_expansion:
+    parameter: include
+    style: JSON:API compound documents (include related resources)
+  request_tracing:
+    request_id_header: null
+  versioning:
+    scheme: uri-path
+    current: v1
+    detail: every path is prefixed /api/v1/. info.version in the document is 0.1.0.
+  error_envelope:
+    media_types: [application/problem+json, application/vnd.api+json, application/ld+json]
+    rfc9457: true
+    schemas: [Error, Error.jsonapi, ConstraintViolation, ConstraintViolation.jsonapi]
+    statuses: [400, 403, 404, 422]
+    note: 422 carries ConstraintViolation — per-field validation failures, the API Platform default.
+    detail: errors/goodlord-problem-types.yml
+  content_negotiation:
+    strict: true
+    accepted: [application/vnd.openapi+json, application/ld+json, application/vnd.api+json, application/json, text/csv]
+    note: >-
+      Accept: application/json against /api/v1/docs returns HTTP 406 — only
+      application/vnd.openapi+json is accepted for the specification document. Data resources
+      additionally publish a text/csv representation.
+  rate_limits:
+    published: false
+  soft_delete:
+    supported: true
+    fields: [deletedAt, deleted]
+    entities: [Role, RoleGroup, RentSchedule, RentScheduleRow]
+cross_cutting:
+  environments:
+    live: https://api.goodoverlord.com
+    sandbox: https://api-sandbox.goodlord.co
+    detail: sandbox/goodlord-sandbox.yml
+  access_model:
+    documentation: public and anonymously readable
+    specifications: publicly downloadable with no login
+    credentials: partner-gated — issued by a Goodlord account manager, never self-serve
+  status_page: https://goodlord.statuspal.io/
+  trust_center: https://trust.goodlord.com/
+related:
+  authentication: authentication/goodlord-authentication.yml
+  scopes: scopes/goodlord-scopes.yml
+  errors: errors/goodlord-problem-types.yml
+  lifecycle: lifecycle/goodlord-lifecycle.yml
+  data_model: data-model/goodlord-data-model.yml
+  webhooks: asyncapi/goodlord-referencing-webhooks.yml

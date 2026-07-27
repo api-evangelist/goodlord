@@ -20,7 +20,7 @@ description: >-
   or account manager. Public contract, partner-gated keys. There is no RESO reference
   of any kind — RESO is a US NAR/MLS construct with no United Kingdom counterpart — and
   Goodlord publishes no open data.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/groq.png
+image: https://www.goodlord.com/hubfs/goodlord-logo-1.jpg
 tags:
 - Real Estate
 - United Kingdom
@@ -70,6 +70,10 @@ apis:
     url: https://portal.goodlord.co/blog/2024/8/22/getting-started-with-goodlords-referencing-api
   - type: Documentation
     url: https://portal.goodlord.co/blog/2024/8/20/getting-started-with-goodlord-referencing-api
+  - type: Overlay
+    url: overlays/goodlord-referencing-api-overlay.yaml
+  - type: Webhooks
+    url: asyncapi/goodlord-referencing-webhooks.yml
 - aid: goodlord:goodlord-referencing-api-sandbox
   name: Goodlord Referencing API (Sandbox)
   description: >-
@@ -94,6 +98,10 @@ apis:
     url: https://portal.goodlord.co/portal/catalogue-products/referencing-product-1
   - type: APIReference
     url: https://portal.goodlord.co/portal/catalogue-products/referencing-product-1/dHlrL3Byb2Qtc2FuZGJveC1yZWZlcmVuY2luZy1hcGk/docs
+  - type: Overlay
+    url: overlays/goodlord-referencing-api-sandbox-overlay.yaml
+  - type: Sandbox
+    url: sandbox/goodlord-sandbox.yml
 - aid: goodlord:goodlord-insurance-app-api
   name: Goodlord Insurance App API
   description: >-
@@ -121,7 +129,57 @@ apis:
     url: openapi/goodlord-insurance-app-api-openapi.json
   - type: APIReference
     url: https://insurance-app.goodlord.co/api/v1/docs
+  - type: Overlay
+    url: overlays/goodlord-insurance-app-api-overlay.yaml
 common:
+- type: Conventions
+  url: conventions/goodlord-conventions.yml
+- type: ErrorCatalog
+  url: errors/goodlord-problem-types.yml
+- type: DataModel
+  url: data-model/goodlord-data-model.yml
+- type: Lifecycle
+  url: lifecycle/goodlord-lifecycle.yml
+- type: StatusPage
+  url: https://goodlord.statuspal.io/
+- type: Conformance
+  url: conformance/goodlord-conformance.yml
+- type: Compliance
+  url: https://trust.goodlord.com/
+- type: Sandbox
+  url: sandbox/goodlord-sandbox.yml
+- type: WellKnown
+  url: well-known/goodlord-well-known.yml
+- type: LLMsTxt
+  url: llms/goodlord-llms.txt
+- type: MCPServer
+  url: mcp/goodlord-mcp.yml
+- type: Webhooks
+  url: asyncapi/goodlord-referencing-webhooks.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: APIReference
+  url: https://portal.goodlord.co/portal/catalogue-products/referencing-product-1/dHlrL3Byb2QtcmVmZXJlbmNpbmctYXBp/docs
+- type: GettingStarted
+  url: https://portal.goodlord.co/blog/2024/8/22/getting-started-with-goodlords-referencing-api
+- type: Support
+  url: https://www.goodlord.com/support
+- type: HelpCenter
+  url: https://agenthelp.goodlord.co/s/
+- type: TermsOfService
+  url: https://www.goodlord.com/terms
+- type: PrivacyPolicy
+  url: https://www.goodlord.com/privacy-policy
+- type: TrustCenter
+  url: security/goodlord-trust-center.yml
+- type: DomainSecurity
+  url: security/goodlord-domain-security.yml
+- type: AgenticAccess
+  url: agentic-access/goodlord-agentic-access.yml
+- type: OAuthScopes
+  url: scopes/goodlord-scopes.yml
+- type: Authentication
+  url: authentication/goodlord-authentication.yml
 - type: Website
   url: https://www.goodlord.com/
 - type: DeveloperPortal

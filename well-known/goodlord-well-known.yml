@@ -1,0 +1,91 @@
+generated: '2026-07-26'
+method: searched
+source: live anonymous probes of every apis.yml host and every OpenAPI servers[] host
+note: >-
+  Goodlord serves exactly one /.well-known/ document anywhere in its estate: the OpenID
+  Connect discovery document for its end-user platform login, which is Microsoft Entra
+  External ID (Azure AD B2C) and is only served on the policy-scoped path — the tenant-root
+  /.well-known/openid-configuration on login.goodlord.co is a 404. No security.txt, no
+  api-catalog, no ai-plugin.json and no OAuth 2.0 authorization-server metadata (RFC 8414)
+  exists anywhere, including on the two Referencing API gateways that do issue OAuth
+  client_credentials tokens.
+warning: >-
+  *.goodlord.co answers a wildcard DNS record. Ten or more non-existent subdomains
+  (developer, docs, status, help, webhooks, sandbox, public-api, partner-api, and a control
+  probe of zzzznotreal) all return HTTP 200 with the byte-identical 8,160-byte Goodlord Core
+  SPA. Likewise portal.goodlord.co returns HTTP 200 text/html for ANY path — /llms.txt and
+  /.well-known/security.txt both return the Tyk developer-portal shell, not a document.
+  Every 200 recorded below was verified by content, not by status code alone.
+hosts:
+- host: https://login.goodlord.co
+  role: end-user platform identity provider (Microsoft Entra External ID / Azure AD B2C)
+  documents:
+  - path: /7ddbafdc-ee33-46fb-968a-3011e2a0a825/B2C_1A_2_SIGNUPORSIGNIN/v2.0/.well-known/openid-configuration
+    status: 200
+    file: goodlord-openid-configuration.json
+    verified: true
+    note: >-
+      Real OIDC discovery document. issuer https://login.goodlord.co/7ddbafdc-ee33-46fb-968a-3011e2a0a825/v2.0/,
+      policy B2C_1A_2_SIGNUPORSIGNIN, scopes_supported [openid], RS256, pairwise subjects,
+      custom claims companies / userRoles / userTypes. This is the letting-agent and tenant
+      platform login, NOT the developer API auth — the Referencing API uses its own OAuth 2.0
+      client_credentials token endpoint with no discovery document.
+  - path: /.well-known/openid-configuration
+    status: 404
+    note: tenant-root discovery is not served; only the policy-scoped path resolves
+- host: https://www.goodlord.com
+  role: marketing site
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+  - {path: /llms.txt, status: 404}
+- host: https://portal.goodlord.co
+  role: Tyk Developer Portal
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    verified: false
+    note: soft 404 — returns the 5,280-byte Tyk portal HTML shell (title "Developer Portal"), not a security.txt
+  - path: /llms.txt
+    status: 200
+    verified: false
+    note: soft 404 — same Tyk portal HTML shell
+- host: https://api-sandbox.goodlord.co
+  role: Referencing API sandbox gateway
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /openapi.json, status: 404}
+  - {path: /swagger.json, status: 404}
+  - {path: /docs, status: 404}
+  note: >-
+    All 404s carry a 9-byte text/plain body — a live, credential-gated gateway rather than a
+    dead name. The OpenAPI for this host is published through the developer portal instead.
+- host: https://insurance-app.goodlord.co
+  role: Insurance App (API Platform / Symfony)
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - path: /api/v1/docs
+    status: 200
+    verified: true
+    media_type: application/vnd.openapi+json
+    saved_as: openapi/goodlord-insurance-app-api-openapi.json
+    note: >-
+      Not a /.well-known/ path, but this is where the machine-readable contract actually lives —
+      a complete OpenAPI 3.1.0 document served publicly and unauthenticated. Content negotiation
+      is strict: Accept application/json returns HTTP 406.
+- host: https://api.goodoverlord.com
+  role: Referencing API live gateway
+  documents: []
+  note: did not answer anonymous probes at all (connection failure) — consistent with network-level allow-listing for partners
+summary:
+  documents_found: 1
+  security_txt: false
+  api_catalog: false
+  oauth_authorization_server_metadata: false
+  openid_configuration: true

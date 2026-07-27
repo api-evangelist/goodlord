@@ -1,0 +1,136 @@
+generated: '2026-07-26'
+method: derived
+source: openapi/goodlord-insurance-app-api-openapi.json, openapi/goodlord-referencing-api-openapi.json
+docs: https://portal.goodlord.co/portal/catalogue-products/referencing-product-1
+format: mixed
+note: >-
+  Goodlord publishes no prose error-code reference. This catalogue is derived
+  mechanically from the response objects declared in the three published
+  OpenAPI 3.1.0 documents. The Referencing API returns a plain JSON envelope
+  (components.schemas.APIErrorResponse) on 400/404/500; the Insurance App API
+  is an API Platform (Symfony) service and declares RFC 9457
+  application/problem+json alongside JSON:API (application/vnd.api+json) and
+  hydra error bodies on 400/403/404/422. No error codes, titles or remediation
+  text beyond the response descriptions below are published by Goodlord.
+envelopes:
+- api: Goodlord Referencing API
+  schema: APIErrorResponse
+  media_type: application/json
+  source: openapi/goodlord-referencing-api-openapi.json
+- api: Goodlord Insurance App API
+  media_types: [application/problem+json, application/vnd.api+json, application/ld+json]
+  rfc9457: true
+  source: openapi/goodlord-insurance-app-api-openapi.json
+problems:
+- status: 400
+  title: "Invalid input"
+  api: Goodlord Insurance App API
+  media_types: [application/json, application/problem+json, application/vnd.api+json]
+  rfc9457: true
+  operation_count: 14
+  source_operations:
+  - openapi/goodlord-insurance-app-api-openapi.json#api_agents_id_patch
+  - openapi/goodlord-insurance-app-api-openapi.json#api_agents_post
+  - openapi/goodlord-insurance-app-api-openapi.json#api_insurance_claims_id_patch
+  - openapi/goodlord-insurance-app-api-openapi.json#api_insurance_claims_idsubmit_post
+  - openapi/goodlord-insurance-app-api-openapi.json#api_insurance_claims_insuranceClaimIdfiles_post
+  - openapi/goodlord-insurance-app-api-openapi.json#api_insurance_claims_insuranceClaimIdrent_schedule_rentScheduleIdrent_schedule_row_id_patch
+  - openapi/goodlord-insurance-app-api-openapi.json#api_insurance_claims_insuranceClaimIdrent_schedule_rentScheduleIdrent_schedule_row_post
+  - openapi/goodlord-insurance-app-api-openapi.json#api_insurance_claims_insuranceClaimIdrent_schedule_rentScheduleIdrent_schedule_rows_post
+  # ... and 6 more operations with the same response
+- status: 403
+  title: "Forbidden"
+  api: Goodlord Insurance App API
+  media_types: [application/json, application/problem+json, application/vnd.api+json]
+  rfc9457: true
+  operation_count: 31
+  source_operations:
+  - openapi/goodlord-insurance-app-api-openapi.json#api_agents_get_collection
+  - openapi/goodlord-insurance-app-api-openapi.json#api_agents_id_get
+  - openapi/goodlord-insurance-app-api-openapi.json#api_agents_id_patch
+  - openapi/goodlord-insurance-app-api-openapi.json#api_agents_post
+  - openapi/goodlord-insurance-app-api-openapi.json#api_companies_get_collection
+  - openapi/goodlord-insurance-app-api-openapi.json#api_companies_id_get
+  - openapi/goodlord-insurance-app-api-openapi.json#api_insurance_claims_get_collection
+  - openapi/goodlord-insurance-app-api-openapi.json#api_insurance_claims_id_get
+  # ... and 23 more operations with the same response
+- status: 404
+  title: "Not found"
+  api: Goodlord Insurance App API
+  media_types: [application/json, application/problem+json, application/vnd.api+json]
+  rfc9457: true
+  operation_count: 19
+  source_operations:
+  - openapi/goodlord-insurance-app-api-openapi.json#api_agents_id_get
+  - openapi/goodlord-insurance-app-api-openapi.json#api_agents_id_patch
+  - openapi/goodlord-insurance-app-api-openapi.json#api_companies_id_get
+  - openapi/goodlord-insurance-app-api-openapi.json#api_insurance_claims_id_get
+  - openapi/goodlord-insurance-app-api-openapi.json#api_insurance_claims_id_patch
+  - openapi/goodlord-insurance-app-api-openapi.json#api_insurance_claims_insuranceClaimIdfiles_id_delete
+  - openapi/goodlord-insurance-app-api-openapi.json#api_insurance_claims_insuranceClaimIdfiles_id_get
+  - openapi/goodlord-insurance-app-api-openapi.json#api_insurance_claims_insuranceClaimIdpayments_id_get
+  # ... and 11 more operations with the same response
+- status: 422
+  title: "An error occurred"
+  api: Goodlord Insurance App API
+  media_types: [application/json, application/problem+json, application/vnd.api+json]
+  rfc9457: true
+  operation_count: 14
+  source_operations:
+  - openapi/goodlord-insurance-app-api-openapi.json#api_agents_id_patch
+  - openapi/goodlord-insurance-app-api-openapi.json#api_agents_post
+  - openapi/goodlord-insurance-app-api-openapi.json#api_insurance_claims_id_patch
+  - openapi/goodlord-insurance-app-api-openapi.json#api_insurance_claims_idsubmit_post
+  - openapi/goodlord-insurance-app-api-openapi.json#api_insurance_claims_insuranceClaimIdfiles_post
+  - openapi/goodlord-insurance-app-api-openapi.json#api_insurance_claims_insuranceClaimIdrent_schedule_rentScheduleIdrent_schedule_row_id_patch
+  - openapi/goodlord-insurance-app-api-openapi.json#api_insurance_claims_insuranceClaimIdrent_schedule_rentScheduleIdrent_schedule_row_post
+  - openapi/goodlord-insurance-app-api-openapi.json#api_insurance_claims_insuranceClaimIdrent_schedule_rentScheduleIdrent_schedule_rows_post
+  # ... and 6 more operations with the same response
+- status: 400
+  title: "Bad Request"
+  api: Goodlord Referencing API
+  media_types: [application/json]
+  rfc9457: false
+  operation_count: 14
+  source_operations:
+  - openapi/goodlord-referencing-api-openapi.json#createApplication
+  - openapi/goodlord-referencing-api-openapi.json#createBotToken
+  - openapi/goodlord-referencing-api-openapi.json#createSubject
+  - openapi/goodlord-referencing-api-openapi.json#deleteApplication
+  - openapi/goodlord-referencing-api-openapi.json#deleteSubject
+  - openapi/goodlord-referencing-api-openapi.json#getApplication
+  - openapi/goodlord-referencing-api-openapi.json#getAuthenticatedFile
+  - openapi/goodlord-referencing-api-openapi.json#getBotToken
+  # ... and 6 more operations with the same response
+- status: 404
+  title: "Not Found"
+  api: Goodlord Referencing API
+  media_types: [application/json]
+  rfc9457: false
+  operation_count: 13
+  source_operations:
+  - openapi/goodlord-referencing-api-openapi.json#createBotToken
+  - openapi/goodlord-referencing-api-openapi.json#createSubject
+  - openapi/goodlord-referencing-api-openapi.json#deleteApplication
+  - openapi/goodlord-referencing-api-openapi.json#deleteSubject
+  - openapi/goodlord-referencing-api-openapi.json#getApplication
+  - openapi/goodlord-referencing-api-openapi.json#getAuthenticatedFile
+  - openapi/goodlord-referencing-api-openapi.json#getBotToken
+  - openapi/goodlord-referencing-api-openapi.json#getSubject
+  # ... and 5 more operations with the same response
+- status: 500
+  title: "Internal Server Error"
+  api: Goodlord Referencing API
+  media_types: [application/json]
+  rfc9457: false
+  operation_count: 14
+  source_operations:
+  - openapi/goodlord-referencing-api-openapi.json#createApplication
+  - openapi/goodlord-referencing-api-openapi.json#createBotToken
+  - openapi/goodlord-referencing-api-openapi.json#createSubject
+  - openapi/goodlord-referencing-api-openapi.json#deleteApplication
+  - openapi/goodlord-referencing-api-openapi.json#deleteSubject
+  - openapi/goodlord-referencing-api-openapi.json#getApplication
+  - openapi/goodlord-referencing-api-openapi.json#getAuthenticatedFile
+  - openapi/goodlord-referencing-api-openapi.json#getBotToken
+  # ... and 6 more operations with the same response

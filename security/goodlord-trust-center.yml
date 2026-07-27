@@ -1,0 +1,102 @@
+generated: '2026-07-26'
+method: searched
+probe: true
+source: https://trust.goodlord.com/
+url: https://trust.goodlord.com/
+platform: Sprinto
+title: Goodlord - Trust Center - Security & Privacy
+discoverable: false
+discoverability_note: >-
+  trust.goodlord.com is not linked from the marketing site navigation, the developer portal or
+  the sitemap (385 URLs, no trust or security entry). It was found by probing the conventional
+  trust.<domain> hostname. It is also fronted by CloudFront with aggressive bot filtering —
+  a default curl User-Agent gets HTTP 403 and only a plausible UA returns the page.
+certifications:
+- name: ISO 27001
+  version: '2022'
+  status: Compliant
+  evidence: 'published on the trust center Compliances panel as "ISO 27001 v2022 — Compliant"'
+  certificate_public: false
+- name: GDPR
+  status: Compliant
+  evidence: published on the trust center Compliances panel
+  certificate_public: false
+not_claimed: [SOC 2, PCI DSS, HIPAA, FedRAMP, CSA STAR, Cyber Essentials, ISO 27017, ISO 27018]
+not_claimed_note: >-
+  No SOC 2 claim appears anywhere in Goodlord's public surface, and no PCI DSS claim despite
+  Goodlord handling tenant rent and deposit payments (Modulr is named as the payments partner
+  in its client terms). Recorded as absent, not as failed.
+ai_posture:
+  published: true
+  human_in_loop: 'Yes'
+  training_on_customer_data: 'No training'
+  data_retention: Contract-based
+  ai_trust_center: published (linked from the trust center as "View AI Trust Center")
+  note: >-
+    An explicit AI security posture panel is unusual for a UK PropTech company of this size and
+    is the most forward-looking thing on the page — it states that customer data is not used
+    for model training and that a human stays in the loop.
+controls:
+  published: true
+  count: 33
+  displayed: 12
+  categories: [Product security, Data security, Network security, App security, Corporate security]
+  examples:
+  - Service Identification and Authentication
+  - Encrypting Data At Rest
+  - Data Backups
+  - Testing for Reliability and Integrity
+  - Limit Network Connections
+  - Anomalous Behavior
+  - Isolation of Information System Components
+  - Conspicuous Link To Privacy Notice
+  - Code of Business Conduct
+  - Roles & Responsibilities
+  - Competency Screening
+resources:
+  published: true
+  count: 43
+  access: gated behind "Request access"
+  examples:
+  - Communications & Network Security Policy
+  - Business Continuity Plan
+  - Asset Management Procedure
+  - Business Continuity & Disaster Recovery Policy
+  - Code of Business Conduct Policy
+  - HR Security Procedure
+subprocessors:
+  published: true
+  count: 40
+  access: partially listed, remainder behind "Request access"
+  named:
+  - {name: AWS, category: Cloud Providers}
+  - {name: Supabase, category: IT infrastructure}
+  - {name: Credas, category: Others}
+  - {name: Konfir, category: Others}
+  - {name: Agiito, category: Payment Processing}
+  - {name: RocketReach, category: Sales}
+  note: >-
+    Credas (identity verification and AML) and Konfir (employment and income verification) are
+    the two that matter for the Referencing API — they are the third parties behind the checks
+    the API orchestrates.
+access_gate:
+  request_access_required: true
+  what_is_gated: [certificates, full policy library, full subprocessor register]
+  what_is_open: [compliance claims, AI posture, control names, policy names, some subprocessor names]
+regulatory:
+  fca:
+    regulated: true
+    detail: >-
+      Goodlord operates as an Appointed Representative of Goodlord Protect Limited, authorised
+      and regulated by the UK Financial Conduct Authority for insurance distribution activities,
+      Firm Reference Number 836727. A permission for the rent-protection insurance product, not
+      an API or security certification.
+evidence:
+- source: https://trust.goodlord.com/
+  keywords: [iso 27001, trust center, gdpr]
+  observed: '2026-07-26'
+related:
+  conformance: conformance/goodlord-conformance.yml
+  domain_security: security/goodlord-domain-security.yml
+  privacy_policy: https://www.goodlord.com/privacy-policy
+  terms: https://www.goodlord.com/terms

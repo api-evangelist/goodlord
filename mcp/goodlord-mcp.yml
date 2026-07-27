@@ -1,0 +1,112 @@
+generated: '2026-07-26'
+method: derived
+status: candidate
+source: openapi/goodlord-referencing-api-openapi.json, openapi/goodlord-insurance-app-api-openapi.json
+provider_signal: >-
+  Goodlord publishes no MCP server and makes no public statement about one. No hosted or
+  remote MCP endpoint, no npm package, no registry listing and no /.well-known/mcp surface was
+  found on any Goodlord host. The tool list below is a CANDIDATE derived one-to-one from the
+  operations that genuinely exist in Goodlord's two published OpenAPI 3.1.0 documents — it is
+  a design proposal for what an agent-facing Goodlord surface would expose, not a server that
+  exists. Nothing here is invented: every source_operation is a verbatim operationId from a
+  published spec.
+server:
+  name: goodlord
+  transport: http
+  url: null
+auth:
+  note: >-
+    Any real server would inherit Goodlord's partner-gated model — OAuth 2.0 client_credentials
+    against /auth/token plus the issued Company-ID tenant header on every call for the
+    Referencing API, and a JWT bearer for the Insurance App API. Credentials are issued by a
+    Goodlord account manager, never self-serve, so an MCP deployment would be per-partner.
+  detail: authentication/goodlord-authentication.yml
+sensitivity_warning: >-
+  This is among the most sensitive domains an agent could be pointed at. The Referencing API
+  handles UK tenant identity documents, income and affordability data and credit-check
+  outcomes; the Insurance App handles possession-proceedings and eviction records. Any real
+  MCP deployment needs the execution contracts in agentic-access/goodlord-agentic-access.yml
+  applied, human-in-the-loop on every write, and outcome-affecting operations
+  (patchSubjectOutcomeConditions, api_insurance_claims_idsubmit_post) treated as
+  consequential rather than routine.
+tools:
+- name: create_application
+  description: Create a new rental application carrying the tenancy and rental information.
+  source_operation: openapi/goodlord-referencing-api-openapi.json#createApplication
+- name: get_application
+  description: Get a rental application by id, including its subjects.
+  source_operation: openapi/goodlord-referencing-api-openapi.json#getApplication
+- name: patch_application
+  description: Update a rental application.
+  source_operation: openapi/goodlord-referencing-api-openapi.json#patchApplication
+- name: delete_application
+  description: Delete a rental application.
+  source_operation: openapi/goodlord-referencing-api-openapi.json#deleteApplication
+- name: create_subject
+  description: Add a subject (applicant, guarantor, or an employer/accountant/landlord referee) to an application.
+  source_operation: openapi/goodlord-referencing-api-openapi.json#createSubject
+- name: get_subject
+  description: Get a subject with its rental details, outcome, milestones and recommendations.
+  source_operation: openapi/goodlord-referencing-api-openapi.json#getSubject
+- name: patch_subject
+  description: Update a subject.
+  source_operation: openapi/goodlord-referencing-api-openapi.json#patchSubject
+- name: delete_subject
+  description: Delete a subject.
+  source_operation: openapi/goodlord-referencing-api-openapi.json#deleteSubject
+- name: patch_subject_outcome_conditions
+  description: Record that the conditions attached to a subject's referencing outcome have been met.
+  source_operation: openapi/goodlord-referencing-api-openapi.json#patchSubjectOutcomeConditions
+- name: get_subject_touchpoints
+  description: List the touchpoints (audit and communication events) recorded against a subject.
+  source_operation: openapi/goodlord-referencing-api-openapi.json#getSubjectTouchpoints
+- name: get_subject_emails
+  description: List the emails Goodlord sent to a subject and their delivery status.
+  source_operation: openapi/goodlord-referencing-api-openapi.json#getSubjectEmails
+- name: get_document_url
+  description: Get an authenticated file URL for a generated referencing document or report.
+  source_operation: openapi/goodlord-referencing-api-openapi.json#getAuthenticatedFile
+- name: list_insurance_claims
+  description: List rent protection insurance claims, filterable by status, company and policy reference.
+  source_operation: openapi/goodlord-insurance-app-api-openapi.json#api_insurance_claims_get_collection
+- name: get_insurance_claim
+  description: Get a rent protection insurance claim by id.
+  source_operation: openapi/goodlord-insurance-app-api-openapi.json#api_insurance_claims_id_get
+- name: create_insurance_claim
+  description: Create a rent protection insurance claim.
+  source_operation: openapi/goodlord-insurance-app-api-openapi.json#api_insurance_claims_post
+- name: update_insurance_claim
+  description: Update the details of a rent protection insurance claim.
+  source_operation: openapi/goodlord-insurance-app-api-openapi.json#api_insurance_claims_id_patch
+- name: submit_insurance_claim
+  description: Submit a rent protection insurance claim to the insurer.
+  source_operation: openapi/goodlord-insurance-app-api-openapi.json#api_insurance_claims_idsubmit_post
+- name: list_claim_files
+  description: List the evidence files attached to a claim.
+  source_operation: openapi/goodlord-insurance-app-api-openapi.json#api_insurance_claims_insuranceClaimIdfiles_get_collection
+- name: upload_claim_file
+  description: Upload an evidence file to a claim.
+  source_operation: openapi/goodlord-insurance-app-api-openapi.json#api_insurance_claims_insuranceClaimIdfiles_post
+- name: list_claim_payments
+  description: List the insurer payments made against a claim.
+  source_operation: openapi/goodlord-insurance-app-api-openapi.json#api_insurance_claims_insuranceClaimIdpayments_get_collection
+- name: get_rent_schedule
+  description: Get the arrears rent schedule attached to a claim.
+  source_operation: openapi/goodlord-insurance-app-api-openapi.json#api_insurance_claims_insuranceClaimIdrent_schedule_get
+- name: add_rent_schedule_rows
+  description: Add multiple dated rows to a claim's rent schedule.
+  source_operation: openapi/goodlord-insurance-app-api-openapi.json#api_insurance_claims_insuranceClaimIdrent_schedule_rentScheduleIdrent_schedule_rows_post
+- name: submit_rent_schedule
+  description: Submit a completed rent schedule.
+  source_operation: openapi/goodlord-insurance-app-api-openapi.json#api_insurance_claims_insuranceClaimIdrent_schedule_rentScheduleIdsubmit_post
+- name: whoami
+  description: Get the calling agent's identity, companies, roles and role groups.
+  source_operation: openapi/goodlord-insurance-app-api-openapi.json#get_me
+coverage:
+  candidate_tools: 24
+  rest_operations_total: 50
+  note: >-
+    50 operations across the Referencing (15, of which getAuthToken and the two bot-token
+    operations are auth plumbing rather than agent tools) and Insurance App (35) documents.
+    Role and role-group administration operations are deliberately excluded from the candidate
+    tool list — permission management is not an agent-appropriate surface.

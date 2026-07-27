@@ -1,0 +1,48 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Goodlord Insurance App API
+  version: 1.0.0
+extends: openapi/goodlord-insurance-app-api-openapi.json
+x-apievangelist:
+  generated: '2026-07-26'
+  method: generated
+  source: https://insurance-app.goodlord.co/api/v1/docs
+  note: Captures API Evangelist enrichment only. The harvested OpenAPI is never mutated.
+actions:
+- target: $.info
+  update:
+    x-apievangelist-provider: goodlord
+    x-apievangelist-enriched: '2026-07-26'
+    x-apievangelist-artifacts:
+      authentication: authentication/goodlord-authentication.yml
+      conventions: conventions/goodlord-conventions.yml
+      errors: errors/goodlord-problem-types.yml
+      lifecycle: lifecycle/goodlord-lifecycle.yml
+      data-model: data-model/goodlord-data-model.yml
+      agentic-access: agentic-access/goodlord-agentic-access.yml
+    x-apievangelist-access:
+      documentation: public
+      specification: public-anonymous-download
+      credentials: partner-gated (issued by a Goodlord account manager; the developer portal registration
+        page returns "Registration is not allowed")
+      self-serve: false
+    x-apievangelist-status-page: https://goodlord.statuspal.io/
+    x-apievangelist-trust-center: https://trust.goodlord.com/
+- target: $.info
+  update:
+    x-apievangelist-note: This OpenAPI is served publicly and unauthenticated at https://insurance-app.goodlord.co/api/v1/docs
+      with the application/vnd.openapi+json media type, but the Insurance App is not listed in the Goodlord
+      developer portal catalogue and has no published onboarding path. Public contract, internal application
+      surface. info.description is empty and info.version is 0.1.0 in the published document.
+    x-apievangelist-server-labels: The spec labels the production host https://insurance-app.goodlord.co/
+      as "Development" and additionally discloses the non-production hosts insurance-app.staging.goodoverlord.com,
+      insurance-app.qa1.goodoverlord.com and insurance-app.demo.goodlord.co.
+- target: $.components.securitySchemes.JWT
+  update:
+    x-apievangelist-note: 'Declared as type apiKey in the Authorization header. Semantically this is an
+      HTTP bearer JWT (type: http, scheme: bearer, bearerFormat: JWT) — the apiKey shape loses that meaning
+      for generated clients.'
+    x-apievangelist-recommended:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

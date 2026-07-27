@@ -1,0 +1,129 @@
+generated: '2026-07-26'
+method: searched
+source: openapi/goodlord-insurance-app-api-openapi.json, openapi/goodlord-referencing-api-openapi.json,
+  openapi/goodlord-referencing-api-sandbox-openapi.json
+docs: https://portal.goodlord.co/portal/catalogue-products/referencing-product-1
+note: >-
+  Derived from the security schemes declared across Goodlord's three published OpenAPI 3.1.0
+  documents, then upgraded from the Authentication walkthrough in the Goodlord Developer
+  Portal — which documents a mandatory request header (Company-ID) and a runtime scope string
+  that appear nowhere in the machine-readable contracts.
+summary:
+  types:
+  - apiKey
+  - oauth2
+  api_key_in:
+  - header
+  oauth2_flows:
+  - clientCredentials
+  self_serve_credentials: false
+  credential_issuance: >-
+    Issued by a Goodlord sales manager or account manager as part of a commercial engagement.
+    The developer portal's own registration page returns "Registration is not allowed" and
+    requires an invite code. Sandbox first, production enabled afterwards.
+schemes:
+- name: OAuth2
+  type: oauth2
+  api: Goodlord Referencing API
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://api.goodoverlord.com/auth/token
+    tokenUrl_sandbox: https://api-sandbox.goodlord.co/auth/token
+    scopes: 0
+    scopes_observed: [free_plan, referencing_product]
+  request_body: client_id, client_secret and grant_type "client_credentials", posted as JSON
+  token_format: JWT
+  token_type: Bearer
+  token_lifetime_seconds: 3600
+  description: |-
+    This API uses OAuth2 to authenticate requests. You must use your client credentials to obtain a token.
+    Read [Obtain a JWT Token](./operations/getAuthToken) for more information.
+  sources:
+  - openapi/goodlord-referencing-api-openapi.json
+  - openapi/goodlord-referencing-api-sandbox-openapi.json
+  - https://portal.goodlord.co/portal/catalogue-products/referencing-product-1
+- name: JWT
+  type: apiKey
+  in: header
+  parameter: Authorization
+  api: Goodlord Insurance App API
+  description: Value for the Authorization header parameter.
+  modelling_note: >-
+    Semantically an HTTP bearer JWT, but declared as type apiKey. Generated clients lose the
+    bearer semantics. No token endpoint, authorization server or discovery document is
+    published for this API — how a caller obtains the JWT is not documented anywhere.
+  sources:
+  - openapi/goodlord-insurance-app-api-openapi.json
+required_headers:
+- api: Goodlord Referencing API
+  headers:
+  - {name: Authorization, value: 'Bearer <access_token>', required: true, declared_in_spec: true}
+  - name: Company-ID
+    value: '<issued Company ID>'
+    required: true
+    declared_in_spec: false
+    note: >-
+      Mandatory tenant selector on EVERY request. Documented only in the portal Authentication
+      walkthrough; it appears in no OpenAPI parameter, header or securityScheme. This is the
+      single biggest gap between Goodlord's contract and its runtime — a client generated
+      straight from the spec will fail.
+  - {name: Content-Type, value: application/json, required: true, declared_in_spec: true}
+- api: Goodlord Insurance App API
+  headers:
+  - {name: Authorization, value: '<JWT>', required: true, declared_in_spec: true}
+  - name: Accept
+    value: application/ld+json | application/vnd.api+json | application/json | text/csv
+    required: false
+    note: content negotiation is strict — the specification document itself only accepts application/vnd.openapi+json
+authorization_model:
+- api: Goodlord Referencing API
+  model: product scope + tenant header
+  detail: >-
+    The granted scope selects the product (referencing_product) and plan (free_plan); the
+    Company-ID header selects the letting agency whose data is visible. No per-operation or
+    per-resource permissions are published.
+- api: Goodlord Insurance App API
+  model: role-based
+  detail: >-
+    An Agent carries roles[] and roleGroups[] and is scoped to one or more companies[].
+    RoleGroups are flagged admin and/or agent. GET /api/v1/me returns the caller's own
+    identity, companies, roles and role groups. Every collection returns 403 when the resource
+    falls outside the caller's companies.
+delegated_tokens:
+  api: Goodlord Referencing API
+  operations: [getBotToken, createBotToken]
+  paths:
+  - 'GET /referencing/subject/{subjectId}/auth/token'
+  - 'POST /referencing/subject/{subjectId}/auth/token'
+  note: >-
+    The Referencing API can mint a per-subject "bot" JWT scoped to a single subject —
+    a delegated token for driving a subject's own referencing journey. Goodlord publishes no
+    prose documentation for these two operations; their lifetime, audience and permitted
+    operations are undocumented.
+end_user_platform_identity:
+  scheme: OpenID Connect / OAuth 2.0 via Microsoft Entra External ID (Azure AD B2C) custom policy
+  audience: letting agents, landlords, tenants and guarantors — NOT developers
+  tenant_id: 7ddbafdc-ee33-46fb-968a-3011e2a0a825
+  policy: B2C_1A_2_SIGNUPORSIGNIN
+  issuer: https://login.goodlord.co/7ddbafdc-ee33-46fb-968a-3011e2a0a825/v2.0/
+  discovery: well-known/goodlord-openid-configuration.json
+  scopes_supported: [openid]
+  id_token_signing_algs: [RS256]
+  subject_types: [pairwise]
+  custom_claims: [companies, userRoles, userTypes]
+  resource_scope_prefix: https://vouchauth.onmicrosoft.com/gl-api
+  note: >-
+    The "vouchauth" tenant name reflects Goodlord's Vouch referencing lineage — corroborated by
+    the Referencing API's own contact address, devs@vouch.co.uk, and by the "vouch" source name
+    in the webhook payload envelope.
+discovery:
+  oauth_authorization_server_metadata: false
+  openid_configuration_on_api_hosts: false
+  note: >-
+    Neither Referencing gateway serves RFC 8414 authorization-server metadata or an OIDC
+    discovery document. The only discovery document in the estate belongs to the end-user
+    platform login.
+related:
+  scopes: scopes/goodlord-scopes.yml
+  conventions: conventions/goodlord-conventions.yml
+  sandbox: sandbox/goodlord-sandbox.yml

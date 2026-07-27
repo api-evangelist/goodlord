@@ -1,0 +1,74 @@
+generated: '2026-07-26'
+method: searched
+source: https://portal.goodlord.co/portal/catalogue-products/referencing-product-1
+also: https://portal.goodlord.co/blog/2024/8/22/getting-started-with-goodlords-referencing-api
+note: >-
+  Goodlord runs a genuine, separately-specified sandbox for the Referencing API — it is
+  published as its own product entry in the developer portal catalogue with its own OpenAPI
+  3.1.0 document, its own host and its own token endpoint. What it is NOT is self-serve.
+  Goodlord's own getting-started guide instructs developers to obtain sandbox access through a
+  Goodlord sales manager or account manager, and the developer portal's own registration page
+  returns "Registration is not allowed" and demands an invite code. This is a partner sandbox,
+  not an open trial.
+exists: true
+self_serve: false
+environments:
+- name: sandbox
+  host: https://api-sandbox.goodlord.co
+  token_endpoint: https://api-sandbox.goodlord.co/auth/token
+  openapi: openapi/goodlord-referencing-api-sandbox-openapi.json
+  catalogue_entry: https://portal.goodlord.co/portal/catalogue-products/referencing-product-1
+  reachable_anonymously: true
+  probe_note: >-
+    GET / returns HTTP 404 with a 9-byte text/plain body and GET /referencing/application
+    returns HTTP 403 with a JSON body — a live, credential-gated gateway rather than a dead
+    hostname. Probed 2026-07-26.
+  operation_parity: >-
+    Identical to live — the same 10 paths and 15 operationIds. The sandbox document differs
+    from the live document only in servers[0].url and in the tokenUrl on the OAuth2 security
+    scheme.
+- name: live
+  host: https://api.goodoverlord.com
+  token_endpoint: https://api.goodoverlord.com/auth/token
+  openapi: openapi/goodlord-referencing-api-openapi.json
+  reachable_anonymously: false
+  probe_note: >-
+    Did not answer anonymous probes at all (connection failure). Consistent with network-level
+    allow-listing for onboarded partners.
+access:
+  how_to_obtain: >-
+    Through a Goodlord sales manager or account manager as part of a commercial engagement.
+    Sandbox is arranged first; production is enabled by the account manager afterwards.
+  self_serve_registration: false
+  registration_page: https://portal.goodlord.co/auth/password/register
+  registration_page_behaviour: >-
+    Returns HTTP 200 and renders "Create an account", immediately followed by
+    "Registration is not allowed" — an invite code is required.
+  credentials_issued: [client_id, client_secret, Company-ID]
+test_data:
+  published_test_values: none
+  note: >-
+    Goodlord publishes NO magic test values of any kind — no test identity documents, no test
+    bank accounts, no seeded applicant fixtures, no synthetic credit-check outcomes and no
+    trigger values for forcing a Pass / Conditional Pass / Fail outcome. A partner working in
+    the sandbox exercises the real referencing state machine against data they create
+    themselves. Nothing is invented here: the absence is the finding.
+  documented_outcome_states: [Pending Submission, In Review, Awaiting Response, Accepted, Rejected, Cancelled]
+  documented_outcome_kinds: [Pass, Conditional Pass, Fail]
+  documented_document_types: [identity, income, residential, credit, output report]
+test_clock_or_time_simulation:
+  supported: false
+webhook_testing:
+  self_serve: false
+  note: >-
+    Webhook endpoints and event selection are configured by Goodlord on request; there is no
+    subscription API, no self-serve UI, no test-fire/replay control and no published signature
+    scheme to verify against in sandbox.
+other_surfaces:
+  insurance_app:
+    sandbox_published: false
+    note: >-
+      The Insurance App OpenAPI discloses non-production hosts verbatim
+      (insurance-app.staging.goodoverlord.com, insurance-app.qa1.goodoverlord.com,
+      insurance-app.demo.goodlord.co) but these are Goodlord's internal environments, not an
+      offered sandbox — no access path is published and none was probed.

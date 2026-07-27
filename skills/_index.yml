@@ -1,0 +1,33 @@
+generated: '2026-07-26'
+method: generated
+source: openapi/goodlord-referencing-api-openapi.json, openapi/goodlord-insurance-app-api-openapi.json
+note: >-
+  Goodlord publishes no agent skills, AGENTS.md or agent guidance of any kind. These are
+  API Evangelist packaged operating instructions, generated from Goodlord's published OpenAPI
+  3.1.0 documents and its developer-portal Authentication, Webhooks and domain guides. Every
+  operationId referenced below appears verbatim in the named specification — nothing is
+  invented. Because this domain carries UK tenant identity, income, credit and
+  possession-proceedings data, each skill states explicitly which operations must not be
+  called by an agent unattended.
+skills:
+- file: goodlord-reference-a-tenant.md
+  name: Reference a tenant with Goodlord
+  api: openapi/goodlord-referencing-api-openapi.json
+  operations: [getAuthToken, createApplication, createSubject, getSubject, getSubjectTouchpoints,
+    getSubjectEmails, getAuthenticatedFile]
+- file: goodlord-collect-a-guarantor.md
+  name: Collect a guarantor and clear referencing conditions
+  api: openapi/goodlord-referencing-api-openapi.json
+  operations: [getAuthToken, getApplication, createSubject, getSubject, patchSubject,
+    patchSubjectOutcomeConditions, getSubjectTouchpoints, getSubjectEmails]
+- file: goodlord-file-a-rent-protection-claim.md
+  name: File a rent protection insurance claim with Goodlord
+  api: openapi/goodlord-insurance-app-api-openapi.json
+  operations: [get_me, api_insurance_claims_get_collection, api_insurance_claims_post,
+    api_insurance_claims_id_get, api_insurance_claims_id_patch,
+    api_insurance_claims_insuranceClaimIdrent_schedule_get,
+    api_insurance_claims_insuranceClaimIdrent_schedule_rentScheduleIdrent_schedule_rows_post,
+    api_insurance_claims_insuranceClaimIdrent_schedule_rentScheduleIdrent_schedule_row_id_patch,
+    api_insurance_claims_insuranceClaimIdrent_schedule_rentScheduleIdsubmit_post,
+    api_insurance_claims_insuranceClaimIdfiles_post, api_insurance_claims_idsubmit_post,
+    api_insurance_claims_insuranceClaimIdpayments_get_collection]

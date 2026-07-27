@@ -1,0 +1,81 @@
+generated: '2026-07-26'
+method: searched
+source: https://goodlord.statuspal.io/, https://www.goodlord.com/status, https://portal.goodlord.co/portal/catalogue-products/referencing-product-1
+derived_from: openapi/goodlord-referencing-api-openapi.json, openapi/goodlord-insurance-app-api-openapi.json
+versioning:
+- api: Goodlord Referencing API
+  scheme: none-in-path
+  current: '1.0.0'
+  evidence: >-
+    No version segment in the base path (/referencing/..., /auth/token); info.version is 1.0.0.
+    The only versioning signal Goodlord publishes is on the event stream, where every webhook
+    event name is prefixed V2 and the payload envelope carries context.source {name "vouch",
+    version "2"} — the surviving version marker from the Vouch referencing platform Goodlord
+    acquired and rebadged.
+  docs: https://portal.goodlord.co/portal/catalogue-products/referencing-product-1
+- api: Goodlord Insurance App API
+  scheme: uri-path
+  current: v1
+  evidence: every path is prefixed /api/v1/; info.version in the served document is 0.1.0
+  docs: https://insurance-app.goodlord.co/api/v1/docs
+deprecation:
+  policy_url: null
+  policy_published: false
+  sunset_header: false
+  deprecation_header: false
+  evidence: >-
+    Goodlord publishes no deprecation or sunset policy. No operation, parameter or schema in
+    any of the three published OpenAPI documents carries deprecated: true, and neither service
+    declares RFC 8594 Sunset or Deprecation response headers. There is no documented notice
+    period for breaking changes; the developer portal's product page has no lifecycle section.
+deprecated_operations: []
+change_management:
+  changelog_published: false
+  release_notes_published: false
+  evidence: >-
+    No changelog, release-notes or "what's new" surface exists for either API. The Tyk
+    developer portal's blog (https://portal.goodlord.co/blog) carries dated getting-started
+    guides from August 2024, not a versioned change record. The marketing site's NewsAGENT
+    (https://www.goodlord.com/newsagent) is lettings-industry editorial for letting agents,
+    not product release notes. The only dated artefact evidencing change is the OpenAPI
+    filename Goodlord's portal serves — live-referencing-api.20260602142430937915.json —
+    which timestamps the spec build at 2026-06-02.
+  spec_build_timestamps:
+  - {api: Goodlord Referencing API, stamp: '20260602142430937915', observed: '2026-06-02'}
+  - {api: Goodlord Referencing API (Sandbox), stamp: '20260602142430294824', observed: '2026-06-02'}
+status_page:
+  url: https://goodlord.statuspal.io/
+  provider: StatusPal
+  reachable_via: https://www.goodlord.com/status (a redirect stub on the marketing site)
+  discoverable_from_developer_portal: false
+  status_api: https://statuspal.io/api/v2/status_pages/goodlord/status
+  components:
+  - {name: Web application, state_observed: Operational}
+  - {name: Referencing, state_observed: Operational}
+  - {name: Vouch, state_observed: Operational}
+  features: [incident history, scheduled maintenance history, email subscribe, auto-refresh every 60 seconds]
+  observed: '2026-07-26'
+  note: >-
+    Confirmed real and public. NOT to be confused with status.goodlord.co, which returns HTTP
+    200 only because *.goodlord.co is a wildcard record serving the Goodlord Core SPA. The
+    real status page is a StatusPal page on a different domain, linked only from a redirect
+    stub at www.goodlord.com/status and from nowhere in the developer portal.
+sla:
+  url: null
+  uptime_target: null
+  evidence: >-
+    No public SLA or uptime commitment is published. Goodlord's Terms of Use
+    (https://www.goodlord.com/terms) are the consumer/agent platform terms and contain no API
+    availability commitment; API service levels sit in the commercial agreement an account
+    manager issues alongside credentials.
+support:
+  help_centres:
+  - {audience: letting agents, url: 'https://agenthelp.goodlord.co/s/'}
+  - {audience: landlords, url: 'https://landlordhelp.goodlord.co/s/'}
+  - {audience: tenants, url: 'https://tenanthelp.goodlord.co/s/'}
+  - {audience: guarantors, url: 'https://guarantorhelp.goodlord.co/s/'}
+  developer_support: none published — the developer portal offers no ticketing, forum or contact route
+  contact: https://www.goodlord.com/contact-us
+roadmap:
+  url: null
+  published: false

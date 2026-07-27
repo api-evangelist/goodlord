@@ -1,0 +1,67 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Goodlord Referencing API (Sandbox)
+  version: 1.0.0
+extends: openapi/goodlord-referencing-api-sandbox-openapi.json
+x-apievangelist:
+  generated: '2026-07-26'
+  method: generated
+  source: https://portal.goodlord.co/portal/catalogue-products/referencing-product-1
+  note: Captures API Evangelist enrichment only. The harvested OpenAPI is never mutated.
+actions:
+- target: $.info
+  update:
+    x-apievangelist-provider: goodlord
+    x-apievangelist-enriched: '2026-07-26'
+    x-apievangelist-artifacts:
+      authentication: authentication/goodlord-authentication.yml
+      conventions: conventions/goodlord-conventions.yml
+      errors: errors/goodlord-problem-types.yml
+      lifecycle: lifecycle/goodlord-lifecycle.yml
+      data-model: data-model/goodlord-data-model.yml
+      agentic-access: agentic-access/goodlord-agentic-access.yml
+    x-apievangelist-access:
+      documentation: public
+      specification: public-anonymous-download
+      credentials: partner-gated (issued by a Goodlord account manager; the developer portal registration
+        page returns "Registration is not allowed")
+      self-serve: false
+    x-apievangelist-status-page: https://goodlord.statuspal.io/
+    x-apievangelist-trust-center: https://trust.goodlord.com/
+- target: $.info
+  update:
+    x-apievangelist-note: Goodlord's published info.termsOfService is the Swagger boilerplate http://swagger.io/terms/
+      and info.license is Apache 2.0, neither of which describes this commercial partner-gated API. Goodlord's
+      real terms of use are at https://www.goodlord.com/terms and its privacy policy at https://www.goodlord.com/privacy-policy.
+    x-apievangelist-terms-of-service: https://www.goodlord.com/terms
+    x-apievangelist-privacy-policy: https://www.goodlord.com/privacy-policy
+- target: $.components.securitySchemes.OAuth2
+  update:
+    x-apievangelist-additional-required-header:
+      name: Company-ID
+      in: header
+      required: true
+      description: Every call to the Referencing API additionally carries an issued Company-ID header
+        alongside the bearer token. This is documented in the portal Authentication walkthrough but is
+        not declared anywhere in the OpenAPI.
+      source: https://portal.goodlord.co/portal/catalogue-products/referencing-product-1
+    x-apievangelist-observed-scopes:
+    - free_plan
+    - referencing_product
+    x-apievangelist-token-lifetime-seconds: 3600
+    x-apievangelist-scopes-note: components.securitySchemes.OAuth2.flows.clientCredentials.scopes is an
+      empty object in the published spec, but the documented example token response returns scope "free_plan
+      referencing_product".
+- target: $
+  update:
+    x-apievangelist-webhooks:
+      documented: true
+      self_serve_subscription: false
+      catalog: asyncapi/goodlord-referencing-webhooks.yml
+      events:
+      - V2.subject.report.generated
+      - V2.subject.reference.form.generated
+      - V2.subject.outcome.updated
+      note: Three webhook events are documented in the portal with an example payload envelope. There
+        is no webhook management API and no self-serve subscription UI — Goodlord configures endpoint
+        and event selection on request. No AsyncAPI document is published.

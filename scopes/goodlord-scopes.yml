@@ -1,0 +1,73 @@
+generated: '2026-07-26'
+method: searched
+source: openapi/goodlord-referencing-api-openapi.json, openapi/goodlord-referencing-api-sandbox-openapi.json
+docs: https://portal.goodlord.co/portal/catalogue-products/referencing-product-1
+note: >-
+  Goodlord publishes no scopes or permissions reference page. The OpenAPI declares an OAuth 2.0
+  clientCredentials flow with an EMPTY scopes object in both the live and sandbox documents, so
+  a client cannot discover any scope from the contract. The two scopes below are taken verbatim
+  from the example token response Goodlord publishes in its own Authentication walkthrough,
+  where the granted scope string is "free_plan referencing_product". They are observed at
+  runtime, not declared — nothing else is asserted about them, and no request-time scope
+  parameter is documented.
+schemes:
+- name: OAuth2
+  source: openapi/goodlord-referencing-api-openapi.json
+  api: Goodlord Referencing API
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://api.goodoverlord.com/auth/token
+    declared_scopes: {}
+  description: |-
+    This API uses OAuth2 to authenticate requests. You must use your client credentials to obtain a token.
+    Read [Obtain a JWT Token](./operations/getAuthToken) for more information.
+- name: OAuth2
+  source: openapi/goodlord-referencing-api-sandbox-openapi.json
+  api: Goodlord Referencing API (Sandbox)
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://api-sandbox.goodlord.co/auth/token
+    declared_scopes: {}
+  description: |-
+    This API uses OAuth2 to authenticate requests. You must use your client credentials to obtain a token.
+    Read [Obtain a JWT Token](./operations/getAuthToken) for more information.
+scopes:
+- scope: free_plan
+  description: >-
+    Observed in the granted scope string of the documented example token response. Reads as a
+    plan/entitlement marker rather than a resource permission. Goodlord publishes no
+    definition, and no other plan value has been observed.
+  flows: [clientCredentials]
+  observed_at_runtime: true
+  declared_in_spec: false
+  sources: [https://portal.goodlord.co/portal/catalogue-products/referencing-product-1]
+- scope: referencing_product
+  description: >-
+    Observed in the granted scope string of the documented example token response. Grants
+    access to the Referencing product surface. Product-level rather than operation-level —
+    no read/write or per-resource split is published.
+  flows: [clientCredentials]
+  observed_at_runtime: true
+  declared_in_spec: false
+  sources: [https://portal.goodlord.co/portal/catalogue-products/referencing-product-1]
+tenant_scoping:
+  mechanism: Company-ID request header
+  note: >-
+    The real access boundary on this API is not the OAuth scope, it is the issued Company-ID
+    header carried on every request. Scope selects the product; Company-ID selects the letting
+    agency whose data you can see. The header is documented only in the portal and is not
+    declared anywhere in the OpenAPI.
+not_applicable:
+- api: Goodlord Insurance App API
+  reason: >-
+    Declares a single JWT bearer scheme modelled as apiKey with no OAuth flow, no token
+    endpoint and no scope surface. Authorisation is enforced by the agent's roles and role
+    groups (GET /api/v1/roles, /api/v1/role_groups) rather than by token scopes.
+end_user_platform:
+  issuer: https://login.goodlord.co/7ddbafdc-ee33-46fb-968a-3011e2a0a825/v2.0/
+  scopes_supported: [openid]
+  resource_scope_prefix: https://vouchauth.onmicrosoft.com/gl-api
+  source: well-known/goodlord-openid-configuration.json
+  note: >-
+    The Azure AD B2C discovery document for the letting-agent and tenant platform login
+    advertises only the openid scope. This is the end-user login, not the developer API.

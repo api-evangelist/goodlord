@@ -1,0 +1,142 @@
+generated: '2026-07-26'
+method: derived
+source: openapi/goodlord-referencing-api-openapi.json, openapi/goodlord-insurance-app-api-openapi.json, well-known/goodlord-openid-configuration.json
+searched: https://trust.goodlord.com/, https://portal.goodlord.co/portal/catalogue-products/referencing-product-1
+note: >-
+  Which cross-cutting and industry standards Goodlord's published surface actually conforms to.
+  Derived from the three OpenAPI 3.1.0 documents, the one OIDC discovery document Goodlord
+  serves, and the compliance claims published on its Sprinto-powered trust center. Absence is
+  recorded as honestly as presence.
+standards:
+- id: openapi-3.1
+  conforms: true
+  evidence: all three published documents declare openapi 3.1.0 and parse cleanly
+- id: oauth2-client-credentials
+  conforms: true
+  evidence: >-
+    components.securitySchemes.OAuth2 declares a clientCredentials flow with tokenUrl
+    https://api.goodoverlord.com/auth/token (sandbox https://api-sandbox.goodlord.co/auth/token);
+    the portal documents the request and a token response of type Bearer, expires_in 3600.
+- id: oauth2-scopes
+  conforms: partial
+  evidence: >-
+    flows.clientCredentials.scopes is an empty object in both Referencing documents, yet the
+    documented example token response returns scope "free_plan referencing_product". Scopes
+    exist at runtime but are not declared in the contract, so no client can discover them.
+- id: rfc8414-oauth-authorization-server-metadata
+  conforms: false
+  evidence: /.well-known/oauth-authorization-server returns 404 on both Referencing gateways
+- id: oidc-discovery
+  conforms: true
+  scope: end-user platform login only, not the developer API
+  evidence: >-
+    https://login.goodlord.co/7ddbafdc-ee33-46fb-968a-3011e2a0a825/B2C_1A_2_SIGNUPORSIGNIN/v2.0/.well-known/openid-configuration
+    returns a complete OIDC discovery document (Microsoft Entra External ID / Azure AD B2C),
+    RS256, pairwise subjects, scopes_supported [openid]. Saved as
+    well-known/goodlord-openid-configuration.json.
+- id: rfc7519-jwt
+  conforms: true
+  evidence: both APIs issue/accept JWT bearer tokens (Referencing OAuth token is a JWT; the Insurance App scheme is named JWT)
+- id: rfc6750-bearer-token
+  conforms: partial
+  evidence: >-
+    The Referencing API uses Authorization Bearer correctly. The Insurance App declares the
+    same header as securityScheme type apiKey rather than type http / scheme bearer, which is
+    a modelling defect rather than a runtime one.
+- id: rfc9457-problem-details
+  conforms: partial
+  evidence: >-
+    The Insurance App API declares application/problem+json responses on 400/403/404/422
+    (API Platform default). The Referencing API does not — it returns a bespoke
+    application/json APIErrorResponse envelope on 400/404/500.
+- id: json-api
+  conforms: partial
+  evidence: >-
+    The Insurance App API publishes application/vnd.api+json representations, JSON:API
+    collection schemas (JsonApiCollectionBaseSchema), an include parameter for compound
+    documents and per-resource .jsonapi schema variants. The Referencing API does not.
+- id: json-ld-hydra
+  conforms: partial
+  evidence: the Insurance App API serves application/ld+json alongside JSON:API — the API Platform Hydra representation
+- id: rfc7386-json-merge-patch
+  conforms: partial
+  evidence: the Insurance App declares .jsonMergePatch schema variants for Agent, Role, RoleGroup and RentScheduleRowUpdate on PATCH operations
+- id: rfc8594-sunset-header
+  conforms: false
+  evidence: no Sunset or Deprecation header is declared or documented; no deprecation policy exists
+- id: pagination
+  conforms: partial
+  evidence: >-
+    The Insurance App exposes API Platform page/itemsPerPage pagination with bracket filters
+    and order[] sorting. The Referencing API publishes no list endpoint and no pagination at all.
+- id: idempotency
+  conforms: false
+  evidence: no Idempotency-Key header, parameter or extension in any published document; no idempotency guidance in the portal
+- id: rate-limit-headers
+  conforms: false
+  evidence: no RateLimit / X-RateLimit headers declared, no 429 response declared, no published limits
+- id: webhooks
+  conforms: partial
+  evidence: >-
+    Three events are published with exact event.name values and an example payload envelope,
+    but there is no signature/verification scheme documented, no replay or retry policy, no
+    subscription API and no AsyncAPI document. See asyncapi/goodlord-referencing-webhooks.yml.
+- id: asyncapi
+  conforms: false
+  evidence: no AsyncAPI document is served anywhere in the estate
+- id: graphql
+  conforms: false
+  evidence: no /graphql surface responds on any host
+- id: grpc
+  conforms: false
+  evidence: no .proto, buf.build module or gRPC surface published
+- id: odata
+  conforms: false
+  evidence: no $metadata document; every probe returned 404
+- id: reso-web-api
+  conforms: false
+  evidence: >-
+    No RESO reference of any kind. RESO is a US NAR/MLS construct with no United Kingdom
+    counterpart; Goodlord is a UK tenancy-lifecycle platform, not a listings platform.
+- id: reso-data-dictionary
+  conforms: false
+  evidence: no Data Dictionary or Universal Property Identifier (UPI) usage anywhere in the surface
+- id: scim2
+  conforms: false
+  evidence: >-
+    The Insurance App API has its own agent/role/role-group user-management surface
+    (/api/v1/agents, /api/v1/roles, /api/v1/role_groups) but it is bespoke, not SCIM 2.0.
+- id: iso27001
+  conforms: true
+  published_claim: true
+  evidence: >-
+    "ISO 27001 v2022 — Compliant" is published on Goodlord's trust center at
+    https://trust.goodlord.com/ (Sprinto). Certificate itself is behind a "Request access" gate.
+- id: gdpr
+  conforms: true
+  published_claim: true
+  evidence: >-
+    "GDPR — Compliant" published on https://trust.goodlord.com/, with a subprocessor register
+    (40+ entries) and a policy library (40+ documents) listed but access-gated. Privacy policy
+    at https://www.goodlord.com/privacy-policy.
+- id: soc2
+  conforms: false
+  evidence: no SOC 2 claim appears on the trust center or anywhere in Goodlord's public surface
+- id: pci-dss
+  conforms: false
+  evidence: no PCI DSS claim published, despite Goodlord handling tenant rent and deposit payments (Modulr is named as the payments partner in its client terms)
+- id: fca-regulated
+  conforms: true
+  published_claim: true
+  scope: insurance distribution, not the API
+  evidence: >-
+    Goodlord operates as an Appointed Representative of Goodlord Protect Limited, authorised
+    and regulated by the UK Financial Conduct Authority for insurance distribution activities,
+    Firm Reference Number 836727. This is a regulatory permission for the rent-protection
+    insurance product, not an API conformance claim.
+summary:
+  conforms: 8
+  partial: 7
+  does_not_conform: 12
+  published_compliance_program: true
+  compliance_page: https://trust.goodlord.com/

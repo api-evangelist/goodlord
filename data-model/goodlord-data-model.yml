@@ -1,0 +1,245 @@
+generated: '2026-07-26'
+method: derived
+source: openapi/goodlord-referencing-api-openapi.json, openapi/goodlord-insurance-app-api-openapi.json
+docs: https://portal.goodlord.co/portal/catalogue-products/referencing-product-1
+note: >-
+  Entity-relationship graph derived mechanically from the schema objects and id-reference
+  fields declared in Goodlord's two published OpenAPI 3.1.0 documents, plus the prose domain
+  model published in the developer portal ("an Application contains rental information and all
+  of the applicants/guarantors which are applying for a tenancy"). Goodlord publishes no object
+  reference with id prefixes, so no prefix column is asserted. The Referencing and Insurance App
+  surfaces are two separate services that share no identifier space in the published contracts —
+  the only observable seam is the free-text/boolean claim fields on InsuranceClaim
+  (referencingCompletedByGoodlord, isTenancyCreatedOnGoodlord, depositCollectedByGoodlord),
+  which record whether the underlying tenancy was handled on the Goodlord platform. That is a
+  reporting flag, not a foreign key.
+domains:
+- name: Referencing
+  api: Goodlord Referencing API
+  source: openapi/goodlord-referencing-api-openapi.json
+  root_entity: Application
+- name: Rent Protection Insurance claims
+  api: Goodlord Insurance App API
+  source: openapi/goodlord-insurance-app-api-openapi.json
+  root_entity: InsuranceClaim
+entities:
+- name: Application
+  domain: Referencing
+  schema: openapi/goodlord-referencing-api-openapi.json#/components/schemas/Application
+  description: >-
+    A rental application. Carries the tenancy/rental information and the set of Subjects
+    (applicants, guarantors and their referees) being assessed for that tenancy.
+  fields: [id, tenancy, subjects, agency, createdAt]
+  identifier: id
+  operations: [createApplication, getApplication, patchApplication, deleteApplication]
+- name: Subject
+  domain: Referencing
+  schema: openapi/goodlord-referencing-api-openapi.json#/components/schemas/Subject
+  description: >-
+    A person assessed within an Application. The published type set is Applicant, Guarantor,
+    Employer referee, Accountant referee and Landlord referee. Carries rentalDetails
+    (price share, affordability ratio), context, outcome, milestones, recommendations and
+    attachedSubjects (the referees hung off an applicant or guarantor).
+  fields: [id, externalId, type, rentalDetails, context, outcome, attachedSubjects, milestones, recommendations]
+  identifier: id
+  external_identifier: externalId
+  operations: [createSubject, getSubject, patchSubject, deleteSubject, patchSubjectOutcomeConditions]
+- name: Touchpoint
+  domain: Referencing
+  schema: openapi/goodlord-referencing-api-openapi.json#/components/schemas/APITouchpoint
+  description: An audit/communication event recorded against a Subject during referencing.
+  fields: [id, subjectId, category, author, message, createdAt]
+  identifier: id
+  operations: [getSubjectTouchpoints]
+- name: Email
+  domain: Referencing
+  schema: openapi/goodlord-referencing-api-openapi.json#/components/schemas/APIEmail
+  description: An email Goodlord sent to a Subject, with its delivery status.
+  fields: [emailAddress, emailSubject, date, status]
+  operations: [getSubjectEmails]
+- name: Document
+  domain: Referencing
+  description: >-
+    A generated referencing document (identity, income, residential, credit and output report
+    types are documented). Retrieved by documentId as a short-lived authenticated file URL —
+    there is no document collection endpoint.
+  identifier: documentId
+  operations: [getAuthenticatedFile]
+- name: InsuranceClaim
+  domain: Rent Protection Insurance claims
+  schema: openapi/goodlord-insurance-app-api-openapi.json#/components/schemas/InsuranceClaim
+  description: >-
+    A rent protection insurance claim. The widest entity in the estate — 130+ declared fields
+    covering the claim itself plus the UK possession-proceedings timeline (Section 8 and
+    Section 21 notice served/expired dates, proceedings issued, hearing, possession, warrants,
+    eviction), deposit handling, compliance evidence (gas safety, EPC, EICR, How to Rent) and
+    Renters' Rights Act fields (rraInfoSheetIssueDate, statementOfTerms*).
+  fields_count: 130
+  identifier: id
+  external_identifier: externalId
+  reference_fields: [claimReference, policyId, rpiUniqueReferenceNumber, solicitorsClaimReference, tenancyId]
+  operations: [api_insurance_claims_get_collection, api_insurance_claims_post, api_insurance_claims_id_get,
+    api_insurance_claims_id_patch, api_insurance_claims_idsubmit_post]
+- name: Company
+  domain: Rent Protection Insurance claims
+  schema: openapi/goodlord-insurance-app-api-openapi.json#/components/schemas/Company
+  description: The letting agency the claim and the agent belong to.
+  fields: [id, name, externalId]
+  identifier: id
+  external_identifier: externalId
+  operations: [api_companies_get_collection, api_companies_id_get]
+- name: Agent
+  domain: Rent Protection Insurance claims
+  schema: openapi/goodlord-insurance-app-api-openapi.json#/components/schemas/Agent
+  description: A user of the Insurance App, scoped to one or more companies and carrying roles and role groups.
+  fields: [id, email, roles, roleGroups, companies]
+  identifier: id
+  operations: [api_agents_get_collection, api_agents_post, api_agents_id_get, api_agents_id_patch, get_me]
+- name: File
+  domain: Rent Protection Insurance claims
+  schema: openapi/goodlord-insurance-app-api-openapi.json#/components/schemas/File
+  description: >-
+    Evidence uploaded against a claim. The podioFileId field discloses a Podio-backed
+    document store behind the service.
+  fields: [id, fileName, originalFileName, fileSize, mimeType, fileType, createdAt, podioFileId, insuranceClaim]
+  identifier: id
+  operations: [api_insurance_claims_insuranceClaimIdfiles_get_collection, api_insurance_claims_insuranceClaimIdfiles_post,
+    api_insurance_claims_insuranceClaimIdfiles_id_get, api_insurance_claims_insuranceClaimIdfiles_id_delete]
+- name: Payment
+  domain: Rent Protection Insurance claims
+  schema: openapi/goodlord-insurance-app-api-openapi.json#/components/schemas/Payment
+  description: An insurer payment made against a claim. Read-only over the API — no create or update operation is published.
+  fields: [id, referenceNumber, paymentStatusIdentifier, paymentStatusDescription, insurer, paymentDate,
+    paymentAmount, refundDueAmount, insuranceClaim]
+  identifier: id
+  operations: [api_insurance_claims_insuranceClaimIdpayments_get_collection, api_insurance_claims_insuranceClaimIdpayments_id_get]
+- name: RentSchedule
+  domain: Rent Protection Insurance claims
+  schema: openapi/goodlord-insurance-app-api-openapi.json#/components/schemas/RentSchedule
+  description: The arrears schedule attached to a claim. Exactly one per claim; submitted as a unit.
+  fields: [id, submittedAt, syncedAt, deletedAt, createdAt, updatedAt, insuranceClaim, rentScheduleRows]
+  identifier: id
+  operations: [api_insurance_claims_insuranceClaimIdrent_schedule_get, api_insurance_claims_insuranceClaimIdrent_schedule_rentScheduleIdsubmit_post]
+- name: RentScheduleRow
+  domain: Rent Protection Insurance claims
+  schema: openapi/goodlord-insurance-app-api-openapi.json#/components/schemas/RentScheduleRow
+  description: >-
+    One dated line of the arrears schedule (rowType, amount, running balance) with its own
+    audit trail. Denormalised — it carries both rentSchedule and insuranceClaim/insuranceClaimId
+    back-references plus companyExternalId.
+  fields: [id, rowType, date, amount, balance, note, audits, submittedAt, rentSchedule, insuranceClaim, insuranceClaimId, companyExternalId]
+  identifier: id
+  operations: [api_insurance_claims_insuranceClaimIdrent_schedule_rentScheduleIdrent_schedule_row_post,
+    api_insurance_claims_insuranceClaimIdrent_schedule_rentScheduleIdrent_schedule_rows_post,
+    api_insurance_claims_insuranceClaimIdrent_schedule_rentScheduleIdrent_schedule_row_id_get,
+    api_insurance_claims_insuranceClaimIdrent_schedule_rentScheduleIdrent_schedule_row_id_patch,
+    api_insurance_claims_insuranceClaimIdrent_schedule_rentScheduleIdrent_schedule_row_id_delete]
+- name: Role
+  domain: Rent Protection Insurance claims
+  schema: openapi/goodlord-insurance-app-api-openapi.json#/components/schemas/Role
+  description: A named permission held by agents, grouped into role groups. Soft-deleted (deletedAt, deleted).
+  fields: [id, name, roleGroups, deletedAt, deleted]
+  identifier: id
+  operations: [api_roles_get_collection, api_roles_post, api_roles_id_get, api_roles_id_patch, api_roles_id_delete]
+- name: RoleGroup
+  domain: Rent Protection Insurance claims
+  schema: openapi/goodlord-insurance-app-api-openapi.json#/components/schemas/RoleGroup
+  description: A bundle of roles, flagged admin and/or agent. Soft-deleted.
+  fields: [id, name, roles, admin, agent, deletedAt, deleted]
+  identifier: id
+  operations: [api_role_groups_get_collection, api_role_groups_post, api_role_groups_id_get,
+    api_role_groups_id_patch, api_role_groups_id_delete]
+relationships:
+- from: Application
+  to: Subject
+  kind: has_many
+  via: subjects
+  evidence: Application.subjects array; Subject is created against an application (PUT /referencing/subject/application/{applicationId})
+- from: Subject
+  to: Application
+  kind: belongs_to
+  via: applicationId
+  evidence: createSubject path parameter applicationId; webhook payload data carries both applicationId and subjectId
+- from: Subject
+  to: Subject
+  kind: has_many
+  via: attachedSubjects
+  evidence: Subject.attachedSubjects — Employer, Accountant and Landlord referees hang off an Applicant or Guarantor
+- from: Touchpoint
+  to: Subject
+  kind: belongs_to
+  via: subjectId
+  evidence: APITouchpoint.subjectId; GET /referencing/subject/{subjectId}/touchpoints
+- from: Email
+  to: Subject
+  kind: belongs_to
+  via: subjectId
+  evidence: GET /referencing/subject/{subjectId}/emails
+- from: InsuranceClaim
+  to: Company
+  kind: belongs_to
+  via: company
+  evidence: InsuranceClaim.company id reference; collection filter company.externalId
+- from: InsuranceClaim
+  to: File
+  kind: has_many
+  via: files
+  evidence: InsuranceClaim.files; File.insuranceClaim back-reference; nested /insurance_claims/{insuranceClaimId}/files
+- from: InsuranceClaim
+  to: Payment
+  kind: has_many
+  via: payments
+  evidence: InsuranceClaim.payments; Payment.insuranceClaim back-reference; nested /insurance_claims/{insuranceClaimId}/payments
+- from: InsuranceClaim
+  to: RentSchedule
+  kind: has_one
+  via: rentSchedule
+  evidence: InsuranceClaim.rentSchedule; GET /insurance_claims/{insuranceClaimId}/rent_schedule returns a single resource
+- from: RentSchedule
+  to: RentScheduleRow
+  kind: has_many
+  via: rentScheduleRows
+  evidence: RentSchedule.rentScheduleRows array; nested rent_schedule_row collection
+- from: RentScheduleRow
+  to: RentSchedule
+  kind: belongs_to
+  via: rentSchedule
+  evidence: RentScheduleRow.rentSchedule id reference
+- from: RentScheduleRow
+  to: InsuranceClaim
+  kind: belongs_to
+  via: insuranceClaimId
+  evidence: RentScheduleRow carries both insuranceClaim and insuranceClaimId — a denormalised second path to the claim
+- from: RentScheduleRow
+  to: RentScheduleRowAudit
+  kind: has_many
+  via: audits
+  evidence: RentScheduleRow.audits array of RentScheduleRowAuditGetDto
+- from: Agent
+  to: Company
+  kind: has_many
+  via: companies
+  evidence: Agent.companies array of company ids — an agent may be scoped to more than one agency
+- from: Agent
+  to: Role
+  kind: has_many
+  via: roles
+  evidence: Agent.roles array
+- from: Agent
+  to: RoleGroup
+  kind: has_many
+  via: roleGroups
+  evidence: Agent.roleGroups array
+- from: RoleGroup
+  to: Role
+  kind: has_many
+  via: roles
+  evidence: RoleGroup.roles and Role.roleGroups — a many-to-many join
+observations:
+- The Referencing API declares 12 schemas for 15 operations; the Insurance App declares 96 schema
+  variants for 35 operations, but most are API Platform serialisation-group projections of the same
+  11 entities (.jsonapi, .csv, .jsonMergePatch and -<group>.read suffixes), not distinct types.
+- No entity in either API is shared with the other. Goodlord's referencing identifiers do not appear
+  in the claims contract and vice versa.
+- Payments and Companies are read-only over the Insurance App API; only claims, files, rent schedule
+  rows, agents, roles and role groups accept writes.
