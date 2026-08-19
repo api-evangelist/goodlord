@@ -1,0 +1,398 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Referencing API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://api.goodoverlord.com/auth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Authentication",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Obtain a JWT token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.goodoverlord.com/auth/token",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Obtain a JWT token to authenticate your requests.\nThe `access_token` property of the response contains the Bearer token that should be included in the Authorization header of all requests to the API.\nIt is recommended to use the `expires_in` property to determine when the token will expire and to request a new token before it expires."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Application",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a new application",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.goodoverlord.com/referencing/application",
+            "headers": [
+              {
+                "name": "Company-ID",
+                "value": "e2baa1a0-1234-5678-9abc-def012345678"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new rental application to reference tenants and guarantors"
+        },
+        {
+          "info": {
+            "name": "Get Application",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.goodoverlord.com/referencing/application/:applicationId",
+            "headers": [
+              {
+                "name": "Company-ID",
+                "value": "e2baa1a0-1234-5678-9abc-def012345678"
+              }
+            ],
+            "params": [
+              {
+                "name": "applicationId",
+                "value": "",
+                "type": "path",
+                "description": "The applicationId of the application you wish to retrieve"
+              }
+            ]
+          },
+          "docs": "Retrieve a copy of an application which you have already created"
+        },
+        {
+          "info": {
+            "name": "Patch Application",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.goodoverlord.com/referencing/application/:applicationId",
+            "headers": [
+              {
+                "name": "Company-ID",
+                "value": "e2baa1a0-1234-5678-9abc-def012345678"
+              }
+            ],
+            "params": [
+              {
+                "name": "applicationId",
+                "value": "",
+                "type": "path",
+                "description": "The applicationId of the application you wish to retrieve"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Patch an application which you have previously created"
+        },
+        {
+          "info": {
+            "name": "Delete Application",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.goodoverlord.com/referencing/application/:applicationId",
+            "headers": [
+              {
+                "name": "Company-ID",
+                "value": "e2baa1a0-1234-5678-9abc-def012345678"
+              }
+            ],
+            "params": [
+              {
+                "name": "applicationId",
+                "value": "",
+                "type": "path",
+                "description": "The applicationId of the application you wish to retrieve"
+              }
+            ]
+          },
+          "docs": "Delete an application which you have already created"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Subject",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Bot JWT Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.goodoverlord.com/referencing/subject/:subjectId/auth/token",
+            "params": [
+              {
+                "name": "subjectId",
+                "value": "",
+                "type": "path",
+                "description": "SubjectId you wish to generate a token for"
+              }
+            ]
+          },
+          "docs": "Deprecated: Use the POST method on this endpoint instead.\n\nGenerate a new JWT token, which can be used as a redirect URL to send your user down the bot flow."
+        },
+        {
+          "info": {
+            "name": "Create Bot JWT Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.goodoverlord.com/referencing/subject/:subjectId/auth/token",
+            "params": [
+              {
+                "name": "subjectId",
+                "value": "",
+                "type": "path",
+                "description": "SubjectId you wish to generate a token for"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generate a new JWT token, which can be used as a redirect URL to send your user down the bot flow.\nThis endpoint replaces the deprecated GET method on the same path."
+        },
+        {
+          "info": {
+            "name": "Get Subject",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.goodoverlord.com/referencing/subject/:subjectId",
+            "headers": [
+              {
+                "name": "Company-ID",
+                "value": "e2baa1a0-1234-5678-9abc-def012345678"
+              }
+            ],
+            "params": [
+              {
+                "name": "subjectId",
+                "value": "",
+                "type": "path",
+                "description": "SubjectId you wish to generate a token for"
+              }
+            ]
+          },
+          "docs": "Retrieve a created subject"
+        },
+        {
+          "info": {
+            "name": "Patch Subject",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.goodoverlord.com/referencing/subject/:subjectId",
+            "headers": [
+              {
+                "name": "Company-ID",
+                "value": "e2baa1a0-1234-5678-9abc-def012345678"
+              }
+            ],
+            "params": [
+              {
+                "name": "subjectId",
+                "value": "",
+                "type": "path",
+                "description": "SubjectId you wish to generate a token for"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Patch a subject you have already created"
+        },
+        {
+          "info": {
+            "name": "Delete Subject",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.goodoverlord.com/referencing/subject/:subjectId",
+            "headers": [
+              {
+                "name": "Company-ID",
+                "value": "e2baa1a0-1234-5678-9abc-def012345678"
+              }
+            ],
+            "params": [
+              {
+                "name": "subjectId",
+                "value": "",
+                "type": "path",
+                "description": "SubjectId you wish to generate a token for"
+              }
+            ]
+          },
+          "docs": "Soft delete a subject which you have already created"
+        },
+        {
+          "info": {
+            "name": "Create Subject",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.goodoverlord.com/referencing/subject/application/:applicationId",
+            "headers": [
+              {
+                "name": "Company-ID",
+                "value": "e2baa1a0-1234-5678-9abc-def012345678"
+              }
+            ],
+            "params": [
+              {
+                "name": "applicationId",
+                "value": "",
+                "type": "path",
+                "description": "ApplicationId you wish to add the new subject to"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new subject"
+        },
+        {
+          "info": {
+            "name": "Get Subject Touchpoints",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.goodoverlord.com/referencing/subject/:subjectId/touchpoints",
+            "params": [
+              {
+                "name": "subjectId",
+                "value": "",
+                "type": "path",
+                "description": "SubjectId you wish to retrieve touchpoints for"
+              }
+            ]
+          },
+          "docs": "Retrieve all touchpoints for a subject, including communications and interactions"
+        },
+        {
+          "info": {
+            "name": "Patch Subject Outcome Conditions",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.goodoverlord.com/referencing/subject/:subjectId/outcome/conditions",
+            "params": [
+              {
+                "name": "subjectId",
+                "value": "",
+                "type": "path",
+                "description": "SubjectId you wish to patch outcome conditions for."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Patch the outcome conditions of a subject you have already created"
+        },
+        {
+          "info": {
+            "name": "Get Subject Emails",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.goodoverlord.com/referencing/subject/:subjectId/emails",
+            "params": [
+              {
+                "name": "subjectId",
+                "value": "",
+                "type": "path",
+                "description": "subjectId for which, you wish to view email information"
+              }
+            ]
+          },
+          "docs": "Get information about emails sent to the requested subject"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Media",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Authenticated File Url",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.goodoverlord.com/referencing/media/document/:documentId",
+            "params": [
+              {
+                "name": "documentId",
+                "value": "",
+                "type": "path",
+                "description": "documentId you wish to view"
+              }
+            ]
+          },
+          "docs": "Generates an authenticated link, which allows you to access a users document for up to 10 minutes"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

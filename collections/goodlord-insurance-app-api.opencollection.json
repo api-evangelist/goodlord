@@ -1,0 +1,1011 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Insurance App",
+    "version": "0.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Agent",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieves the collection of Agent resources.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://insurance-app.goodlord.co/api/v1/agents",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The collection page number"
+              },
+              {
+                "name": "itemsPerPage",
+                "value": "",
+                "type": "query",
+                "description": "The number of items per page"
+              }
+            ]
+          },
+          "docs": "Retrieves the collection of Agent resources."
+        },
+        {
+          "info": {
+            "name": "Creates a Agent resource.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://insurance-app.goodlord.co/api/v1/agents",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a Agent resource."
+        },
+        {
+          "info": {
+            "name": "Retrieves a Agent resource.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://insurance-app.goodlord.co/api/v1/agents/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Agent identifier"
+              }
+            ]
+          },
+          "docs": "Retrieves a Agent resource."
+        },
+        {
+          "info": {
+            "name": "Updates the Agent resource.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://insurance-app.goodlord.co/api/v1/agents/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Agent identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the Agent resource."
+        },
+        {
+          "info": {
+            "name": "Retrieves a Agent resource.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://insurance-app.goodlord.co/api/v1/me",
+            "params": [
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "Agent include"
+              }
+            ]
+          },
+          "docs": "Retrieves a Agent resource."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Company",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieves the collection of Company resources.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://insurance-app.goodlord.co/api/v1/companies",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The collection page number"
+              },
+              {
+                "name": "itemsPerPage",
+                "value": "",
+                "type": "query",
+                "description": "The number of items per page"
+              }
+            ]
+          },
+          "docs": "Retrieves the collection of Company resources."
+        },
+        {
+          "info": {
+            "name": "Retrieves a Company resource.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://insurance-app.goodlord.co/api/v1/companies/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Company identifier"
+              }
+            ]
+          },
+          "docs": "Retrieves a Company resource."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "File",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieves the collection of File resources.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://insurance-app.goodlord.co/api/v1/insurance_claims/:insuranceClaimId/files",
+            "params": [
+              {
+                "name": "insuranceClaimId",
+                "value": "",
+                "type": "path",
+                "description": "File identifier"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The collection page number"
+              },
+              {
+                "name": "itemsPerPage",
+                "value": "",
+                "type": "query",
+                "description": "The number of items per page"
+              }
+            ]
+          },
+          "docs": "Retrieves the collection of File resources."
+        },
+        {
+          "info": {
+            "name": "Upload a file to an insurance claim",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://insurance-app.goodlord.co/api/v1/insurance_claims/:insuranceClaimId/files",
+            "params": [
+              {
+                "name": "insuranceClaimId",
+                "value": "",
+                "type": "path",
+                "description": "FileCreate identifier"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "file",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "file_type",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Upload a file (tenancy agreement, rent schedule, or supporting document)\n                to an insurance claim. The file will be stored and synced to Podio."
+        },
+        {
+          "info": {
+            "name": "Retrieves a File resource.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://insurance-app.goodlord.co/api/v1/insurance_claims/:insuranceClaimId/files/:id",
+            "params": [
+              {
+                "name": "insuranceClaimId",
+                "value": "",
+                "type": "path",
+                "description": "File identifier"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "File identifier"
+              }
+            ]
+          },
+          "docs": "Retrieves a File resource."
+        },
+        {
+          "info": {
+            "name": "Removes the File resource.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://insurance-app.goodlord.co/api/v1/insurance_claims/:insuranceClaimId/files/:id",
+            "params": [
+              {
+                "name": "insuranceClaimId",
+                "value": "",
+                "type": "path",
+                "description": "File identifier"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "File identifier"
+              }
+            ]
+          },
+          "docs": "Removes the File resource."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "InsuranceClaim",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieves the collection of InsuranceClaim resources.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://insurance-app.goodlord.co/api/v1/insurance_claims",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The collection page number"
+              },
+              {
+                "name": "itemsPerPage",
+                "value": "",
+                "type": "query",
+                "description": "The number of items per page"
+              },
+              {
+                "name": "company.externalId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "company.externalId[]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "policyUniqueReferenceNumber[]",
+                "value": "",
+                "type": "query",
+                "description": "Filter insurance claims by policy unique reference number (RPI ref)"
+              },
+              {
+                "name": "policyUniqueReferenceNumber",
+                "value": "",
+                "type": "query",
+                "description": "Filter insurance claims by policy unique reference number (RPI ref)"
+              },
+              {
+                "name": "propertyAddress",
+                "value": "",
+                "type": "query",
+                "description": "Filter insurance claims by address"
+              },
+              {
+                "name": "claimStatus[]",
+                "value": "",
+                "type": "query",
+                "description": "Filter insurance claims by status"
+              },
+              {
+                "name": "claimStatus",
+                "value": "",
+                "type": "query",
+                "description": "Filter insurance claims by status"
+              },
+              {
+                "name": "order[totalPaymentAmount]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "order[claimDate]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "order[latestPaymentDate]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "include",
+                "value": "company,files,payments",
+                "type": "query",
+                "description": "Which relations to include in the response"
+              }
+            ]
+          },
+          "docs": "Retrieves the collection of InsuranceClaim resources."
+        },
+        {
+          "info": {
+            "name": "Creates a InsuranceClaimCreate resource.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://insurance-app.goodlord.co/api/v1/insurance_claims",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a InsuranceClaimCreate resource."
+        },
+        {
+          "info": {
+            "name": "Retrieves a InsuranceClaim resource.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://insurance-app.goodlord.co/api/v1/insurance_claims/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "InsuranceClaim identifier"
+              },
+              {
+                "name": "include",
+                "value": "company,files,payments",
+                "type": "query",
+                "description": "Which relations to include in the response"
+              }
+            ]
+          },
+          "docs": "Retrieves a InsuranceClaim resource."
+        },
+        {
+          "info": {
+            "name": "Update insurance claim details",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://insurance-app.goodlord.co/api/v1/insurance_claims/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "InsuranceClaimUpdate identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Partially update an insurance claim. Only included fields are modified."
+        },
+        {
+          "info": {
+            "name": "Submit an insurance claim",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://insurance-app.goodlord.co/api/v1/insurance_claims/:id/submit",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "InsuranceClaim identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a InsuranceClaim resource."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Payment",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieves the collection of Payment resources.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://insurance-app.goodlord.co/api/v1/insurance_claims/:insuranceClaimId/payments",
+            "params": [
+              {
+                "name": "insuranceClaimId",
+                "value": "",
+                "type": "path",
+                "description": "Payment identifier"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The collection page number"
+              },
+              {
+                "name": "itemsPerPage",
+                "value": "",
+                "type": "query",
+                "description": "The number of items per page"
+              }
+            ]
+          },
+          "docs": "Retrieves the collection of Payment resources."
+        },
+        {
+          "info": {
+            "name": "Retrieves a Payment resource.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://insurance-app.goodlord.co/api/v1/insurance_claims/:insuranceClaimId/payments/:id",
+            "params": [
+              {
+                "name": "insuranceClaimId",
+                "value": "",
+                "type": "path",
+                "description": "Payment identifier"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Payment identifier"
+              }
+            ]
+          },
+          "docs": "Retrieves a Payment resource."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "RentSchedule",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieves a RentSchedule resource.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://insurance-app.goodlord.co/api/v1/insurance_claims/:insuranceClaimId/rent_schedule",
+            "params": [
+              {
+                "name": "insuranceClaimId",
+                "value": "",
+                "type": "path",
+                "description": "RentSchedule identifier"
+              },
+              {
+                "name": "include",
+                "value": "rentScheduleRows",
+                "type": "query",
+                "description": "Which relations to include in the response"
+              }
+            ]
+          },
+          "docs": "Retrieves a RentSchedule resource."
+        },
+        {
+          "info": {
+            "name": "Create multiple rent schedule rows",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://insurance-app.goodlord.co/api/v1/insurance_claims/:insuranceClaimId/rent_schedule/:rentScheduleId/rent_schedule_rows",
+            "params": [
+              {
+                "name": "insuranceClaimId",
+                "value": "",
+                "type": "path",
+                "description": "RentScheduleRowBulk identifier"
+              },
+              {
+                "name": "rentScheduleId",
+                "value": "",
+                "type": "path",
+                "description": "RentScheduleRowBulk identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a RentScheduleRowBulk resource."
+        },
+        {
+          "info": {
+            "name": "Creates a RentSchedule resource.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://insurance-app.goodlord.co/api/v1/insurance_claims/:insuranceClaimId/rent_schedule/:rentScheduleId/submit",
+            "params": [
+              {
+                "name": "insuranceClaimId",
+                "value": "",
+                "type": "path",
+                "description": "RentSchedule identifier"
+              },
+              {
+                "name": "rentScheduleId",
+                "value": "",
+                "type": "path",
+                "description": "RentSchedule identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a RentSchedule resource."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "RentScheduleRow",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieves a RentScheduleRow resource.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://insurance-app.goodlord.co/api/v1/insurance_claims/:insuranceClaimId/rent_schedule/:rentScheduleId/rent_schedule_row/:id",
+            "params": [
+              {
+                "name": "insuranceClaimId",
+                "value": "",
+                "type": "path",
+                "description": "RentScheduleRow identifier"
+              },
+              {
+                "name": "rentScheduleId",
+                "value": "",
+                "type": "path",
+                "description": "RentScheduleRow identifier"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "RentScheduleRow identifier"
+              },
+              {
+                "name": "include",
+                "value": "rentSchedule",
+                "type": "query",
+                "description": "Which relations to include in the response"
+              }
+            ]
+          },
+          "docs": "Retrieves a RentScheduleRow resource."
+        },
+        {
+          "info": {
+            "name": "Removes the RentScheduleRow resource.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://insurance-app.goodlord.co/api/v1/insurance_claims/:insuranceClaimId/rent_schedule/:rentScheduleId/rent_schedule_row/:id",
+            "params": [
+              {
+                "name": "insuranceClaimId",
+                "value": "",
+                "type": "path",
+                "description": "RentScheduleRow identifier"
+              },
+              {
+                "name": "rentScheduleId",
+                "value": "",
+                "type": "path",
+                "description": "RentScheduleRow identifier"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "RentScheduleRow identifier"
+              }
+            ]
+          },
+          "docs": "Removes the RentScheduleRow resource."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "RentScheduleRowUpdate",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Updates the RentScheduleRowUpdate resource.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://insurance-app.goodlord.co/api/v1/insurance_claims/:insuranceClaimId/rent_schedule/:rentScheduleId/rent_schedule_row/:id",
+            "params": [
+              {
+                "name": "insuranceClaimId",
+                "value": "",
+                "type": "path",
+                "description": "RentScheduleRowUpdate identifier"
+              },
+              {
+                "name": "rentScheduleId",
+                "value": "",
+                "type": "path",
+                "description": "RentScheduleRowUpdate identifier"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "RentScheduleRowUpdate identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the RentScheduleRowUpdate resource."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "RentScheduleRowPostDto",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Creates a RentScheduleRowPostDto resource.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://insurance-app.goodlord.co/api/v1/insurance_claims/:insuranceClaimId/rent_schedule/:rentScheduleId/rent_schedule_row",
+            "params": [
+              {
+                "name": "insuranceClaimId",
+                "value": "",
+                "type": "path",
+                "description": "RentScheduleRowPostDto identifier"
+              },
+              {
+                "name": "rentScheduleId",
+                "value": "",
+                "type": "path",
+                "description": "RentScheduleRowPostDto identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a RentScheduleRowPostDto resource."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Role",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieves the collection of Role resources.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://insurance-app.goodlord.co/api/v1/roles",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The collection page number"
+              },
+              {
+                "name": "itemsPerPage",
+                "value": "",
+                "type": "query",
+                "description": "The number of items per page"
+              }
+            ]
+          },
+          "docs": "Retrieves the collection of Role resources."
+        },
+        {
+          "info": {
+            "name": "Creates a Role resource.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://insurance-app.goodlord.co/api/v1/roles",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a Role resource."
+        },
+        {
+          "info": {
+            "name": "Retrieves a Role resource.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://insurance-app.goodlord.co/api/v1/roles/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Role identifier"
+              }
+            ]
+          },
+          "docs": "Retrieves a Role resource."
+        },
+        {
+          "info": {
+            "name": "Updates the Role resource.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://insurance-app.goodlord.co/api/v1/roles/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Role identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the Role resource."
+        },
+        {
+          "info": {
+            "name": "Removes the Role resource.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://insurance-app.goodlord.co/api/v1/roles/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Role identifier"
+              }
+            ]
+          },
+          "docs": "Removes the Role resource."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "RoleGroup",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieves the collection of RoleGroup resources.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://insurance-app.goodlord.co/api/v1/role_groups",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The collection page number"
+              },
+              {
+                "name": "itemsPerPage",
+                "value": "",
+                "type": "query",
+                "description": "The number of items per page"
+              }
+            ]
+          },
+          "docs": "Retrieves the collection of RoleGroup resources."
+        },
+        {
+          "info": {
+            "name": "Creates a RoleGroup resource.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://insurance-app.goodlord.co/api/v1/role_groups",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a RoleGroup resource."
+        },
+        {
+          "info": {
+            "name": "Retrieves a RoleGroup resource.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://insurance-app.goodlord.co/api/v1/role_groups/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "RoleGroup identifier"
+              }
+            ]
+          },
+          "docs": "Retrieves a RoleGroup resource."
+        },
+        {
+          "info": {
+            "name": "Updates the RoleGroup resource.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://insurance-app.goodlord.co/api/v1/role_groups/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "RoleGroup identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the RoleGroup resource."
+        },
+        {
+          "info": {
+            "name": "Removes the RoleGroup resource.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://insurance-app.goodlord.co/api/v1/role_groups/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "RoleGroup identifier"
+              }
+            ]
+          },
+          "docs": "Removes the RoleGroup resource."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
