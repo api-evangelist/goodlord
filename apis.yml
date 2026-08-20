@@ -22,6 +22,17 @@ description: >-
   Goodlord publishes no open data.
 image: https://www.goodlord.com/hubfs/goodlord-logo-1.jpg
 tags:
+- Real-Estate
+- United Kingdom
+- PropTech
+- Property Management
+- Rentals
+- Lettings
+- Tenant Referencing
+- Tenancy Management
+- Insurance
+- Payments
+tags_raw:
 - Real Estate
 - United Kingdom
 - PropTech
@@ -54,6 +65,12 @@ apis:
   humanURL: https://portal.goodlord.co/portal/catalogue-products/referencing-product-1
   baseURL: https://api.goodoverlord.com
   tags:
+  - Referencing
+  - Tenant Screening
+  - Application
+  - Lettings
+  - Rentals
+  tags_raw:
   - Referencing
   - Tenant Screening
   - Applications
