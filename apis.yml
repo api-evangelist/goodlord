@@ -47,108 +47,435 @@ created: '2026-07-26'
 modified: '2026-07-26'
 specificationVersion: '0.23'
 apis:
-- aid: goodlord:goodlord-referencing-api
-  name: Goodlord Referencing API
-  description: >-
-    Goodlord's public Referencing API — the production surface of the Referencing
-    Product listed in the public catalogue of the Goodlord Developer Portal. It lets a
-    lettings agency's own system create rental applications, add and assess Applicants
-    and Guarantors (plus Employer, Accountant and Landlord referees) through the
-    referencing process, patch outcome conditions, read touchpoints and emails, and
-    retrieve generated documents. Authentication is OAuth 2.0 machine-to-machine
-    client_credentials against /auth/token, returning a one-hour JWT bearer token; every
-    call additionally carries an issued Company-ID header. Three webhook events are
-    documented (V2.subject.report.generated, V2.subject.reference.form.generated,
-    V2.subject.outcome.updated) but subscriptions are configured by Goodlord on request,
-    not self-serve. The OpenAPI 3.1.0 document was fetched anonymously; credentials are
-    issued only through a Goodlord account manager.
+- aid: goodlord:goodlord-agent-api
+  name: Goodlord Agent API
+  description: Resource 'Agent' operations.
   humanURL: https://portal.goodlord.co/portal/catalogue-products/referencing-product-1
   baseURL: https://api.goodoverlord.com
   tags:
-  - Referencing
-  - Tenant Screening
-  - Application
-  - Lettings
-  - Rentals
-  tags_raw:
-  - Referencing
-  - Tenant Screening
-  - Applications
-  - Lettings
-  - Rentals
+  - Agent
   properties:
   - type: OpenAPI
-    url: openapi/goodlord-referencing-api-openapi.json
+    url: openapi/goodlord-agent-api-openapi.yml
   - type: Documentation
     url: https://portal.goodlord.co/portal/catalogue-products/referencing-product-1
   - type: APIReference
-    url: https://portal.goodlord.co/portal/catalogue-products/referencing-product-1/dHlrL3Byb2QtcmVmZXJlbmNpbmctYXBp/docs
+    url: >-
+      https://portal.goodlord.co/portal/catalogue-products/referencing-product-1/dHlrL3Byb2QtcmVmZXJlbmNpbmctYXBp/docs
   - type: GettingStarted
     url: https://portal.goodlord.co/blog/2024/8/22/getting-started-with-goodlords-referencing-api
   - type: Documentation
     url: https://portal.goodlord.co/blog/2024/8/20/getting-started-with-goodlord-referencing-api
-  - type: Overlay
-    url: overlays/goodlord-referencing-api-overlay.yaml
   - type: Webhooks
     url: asyncapi/goodlord-referencing-webhooks.yml
-- aid: goodlord:goodlord-referencing-api-sandbox
-  name: Goodlord Referencing API (Sandbox)
+  - type: APIReference
+    url: >-
+      https://portal.goodlord.co/portal/catalogue-products/referencing-product-1/dHlrL3Byb2Qtc2FuZGJveC1yZWZlcmVuY2luZy1hcGk/docs
+  - type: Sandbox
+    url: sandbox/goodlord-sandbox.yml
+  - type: APIReference
+    url: https://insurance-app.goodlord.co/api/v1/docs
+- aid: goodlord:goodlord-application-api
+  name: Goodlord Application API
   description: >-
-    The sandbox environment of the Goodlord Referencing Product, published as a separate
-    entry in the developer portal's public catalogue and carrying its own OpenAPI 3.1.0
-    document with the sandbox server and sandbox token endpoint. Operation surface is
-    identical to the live API. Goodlord's getting-started guide states that a sandbox
-    account is arranged by Goodlord's team during a commercial engagement and that
-    production is enabled afterwards by an account manager, so this is a partner sandbox
-    rather than an open trial — no self-serve key issuance exists.
+    An application contains rental information and all of the applicants/guarantors which are applying
+    for a tenancy.
   humanURL: https://portal.goodlord.co/portal/catalogue-products/referencing-product-1
-  baseURL: https://api-sandbox.goodlord.co
+  baseURL: https://api.goodoverlord.com
   tags:
-  - Referencing
-  - Sandbox
-  - Tenant Screening
-  - Lettings
+  - Application
   properties:
   - type: OpenAPI
-    url: openapi/goodlord-referencing-api-sandbox-openapi.json
+    url: openapi/goodlord-application-api-openapi.yml
   - type: Documentation
     url: https://portal.goodlord.co/portal/catalogue-products/referencing-product-1
   - type: APIReference
-    url: https://portal.goodlord.co/portal/catalogue-products/referencing-product-1/dHlrL3Byb2Qtc2FuZGJveC1yZWZlcmVuY2luZy1hcGk/docs
-  - type: Overlay
-    url: overlays/goodlord-referencing-api-sandbox-overlay.yaml
+    url: >-
+      https://portal.goodlord.co/portal/catalogue-products/referencing-product-1/dHlrL3Byb2QtcmVmZXJlbmNpbmctYXBp/docs
+  - type: GettingStarted
+    url: https://portal.goodlord.co/blog/2024/8/22/getting-started-with-goodlords-referencing-api
+  - type: Documentation
+    url: https://portal.goodlord.co/blog/2024/8/20/getting-started-with-goodlord-referencing-api
+  - type: Webhooks
+    url: asyncapi/goodlord-referencing-webhooks.yml
+  - type: APIReference
+    url: >-
+      https://portal.goodlord.co/portal/catalogue-products/referencing-product-1/dHlrL3Byb2Qtc2FuZGJveC1yZWZlcmVuY2luZy1hcGk/docs
   - type: Sandbox
     url: sandbox/goodlord-sandbox.yml
-- aid: goodlord:goodlord-insurance-app-api
-  name: Goodlord Insurance App API
-  description: >-
-    A second real Goodlord API surface, discovered outside the developer portal. The
-    Goodlord Insurance App is an API Platform (Symfony) service whose OpenAPI 3.1.0
-    document is served publicly and unauthenticated at /api/v1/docs with the
-    application/vnd.openapi+json media type. It covers rent protection insurance claims
-    handling — insurance claims and claim submission, claim file upload and deletion,
-    claim payments, rent schedules and rent schedule rows, plus agents, companies, roles
-    and role groups. All 21 operations are gated by a JWT in the Authorization header and
-    every collection probe returned HTTP 401. Goodlord does not list this API in its
-    developer portal catalogue and publishes no onboarding path for it, so the contract
-    is public but the API itself is an internal application surface, not an offered
-    developer product.
-  humanURL: https://insurance-app.goodlord.co/api/v1/docs
-  baseURL: https://insurance-app.goodlord.co
-  tags:
-  - Insurance
-  - Rent Protection
-  - Claims
-  - Payments
-  - Rent Schedule
-  properties:
-  - type: OpenAPI
-    url: openapi/goodlord-insurance-app-api-openapi.json
   - type: APIReference
     url: https://insurance-app.goodlord.co/api/v1/docs
-  - type: Overlay
-    url: overlays/goodlord-insurance-app-api-overlay.yaml
+- aid: goodlord:goodlord-authentication-api
+  name: Goodlord Authentication API
+  description: Authentication operations
+  humanURL: https://portal.goodlord.co/portal/catalogue-products/referencing-product-1
+  baseURL: https://api.goodoverlord.com
+  tags:
+  - Authentication
+  properties:
+  - type: OpenAPI
+    url: openapi/goodlord-authentication-api-openapi.yml
+  - type: Documentation
+    url: https://portal.goodlord.co/portal/catalogue-products/referencing-product-1
+  - type: APIReference
+    url: >-
+      https://portal.goodlord.co/portal/catalogue-products/referencing-product-1/dHlrL3Byb2QtcmVmZXJlbmNpbmctYXBp/docs
+  - type: GettingStarted
+    url: https://portal.goodlord.co/blog/2024/8/22/getting-started-with-goodlords-referencing-api
+  - type: Documentation
+    url: https://portal.goodlord.co/blog/2024/8/20/getting-started-with-goodlord-referencing-api
+  - type: Webhooks
+    url: asyncapi/goodlord-referencing-webhooks.yml
+  - type: APIReference
+    url: >-
+      https://portal.goodlord.co/portal/catalogue-products/referencing-product-1/dHlrL3Byb2Qtc2FuZGJveC1yZWZlcmVuY2luZy1hcGk/docs
+  - type: Sandbox
+    url: sandbox/goodlord-sandbox.yml
+  - type: APIReference
+    url: https://insurance-app.goodlord.co/api/v1/docs
+- aid: goodlord:goodlord-company-api
+  name: Goodlord Company API
+  description: Resource 'Company' operations.
+  humanURL: https://portal.goodlord.co/portal/catalogue-products/referencing-product-1
+  baseURL: https://api.goodoverlord.com
+  tags:
+  - Company
+  properties:
+  - type: OpenAPI
+    url: openapi/goodlord-company-api-openapi.yml
+  - type: Documentation
+    url: https://portal.goodlord.co/portal/catalogue-products/referencing-product-1
+  - type: APIReference
+    url: >-
+      https://portal.goodlord.co/portal/catalogue-products/referencing-product-1/dHlrL3Byb2QtcmVmZXJlbmNpbmctYXBp/docs
+  - type: GettingStarted
+    url: https://portal.goodlord.co/blog/2024/8/22/getting-started-with-goodlords-referencing-api
+  - type: Documentation
+    url: https://portal.goodlord.co/blog/2024/8/20/getting-started-with-goodlord-referencing-api
+  - type: Webhooks
+    url: asyncapi/goodlord-referencing-webhooks.yml
+  - type: APIReference
+    url: >-
+      https://portal.goodlord.co/portal/catalogue-products/referencing-product-1/dHlrL3Byb2Qtc2FuZGJveC1yZWZlcmVuY2luZy1hcGk/docs
+  - type: Sandbox
+    url: sandbox/goodlord-sandbox.yml
+  - type: APIReference
+    url: https://insurance-app.goodlord.co/api/v1/docs
+- aid: goodlord:goodlord-file-api
+  name: Goodlord File API
+  description: Resource 'File' operations.
+  humanURL: https://portal.goodlord.co/portal/catalogue-products/referencing-product-1
+  baseURL: https://api.goodoverlord.com
+  tags:
+  - File
+  properties:
+  - type: OpenAPI
+    url: openapi/goodlord-file-api-openapi.yml
+  - type: Documentation
+    url: https://portal.goodlord.co/portal/catalogue-products/referencing-product-1
+  - type: APIReference
+    url: >-
+      https://portal.goodlord.co/portal/catalogue-products/referencing-product-1/dHlrL3Byb2QtcmVmZXJlbmNpbmctYXBp/docs
+  - type: GettingStarted
+    url: https://portal.goodlord.co/blog/2024/8/22/getting-started-with-goodlords-referencing-api
+  - type: Documentation
+    url: https://portal.goodlord.co/blog/2024/8/20/getting-started-with-goodlord-referencing-api
+  - type: Webhooks
+    url: asyncapi/goodlord-referencing-webhooks.yml
+  - type: APIReference
+    url: >-
+      https://portal.goodlord.co/portal/catalogue-products/referencing-product-1/dHlrL3Byb2Qtc2FuZGJveC1yZWZlcmVuY2luZy1hcGk/docs
+  - type: Sandbox
+    url: sandbox/goodlord-sandbox.yml
+  - type: APIReference
+    url: https://insurance-app.goodlord.co/api/v1/docs
+- aid: goodlord:goodlord-insuranceclaim-api
+  name: Goodlord Insurance Claim API
+  description: Resource 'InsuranceClaim' operations.
+  humanURL: https://portal.goodlord.co/portal/catalogue-products/referencing-product-1
+  baseURL: https://api.goodoverlord.com
+  tags:
+  - InsuranceClaim
+  properties:
+  - type: OpenAPI
+    url: openapi/goodlord-insuranceclaim-api-openapi.yml
+  - type: Documentation
+    url: https://portal.goodlord.co/portal/catalogue-products/referencing-product-1
+  - type: APIReference
+    url: >-
+      https://portal.goodlord.co/portal/catalogue-products/referencing-product-1/dHlrL3Byb2QtcmVmZXJlbmNpbmctYXBp/docs
+  - type: GettingStarted
+    url: https://portal.goodlord.co/blog/2024/8/22/getting-started-with-goodlords-referencing-api
+  - type: Documentation
+    url: https://portal.goodlord.co/blog/2024/8/20/getting-started-with-goodlord-referencing-api
+  - type: Webhooks
+    url: asyncapi/goodlord-referencing-webhooks.yml
+  - type: APIReference
+    url: >-
+      https://portal.goodlord.co/portal/catalogue-products/referencing-product-1/dHlrL3Byb2Qtc2FuZGJveC1yZWZlcmVuY2luZy1hcGk/docs
+  - type: Sandbox
+    url: sandbox/goodlord-sandbox.yml
+  - type: APIReference
+    url: https://insurance-app.goodlord.co/api/v1/docs
+- aid: goodlord:goodlord-media-api
+  name: Goodlord Media API
+  description: Operations which are concerned around retrieving files
+  humanURL: https://portal.goodlord.co/portal/catalogue-products/referencing-product-1
+  baseURL: https://api.goodoverlord.com
+  tags:
+  - Media
+  properties:
+  - type: OpenAPI
+    url: openapi/goodlord-media-api-openapi.yml
+  - type: Documentation
+    url: https://portal.goodlord.co/portal/catalogue-products/referencing-product-1
+  - type: APIReference
+    url: >-
+      https://portal.goodlord.co/portal/catalogue-products/referencing-product-1/dHlrL3Byb2QtcmVmZXJlbmNpbmctYXBp/docs
+  - type: GettingStarted
+    url: https://portal.goodlord.co/blog/2024/8/22/getting-started-with-goodlords-referencing-api
+  - type: Documentation
+    url: https://portal.goodlord.co/blog/2024/8/20/getting-started-with-goodlord-referencing-api
+  - type: Webhooks
+    url: asyncapi/goodlord-referencing-webhooks.yml
+  - type: APIReference
+    url: >-
+      https://portal.goodlord.co/portal/catalogue-products/referencing-product-1/dHlrL3Byb2Qtc2FuZGJveC1yZWZlcmVuY2luZy1hcGk/docs
+  - type: Sandbox
+    url: sandbox/goodlord-sandbox.yml
+  - type: APIReference
+    url: https://insurance-app.goodlord.co/api/v1/docs
+- aid: goodlord:goodlord-payment-api
+  name: Goodlord Payment API
+  description: Resource 'Payment' operations.
+  humanURL: https://portal.goodlord.co/portal/catalogue-products/referencing-product-1
+  baseURL: https://api.goodoverlord.com
+  tags:
+  - Payment
+  properties:
+  - type: OpenAPI
+    url: openapi/goodlord-payment-api-openapi.yml
+  - type: Documentation
+    url: https://portal.goodlord.co/portal/catalogue-products/referencing-product-1
+  - type: APIReference
+    url: >-
+      https://portal.goodlord.co/portal/catalogue-products/referencing-product-1/dHlrL3Byb2QtcmVmZXJlbmNpbmctYXBp/docs
+  - type: GettingStarted
+    url: https://portal.goodlord.co/blog/2024/8/22/getting-started-with-goodlords-referencing-api
+  - type: Documentation
+    url: https://portal.goodlord.co/blog/2024/8/20/getting-started-with-goodlord-referencing-api
+  - type: Webhooks
+    url: asyncapi/goodlord-referencing-webhooks.yml
+  - type: APIReference
+    url: >-
+      https://portal.goodlord.co/portal/catalogue-products/referencing-product-1/dHlrL3Byb2Qtc2FuZGJveC1yZWZlcmVuY2luZy1hcGk/docs
+  - type: Sandbox
+    url: sandbox/goodlord-sandbox.yml
+  - type: APIReference
+    url: https://insurance-app.goodlord.co/api/v1/docs
+- aid: goodlord:goodlord-rentschedule-api
+  name: Goodlord Rent Schedule API
+  description: Resource 'RentSchedule' operations.
+  humanURL: https://portal.goodlord.co/portal/catalogue-products/referencing-product-1
+  baseURL: https://api.goodoverlord.com
+  tags:
+  - RentSchedule
+  properties:
+  - type: OpenAPI
+    url: openapi/goodlord-rentschedule-api-openapi.yml
+  - type: Documentation
+    url: https://portal.goodlord.co/portal/catalogue-products/referencing-product-1
+  - type: APIReference
+    url: >-
+      https://portal.goodlord.co/portal/catalogue-products/referencing-product-1/dHlrL3Byb2QtcmVmZXJlbmNpbmctYXBp/docs
+  - type: GettingStarted
+    url: https://portal.goodlord.co/blog/2024/8/22/getting-started-with-goodlords-referencing-api
+  - type: Documentation
+    url: https://portal.goodlord.co/blog/2024/8/20/getting-started-with-goodlord-referencing-api
+  - type: Webhooks
+    url: asyncapi/goodlord-referencing-webhooks.yml
+  - type: APIReference
+    url: >-
+      https://portal.goodlord.co/portal/catalogue-products/referencing-product-1/dHlrL3Byb2Qtc2FuZGJveC1yZWZlcmVuY2luZy1hcGk/docs
+  - type: Sandbox
+    url: sandbox/goodlord-sandbox.yml
+  - type: APIReference
+    url: https://insurance-app.goodlord.co/api/v1/docs
+- aid: goodlord:goodlord-rentschedulerow-api
+  name: Goodlord Rent Schedule Row API
+  description: Resource 'RentScheduleRow' operations.
+  humanURL: https://portal.goodlord.co/portal/catalogue-products/referencing-product-1
+  baseURL: https://api.goodoverlord.com
+  tags:
+  - RentScheduleRow
+  properties:
+  - type: OpenAPI
+    url: openapi/goodlord-rentschedulerow-api-openapi.yml
+  - type: Documentation
+    url: https://portal.goodlord.co/portal/catalogue-products/referencing-product-1
+  - type: APIReference
+    url: >-
+      https://portal.goodlord.co/portal/catalogue-products/referencing-product-1/dHlrL3Byb2QtcmVmZXJlbmNpbmctYXBp/docs
+  - type: GettingStarted
+    url: https://portal.goodlord.co/blog/2024/8/22/getting-started-with-goodlords-referencing-api
+  - type: Documentation
+    url: https://portal.goodlord.co/blog/2024/8/20/getting-started-with-goodlord-referencing-api
+  - type: Webhooks
+    url: asyncapi/goodlord-referencing-webhooks.yml
+  - type: APIReference
+    url: >-
+      https://portal.goodlord.co/portal/catalogue-products/referencing-product-1/dHlrL3Byb2Qtc2FuZGJveC1yZWZlcmVuY2luZy1hcGk/docs
+  - type: Sandbox
+    url: sandbox/goodlord-sandbox.yml
+  - type: APIReference
+    url: https://insurance-app.goodlord.co/api/v1/docs
+- aid: goodlord:goodlord-rentschedulerowpostdto-api
+  name: Goodlord Rent Schedule Row Post Dto API
+  description: Resource 'RentScheduleRowPostDto' operations.
+  humanURL: https://portal.goodlord.co/portal/catalogue-products/referencing-product-1
+  baseURL: https://api.goodoverlord.com
+  tags:
+  - RentScheduleRowPostDto
+  properties:
+  - type: OpenAPI
+    url: openapi/goodlord-rentschedulerowpostdto-api-openapi.yml
+  - type: Documentation
+    url: https://portal.goodlord.co/portal/catalogue-products/referencing-product-1
+  - type: APIReference
+    url: >-
+      https://portal.goodlord.co/portal/catalogue-products/referencing-product-1/dHlrL3Byb2QtcmVmZXJlbmNpbmctYXBp/docs
+  - type: GettingStarted
+    url: https://portal.goodlord.co/blog/2024/8/22/getting-started-with-goodlords-referencing-api
+  - type: Documentation
+    url: https://portal.goodlord.co/blog/2024/8/20/getting-started-with-goodlord-referencing-api
+  - type: Webhooks
+    url: asyncapi/goodlord-referencing-webhooks.yml
+  - type: APIReference
+    url: >-
+      https://portal.goodlord.co/portal/catalogue-products/referencing-product-1/dHlrL3Byb2Qtc2FuZGJveC1yZWZlcmVuY2luZy1hcGk/docs
+  - type: Sandbox
+    url: sandbox/goodlord-sandbox.yml
+  - type: APIReference
+    url: https://insurance-app.goodlord.co/api/v1/docs
+- aid: goodlord:goodlord-rentschedulerowupdate-api
+  name: Goodlord Rent Schedule Row Update API
+  description: Resource 'RentScheduleRowUpdate' operations.
+  humanURL: https://portal.goodlord.co/portal/catalogue-products/referencing-product-1
+  baseURL: https://api.goodoverlord.com
+  tags:
+  - RentScheduleRowUpdate
+  properties:
+  - type: OpenAPI
+    url: openapi/goodlord-rentschedulerowupdate-api-openapi.yml
+  - type: Documentation
+    url: https://portal.goodlord.co/portal/catalogue-products/referencing-product-1
+  - type: APIReference
+    url: >-
+      https://portal.goodlord.co/portal/catalogue-products/referencing-product-1/dHlrL3Byb2QtcmVmZXJlbmNpbmctYXBp/docs
+  - type: GettingStarted
+    url: https://portal.goodlord.co/blog/2024/8/22/getting-started-with-goodlords-referencing-api
+  - type: Documentation
+    url: https://portal.goodlord.co/blog/2024/8/20/getting-started-with-goodlord-referencing-api
+  - type: Webhooks
+    url: asyncapi/goodlord-referencing-webhooks.yml
+  - type: APIReference
+    url: >-
+      https://portal.goodlord.co/portal/catalogue-products/referencing-product-1/dHlrL3Byb2Qtc2FuZGJveC1yZWZlcmVuY2luZy1hcGk/docs
+  - type: Sandbox
+    url: sandbox/goodlord-sandbox.yml
+  - type: APIReference
+    url: https://insurance-app.goodlord.co/api/v1/docs
+- aid: goodlord:goodlord-role-api
+  name: Goodlord Role API
+  description: Resource 'Role' operations.
+  humanURL: https://portal.goodlord.co/portal/catalogue-products/referencing-product-1
+  baseURL: https://api.goodoverlord.com
+  tags:
+  - Role
+  properties:
+  - type: OpenAPI
+    url: openapi/goodlord-role-api-openapi.yml
+  - type: Documentation
+    url: https://portal.goodlord.co/portal/catalogue-products/referencing-product-1
+  - type: APIReference
+    url: >-
+      https://portal.goodlord.co/portal/catalogue-products/referencing-product-1/dHlrL3Byb2QtcmVmZXJlbmNpbmctYXBp/docs
+  - type: GettingStarted
+    url: https://portal.goodlord.co/blog/2024/8/22/getting-started-with-goodlords-referencing-api
+  - type: Documentation
+    url: https://portal.goodlord.co/blog/2024/8/20/getting-started-with-goodlord-referencing-api
+  - type: Webhooks
+    url: asyncapi/goodlord-referencing-webhooks.yml
+  - type: APIReference
+    url: >-
+      https://portal.goodlord.co/portal/catalogue-products/referencing-product-1/dHlrL3Byb2Qtc2FuZGJveC1yZWZlcmVuY2luZy1hcGk/docs
+  - type: Sandbox
+    url: sandbox/goodlord-sandbox.yml
+  - type: APIReference
+    url: https://insurance-app.goodlord.co/api/v1/docs
+- aid: goodlord:goodlord-rolegroup-api
+  name: Goodlord Role Group API
+  description: Resource 'RoleGroup' operations.
+  humanURL: https://portal.goodlord.co/portal/catalogue-products/referencing-product-1
+  baseURL: https://api.goodoverlord.com
+  tags:
+  - RoleGroup
+  properties:
+  - type: OpenAPI
+    url: openapi/goodlord-rolegroup-api-openapi.yml
+  - type: Documentation
+    url: https://portal.goodlord.co/portal/catalogue-products/referencing-product-1
+  - type: APIReference
+    url: >-
+      https://portal.goodlord.co/portal/catalogue-products/referencing-product-1/dHlrL3Byb2QtcmVmZXJlbmNpbmctYXBp/docs
+  - type: GettingStarted
+    url: https://portal.goodlord.co/blog/2024/8/22/getting-started-with-goodlords-referencing-api
+  - type: Documentation
+    url: https://portal.goodlord.co/blog/2024/8/20/getting-started-with-goodlord-referencing-api
+  - type: Webhooks
+    url: asyncapi/goodlord-referencing-webhooks.yml
+  - type: APIReference
+    url: >-
+      https://portal.goodlord.co/portal/catalogue-products/referencing-product-1/dHlrL3Byb2Qtc2FuZGJveC1yZWZlcmVuY2luZy1hcGk/docs
+  - type: Sandbox
+    url: sandbox/goodlord-sandbox.yml
+  - type: APIReference
+    url: https://insurance-app.goodlord.co/api/v1/docs
+- aid: goodlord:goodlord-subject-api
+  name: Goodlord Subject API
+  description: A person who exists on an application.
+  humanURL: https://portal.goodlord.co/portal/catalogue-products/referencing-product-1
+  baseURL: https://api.goodoverlord.com
+  tags:
+  - Subject
+  properties:
+  - type: OpenAPI
+    url: openapi/goodlord-subject-api-openapi.yml
+  - type: Documentation
+    url: https://portal.goodlord.co/portal/catalogue-products/referencing-product-1
+  - type: APIReference
+    url: >-
+      https://portal.goodlord.co/portal/catalogue-products/referencing-product-1/dHlrL3Byb2QtcmVmZXJlbmNpbmctYXBp/docs
+  - type: GettingStarted
+    url: https://portal.goodlord.co/blog/2024/8/22/getting-started-with-goodlords-referencing-api
+  - type: Documentation
+    url: https://portal.goodlord.co/blog/2024/8/20/getting-started-with-goodlord-referencing-api
+  - type: Webhooks
+    url: asyncapi/goodlord-referencing-webhooks.yml
+  - type: APIReference
+    url: >-
+      https://portal.goodlord.co/portal/catalogue-products/referencing-product-1/dHlrL3Byb2Qtc2FuZGJveC1yZWZlcmVuY2luZy1hcGk/docs
+  - type: Sandbox
+    url: sandbox/goodlord-sandbox.yml
+  - type: APIReference
+    url: https://insurance-app.goodlord.co/api/v1/docs
 common:
+- type: Overlay
+  url: overlays/goodlord-referencing-api-overlay.yaml
+- type: Overlay
+  url: overlays/goodlord-referencing-api-sandbox-overlay.yaml
+- type: Overlay
+  url: overlays/goodlord-insurance-app-api-overlay.yaml
 - type: Conventions
   url: conventions/goodlord-conventions.yml
 - type: ErrorCatalog
