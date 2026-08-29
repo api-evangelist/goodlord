@@ -482,6 +482,9 @@ apis:
   - type: APIReference
     url: https://insurance-app.goodlord.co/api/v1/docs
 common:
+- type: CapabilityMap
+  url: capabilities/goodlord-capability-edges.yml
+  name: Goodlord Business Capability Map
 - type: Overlay
   url: overlays/goodlord-referencing-api-overlay.yaml
 - type: Overlay

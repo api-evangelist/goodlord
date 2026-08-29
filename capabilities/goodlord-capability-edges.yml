@@ -1,0 +1,58 @@
+slug: goodlord
+provider: Goodlord
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Real Estate
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 4
+edges:
+- tag: Application
+  spec_file: goodlord-application-api-openapi.yml
+  capability_id: BC-4950.40
+  capability_id_l1: BC-4950
+  capability_name: Tenant Application & Screening
+  confidence: 0.85
+  evidence: POST /referencing/application  createApplication  Create a new application; schemas CreateApplicationRequest,
+    Subject (referencing API)
+  reason: Goodlord's referencing API creates and manages tenant referencing applications with subjects,
+    which is landlord-side tenant application capture and screening in the residential lettings lifecycle.
+- tag: Subject
+  spec_file: goodlord-subject-api-openapi.yml
+  capability_id: BC-4950.40
+  capability_id_l1: BC-4950
+  capability_name: Tenant Application & Screening
+  confidence: 0.78
+  evidence: PUT /referencing/subject/application/{applicationId}  createSubject  Create Subject; PATCH
+    /referencing/subject/{subjectId}/outcome/conditions  patchSubjectOutcomeConditions
+  reason: Operations sit under /referencing and create a Subject against an application, tracking touchpoints,
+    emails and outcome conditions — this is the tenant referencing (credit/identity/reference check) subject
+    of a rental application, matching Tenant Application & Screening. Some residual risk that 'Subject'
+    is a generic data-subject construct, hence 0.78.
+- tag: Role
+  spec_file: goodlord-role-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.75
+  evidence: 'GET /api/v1/roles  Retrieves the collection of Role resources ... POST /api/v1/roles  Creates
+    a Role resource; schemas: Role, RoleGroup'
+  reason: CRUD over roles and role groups inside the application is authorisation/permission administration,
+    which maps to Identity & Access Management rather than any real-estate business capability. Confidence
+    held below 0.9 because it is generic platform plumbing that some would leave unmapped.
+- tag: RoleGroup
+  spec_file: goodlord-rolegroup-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.72
+  evidence: 'GET /api/v1/role_groups  Retrieves the collection of RoleGroup resources ... schemas: RoleGroup,
+    Role'
+  reason: Role-group CRUD is grouping of permissions for application users — access management, not a
+    lettings business process. Same reasoning and calibration as the Role tag.
