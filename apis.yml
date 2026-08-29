@@ -20,6 +20,18 @@ description: >-
   or account manager. Public contract, partner-gated keys. There is no RESO reference
   of any kind — RESO is a US NAR/MLS construct with no United Kingdom counterpart — and
   Goodlord publishes no open data.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://www.goodlord.com/hubfs/goodlord-logo-1.jpg
 tags:
 - Real-Estate
