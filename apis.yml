@@ -65,6 +65,8 @@ apis:
   humanURL: https://portal.goodlord.co/portal/catalogue-products/referencing-product-1
   baseURL: https://api.goodoverlord.com
   tags:
+  - Agents
+  tags_raw:
   - Agent
   properties:
   - type: OpenAPI
