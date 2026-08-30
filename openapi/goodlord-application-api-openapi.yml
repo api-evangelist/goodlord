@@ -1,0 +1,897 @@
+openapi: 3.2.0
+info:
+  title: Goodlord Application API
+  version: 1.0.0
+  contact:
+    email: devs@vouch.co.uk
+    name: Goodlord
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  description: 'Operations tagged Application across 2 of this provider''s published API definitions: goodlord-referencing-api-openapi.json, goodlord-referencing-api-sandbox-openapi.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.goodoverlord.com
+  description: Live Server
+- url: https://api-sandbox.goodlord.co
+  description: Sandbox Server
+security:
+- OAuth2: []
+tags:
+- name: Application
+  description: An application contains rental information and all of the applicants/guarantors which are applying for a tenancy.
+  externalDocs:
+    description: What's an Application?
+    url: https://portal.goodlord.co/blog/2024/8/20/getting-started-with-goodlord-referencing-api#applications
+paths:
+  /referencing/application:
+    parameters:
+    - $ref: '#/components/parameters/CompanyId'
+    post:
+      externalDocs:
+        description: Find out more about Applications
+        url: https://portal.goodlord.co/blog/2024/8/20/getting-started-with-goodlord-referencing-api#applications
+      tags:
+      - Application
+      summary: Create a new application
+      description: Create a new rental application to reference tenants and guarantors
+      operationId: createApplication
+      requestBody:
+        description: Application object that needs to be created
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateApplicationRequest'
+            examples:
+              Example 1 - Create a 12 month tenancy:
+                value:
+                  tenancy:
+                    moveInDate: '2024-10-01'
+                    term: 12
+                    monthlyCost: 1000
+                    address:
+                      line1: 22 Street
+                      city: Sheffield
+                      postcode: S6 3GJ
+                      country: Wales
+                  agency:
+                    companyName: John Smith Lettings
+                    agentName: John Smith
+                    agentMobile: 07293838394
+                    agentEmail: john.smith@example.com
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Application'
+              examples:
+                Example 1 - Create a 12 month tenancy:
+                  value:
+                    id: 644e4a2b-e2cc-4269-9022-91eaada1592e
+                    subjects: []
+                    createdAt: '2025-07-22T14:35:12.1893525+00:00'
+                    tenancy:
+                      moveInDate: '2024-10-01'
+                      monthlyCost: 1000
+                      term: 12
+                      address:
+                        id: 01dad872-3428-4dc1-b911-3a0da3bbc1fc
+                        line1: 22 Street
+                        line2: null
+                        city: Sheffield
+                        postcode: S6 3GJ
+                        country: Wales
+                    agency:
+                      companyName: John Smith Lettings
+                      agentName: John Smith
+                      agentMobile: 07293838394
+                      agentEmail: john.smith@example.com
+                    status: Active
+                    documents: []
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiMessageResponse'
+    servers:
+    - url: https://api.goodoverlord.com
+      description: Live Server
+  /referencing/application/{applicationId}:
+    parameters:
+    - name: applicationId
+      in: path
+      description: The applicationId of the application you wish to retrieve
+      required: true
+      schema:
+        type: string
+    - $ref: '#/components/parameters/CompanyId'
+    get:
+      externalDocs:
+        description: Find out more about Applications
+        url: https://portal.goodlord.co/blog/2024/8/20/getting-started-with-goodlord-referencing-api#applications
+      tags:
+      - Application
+      summary: Get Application
+      description: Retrieve a copy of an application which you have already created
+      operationId: getApplication
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Application'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Could not find requested application {applicationId}
+                xml:
+                  name: '##default'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiMessageResponse'
+    patch:
+      externalDocs:
+        description: Find out more about Applications
+        url: https://portal.goodlord.co/blog/2024/8/20/getting-started-with-goodlord-referencing-api#application
+      tags:
+      - Application
+      summary: Patch Application
+      description: Patch an application which you have previously created
+      operationId: patchApplication
+      requestBody:
+        description: Properties which need to be patched on the application
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchApplicationRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Application'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Could not find requested application {applicationId}
+                xml:
+                  name: '##default'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiMessageResponse'
+    delete:
+      externalDocs:
+        description: Find out more about Applications
+        url: https://portal.goodlord.co/blog/2024/8/20/getting-started-with-goodlord-referencing-api#application
+      tags:
+      - Application
+      summary: Delete Application
+      description: Delete an application which you have already created
+      operationId: deleteApplication
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Application'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Could not find requested application {applicationId}
+                xml:
+                  name: '##default'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiMessageResponse'
+    servers:
+    - url: https://api.goodoverlord.com
+      description: Live Server
+components:
+  schemas:
+    Application:
+      title: Application
+      type: object
+      description: An application contains rental information and all of the applicants/guarantors which are applying for a tenancy.
+      properties:
+        id:
+          type: string
+        tenancy:
+          type: object
+          properties:
+            moveInDate:
+              type: string
+              example: '2024-10-01'
+            term:
+              type: number
+              example: 12
+            monthlyCost:
+              type: number
+              example: 1000
+            address:
+              type: object
+              properties:
+                line1:
+                  type: string
+                  example: 22 Street
+                city:
+                  type: string
+                  example: Sheffield
+                postcode:
+                  type: string
+                  example: S1 123
+                country:
+                  type: string
+                  example: England
+        subjects:
+          type: array
+          items:
+            $ref: '#/components/schemas/Subject'
+        agency:
+          type: object
+          properties:
+            companyName:
+              type: string
+              example: John Smith Lettings
+            agentName:
+              type: string
+              example: John Smith
+            agentMobile:
+              type: string
+              example: 07912345678
+            agentEmail:
+              type: string
+              example: john.smith@example.com
+        createdAt:
+          type: string
+      required: []
+    ApiMessageResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: Something happened that I need to alert you about
+      xml:
+        name: '##default'
+    PatchApplicationRequest:
+      title: Patch Application Request
+      type: object
+      properties:
+        tenancy:
+          type: object
+          description: One of moveInDate, term or monthlyCost are required
+          properties:
+            moveInDate:
+              type: string
+              description: Move in date in YYYY-MM-DD format. This must be a date in the future, but no longer than 14 months in the future.
+              example: '2024-10-01'
+            term:
+              type: number
+              example: 12
+              description: Term of rental tenancy in months. Maximum 120 months (10 years)
+            monthlyCost:
+              type: number
+              example: 1000
+              description: Monthly cost in GBP
+            address:
+              type: object
+              description: Address of application
+              required:
+              - line1
+              - country
+              - postcode
+              - city
+              properties:
+                line1:
+                  type: string
+                line2:
+                  type: string
+                city:
+                  type: string
+                postcode:
+                  type: string
+                country:
+                  type: string
+          required: []
+      required:
+      - tenancy
+    Subject:
+      title: Subject
+      type: object
+      description: A subject is a person who is part of an application.
+      properties:
+        externalId:
+          type: string
+          example: '1234'
+        rentalDetails:
+          type: object
+          properties:
+            priceShare:
+              type: number
+              description: The portion of the monthly rent attributed to this subject, in GBP.
+              example: 1000
+            affordabilityRatio:
+              type: number
+              description: 'Minimum income-to-rent multiplier the subject''s income must satisfy. The stored value reflects company-config precedence: if your company has a configured affordability ratio (`TenantAffordabilityRatio` for applicants, `GuarantorAffordabilityRatio` for guarantors), the response shows that value rather than any value originally supplied at creation/patch time.'
+              example: 2.5
+        context:
+          type: object
+          properties:
+            name:
+              type: string
+              example: John Smith
+            firstName:
+              type: string
+              example: John
+            lastName:
+              type: string
+              example: Smith
+            email:
+              type: string
+              example: john@smith.com
+            mobile:
+              type: string
+              example: 07912345678
+            redirectUrlOnJourneyComplete:
+              type: string
+              example: https://www.myapp.com/complete
+            tenancyRenewal:
+              type: boolean
+              example: false
+            product:
+              type: string
+              example: Pro
+            addresses:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: '1234'
+                  addressType:
+                    type: string
+                    example: current
+                  bedroomIdentifier:
+                    type: string
+                    example: Room A
+                  name:
+                    type: string
+                    example: '22'
+                  startDate:
+                    type: string
+                    example: '2024-10-01'
+                  status:
+                    type: string
+                    example: Renting
+                  line1:
+                    type: string
+                    example: Street
+                  normalizedLine1:
+                    type: string
+                    example: 22 Street
+                  line2:
+                    type: string
+                    example: Crookesmoore
+                  city:
+                    type: string
+                    example: Sheffield
+                  county: {}
+                  postcode:
+                    type: string
+                    example: S1 123
+                  country:
+                    type: string
+                    example: England
+                  countryCodeAlpha2:
+                    type: string
+                    example: GB
+                  referee:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: '1234'
+                      name:
+                        type: string
+                        example: Jane Smith
+                      email:
+                        type: string
+                        example: jane@smith.com
+                      mobile:
+                        type: string
+                        example: 07912345678
+                      createdAt:
+                        type: string
+                        example: '2024-10-01'
+            incomes:
+              type: array
+              items:
+                type: object
+                properties:
+                  company:
+                    type: string
+                    example: Tesco
+                  position:
+                    type: string
+                    example: Manager
+                  contractType:
+                    type: string
+                    example: Permanent
+                  contractSchedule:
+                    type: string
+                    example: Full Time
+                  guaranteedBonus: {}
+                  startDate:
+                    type: string
+                    example: '2024-10-01'
+                  endDate: {}
+                  address:
+                    type: object
+                    properties:
+                      id: {}
+                      addressType:
+                        type: string
+                      name: {}
+                      startDate: {}
+                      status: {}
+                      line1:
+                        type: string
+                      normalizedLine1:
+                        type: string
+                      line2:
+                        type: string
+                      line3: {}
+                      city:
+                        type: string
+                      county: {}
+                      postcode:
+                        type: string
+                      country:
+                        type: string
+                      countryCodeAlpha2: {}
+                  referee:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: '1234'
+                      name:
+                        type: string
+                        example: Jane Smith
+                      email:
+                        type: string
+                        example: jane@smith.com
+                      mobile:
+                        type: string
+                        example: 07912345678
+                      createdAt:
+                        type: string
+                        example: '2024-10-01'
+                      isNonProfessionalEmail:
+                        type: boolean
+                        nullable: true
+                        description: True when the referee's email domain has been flagged as a free or non-professional email provider (e.g. gmail.com, yahoo.com). Null when the value cannot be determined or is not evaluated for this referee type.
+                        example: true
+                  type:
+                    type: string
+                  evidenceType:
+                    type: string
+                    example: Open Banking
+                  income:
+                    type: object
+                    properties:
+                      value:
+                        type: number
+                      currency:
+                        type: string
+                      frequency:
+                        type: string
+                  id:
+                    type: string
+            incomeSummary:
+              type: object
+              properties:
+                totalIncome:
+                  type: number
+                  example: 2000
+                totalVerifiedIncome:
+                  type: number
+                  example: 1000
+                maximumAffordabilityPercentage:
+                  type: number
+                  example: 123
+                openBanking:
+                  type: object
+                  properties:
+                    provider:
+                      type: string
+                      example: tink
+                    status:
+                      type: string
+                      example: Connected
+                    outcome:
+                      type: object
+                      properties:
+                        estimatedAnnualNetIncome:
+                          type: number
+                          example: 1000
+                        estimatedAnnualGrossIncome:
+                          type: number
+                          example: 1500
+                    optOutReason:
+                      type: object
+                      properties:
+                        category:
+                          type: string
+                          example: bankNotListed
+                          enum:
+                          - bankNotListed
+                          - connectionFailed
+                          - privacyConcerns
+                          - incomeAccuracy
+                          - somethingElse
+                          - userOptedOut
+                        additionalInformation:
+                          type: string
+                          example: Additional information here.
+            credit:
+              type: object
+              properties:
+                hasAdverseCredit:
+                  type: boolean
+                  example: false
+                adverseCreditDeclared:
+                  type: boolean
+                  example: false
+            documents:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: '1234'
+                  fileName:
+                    type: string
+                    example: file.pdf
+                  thumbnail:
+                    type: string
+                    example: file.png
+                  documentType:
+                    type: string
+                    example: Proof of Address
+            communicationPreferences:
+              type: object
+              properties:
+                sendInitialTenantEmail:
+                  type: boolean
+                  example: false
+                  description: Whether to send the initial tenant email. This is used to notify the tenant that they have been added to a referencing application. You may wish to disable this if you wish to send your own emails rather than relying on Goodlord to send them. Please note that this email does include a link to the referencing bot journey that an applicant is required to fill out to submit their application.
+                disableRentProtectionComms:
+                  type: boolean
+                  example: true
+                  description: Whether to show Rent Protection Insurance (RPI) copy & coverage in the subject referencing PDF report
+                disableTCLIComms:
+                  type: boolean
+                  example: true
+                  description: Whether to show Tenant Contents and Liability Insurance (TCLI) banner in subject referencing PDF report
+                disableTenancyServicesComms:
+                  type: boolean
+                  example: true
+                  description: Whether to show tenancy services banner in subject referencing PDF report
+            guarantorCollection:
+              type: object
+              nullable: true
+              description: Reflects the guarantor collection configuration on this subject. Only populated when present on the stored subject - applicants with a guarantor requirement will have this populated; applicants without and all guarantors will not. The `affordabilityRatio` shown here reflects the resolved value after company-config precedence is applied.
+              properties:
+                required:
+                  type: boolean
+                  description: Whether a guarantor is required for this applicant.
+                  example: true
+                product:
+                  type: string
+                  description: The referencing product the guarantor will go through.
+                  enum:
+                  - Pro
+                  - Essential
+                  - Priority
+                  - Corporate
+                  example: Pro
+                affordabilityRatio:
+                  type: number
+                  minimum: 1
+                  description: Minimum income-to-rent multiplier the guarantor's income must satisfy. Reflects company-config precedence (see request schema for details).
+                  example: 3.0
+            identity:
+              type: object
+              nullable: true
+              properties:
+                nationality:
+                  type: string
+                  example: UK
+                  description: The tenant's nationality
+                nationalInsuranceNumber:
+                  type: string
+                  example: AB123456C
+                  description: The tenant's National Insurance Number
+                r2rShareCode:
+                  type: string
+                  example: A12 B3D EFG
+                  description: The tenant's Right to Rent Share Code
+                idvt:
+                  type: object
+                  nullable: true
+                  properties:
+                    idCheckStatus:
+                      type: string
+                      enum:
+                      - Pending
+                      - Pass
+                      - Fail
+                      - Refer
+                    r2rCheckStatus:
+                      type: string
+                      enum:
+                      - NotPerformed
+                      - Pending
+                      - Pass
+                      - Fail
+                      - Refer
+                pepsSanctions:
+                  type: object
+                  nullable: true
+                  properties:
+                    pepsStatus:
+                      type: string
+                      enum:
+                      - NotFound
+                      - Match
+                      - ActionRequired
+                    sanctionsStatus:
+                      type: string
+                      enum:
+                      - NotFound
+                      - Match
+                      - ActionRequired
+        outcome:
+          type: object
+          properties:
+            status:
+              type: string
+              example: Accepted
+            comments:
+              type: string
+              example: This application has been accepted
+            rpi:
+              type: object
+              properties:
+                eligibility:
+                  type: string
+                  example: eligible
+                comments:
+                  type: string
+                  example: This application is eligible for RPI
+            sections:
+              type: array
+              items:
+                type: object
+                properties:
+                  name:
+                    type: string
+                    example: Income
+                  status:
+                    type: string
+                    example: Accepted
+        id:
+          type: string
+          example: '1234'
+        type:
+          type: string
+          enum:
+          - applicant
+          - guarantor
+          example: applicant
+        attachedSubjects:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              type:
+                type: string
+        milestones:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+                example: FinalOutcome
+              event:
+                type: string
+                example: subject.accepted
+              createdAt:
+                type: string
+                example: '2024-10-01'
+              updatedAt:
+                type: string
+                example: '2024-10-01'
+        recommendations:
+          type: array
+          items: {}
+      required: []
+    CreateApplicationRequest:
+      title: Create Application Request
+      type: object
+      properties:
+        tenancy:
+          type: object
+          properties:
+            moveInDate:
+              type: string
+              description: Move in date in YYYY-MM-DD format. This must be a date in the future, but no longer than 14 months in the future.
+              example: '2024-10-01'
+            term:
+              type: number
+              example: 12
+              description: Term of rental tenancy in months. Maximum 120 months (10 years)
+            monthlyCost:
+              type: number
+              example: 1000
+              description: Monthly cost in GBP
+            address:
+              type: object
+              properties:
+                line1:
+                  example: 22 Street
+                  type: string
+                city:
+                  example: Sheffield
+                  type: string
+                postcode:
+                  example: S1 123
+                  type: string
+                country:
+                  example: England
+                  description: 'Must be one of: ''England'' | ''Scotland'' | ''Wales''. Tenancies created within England are subject to right to rent checks and sharecode collection'
+                  type: string
+              required:
+              - line1
+              - city
+              - postcode
+              - country
+          required:
+          - moveInDate
+          - term
+          - monthlyCost
+          - address
+        agency:
+          type: object
+          properties:
+            companyName:
+              type: string
+              description: The name of your lettings agency. This is used by our referencing team to identify your agency
+              example: John Smith Lettings
+            agentName:
+              type: string
+              description: The name of your estate agent who is assigned to this application
+              example: John Smith
+            agentMobile:
+              type: string
+              description: The mobile number of your estate agent who is assigned to this application. We require this as our referencing may need to contact them to provide updates and chasers.
+              example: 07293838394
+            agentEmail:
+              type: string
+              description: The email address of your estate agent who is assigned to this application. We require this as our referencing may need to contact them to provide updates and chasers.
+              example: john.smith@example.com
+          required:
+          - companyName
+          - agentName
+      required:
+      - tenancy
+      - agency
+    APIErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              reason:
+                type: string
+                example: PropertyIsInvalid
+              description:
+                type: string
+                example: Request.Property is Invalid
+            required:
+            - reason
+            - description
+      required:
+      - errors
+  parameters:
+    CompanyId:
+      name: Company-ID
+      in: header
+      description: A unique GUID identifying your company, issued alongside your API keys. This value may differ between production and sandbox environments. This is a mandatory header for all application and subject endpoints.
+      required: true
+      schema:
+        type: string
+        format: uuid
+      example: e2baa1a0-1234-5678-9abc-def012345678
+  securitySchemes:
+    OAuth2:
+      description: 'This API uses OAuth2 to authenticate requests. You must use your client credentials to obtain a token.
+
+        Read [Obtain a JWT Token](./operations/getAuthToken) for more information.'
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://api.goodoverlord.com/auth/token
+          scopes: {}
+externalDocs:
+  description: Understanding Goodlord's Referencing API
+  url: https://portal.goodlord.co/blog/2024/8/20/getting-started-with-goodlord-referencing-api
+x-refined-from:
+- goodlord-referencing-api-openapi.json
+- goodlord-referencing-api-sandbox-openapi.json

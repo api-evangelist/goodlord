@@ -1,0 +1,121 @@
+openapi: 3.2.0
+info:
+  title: Goodlord Media API
+  version: 1.0.0
+  contact:
+    email: devs@vouch.co.uk
+    name: Goodlord
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  description: 'Operations tagged Media across 2 of this provider''s published API definitions: goodlord-referencing-api-openapi.json, goodlord-referencing-api-sandbox-openapi.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.goodoverlord.com
+  description: Live Server
+- url: https://api-sandbox.goodlord.co
+  description: Sandbox Server
+security:
+- OAuth2: []
+tags:
+- name: Media
+  description: Operations which are concerned around retrieving files
+paths:
+  /referencing/media/document/{documentId}:
+    get:
+      tags:
+      - Media
+      summary: Get Authenticated File Url
+      description: Generates an authenticated link, which allows you to access a users document for up to 10 minutes
+      operationId: getAuthenticatedFile
+      parameters:
+      - name: documentId
+        in: path
+        description: documentId you wish to view
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  authenticatedUrl:
+                    type: string
+                    description: An authenticated file URL which allows you to view a document attached to one of your subjects
+                    example: www.goodlorddocs.co.uk/user-image.png?token=secret
+                xml:
+                  name: '##default'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Could not find requested subject {subjectId}
+                xml:
+                  name: '##default'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: An unknown error occurred when trying to generate token for {subjectId}
+                xml:
+                  name: '##default'
+    servers:
+    - url: https://api.goodoverlord.com
+      description: Live Server
+components:
+  schemas:
+    APIErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              reason:
+                type: string
+                example: PropertyIsInvalid
+              description:
+                type: string
+                example: Request.Property is Invalid
+            required:
+            - reason
+            - description
+      required:
+      - errors
+  securitySchemes:
+    OAuth2:
+      description: 'This API uses OAuth2 to authenticate requests. You must use your client credentials to obtain a token.
+
+        Read [Obtain a JWT Token](./operations/getAuthToken) for more information.'
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://api.goodoverlord.com/auth/token
+          scopes: {}
+externalDocs:
+  description: Understanding Goodlord's Referencing API
+  url: https://portal.goodlord.co/blog/2024/8/20/getting-started-with-goodlord-referencing-api
+x-refined-from:
+- goodlord-referencing-api-openapi.json
+- goodlord-referencing-api-sandbox-openapi.json

@@ -1,0 +1,862 @@
+openapi: 3.2.0
+info:
+  title: Insurance App Agent API
+  description: Resource 'Agent' operations.
+  version: 0.1.0
+servers:
+- url: https://insurance-app.goodlord.co/
+  description: Development
+- url: https://insurance-app.staging.goodoverlord.com/
+  description: Staging
+- url: https://insurance-app.qa1.goodoverlord.com/
+  description: QA1
+- url: https://insurance-app.demo.goodlord.co/
+  description: Demo
+security:
+- JWT: []
+tags:
+- name: Agent
+  description: Resource 'Agent' operations.
+paths:
+  /api/v1/agents:
+    get:
+      operationId: api_agents_get_collection
+      tags:
+      - Agent
+      responses:
+        '200':
+          description: Agent collection
+          content:
+            application/vnd.api+json:
+              schema:
+                description: Agent.jsonapi collection.
+                allOf:
+                - $ref: '#/components/schemas/JsonApiCollectionBaseSchema'
+                - type: object
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: string
+                          type:
+                            type: string
+                          attributes:
+                            $ref: '#/components/schemas/Agent'
+                          relationships:
+                            type: object
+                            properties:
+                              companies:
+                                properties:
+                                  data:
+                                    type: array
+                                    items:
+                                      type: object
+                                      properties:
+                                        type:
+                                          type: string
+                                        id:
+                                          type: string
+                                          format: iri-reference
+                        required:
+                        - type
+                        - id
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Agent-agent_user.read'
+            text/csv:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Agent.csv-agent_user.read'
+        '403':
+          description: Forbidden
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Error.jsonapi'
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          links: {}
+      summary: Retrieves the collection of Agent resources.
+      description: Retrieves the collection of Agent resources.
+      parameters:
+      - name: page
+        in: query
+        description: The collection page number
+        required: false
+        deprecated: false
+        schema:
+          type: integer
+          default: 1
+        style: form
+        explode: false
+      - name: itemsPerPage
+        in: query
+        description: The number of items per page
+        required: false
+        deprecated: false
+        schema:
+          type: integer
+          default: 50
+          minimum: 0
+          maximum: 100
+        style: form
+        explode: false
+    post:
+      operationId: api_agents_post
+      tags:
+      - Agent
+      responses:
+        '201':
+          description: Agent resource created
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Agent.jsonapi'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Agent'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Agent.csv'
+          links: {}
+        '400':
+          description: Invalid input
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Error.jsonapi'
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          links: {}
+        '422':
+          description: An error occurred
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/ConstraintViolation.jsonapi'
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ConstraintViolation'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConstraintViolation'
+          links: {}
+        '403':
+          description: Forbidden
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Error.jsonapi'
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          links: {}
+      summary: Creates a Agent resource.
+      description: Creates a Agent resource.
+      parameters: []
+      requestBody:
+        description: The new Agent resource
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Agent.jsonapi'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Agent'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/Agent.csv'
+        required: true
+  /api/v1/agents/{id}:
+    get:
+      operationId: api_agents_id_get
+      tags:
+      - Agent
+      responses:
+        '200':
+          description: Agent resource
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Agent.jsonapi'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Agent-agent_user.read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Agent.csv-agent_user.read'
+        '403':
+          description: Forbidden
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Error.jsonapi'
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          links: {}
+        '404':
+          description: Not found
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Error.jsonapi'
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          links: {}
+      summary: Retrieves a Agent resource.
+      description: Retrieves a Agent resource.
+      parameters:
+      - name: id
+        in: path
+        description: Agent identifier
+        required: true
+        deprecated: false
+        schema:
+          type: string
+        style: simple
+        explode: false
+    patch:
+      operationId: api_agents_id_patch
+      tags:
+      - Agent
+      responses:
+        '200':
+          description: Agent resource updated
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Agent.jsonapi'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Agent'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Agent.csv'
+          links: {}
+        '400':
+          description: Invalid input
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Error.jsonapi'
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          links: {}
+        '422':
+          description: An error occurred
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/ConstraintViolation.jsonapi'
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ConstraintViolation'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConstraintViolation'
+          links: {}
+        '403':
+          description: Forbidden
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Error.jsonapi'
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          links: {}
+        '404':
+          description: Not found
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Error.jsonapi'
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          links: {}
+      summary: Updates the Agent resource.
+      description: Updates the Agent resource.
+      parameters:
+      - name: id
+        in: path
+        description: Agent identifier
+        required: true
+        deprecated: false
+        schema:
+          type: string
+        style: simple
+        explode: false
+      requestBody:
+        description: The updated Agent resource
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Agent.jsonapi'
+          application/merge-patch+json:
+            schema:
+              $ref: '#/components/schemas/Agent.jsonMergePatch'
+        required: true
+  /api/v1/me:
+    get:
+      operationId: get_me
+      tags:
+      - Agent
+      responses:
+        '200':
+          description: Agent resource
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Agent.AppUserGetDto.jsonapi-me.get'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Agent.UserWithClaimData-me.get'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Agent.UserWithClaimData.csv-me.get'
+        '403':
+          description: Forbidden
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Error.jsonapi'
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          links: {}
+        '404':
+          description: Not found
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Error.jsonapi'
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          links: {}
+      summary: Retrieves a Agent resource.
+      description: Retrieves a Agent resource.
+      parameters:
+      - name: include
+        in: query
+        description: Agent include
+        required: false
+        deprecated: false
+        schema:
+          type: string
+        style: form
+        explode: false
+components:
+  schemas:
+    Agent.csv-me.get:
+      type: object
+      properties:
+        id:
+          type: string
+        email:
+          type: string
+        roles:
+          type: array
+          items:
+            type: string
+        roleGroups:
+          type: array
+          items:
+            type: string
+        companies:
+          type: array
+          items:
+            $ref: '#/components/schemas/Company.csv-me.get'
+    JsonApiCollectionBaseSchema:
+      allOf:
+      - $ref: '#/components/schemas/JsonApiCollectionBaseSchemaNoPagination'
+      - type: object
+        properties:
+          links:
+            type: object
+            properties:
+              first:
+                type: string
+                format: iri-reference
+              prev:
+                type: string
+                format: iri-reference
+              next:
+                type: string
+                format: iri-reference
+              last:
+                type: string
+                format: iri-reference
+            example:
+              first: string
+              prev: string
+              next: string
+              last: string
+          meta:
+            type: object
+            properties:
+              itemsPerPage:
+                type: integer
+                minimum: 0
+              currentPage:
+                type: integer
+                minimum: 0
+    JsonApiCollectionBaseSchemaNoPagination:
+      type: object
+      properties:
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+              format: iri-reference
+          example:
+            self: string
+        meta:
+          type: object
+          properties:
+            totalItems:
+              type: integer
+              minimum: 0
+        data:
+          type: array
+      required:
+      - data
+    Agent.UserWithClaimData.csv-me.get:
+      type: object
+      properties:
+        user:
+          $ref: '#/components/schemas/Agent.csv-me.get'
+        companies:
+          type: array
+          items:
+            type:
+            - string
+            - 'null'
+        userRoles:
+          type: array
+          items:
+            type: string
+        userTypes:
+          type: array
+          items:
+            type: string
+    Agent-agent_user.read:
+      type: object
+      properties:
+        id:
+          type: string
+        email:
+          type: string
+        roleGroups:
+          type: array
+          items:
+            type: string
+        companies:
+          type: array
+          items:
+            $ref: '#/components/schemas/Company-agent_user.read'
+    Company:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type:
+          - string
+          - 'null'
+        externalId:
+          type: string
+    Company-agent_user.read:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type:
+          - string
+          - 'null'
+    Company.csv-me.get:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type:
+          - string
+          - 'null'
+    Company-me.get:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type:
+          - string
+          - 'null'
+    Agent.UserWithClaimData-me.get:
+      type: object
+      properties:
+        user:
+          $ref: '#/components/schemas/Agent-me.get'
+        companies:
+          type: array
+          items:
+            type:
+            - string
+            - 'null'
+        userRoles:
+          type: array
+          items:
+            type: string
+        userTypes:
+          type: array
+          items:
+            type: string
+    Company.csv-agent_user.read:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type:
+          - string
+          - 'null'
+    Agent.jsonapi:
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+            attributes:
+              $ref: '#/components/schemas/Agent'
+            relationships:
+              type: object
+              properties:
+                companies:
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          type:
+                            type: string
+                          id:
+                            type: string
+                            format: iri-reference
+          required:
+          - type
+          - id
+        included:
+          description: Related resources requested via the "include" query parameter.
+          type: array
+          items:
+            anyOf:
+            - $ref: '#/components/schemas/Company.jsonapi'
+          readOnly: true
+          externalDocs:
+            url: https://jsonapi.org/format/#fetching-includes
+    ConstraintViolation:
+      type: object
+      description: Unprocessable entity
+      properties:
+        status:
+          default: 422
+          type: integer
+        detail:
+          readOnly: true
+          type: string
+        type:
+          readOnly: true
+          type: string
+        title:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        instance:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+    Agent.csv-agent_user.read:
+      type: object
+      properties:
+        id:
+          type: string
+        email:
+          type: string
+        roleGroups:
+          type: array
+          items:
+            type: string
+        companies:
+          type: array
+          items:
+            $ref: '#/components/schemas/Company.csv-agent_user.read'
+    Agent.jsonMergePatch:
+      type: object
+      properties:
+        id:
+          type: string
+        email:
+          type: string
+        roles:
+          type: array
+          items:
+            type: string
+        roleGroups:
+          type: array
+          items:
+            type: string
+        companies:
+          type: array
+          items:
+            type: string
+            format: iri-reference
+            example: https://example.com/
+    Agent-me.get:
+      type: object
+      properties:
+        id:
+          type: string
+        email:
+          type: string
+        roles:
+          type: array
+          items:
+            type: string
+        roleGroups:
+          type: array
+          items:
+            type: string
+        companies:
+          type: array
+          items:
+            $ref: '#/components/schemas/Company-me.get'
+    ConstraintViolation.jsonapi:
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+            attributes:
+              $ref: '#/components/schemas/ConstraintViolation'
+          required:
+          - type
+          - id
+    Error.jsonapi:
+      properties:
+        errors:
+          type: array
+          items:
+            allOf:
+            - $ref: '#/components/schemas/Error'
+            - type: object
+              properties:
+                source:
+                  type: object
+                status:
+                  type: string
+    Error:
+      type: object
+      description: A representation of common errors.
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        title:
+          readOnly: true
+          description: A short, human-readable summary of the problem.
+          type:
+          - string
+          - 'null'
+        detail:
+          readOnly: true
+          description: A human-readable explanation specific to this occurrence of the problem.
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - number
+          - 'null'
+          examples:
+          - 404
+          default: 400
+        instance:
+          readOnly: true
+          description: A URI reference that identifies the specific occurrence of the problem. It may or may not yield further information if dereferenced.
+          type:
+          - string
+          - 'null'
+        type:
+          readOnly: true
+          description: A URI reference that identifies the problem type
+          type: string
+        meta:
+          type: object
+        source:
+          type: object
+          properties:
+            pointer:
+              type: string
+            parameter:
+              type: string
+            header:
+              type: string
+    Agent.csv:
+      type: object
+      properties:
+        id:
+          type: string
+        email:
+          type: string
+        roles:
+          type: array
+          items:
+            type: string
+        roleGroups:
+          type: array
+          items:
+            type: string
+        companies:
+          type: array
+          items:
+            type: string
+            format: iri-reference
+            example: https://example.com/
+    Agent:
+      type: object
+      properties:
+        id:
+          type: string
+        email:
+          type: string
+        roles:
+          type: array
+          items:
+            type: string
+        roleGroups:
+          type: array
+          items:
+            type: string
+        companies:
+          type: array
+          items:
+            type: string
+            format: iri-reference
+            example: https://example.com/
+    Company.jsonapi:
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+            attributes:
+              $ref: '#/components/schemas/Company'
+          required:
+          - type
+          - id
+    Agent.AppUserGetDto.jsonapi-me.get:
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+            attributes:
+              $ref: '#/components/schemas/Agent.UserWithClaimData-me.get'
+            relationships:
+              type: object
+              properties:
+                companies:
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          type:
+                            type: string
+                          id:
+                            type: string
+                            format: iri-reference
+          required:
+          - type
+          - id
+        included:
+          description: Related resources requested via the "include" query parameter.
+          type: array
+          items:
+            anyOf:
+            - $ref: '#/components/schemas/Company.jsonapi'
+          readOnly: true
+          externalDocs:
+            url: https://jsonapi.org/format/#fetching-includes
+  securitySchemes:
+    JWT:
+      type: apiKey
+      description: Value for the Authorization header parameter.
+      name: Authorization
+      in: header

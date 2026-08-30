@@ -1,0 +1,501 @@
+openapi: 3.2.0
+info:
+  title: Insurance App Rent Schedule Row Update API
+  description: Resource 'RentScheduleRowUpdate' operations.
+  version: 0.1.0
+servers:
+- url: https://insurance-app.goodlord.co/
+  description: Development
+- url: https://insurance-app.staging.goodoverlord.com/
+  description: Staging
+- url: https://insurance-app.qa1.goodoverlord.com/
+  description: QA1
+- url: https://insurance-app.demo.goodlord.co/
+  description: Demo
+security:
+- JWT: []
+tags:
+- name: RentScheduleRowUpdate
+  description: Resource 'RentScheduleRowUpdate' operations.
+paths:
+  /api/v1/insurance_claims/{insuranceClaimId}/rent_schedule/{rentScheduleId}/rent_schedule_row/{id}:
+    patch:
+      operationId: api_insurance_claims_insuranceClaimIdrent_schedule_rentScheduleIdrent_schedule_row_id_patch
+      tags:
+      - RentScheduleRowUpdate
+      responses:
+        '200':
+          description: RentScheduleRowUpdate resource updated
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/RentScheduleRowUpdate.RentScheduleRowPatchDto.jsonapi'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RentScheduleRowUpdate.RentScheduleRowGetModel'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/RentScheduleRowUpdate.RentScheduleRowGetModel.csv'
+          links: {}
+        '400':
+          description: Invalid input
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Error.jsonapi'
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          links: {}
+        '422':
+          description: An error occurred
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/ConstraintViolation.jsonapi'
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ConstraintViolation'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConstraintViolation'
+          links: {}
+        '403':
+          description: Forbidden
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Error.jsonapi'
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          links: {}
+        '404':
+          description: Not found
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Error.jsonapi'
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          links: {}
+      summary: Updates the RentScheduleRowUpdate resource.
+      description: Updates the RentScheduleRowUpdate resource.
+      parameters:
+      - name: insuranceClaimId
+        in: path
+        description: RentScheduleRowUpdate identifier
+        required: true
+        deprecated: false
+        schema:
+          type: string
+        style: simple
+        explode: false
+      - name: rentScheduleId
+        in: path
+        description: RentScheduleRowUpdate identifier
+        required: true
+        deprecated: false
+        schema:
+          type: string
+        style: simple
+        explode: false
+      - name: id
+        in: path
+        description: RentScheduleRowUpdate identifier
+        required: true
+        deprecated: false
+        schema:
+          type: string
+        style: simple
+        explode: false
+      requestBody:
+        description: The updated RentScheduleRowUpdate resource
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/RentScheduleRowUpdate.jsonapi'
+          application/merge-patch+json:
+            schema:
+              $ref: '#/components/schemas/RentScheduleRowUpdate.jsonMergePatch'
+        required: true
+components:
+  schemas:
+    ConstraintViolation.jsonapi:
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+            attributes:
+              $ref: '#/components/schemas/ConstraintViolation'
+          required:
+          - type
+          - id
+    RentScheduleRowUpdate.RentScheduleRowPatchDto.jsonapi:
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+            attributes:
+              $ref: '#/components/schemas/RentScheduleRowUpdate.RentScheduleRowGetModel'
+          required:
+          - type
+          - id
+    RentScheduleRowUpdate.jsonapi:
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+            attributes:
+              $ref: '#/components/schemas/RentScheduleRowUpdate.jsonMergePatch'
+          required:
+          - type
+          - id
+    RentScheduleRowUpdate.jsonMergePatch:
+      type: object
+      properties:
+        date:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        amount:
+          type: object
+          properties:
+            amount:
+              type: integer
+              example: 123
+            currency:
+              type: string
+              example: GBP
+        note:
+          maxLength: 2000
+          type:
+          - string
+          - 'null'
+    ConstraintViolation:
+      type: object
+      description: Unprocessable entity
+      properties:
+        status:
+          default: 422
+          type: integer
+        detail:
+          readOnly: true
+          type: string
+        type:
+          readOnly: true
+          type: string
+        title:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        instance:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+    Error.jsonapi:
+      properties:
+        errors:
+          type: array
+          items:
+            allOf:
+            - $ref: '#/components/schemas/Error'
+            - type: object
+              properties:
+                source:
+                  type: object
+                status:
+                  type: string
+    RentScheduleRowUpdate.RentScheduleRowGetModel.csv:
+      type: object
+      properties:
+        audits:
+          type: array
+          items:
+            $ref: '#/components/schemas/RentScheduleRowAuditGetDto.csv'
+        balance:
+          readOnly: true
+          description: API serialization - returns an array to avoid JSON:API wrapping of Money objects.
+          type: object
+          additionalProperties:
+            anyOf:
+            - type: integer
+            - type: string
+        id:
+          readOnly: true
+          type: string
+        rowType:
+          readOnly: true
+          description: API serialization - returns the string value to avoid JSON:API wrapping of enums.
+          type: string
+        date:
+          readOnly: true
+          type: string
+          format: date-time
+        amount:
+          type: object
+          properties:
+            amount:
+              type: integer
+              example: 123
+            currency:
+              type: string
+              example: GBP
+        note:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        submittedAt:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+          format: date-time
+        createdAt:
+          readOnly: true
+          type: string
+          format: date-time
+        updatedAt:
+          readOnly: true
+          type: string
+          format: date-time
+        deletedAt:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+          format: date-time
+        rentSchedule:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+          format: iri-reference
+          example: https://example.com/
+        insuranceClaim:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+          format: iri-reference
+          example: https://example.com/
+        insuranceClaimId:
+          readOnly: true
+          type: string
+        companyExternalId:
+          readOnly: true
+          description: 'Helper method for voter - gets company external ID directly from entity
+
+            without creating a DTO (which can fail in certain test contexts).'
+          type:
+          - string
+          - 'null'
+    Error:
+      type: object
+      description: A representation of common errors.
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        title:
+          readOnly: true
+          description: A short, human-readable summary of the problem.
+          type:
+          - string
+          - 'null'
+        detail:
+          readOnly: true
+          description: A human-readable explanation specific to this occurrence of the problem.
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - number
+          - 'null'
+          examples:
+          - 404
+          default: 400
+        instance:
+          readOnly: true
+          description: A URI reference that identifies the specific occurrence of the problem. It may or may not yield further information if dereferenced.
+          type:
+          - string
+          - 'null'
+        type:
+          readOnly: true
+          description: A URI reference that identifies the problem type
+          type: string
+        meta:
+          type: object
+        source:
+          type: object
+          properties:
+            pointer:
+              type: string
+            parameter:
+              type: string
+            header:
+              type: string
+    RentScheduleRowAuditGetDto.csv:
+      type: object
+      properties:
+        type:
+          type: string
+        text:
+          type: string
+        changedBy:
+          type:
+          - string
+          - 'null'
+        changedAt:
+          type: string
+          format: date-time
+        changes:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+    RentScheduleRowAuditGetDto:
+      type: object
+      properties:
+        type:
+          type: string
+        text:
+          type: string
+        changedBy:
+          type:
+          - string
+          - 'null'
+        changedAt:
+          type: string
+          format: date-time
+        changes:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+    RentScheduleRowUpdate.RentScheduleRowGetModel:
+      type: object
+      properties:
+        audits:
+          type: array
+          items:
+            $ref: '#/components/schemas/RentScheduleRowAuditGetDto'
+        balance:
+          readOnly: true
+          description: API serialization - returns an array to avoid JSON:API wrapping of Money objects.
+          type: object
+          additionalProperties:
+            anyOf:
+            - type: integer
+            - type: string
+        id:
+          readOnly: true
+          type: string
+        rowType:
+          readOnly: true
+          description: API serialization - returns the string value to avoid JSON:API wrapping of enums.
+          type: string
+        date:
+          readOnly: true
+          type: string
+          format: date-time
+        amount:
+          type: object
+          properties:
+            amount:
+              type: integer
+              example: 123
+            currency:
+              type: string
+              example: GBP
+        note:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        submittedAt:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+          format: date-time
+        createdAt:
+          readOnly: true
+          type: string
+          format: date-time
+        updatedAt:
+          readOnly: true
+          type: string
+          format: date-time
+        deletedAt:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+          format: date-time
+        rentSchedule:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+          format: iri-reference
+          example: https://example.com/
+        insuranceClaim:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+          format: iri-reference
+          example: https://example.com/
+        insuranceClaimId:
+          readOnly: true
+          type: string
+        companyExternalId:
+          readOnly: true
+          description: 'Helper method for voter - gets company external ID directly from entity
+
+            without creating a DTO (which can fail in certain test contexts).'
+          type:
+          - string
+          - 'null'
+  securitySchemes:
+    JWT:
+      type: apiKey
+      description: Value for the Authorization header parameter.
+      name: Authorization
+      in: header

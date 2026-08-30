@@ -1,0 +1,100 @@
+openapi: 3.2.0
+info:
+  title: Goodlord Authentication API
+  version: 1.0.0
+  contact:
+    email: devs@vouch.co.uk
+    name: Goodlord
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  description: 'Operations tagged Authentication across 2 of this provider''s published API definitions: goodlord-referencing-api-openapi.json, goodlord-referencing-api-sandbox-openapi.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.goodoverlord.com
+  description: Live Server
+- url: https://api-sandbox.goodlord.co
+  description: Sandbox Server
+security:
+- OAuth2: []
+tags:
+- name: Authentication
+  description: Authentication operations
+paths:
+  /auth/token:
+    parameters: []
+    post:
+      security: []
+      tags:
+      - Authentication
+      summary: Obtain a JWT token
+      description: 'Obtain a JWT token to authenticate your requests.
+
+        The `access_token` property of the response contains the Bearer token that should be included in the Authorization header of all requests to the API.
+
+        It is recommended to use the `expires_in` property to determine when the token will expire and to request a new token before it expires.'
+      operationId: getAuthToken
+      requestBody:
+        description: Client credentials to obtain a JWT token
+        content:
+          application/json:
+            schema:
+              title: Token Request
+              type: object
+              properties:
+                client_id:
+                  type: string
+                  example: example-client-id
+                client_secret:
+                  type: string
+                  example: example-client-secret
+                grant_type:
+                  type: string
+                  enum:
+                  - client_credentials
+              required:
+              - client_id
+              - client_secret
+              - grant_type
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                title: Token Response
+                type: object
+                properties:
+                  access_token:
+                    type: string
+                    example: your_jwt_access_token
+                  scope:
+                    type: string
+                    example: some_scope some_other_scope
+                  expires_in:
+                    type: number
+                    example: 86400
+                  token_type:
+                    type: string
+                    example: Bearer
+    servers:
+    - url: https://api.goodoverlord.com
+      description: Live Server
+components:
+  securitySchemes:
+    OAuth2:
+      description: 'This API uses OAuth2 to authenticate requests. You must use your client credentials to obtain a token.
+
+        Read [Obtain a JWT Token](./operations/getAuthToken) for more information.'
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://api.goodoverlord.com/auth/token
+          scopes: {}
+externalDocs:
+  description: Understanding Goodlord's Referencing API
+  url: https://portal.goodlord.co/blog/2024/8/20/getting-started-with-goodlord-referencing-api
+x-refined-from:
+- goodlord-referencing-api-openapi.json
+- goodlord-referencing-api-sandbox-openapi.json

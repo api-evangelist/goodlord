@@ -1,0 +1,2033 @@
+openapi: 3.2.0
+info:
+  title: Insurance App Rent Schedule API
+  description: Resource 'RentSchedule' operations.
+  version: 0.1.0
+servers:
+- url: https://insurance-app.goodlord.co/
+  description: Development
+- url: https://insurance-app.staging.goodoverlord.com/
+  description: Staging
+- url: https://insurance-app.qa1.goodoverlord.com/
+  description: QA1
+- url: https://insurance-app.demo.goodlord.co/
+  description: Demo
+security:
+- JWT: []
+tags:
+- name: RentSchedule
+  description: Resource 'RentSchedule' operations.
+paths:
+  /api/v1/insurance_claims/{insuranceClaimId}/rent_schedule:
+    get:
+      operationId: api_insurance_claims_insuranceClaimIdrent_schedule_get
+      tags:
+      - RentSchedule
+      responses:
+        '200':
+          description: RentSchedule resource
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/RentSchedule.jsonapi'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RentSchedule-rent_schedule.read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/RentSchedule.csv-rent_schedule.read'
+        '403':
+          description: Forbidden
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Error.jsonapi'
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          links: {}
+        '404':
+          description: Not found
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Error.jsonapi'
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          links: {}
+      summary: Retrieves a RentSchedule resource.
+      description: Retrieves a RentSchedule resource.
+      parameters:
+      - name: insuranceClaimId
+        in: path
+        description: RentSchedule identifier
+        required: true
+        deprecated: false
+        schema:
+          type: string
+        style: simple
+        explode: false
+      - name: include
+        in: query
+        description: Which relations to include in the response
+        required: false
+        deprecated: false
+        schema:
+          type: string
+        style: form
+        explode: false
+        example: rentScheduleRows
+  /api/v1/insurance_claims/{insuranceClaimId}/rent_schedule/{rentScheduleId}/rent_schedule_rows:
+    post:
+      operationId: api_insurance_claims_insuranceClaimIdrent_schedule_rentScheduleIdrent_schedule_rows_post
+      tags:
+      - RentSchedule
+      responses:
+        '204':
+          description: RentScheduleRowBulk resource created
+          links: {}
+        '400':
+          description: Invalid input
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Error.jsonapi'
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          links: {}
+        '422':
+          description: An error occurred
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/ConstraintViolation.jsonapi'
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ConstraintViolation'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConstraintViolation'
+          links: {}
+      summary: Create multiple rent schedule rows
+      description: Creates a RentScheduleRowBulk resource.
+      parameters:
+      - name: insuranceClaimId
+        in: path
+        description: RentScheduleRowBulk identifier
+        required: true
+        deprecated: false
+        schema:
+          type: string
+        style: simple
+        explode: false
+      - name: rentScheduleId
+        in: path
+        description: RentScheduleRowBulk identifier
+        required: true
+        deprecated: false
+        schema:
+          type: string
+        style: simple
+        explode: false
+      requestBody:
+        description: At least one row; each item matches single-row POST payload (see schema).
+        content:
+          application/vnd.api+json:
+            schema:
+              type: object
+              required:
+              - data
+              properties:
+                data:
+                  type: object
+                  required:
+                  - attributes
+                  properties:
+                    type:
+                      type: string
+                      example: RentScheduleRowBulk
+                    attributes:
+                      type: object
+                      required:
+                      - rentScheduleRows
+                      properties:
+                        rentScheduleRows:
+                          type: array
+                          minItems: 1
+                          items:
+                            type: object
+                            required:
+                            - rowType
+                            - date
+                            - amount
+                            properties:
+                              rowType:
+                                type: string
+                                enum:
+                                - tenant_payment
+                                - rent_due
+                              date:
+                                type: string
+                                format: date
+                              amount:
+                                type: object
+                                required:
+                                - amount
+                                - currency
+                                properties:
+                                  amount:
+                                    type: integer
+                                    description: Amount in minor units (e.g. pence)
+                                  currency:
+                                    type: string
+                                    example: GBP
+                              note:
+                                type: string
+                                nullable: true
+            example:
+              data:
+                type: RentScheduleRowBulk
+                attributes:
+                  rentScheduleRows:
+                  - rowType: tenant_payment
+                    date: '2024-01-15'
+                    amount:
+                      amount: 150000
+                      currency: GBP
+                    note: First row
+                  - rowType: rent_due
+                    date: '2024-02-15'
+                    amount:
+                      amount: 160000
+                      currency: GBP
+        required: true
+  /api/v1/insurance_claims/{insuranceClaimId}/rent_schedule/{rentScheduleId}/submit:
+    post:
+      operationId: api_insurance_claims_insuranceClaimIdrent_schedule_rentScheduleIdsubmit_post
+      tags:
+      - RentSchedule
+      responses:
+        '201':
+          description: RentSchedule resource created
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/RentSchedule.jsonapi'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RentSchedule'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/RentSchedule.csv'
+          links: {}
+        '400':
+          description: Invalid input
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Error.jsonapi'
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          links: {}
+        '422':
+          description: An error occurred
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/ConstraintViolation.jsonapi'
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ConstraintViolation'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConstraintViolation'
+          links: {}
+        '403':
+          description: Forbidden
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Error.jsonapi'
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          links: {}
+      summary: Creates a RentSchedule resource.
+      description: Creates a RentSchedule resource.
+      parameters:
+      - name: insuranceClaimId
+        in: path
+        description: RentSchedule identifier
+        required: true
+        deprecated: false
+        schema:
+          type: string
+        style: simple
+        explode: false
+      - name: rentScheduleId
+        in: path
+        description: RentSchedule identifier
+        required: true
+        deprecated: false
+        schema:
+          type: string
+        style: simple
+        explode: false
+      requestBody:
+        description: The new RentSchedule resource
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/RentSchedule.jsonapi'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RentSchedule'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/RentSchedule.csv'
+        required: true
+components:
+  schemas:
+    Payment:
+      type: object
+      properties:
+        id:
+          readOnly: true
+          type: string
+        referenceNumber:
+          readOnly: true
+          type: string
+        paymentStatusIdentifier:
+          readOnly: true
+          type: string
+        paymentStatusDescription:
+          readOnly: true
+          type: string
+        insurer:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        paymentDate:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+          format: date-time
+        paymentCreatedAt:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+          format: date-time
+        paymentSubmittedAt:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+          format: date-time
+        paymentPaidAt:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+          format: date-time
+        refundDueAmount:
+          readOnly: true
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            anyOf:
+            - type: integer
+            - type: string
+        customerPaymentUpdate:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        paymentAmount:
+          readOnly: true
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            anyOf:
+            - type: integer
+            - type: string
+        createdAt:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+          format: date-time
+        insuranceClaim:
+          readOnly: true
+          type: string
+          format: iri-reference
+          example: https://example.com/
+    RentSchedule.csv:
+      type: object
+      properties:
+        id:
+          readOnly: true
+          type: string
+        submittedAt:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+          format: date-time
+        syncedAt:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+          format: date-time
+        deletedAt:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+          format: date-time
+        createdAt:
+          readOnly: true
+          type: string
+          format: date-time
+        updatedAt:
+          readOnly: true
+          type: string
+          format: date-time
+        insuranceClaim:
+          readOnly: true
+          type: string
+          format: iri-reference
+          example: https://example.com/
+        rentScheduleRows:
+          readOnly: true
+          type: array
+          items:
+            type: string
+            format: iri-reference
+            example: https://example.com/
+    RentSchedule:
+      type: object
+      properties:
+        id:
+          readOnly: true
+          type: string
+        submittedAt:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+          format: date-time
+        syncedAt:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+          format: date-time
+        deletedAt:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+          format: date-time
+        createdAt:
+          readOnly: true
+          type: string
+          format: date-time
+        updatedAt:
+          readOnly: true
+          type: string
+          format: date-time
+        insuranceClaim:
+          readOnly: true
+          type: string
+          format: iri-reference
+          example: https://example.com/
+        rentScheduleRows:
+          readOnly: true
+          type: array
+          items:
+            type: string
+            format: iri-reference
+            example: https://example.com/
+    Company:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type:
+          - string
+          - 'null'
+        externalId:
+          type: string
+    RentScheduleRowAuditGetDto:
+      type: object
+      properties:
+        type:
+          type: string
+        text:
+          type: string
+        changedBy:
+          type:
+          - string
+          - 'null'
+        changedAt:
+          type: string
+          format: date-time
+        changes:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+    RentScheduleRow-rent_schedule.read:
+      type: object
+      properties:
+        id:
+          readOnly: true
+          type: string
+        rowType:
+          readOnly: true
+          description: API serialization - returns the string value to avoid JSON:API wrapping of enums.
+          type: string
+        date:
+          readOnly: true
+          type: string
+          format: date-time
+        amount:
+          type: object
+          properties:
+            amount:
+              type: integer
+              example: 123
+            currency:
+              type: string
+              example: GBP
+        note:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        submittedAt:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+          format: date-time
+        createdAt:
+          readOnly: true
+          type: string
+          format: date-time
+        updatedAt:
+          readOnly: true
+          type: string
+          format: date-time
+        deletedAt:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+          format: date-time
+        rentSchedule:
+          anyOf:
+          - $ref: '#/components/schemas/RentSchedule-rent_schedule.read'
+          - type: 'null'
+          readOnly: true
+        insuranceClaimId:
+          readOnly: true
+          type: string
+        balance:
+          readOnly: true
+          description: API serialization - returns an array to avoid JSON:API wrapping of Money objects.
+          type: object
+          additionalProperties:
+            anyOf:
+            - type: integer
+            - type: string
+    ConstraintViolation:
+      type: object
+      description: Unprocessable entity
+      properties:
+        status:
+          default: 422
+          type: integer
+        detail:
+          readOnly: true
+          type: string
+        type:
+          readOnly: true
+          type: string
+        title:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        instance:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+    RentSchedule.jsonapi:
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+            attributes:
+              $ref: '#/components/schemas/RentSchedule'
+            relationships:
+              type: object
+              properties:
+                insuranceClaim:
+                  properties:
+                    data:
+                      oneOf:
+                      - type: 'null'
+                      - type: object
+                        properties:
+                          type:
+                            type: string
+                          id:
+                            type: string
+                            format: iri-reference
+                rentScheduleRows:
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          type:
+                            type: string
+                          id:
+                            type: string
+                            format: iri-reference
+          required:
+          - type
+          - id
+        included:
+          description: Related resources requested via the "include" query parameter.
+          type: array
+          items:
+            anyOf:
+            - $ref: '#/components/schemas/InsuranceClaim.jsonapi'
+            - $ref: '#/components/schemas/RentScheduleRow.jsonapi'
+          readOnly: true
+          externalDocs:
+            url: https://jsonapi.org/format/#fetching-includes
+    Payment.jsonapi:
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+            attributes:
+              $ref: '#/components/schemas/Payment'
+            relationships:
+              type: object
+              properties:
+                insuranceClaim:
+                  properties:
+                    data:
+                      oneOf:
+                      - type: 'null'
+                      - type: object
+                        properties:
+                          type:
+                            type: string
+                          id:
+                            type: string
+                            format: iri-reference
+          required:
+          - type
+          - id
+        included:
+          description: Related resources requested via the "include" query parameter.
+          type: array
+          items:
+            anyOf:
+            - $ref: '#/components/schemas/InsuranceClaim.jsonapi'
+          readOnly: true
+          externalDocs:
+            url: https://jsonapi.org/format/#fetching-includes
+    RentSchedule.csv-rent_schedule.read:
+      type: object
+      properties:
+        id:
+          readOnly: true
+          type: string
+        submittedAt:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+          format: date-time
+        syncedAt:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+          format: date-time
+        deletedAt:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+          format: date-time
+        createdAt:
+          readOnly: true
+          type: string
+          format: date-time
+        updatedAt:
+          readOnly: true
+          type: string
+          format: date-time
+        insuranceClaim:
+          $ref: '#/components/schemas/InsuranceClaim.csv-rent_schedule.read'
+        rentScheduleRows:
+          type: array
+          items:
+            $ref: '#/components/schemas/RentScheduleRow.csv-rent_schedule.read'
+          readOnly: true
+    InsuranceClaim.csv-rent_schedule.read:
+      type: object
+      properties:
+        id:
+          type: string
+        externalId:
+          type: string
+        propertyAddress:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+        claimStatus:
+          type: string
+        totalPaymentAmount:
+          type: object
+          additionalProperties:
+            anyOf:
+            - type: integer
+            - type: string
+        claimReference:
+          type: string
+        firstArrearsDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        mediationResponse:
+          type:
+          - string
+          - 'null'
+        claimStatusDescription:
+          type: string
+        claimDate:
+          type: string
+          format: date-time
+        policyId:
+          type: integer
+        company:
+          type: string
+          format: iri-reference
+          example: https://example.com/
+        tenancyId:
+          type:
+          - string
+          - 'null'
+        legalStatus:
+          type:
+          - string
+          - 'null'
+        latestPaymentDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        solicitorsClaimReference:
+          type:
+          - string
+          - 'null'
+        firmInstructed:
+          type:
+          - string
+          - 'null'
+        dateLegalInstructed:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        section8DateServed:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        section8DateExpired:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        section21DateServed:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        section21DateExpired:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        dateProceedingsIssued:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        dateOfHearing:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        court:
+          type:
+          - string
+          - 'null'
+        hearingOutcome:
+          type:
+          - string
+          - 'null'
+        possessionDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        warrantsAppliedFor:
+          type:
+          - string
+          - 'null'
+        dateOfEviction:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        typeOfClaim:
+          type:
+          - string
+          - 'null'
+        rentScheduleStatus:
+          type:
+          - string
+          - 'null'
+        rpiUniqueReferenceNumber:
+          type:
+          - string
+          - 'null'
+    InsuranceClaim:
+      type: object
+      properties:
+        id:
+          type: string
+        externalId:
+          type: string
+        createdAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        updatedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        propertyAddress:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+        claimStatus:
+          type: string
+        totalPaymentAmount:
+          type: object
+          additionalProperties:
+            anyOf:
+            - type: integer
+            - type: string
+        claimReference:
+          type: string
+        firstArrearsDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        mediationResponse:
+          type:
+          - string
+          - 'null'
+        claimStatusDescription:
+          type: string
+        claimDate:
+          type: string
+          format: date-time
+        policyId:
+          type: integer
+        company:
+          type: string
+          format: iri-reference
+          example: https://example.com/
+        tenancyId:
+          type:
+          - string
+          - 'null'
+        legalStatus:
+          type:
+          - string
+          - 'null'
+        latestPaymentDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        solicitorsClaimReference:
+          type:
+          - string
+          - 'null'
+        firmInstructed:
+          type:
+          - string
+          - 'null'
+        dateLegalInstructed:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        section8DateServed:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        section8DateExpired:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        section21DateServed:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        section21DateExpired:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        dateProceedingsIssued:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        dateOfHearing:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        court:
+          type:
+          - string
+          - 'null'
+        hearingOutcome:
+          type:
+          - string
+          - 'null'
+        possessionDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        warrantsAppliedFor:
+          type:
+          - string
+          - 'null'
+        dateOfEviction:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        typeOfClaim:
+          type:
+          - string
+          - 'null'
+        rentScheduleStatus:
+          type:
+          - string
+          - 'null'
+        rentSchedule:
+          type:
+          - string
+          - 'null'
+          format: iri-reference
+          example: https://example.com/
+        files:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+            format: iri-reference
+            example: https://example.com/
+        payments:
+          type: array
+          items:
+            type: string
+            format: iri-reference
+            example: https://example.com/
+        rpiUniqueReferenceNumber:
+          type:
+          - string
+          - 'null'
+        agencyName:
+          type:
+          - string
+          - 'null'
+        agentName:
+          type:
+          - string
+          - 'null'
+        agencyEmail:
+          type:
+          - string
+          - 'null'
+        agencyPhone:
+          type:
+          - string
+          - 'null'
+        lettingAgentRegistrationNumber:
+          type:
+          - string
+          - 'null'
+        tenants:
+          type:
+          - array
+          - 'null'
+          items:
+            type: object
+            additionalProperties:
+              type:
+              - string
+              - 'null'
+        guarantors:
+          type:
+          - array
+          - 'null'
+          items:
+            type: object
+            additionalProperties:
+              type:
+              - string
+              - 'null'
+        landlords:
+          type:
+          - array
+          - 'null'
+          items:
+            type: object
+            additionalProperties:
+              type:
+              - string
+              - 'null'
+        landlordRegistrationNumber:
+          type:
+          - string
+          - 'null'
+        permittedOccupiersName:
+          type:
+          - string
+          - 'null'
+        isTenancyCreatedOnGoodlord:
+          type:
+          - string
+          - 'null'
+        isTenancyRemovedAndNowOnFixedTerm:
+          type:
+          - string
+          - 'null'
+        dateBecamePeriodic:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        referencingCompletedByGoodlord:
+          type:
+          - string
+          - 'null'
+        isGasAtProperty:
+          type:
+          - string
+          - 'null'
+        didUploadEpcToGoodlord:
+          type:
+          - string
+          - 'null'
+        dateEpcWasProvidedToTenant:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        howEpcWasGivenToTenant:
+          type:
+          - string
+          - 'null'
+        isEicrOnGoodlord:
+          type:
+          - string
+          - 'null'
+        depositType:
+          type:
+          - string
+          - 'null'
+        depositCollectedByGoodlord:
+          type:
+          - string
+          - 'null'
+        depositPaidBy:
+          type:
+          - string
+          - 'null'
+        dateDepositWasPaid:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        isDepositCertificateOnGoodlord:
+          type:
+          - string
+          - 'null'
+        dateDepositProtected:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        prescribedInformationGiven:
+          type:
+          - string
+          - 'null'
+        depositReplacementCoverLevel:
+          type:
+          - string
+          - 'null'
+        propertyRequiresLicense:
+          type:
+          - string
+          - 'null'
+        dateOfRentArrears:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        rentOutstanding:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            anyOf:
+            - type: integer
+            - type: string
+        reasonForNonPayment:
+          type:
+          - string
+          - 'null'
+        tenantsInDebtRespiteScheme:
+          type:
+          - string
+          - 'null'
+        detailsOfBreach:
+          type:
+          - string
+          - 'null'
+        dateAwareOfBreach:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        worksBeingClaimedForDamage:
+          type:
+          - string
+          - 'null'
+        depositUsedFor:
+          type:
+          - string
+          - 'null'
+        datePropertyDamageIdentified:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        currentDisputeInfo:
+          type:
+          - string
+          - 'null'
+        dateAwareOfDispute:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        trespassOrNuisanceInfo:
+          type:
+          - string
+          - 'null'
+        dateAwareOfTrespassOrNuisance:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        isPropertyStillOccupied:
+          type:
+          - string
+          - 'null'
+        verificationTenantIsStillOccupyingProperty:
+          type:
+          - string
+          - 'null'
+        dateLastInspection:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        dateTenantVacated:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        isClaimAgainstDepositFinalisedByDepositScheme:
+          type:
+          - string
+          - 'null'
+        isClaimAgainstDepositReplacementFinalised:
+          type:
+          - string
+          - 'null'
+        amountAwardedForRentArrears:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            anyOf:
+            - type: integer
+            - type: string
+        depositUseBreakdown:
+          type:
+          - string
+          - 'null'
+        howDepositClaimWasSettled:
+          type:
+          - string
+          - 'null'
+        depositReplacementUseBreakdown:
+          type:
+          - string
+          - 'null'
+        forwardingAddress:
+          type:
+          - string
+          - 'null'
+        agencyInstructedToReLet:
+          type:
+          - string
+          - 'null'
+        isPropertyAlreadyReLet:
+          type:
+          - string
+          - 'null'
+        dateNewTenancy:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        possessionNoticesServed:
+          type:
+          - string
+          - 'null'
+        otherNoticesServed:
+          type:
+          - string
+          - 'null'
+        disputesBetweenTenantAndLandlord:
+          type:
+          - string
+          - 'null'
+        detailsOfDisputesBetweenTenantAndLandlord:
+          type:
+          - string
+          - 'null'
+        otherRelevantClaimInfo:
+          type:
+          - string
+          - 'null'
+        noticesServedToLandlord:
+          type:
+          - string
+          - 'null'
+        agencyAccountName:
+          type:
+          - string
+          - 'null'
+        agencyAccountNumber:
+          type:
+          - string
+          - 'null'
+        agencySortCode:
+          type:
+          - string
+          - 'null'
+        remittanceEmail:
+          type:
+          - string
+          - 'null'
+        gasSafetyCertificates:
+          type:
+          - array
+          - 'null'
+          items:
+            type: object
+            additionalProperties:
+              type:
+              - string
+              - 'null'
+        howToRentGuides:
+          type:
+          - array
+          - 'null'
+          items:
+            type: object
+            additionalProperties:
+              type:
+              - string
+              - 'null'
+        tribunalNotificationDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        marketValueExplanation:
+          type:
+          - string
+          - 'null'
+        firstMonthRentRequestedViaGoodlord:
+          type:
+          - string
+          - 'null'
+        keysHandedOverDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        tenantOccupationDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        detailsOfAntiSocialBehaviour:
+          type:
+          - string
+          - 'null'
+        dateAwareOfAntiSocialBehaviour:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        rraInfoSheetIssueDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        rraInfoSheetIssueMethod:
+          type:
+          - string
+          - 'null'
+        statementOfTermsInTenancyAgreement:
+          type:
+          - string
+          - 'null'
+        statementOfTermsIssuedDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        statementOfTermsIssuedMethod:
+          type:
+          - string
+          - 'null'
+        firstMonthRentRequestedBeforeSigning:
+          type:
+          - string
+          - 'null'
+        firstMonthRentRequestedDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        originalTenancyStartDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+    RentSchedule-rent_schedule.read:
+      type: object
+      properties:
+        id:
+          readOnly: true
+          type: string
+        submittedAt:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+          format: date-time
+        syncedAt:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+          format: date-time
+        deletedAt:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+          format: date-time
+        createdAt:
+          readOnly: true
+          type: string
+          format: date-time
+        updatedAt:
+          readOnly: true
+          type: string
+          format: date-time
+        insuranceClaim:
+          $ref: '#/components/schemas/InsuranceClaim-rent_schedule.read'
+        rentScheduleRows:
+          type: array
+          items:
+            $ref: '#/components/schemas/RentScheduleRow-rent_schedule.read'
+          readOnly: true
+    RentScheduleRow:
+      type: object
+      properties:
+        audits:
+          type: array
+          items:
+            $ref: '#/components/schemas/RentScheduleRowAuditGetDto'
+        balance:
+          readOnly: true
+          description: API serialization - returns an array to avoid JSON:API wrapping of Money objects.
+          type: object
+          additionalProperties:
+            anyOf:
+            - type: integer
+            - type: string
+        id:
+          readOnly: true
+          type: string
+        rowType:
+          readOnly: true
+          description: API serialization - returns the string value to avoid JSON:API wrapping of enums.
+          type: string
+        date:
+          readOnly: true
+          type: string
+          format: date-time
+        amount:
+          type: object
+          properties:
+            amount:
+              type: integer
+              example: 123
+            currency:
+              type: string
+              example: GBP
+        note:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        submittedAt:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+          format: date-time
+        createdAt:
+          readOnly: true
+          type: string
+          format: date-time
+        updatedAt:
+          readOnly: true
+          type: string
+          format: date-time
+        deletedAt:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+          format: date-time
+        rentSchedule:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+          format: iri-reference
+          example: https://example.com/
+        insuranceClaim:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+          format: iri-reference
+          example: https://example.com/
+        insuranceClaimId:
+          readOnly: true
+          type: string
+        companyExternalId:
+          readOnly: true
+          description: 'Helper method for voter - gets company external ID directly from entity
+
+            without creating a DTO (which can fail in certain test contexts).'
+          type:
+          - string
+          - 'null'
+    File.jsonapi:
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+            attributes:
+              $ref: '#/components/schemas/File'
+            relationships:
+              type: object
+              properties:
+                insuranceClaim:
+                  properties:
+                    data:
+                      oneOf:
+                      - type: 'null'
+                      - type: object
+                        properties:
+                          type:
+                            type: string
+                          id:
+                            type: string
+                            format: iri-reference
+          required:
+          - type
+          - id
+        included:
+          description: Related resources requested via the "include" query parameter.
+          type: array
+          items:
+            anyOf:
+            - $ref: '#/components/schemas/InsuranceClaim.jsonapi'
+          readOnly: true
+          externalDocs:
+            url: https://jsonapi.org/format/#fetching-includes
+    ConstraintViolation.jsonapi:
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+            attributes:
+              $ref: '#/components/schemas/ConstraintViolation'
+          required:
+          - type
+          - id
+    InsuranceClaim.jsonapi:
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+            attributes:
+              $ref: '#/components/schemas/InsuranceClaim'
+            relationships:
+              type: object
+              properties:
+                company:
+                  properties:
+                    data:
+                      oneOf:
+                      - type: 'null'
+                      - type: object
+                        properties:
+                          type:
+                            type: string
+                          id:
+                            type: string
+                            format: iri-reference
+                rentSchedule:
+                  properties:
+                    data:
+                      oneOf:
+                      - type: 'null'
+                      - type: object
+                        properties:
+                          type:
+                            type: string
+                          id:
+                            type: string
+                            format: iri-reference
+                files:
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          type:
+                            type: string
+                          id:
+                            type: string
+                            format: iri-reference
+                payments:
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          type:
+                            type: string
+                          id:
+                            type: string
+                            format: iri-reference
+          required:
+          - type
+          - id
+        included:
+          description: Related resources requested via the "include" query parameter.
+          type: array
+          items:
+            anyOf:
+            - $ref: '#/components/schemas/Company.jsonapi'
+            - $ref: '#/components/schemas/RentSchedule.jsonapi'
+            - $ref: '#/components/schemas/File.jsonapi'
+            - $ref: '#/components/schemas/Payment.jsonapi'
+          readOnly: true
+          externalDocs:
+            url: https://jsonapi.org/format/#fetching-includes
+    Error.jsonapi:
+      properties:
+        errors:
+          type: array
+          items:
+            allOf:
+            - $ref: '#/components/schemas/Error'
+            - type: object
+              properties:
+                source:
+                  type: object
+                status:
+                  type: string
+    RentScheduleRow.jsonapi:
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+            attributes:
+              $ref: '#/components/schemas/RentScheduleRow'
+            relationships:
+              type: object
+              properties:
+                rentSchedule:
+                  properties:
+                    data:
+                      oneOf:
+                      - type: 'null'
+                      - type: object
+                        properties:
+                          type:
+                            type: string
+                          id:
+                            type: string
+                            format: iri-reference
+                insuranceClaim:
+                  properties:
+                    data:
+                      oneOf:
+                      - type: 'null'
+                      - type: object
+                        properties:
+                          type:
+                            type: string
+                          id:
+                            type: string
+                            format: iri-reference
+          required:
+          - type
+          - id
+        included:
+          description: Related resources requested via the "include" query parameter.
+          type: array
+          items:
+            anyOf:
+            - $ref: '#/components/schemas/RentSchedule.jsonapi'
+            - $ref: '#/components/schemas/InsuranceClaim.jsonapi'
+          readOnly: true
+          externalDocs:
+            url: https://jsonapi.org/format/#fetching-includes
+    Error:
+      type: object
+      description: A representation of common errors.
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        title:
+          readOnly: true
+          description: A short, human-readable summary of the problem.
+          type:
+          - string
+          - 'null'
+        detail:
+          readOnly: true
+          description: A human-readable explanation specific to this occurrence of the problem.
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - number
+          - 'null'
+          examples:
+          - 404
+          default: 400
+        instance:
+          readOnly: true
+          description: A URI reference that identifies the specific occurrence of the problem. It may or may not yield further information if dereferenced.
+          type:
+          - string
+          - 'null'
+        type:
+          readOnly: true
+          description: A URI reference that identifies the problem type
+          type: string
+        meta:
+          type: object
+        source:
+          type: object
+          properties:
+            pointer:
+              type: string
+            parameter:
+              type: string
+            header:
+              type: string
+    File:
+      type: object
+      properties:
+        id:
+          readOnly: true
+          type: string
+        fileName:
+          readOnly: true
+          type: string
+        originalFileName:
+          readOnly: true
+          type: string
+        fileSize:
+          readOnly: true
+          type:
+          - integer
+          - 'null'
+        mimeType:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        fileType:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        createdAt:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+          format: date-time
+        podioFileId:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        insuranceClaim:
+          readOnly: true
+          description: Insurance claim reference - lazy-loaded to avoid circular references.
+          type:
+          - string
+          - 'null'
+          format: iri-reference
+          example: https://example.com/
+    RentScheduleRow.csv-rent_schedule.read:
+      type: object
+      properties:
+        id:
+          readOnly: true
+          type: string
+        rowType:
+          readOnly: true
+          description: API serialization - returns the string value to avoid JSON:API wrapping of enums.
+          type: string
+        date:
+          readOnly: true
+          type: string
+          format: date-time
+        amount:
+          type: object
+          properties:
+            amount:
+              type: integer
+              example: 123
+            currency:
+              type: string
+              example: GBP
+        note:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        submittedAt:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+          format: date-time
+        createdAt:
+          readOnly: true
+          type: string
+          format: date-time
+        updatedAt:
+          readOnly: true
+          type: string
+          format: date-time
+        deletedAt:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+          format: date-time
+        rentSchedule:
+          anyOf:
+          - $ref: '#/components/schemas/RentSchedule.csv-rent_schedule.read'
+          - type: 'null'
+          readOnly: true
+        insuranceClaimId:
+          readOnly: true
+          type: string
+        balance:
+          readOnly: true
+          description: API serialization - returns an array to avoid JSON:API wrapping of Money objects.
+          type: object
+          additionalProperties:
+            anyOf:
+            - type: integer
+            - type: string
+    Company.jsonapi:
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+            attributes:
+              $ref: '#/components/schemas/Company'
+          required:
+          - type
+          - id
+    InsuranceClaim-rent_schedule.read:
+      type: object
+      properties:
+        id:
+          type: string
+        externalId:
+          type: string
+        propertyAddress:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+        claimStatus:
+          type: string
+        totalPaymentAmount:
+          type: object
+          additionalProperties:
+            anyOf:
+            - type: integer
+            - type: string
+        claimReference:
+          type: string
+        firstArrearsDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        mediationResponse:
+          type:
+          - string
+          - 'null'
+        claimStatusDescription:
+          type: string
+        claimDate:
+          type: string
+          format: date-time
+        policyId:
+          type: integer
+        company:
+          type: string
+          format: iri-reference
+          example: https://example.com/
+        tenancyId:
+          type:
+          - string
+          - 'null'
+        legalStatus:
+          type:
+          - string
+          - 'null'
+        latestPaymentDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        solicitorsClaimReference:
+          type:
+          - string
+          - 'null'
+        firmInstructed:
+          type:
+          - string
+          - 'null'
+        dateLegalInstructed:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        section8DateServed:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        section8DateExpired:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        section21DateServed:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        section21DateExpired:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        dateProceedingsIssued:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        dateOfHearing:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        court:
+          type:
+          - string
+          - 'null'
+        hearingOutcome:
+          type:
+          - string
+          - 'null'
+        possessionDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        warrantsAppliedFor:
+          type:
+          - string
+          - 'null'
+        dateOfEviction:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        typeOfClaim:
+          type:
+          - string
+          - 'null'
+        rentScheduleStatus:
+          type:
+          - string
+          - 'null'
+        rpiUniqueReferenceNumber:
+          type:
+          - string
+          - 'null'
+  securitySchemes:
+    JWT:
+      type: apiKey
+      description: Value for the Authorization header parameter.
+      name: Authorization
+      in: header

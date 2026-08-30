@@ -1,0 +1,5999 @@
+openapi: 3.2.0
+info:
+  title: Insurance App Insurance Claim API
+  description: Resource 'InsuranceClaim' operations.
+  version: 0.1.0
+servers:
+- url: https://insurance-app.goodlord.co/
+  description: Development
+- url: https://insurance-app.staging.goodoverlord.com/
+  description: Staging
+- url: https://insurance-app.qa1.goodoverlord.com/
+  description: QA1
+- url: https://insurance-app.demo.goodlord.co/
+  description: Demo
+security:
+- JWT: []
+tags:
+- name: InsuranceClaim
+  description: Resource 'InsuranceClaim' operations.
+paths:
+  /api/v1/insurance_claims:
+    get:
+      operationId: api_insurance_claims_get_collection
+      tags:
+      - InsuranceClaim
+      responses:
+        '200':
+          description: InsuranceClaim collection
+          content:
+            application/vnd.api+json:
+              schema:
+                description: InsuranceClaim.jsonapi collection.
+                allOf:
+                - $ref: '#/components/schemas/JsonApiCollectionBaseSchema'
+                - type: object
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: string
+                          type:
+                            type: string
+                          attributes:
+                            $ref: '#/components/schemas/InsuranceClaim'
+                          relationships:
+                            type: object
+                            properties:
+                              company:
+                                properties:
+                                  data:
+                                    oneOf:
+                                    - type: 'null'
+                                    - type: object
+                                      properties:
+                                        type:
+                                          type: string
+                                        id:
+                                          type: string
+                                          format: iri-reference
+                              rentSchedule:
+                                properties:
+                                  data:
+                                    oneOf:
+                                    - type: 'null'
+                                    - type: object
+                                      properties:
+                                        type:
+                                          type: string
+                                        id:
+                                          type: string
+                                          format: iri-reference
+                              files:
+                                properties:
+                                  data:
+                                    type: array
+                                    items:
+                                      type: object
+                                      properties:
+                                        type:
+                                          type: string
+                                        id:
+                                          type: string
+                                          format: iri-reference
+                              payments:
+                                properties:
+                                  data:
+                                    type: array
+                                    items:
+                                      type: object
+                                      properties:
+                                        type:
+                                          type: string
+                                        id:
+                                          type: string
+                                          format: iri-reference
+                        required:
+                        - type
+                        - id
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InsuranceClaim-insurance_claim.read'
+            text/csv:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InsuranceClaim.csv-insurance_claim.read'
+        '403':
+          description: Forbidden
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Error.jsonapi'
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          links: {}
+      summary: Retrieves the collection of InsuranceClaim resources.
+      description: Retrieves the collection of InsuranceClaim resources.
+      parameters:
+      - name: page
+        in: query
+        description: The collection page number
+        required: false
+        deprecated: false
+        schema:
+          type: integer
+          default: 1
+        style: form
+        explode: false
+      - name: itemsPerPage
+        in: query
+        description: The number of items per page
+        required: false
+        deprecated: false
+        schema:
+          type: integer
+          default: 50
+          minimum: 0
+          maximum: 100
+        style: form
+        explode: false
+      - name: company.externalId
+        in: query
+        description: ''
+        required: false
+        deprecated: false
+        schema:
+          type: string
+        style: form
+        explode: false
+      - name: company.externalId[]
+        in: query
+        description: ''
+        required: false
+        deprecated: false
+        schema:
+          type: array
+          items:
+            type: string
+        style: form
+        explode: true
+      - name: policyUniqueReferenceNumber[]
+        in: query
+        description: Filter insurance claims by policy unique reference number (RPI ref)
+        required: false
+        deprecated: false
+        schema:
+          type: array
+          items:
+            type: string
+        style: form
+        explode: true
+      - name: policyUniqueReferenceNumber
+        in: query
+        description: Filter insurance claims by policy unique reference number (RPI ref)
+        required: false
+        deprecated: false
+        schema:
+          type: string
+        style: form
+        explode: false
+      - name: propertyAddress
+        in: query
+        description: Filter insurance claims by address
+        required: false
+        deprecated: false
+        schema:
+          type: string
+        style: form
+        explode: false
+      - name: claimStatus[]
+        in: query
+        description: Filter insurance claims by status
+        required: false
+        deprecated: false
+        schema:
+          type: array
+          items:
+            type: string
+        style: form
+        explode: true
+      - name: claimStatus
+        in: query
+        description: Filter insurance claims by status
+        required: false
+        deprecated: false
+        schema:
+          type: string
+        style: form
+        explode: false
+      - name: order[totalPaymentAmount]
+        in: query
+        description: ''
+        required: false
+        deprecated: false
+        schema:
+          type: string
+          default: asc
+          enum:
+          - asc
+          - desc
+        style: form
+        explode: false
+      - name: order[claimDate]
+        in: query
+        description: ''
+        required: false
+        deprecated: false
+        schema:
+          type: string
+          default: asc
+          enum:
+          - asc
+          - desc
+        style: form
+        explode: false
+      - name: order[latestPaymentDate]
+        in: query
+        description: ''
+        required: false
+        deprecated: false
+        schema:
+          type: string
+          default: asc
+          enum:
+          - asc
+          - desc
+        style: form
+        explode: false
+      - name: include
+        in: query
+        description: Which relations to include in the response
+        required: false
+        deprecated: false
+        schema:
+          type: string
+        style: form
+        explode: false
+        example: company,files,payments
+    post:
+      operationId: api_insurance_claims_post
+      tags:
+      - InsuranceClaim
+      responses:
+        '201':
+          description: InsuranceClaimCreate resource created
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/InsuranceClaimCreate.InsuranceClaimPostDto.jsonapi-insurance_claim.read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InsuranceClaimCreate.InsuranceClaimGetDto-insurance_claim.read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/InsuranceClaimCreate.InsuranceClaimGetDto.csv-insurance_claim.read'
+          links: {}
+        '400':
+          description: Invalid input
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Error.jsonapi'
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          links: {}
+        '422':
+          description: An error occurred
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/ConstraintViolation.jsonapi'
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ConstraintViolation'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConstraintViolation'
+          links: {}
+      summary: Creates a InsuranceClaimCreate resource.
+      description: Creates a InsuranceClaimCreate resource.
+      parameters: []
+      requestBody:
+        description: The new InsuranceClaimCreate resource
+        content:
+          application/vnd.api+json:
+            example:
+              data:
+                type: InsuranceClaimCreate
+                attributes:
+                  policyId: 1
+                  propertyAddress:
+                    line1: 123 Main St
+                    line2: London
+                    line3: string
+                    postcode: SW1A 1AA
+                    country: England
+                  typeOfClaim: Rent Arrears
+                  rpiUniqueReferenceNumber: RPI-123456
+                  companyExternalId: 1
+        required: false
+  /api/v1/insurance_claims/{id}:
+    get:
+      operationId: api_insurance_claims_id_get
+      tags:
+      - InsuranceClaim
+      responses:
+        '200':
+          description: InsuranceClaim resource
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/InsuranceClaim.jsonapi'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InsuranceClaim-insurance_claim.read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/InsuranceClaim.csv-insurance_claim.read'
+        '403':
+          description: Forbidden
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Error.jsonapi'
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          links: {}
+        '404':
+          description: Not found
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Error.jsonapi'
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          links: {}
+      summary: Retrieves a InsuranceClaim resource.
+      description: Retrieves a InsuranceClaim resource.
+      parameters:
+      - name: id
+        in: path
+        description: InsuranceClaim identifier
+        required: true
+        deprecated: false
+        schema:
+          type: string
+        style: simple
+        explode: false
+      - name: include
+        in: query
+        description: Which relations to include in the response
+        required: false
+        deprecated: false
+        schema:
+          type: string
+        style: form
+        explode: false
+        example: company,files,payments
+    patch:
+      operationId: api_insurance_claims_id_patch
+      tags:
+      - InsuranceClaim
+      responses:
+        '200':
+          description: InsuranceClaimUpdate resource updated
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/InsuranceClaimUpdate.InsuranceClaimPatchDto.jsonapi-insurance_claim.read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InsuranceClaimUpdate.InsuranceClaimGetDto-insurance_claim.read'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/InsuranceClaimUpdate.InsuranceClaimGetDto.csv-insurance_claim.read'
+          links: {}
+        '400':
+          description: Invalid input
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Error.jsonapi'
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          links: {}
+        '422':
+          description: An error occurred
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/ConstraintViolation.jsonapi'
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ConstraintViolation'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConstraintViolation'
+          links: {}
+        '404':
+          description: Not found
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Error.jsonapi'
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          links: {}
+      summary: Update insurance claim details
+      description: Partially update an insurance claim. Only included fields are modified.
+      parameters:
+      - name: id
+        in: path
+        description: InsuranceClaimUpdate identifier
+        required: true
+        deprecated: false
+        schema:
+          type: string
+        style: simple
+        explode: false
+      requestBody:
+        description: File upload data
+        content:
+          application/vnd.api+json:
+            example:
+              data:
+                type: InsuranceClaimUpdate
+                id: /api/v1/insurance_claims/550e8400-e29b-41d4-a716-446655440000
+                attributes:
+                  agencyName: Updated Agency Name
+                  agentName: John Smith
+                  agencyEmail: john@agency.com
+                  agencyPhone: 020 1234 5678
+                  lettingAgentRegistrationNumber: LARN123456
+                  tenants:
+                  - name: John Smith
+                    email: john@example.com
+                    phone: '+447851000000'
+                  - name: Jane Doe
+                    email: jane@example.com
+                    phone: '+447851000001'
+                  propertyAddress:
+                    line1: 123 New Street
+                    line2: New Area
+                    line3: New District
+                    postcode: SW1A 1AA
+                    country: England
+                  guarantors:
+                  - name: Jane Guarantor
+                    address: 123 Guarantor Street
+                    phone: '+447851111111'
+                    email: guarantor@example.com
+                  landlords:
+                  - name: John Landlord
+                    address: 456 Landlord Avenue
+                    email: landlord@example.com
+                    phone: 020 7654 3210
+                  landlordRegistrationNumber: LARN789
+                  permittedOccupiersName: Child A, Child B
+                  isTenancyCreatedOnGoodlord: 'Yes'
+                  isTenancyRemovedAndNowOnFixedTerm: Periodic
+                  dateBecamePeriodic: '2024-01-15'
+                  referencingCompletedByGoodlord: 'Yes'
+                  isGasAtProperty: 'Yes'
+                  didUploadEpcToGoodlord: 'Yes'
+                  dateEpcWasProvidedToTenant: '2024-01-10'
+                  howEpcWasGivenToTenant: Hard copy in person
+                  isEicrOnGoodlord: 'Yes'
+                  depositType: Cash deposit
+                  depositCollectedByGoodlord: 'Yes'
+                  depositPaidBy: Tenant
+                  dateDepositWasPaid: '2024-01-05'
+                  isDepositCertificateOnGoodlord: 'Yes'
+                  dateDepositProtected: '2024-01-06'
+                  prescribedInformationGiven: Provided in person at tenancy start
+                  depositReplacementCoverLevel: 6 weeks rent
+                  propertyRequiresLicense: 'No'
+                  dateOfRentArrears: '2024-02-01'
+                  rentOutstanding:
+                    amount: 150000
+                    currency: GBP
+                  reasonForNonPayment: Tenant lost job
+                  tenantsInDebtRespiteScheme: 'No'
+                  detailsOfBreach: Unauthorised subletting
+                  dateAwareOfBreach: '2024-02-15'
+                  worksBeingClaimedForDamage: Repainting, carpet replacement
+                  depositUsedFor: Rent arrears and damage
+                  datePropertyDamageIdentified: '2024-02-20'
+                  currentDisputeInfo: Tenant disputes damage claim
+                  dateAwareOfDispute: '2024-02-25'
+                  trespassOrNuisanceInfo: N/A
+                  dateAwareOfTrespassOrNuisance: null
+                  isPropertyStillOccupied: 'No'
+                  verificationTenantIsStillOccupyingProperty: Keys returned, inventory completed
+                  dateLastInspection: '2024-02-28'
+                  dateTenantVacated: '2024-02-28'
+                  isClaimAgainstDepositFinalisedByDepositScheme: 'Yes'
+                  isClaimAgainstDepositReplacementFinalised: 'Yes'
+                  amountAwardedForRentArrears:
+                    amount: 50000
+                    currency: GBP
+                  depositUseBreakdown: £500 rent arrears, £200 damage
+                  howDepositClaimWasSettled: Tenant provided written authorisation for the deductions
+                  depositReplacementUseBreakdown: £300 rent arrears, £150 damage
+                  forwardingAddress: 123 New Tenant Street, London, SW1A 1AA
+                  agencyInstructedToReLet: 'Yes'
+                  isPropertyAlreadyReLet: 'No'
+                  dateNewTenancy: null
+                  possessionNoticesServed: 'Yes'
+                  otherNoticesServed: 'No'
+                  disputesBetweenTenantAndLandlord: 'No'
+                  detailsOfDisputesBetweenTenantAndLandlord: Tenant disputes damage assessment
+                  otherRelevantClaimInfo: Additional context for the claim
+                  noticesServedToLandlord: 'No'
+                  agencyAccountName: Acme Lettings
+                  agencyAccountNumber: '12345678'
+                  agencySortCode: 12-34-56
+                  remittanceEmail: remittance@agency.com
+                  gasSafetyCertificates:
+                  - yearGasCheckCompleted: '2024'
+                    dateProvidedToTenants: '2024-03-15'
+                    methodOfProvision: Hard copy in person
+                  - yearGasCheckCompleted: '2025'
+                    dateProvidedToTenants: '2025-03-20'
+                    methodOfProvision: Email/Electronic copy
+                  howToRentGuides:
+                  - guideVersion: October 2023
+                    dateProvidedToTenant: '2023-11-01'
+                    methodOfProvision: Hard copy by post
+                  - guideVersion: March 2023
+                    dateProvidedToTenant: '2023-04-15'
+                    methodOfProvision: Other
+                  tribunalNotificationDate: '2026-03-01'
+                  marketValueExplanation: Based on comparable local listings within 0.5 miles
+                  firstMonthRentRequestedViaGoodlord: 'Yes'
+                  keysHandedOverDate: '2026-02-15'
+                  tenantOccupationDate: '2026-02-16'
+                  detailsOfAntiSocialBehaviour: Repeated noise complaints from neighbours
+                  dateAwareOfAntiSocialBehaviour: '2026-02-20'
+                  rraInfoSheetIssueDate: '2026-04-15'
+                  rraInfoSheetIssueMethod: By Email/Electronic copy
+                  statementOfTermsInTenancyAgreement: 'Yes'
+                  statementOfTermsIssuedDate: '2026-04-15'
+                  statementOfTermsIssuedMethod: By Email/Electronic copy
+                  firstMonthRentRequestedBeforeSigning: 'No'
+                  firstMonthRentRequestedDate: '2026-04-20'
+                  originalTenancyStartDate: '2026-03-01'
+        required: true
+  /api/v1/insurance_claims/{id}/submit:
+    post:
+      operationId: api_insurance_claims_idsubmit_post
+      tags:
+      - InsuranceClaim
+      responses:
+        '201':
+          description: InsuranceClaim resource created
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/InsuranceClaim.jsonapi'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InsuranceClaim'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/InsuranceClaim.csv'
+          links: {}
+        '400':
+          description: Invalid input
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Error.jsonapi'
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          links: {}
+        '422':
+          description: An error occurred
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/ConstraintViolation.jsonapi'
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ConstraintViolation'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConstraintViolation'
+          links: {}
+        '403':
+          description: Forbidden
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Error.jsonapi'
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          links: {}
+      summary: Submit an insurance claim
+      description: Creates a InsuranceClaim resource.
+      parameters:
+      - name: id
+        in: path
+        description: InsuranceClaim identifier
+        required: true
+        deprecated: false
+        schema:
+          type: string
+        style: simple
+        explode: false
+      requestBody:
+        description: The new InsuranceClaim resource
+        content:
+          application/vnd.api+json:
+            schema:
+              type: object
+              example: {}
+        required: false
+components:
+  schemas:
+    JsonApiCollectionBaseSchema:
+      allOf:
+      - $ref: '#/components/schemas/JsonApiCollectionBaseSchemaNoPagination'
+      - type: object
+        properties:
+          links:
+            type: object
+            properties:
+              first:
+                type: string
+                format: iri-reference
+              prev:
+                type: string
+                format: iri-reference
+              next:
+                type: string
+                format: iri-reference
+              last:
+                type: string
+                format: iri-reference
+            example:
+              first: string
+              prev: string
+              next: string
+              last: string
+          meta:
+            type: object
+            properties:
+              itemsPerPage:
+                type: integer
+                minimum: 0
+              currentPage:
+                type: integer
+                minimum: 0
+    JsonApiCollectionBaseSchemaNoPagination:
+      type: object
+      properties:
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+              format: iri-reference
+          example:
+            self: string
+        meta:
+          type: object
+          properties:
+            totalItems:
+              type: integer
+              minimum: 0
+        data:
+          type: array
+      required:
+      - data
+    InsuranceClaim.csv:
+      type: object
+      properties:
+        id:
+          type: string
+        externalId:
+          type: string
+        createdAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        updatedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        propertyAddress:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+        claimStatus:
+          type: string
+        totalPaymentAmount:
+          type: object
+          additionalProperties:
+            anyOf:
+            - type: integer
+            - type: string
+        claimReference:
+          type: string
+        firstArrearsDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        mediationResponse:
+          type:
+          - string
+          - 'null'
+        claimStatusDescription:
+          type: string
+        claimDate:
+          type: string
+          format: date-time
+        policyId:
+          type: integer
+        company:
+          type: string
+          format: iri-reference
+          example: https://example.com/
+        tenancyId:
+          type:
+          - string
+          - 'null'
+        legalStatus:
+          type:
+          - string
+          - 'null'
+        latestPaymentDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        solicitorsClaimReference:
+          type:
+          - string
+          - 'null'
+        firmInstructed:
+          type:
+          - string
+          - 'null'
+        dateLegalInstructed:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        section8DateServed:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        section8DateExpired:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        section21DateServed:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        section21DateExpired:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        dateProceedingsIssued:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        dateOfHearing:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        court:
+          type:
+          - string
+          - 'null'
+        hearingOutcome:
+          type:
+          - string
+          - 'null'
+        possessionDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        warrantsAppliedFor:
+          type:
+          - string
+          - 'null'
+        dateOfEviction:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        typeOfClaim:
+          type:
+          - string
+          - 'null'
+        rentScheduleStatus:
+          type:
+          - string
+          - 'null'
+        rentSchedule:
+          type:
+          - string
+          - 'null'
+          format: iri-reference
+          example: https://example.com/
+        files:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+            format: iri-reference
+            example: https://example.com/
+        payments:
+          type: array
+          items:
+            type: string
+            format: iri-reference
+            example: https://example.com/
+        rpiUniqueReferenceNumber:
+          type:
+          - string
+          - 'null'
+        agencyName:
+          type:
+          - string
+          - 'null'
+        agentName:
+          type:
+          - string
+          - 'null'
+        agencyEmail:
+          type:
+          - string
+          - 'null'
+        agencyPhone:
+          type:
+          - string
+          - 'null'
+        lettingAgentRegistrationNumber:
+          type:
+          - string
+          - 'null'
+        tenants:
+          type:
+          - array
+          - 'null'
+          items:
+            type: object
+            additionalProperties:
+              type:
+              - string
+              - 'null'
+        guarantors:
+          type:
+          - array
+          - 'null'
+          items:
+            type: object
+            additionalProperties:
+              type:
+              - string
+              - 'null'
+        landlords:
+          type:
+          - array
+          - 'null'
+          items:
+            type: object
+            additionalProperties:
+              type:
+              - string
+              - 'null'
+        landlordRegistrationNumber:
+          type:
+          - string
+          - 'null'
+        permittedOccupiersName:
+          type:
+          - string
+          - 'null'
+        isTenancyCreatedOnGoodlord:
+          type:
+          - string
+          - 'null'
+        isTenancyRemovedAndNowOnFixedTerm:
+          type:
+          - string
+          - 'null'
+        dateBecamePeriodic:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        referencingCompletedByGoodlord:
+          type:
+          - string
+          - 'null'
+        isGasAtProperty:
+          type:
+          - string
+          - 'null'
+        didUploadEpcToGoodlord:
+          type:
+          - string
+          - 'null'
+        dateEpcWasProvidedToTenant:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        howEpcWasGivenToTenant:
+          type:
+          - string
+          - 'null'
+        isEicrOnGoodlord:
+          type:
+          - string
+          - 'null'
+        depositType:
+          type:
+          - string
+          - 'null'
+        depositCollectedByGoodlord:
+          type:
+          - string
+          - 'null'
+        depositPaidBy:
+          type:
+          - string
+          - 'null'
+        dateDepositWasPaid:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        isDepositCertificateOnGoodlord:
+          type:
+          - string
+          - 'null'
+        dateDepositProtected:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        prescribedInformationGiven:
+          type:
+          - string
+          - 'null'
+        depositReplacementCoverLevel:
+          type:
+          - string
+          - 'null'
+        propertyRequiresLicense:
+          type:
+          - string
+          - 'null'
+        dateOfRentArrears:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        rentOutstanding:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            anyOf:
+            - type: integer
+            - type: string
+        reasonForNonPayment:
+          type:
+          - string
+          - 'null'
+        tenantsInDebtRespiteScheme:
+          type:
+          - string
+          - 'null'
+        detailsOfBreach:
+          type:
+          - string
+          - 'null'
+        dateAwareOfBreach:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        worksBeingClaimedForDamage:
+          type:
+          - string
+          - 'null'
+        depositUsedFor:
+          type:
+          - string
+          - 'null'
+        datePropertyDamageIdentified:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        currentDisputeInfo:
+          type:
+          - string
+          - 'null'
+        dateAwareOfDispute:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        trespassOrNuisanceInfo:
+          type:
+          - string
+          - 'null'
+        dateAwareOfTrespassOrNuisance:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        isPropertyStillOccupied:
+          type:
+          - string
+          - 'null'
+        verificationTenantIsStillOccupyingProperty:
+          type:
+          - string
+          - 'null'
+        dateLastInspection:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        dateTenantVacated:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        isClaimAgainstDepositFinalisedByDepositScheme:
+          type:
+          - string
+          - 'null'
+        isClaimAgainstDepositReplacementFinalised:
+          type:
+          - string
+          - 'null'
+        amountAwardedForRentArrears:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            anyOf:
+            - type: integer
+            - type: string
+        depositUseBreakdown:
+          type:
+          - string
+          - 'null'
+        howDepositClaimWasSettled:
+          type:
+          - string
+          - 'null'
+        depositReplacementUseBreakdown:
+          type:
+          - string
+          - 'null'
+        forwardingAddress:
+          type:
+          - string
+          - 'null'
+        agencyInstructedToReLet:
+          type:
+          - string
+          - 'null'
+        isPropertyAlreadyReLet:
+          type:
+          - string
+          - 'null'
+        dateNewTenancy:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        possessionNoticesServed:
+          type:
+          - string
+          - 'null'
+        otherNoticesServed:
+          type:
+          - string
+          - 'null'
+        disputesBetweenTenantAndLandlord:
+          type:
+          - string
+          - 'null'
+        detailsOfDisputesBetweenTenantAndLandlord:
+          type:
+          - string
+          - 'null'
+        otherRelevantClaimInfo:
+          type:
+          - string
+          - 'null'
+        noticesServedToLandlord:
+          type:
+          - string
+          - 'null'
+        agencyAccountName:
+          type:
+          - string
+          - 'null'
+        agencyAccountNumber:
+          type:
+          - string
+          - 'null'
+        agencySortCode:
+          type:
+          - string
+          - 'null'
+        remittanceEmail:
+          type:
+          - string
+          - 'null'
+        gasSafetyCertificates:
+          type:
+          - array
+          - 'null'
+          items:
+            type: object
+            additionalProperties:
+              type:
+              - string
+              - 'null'
+        howToRentGuides:
+          type:
+          - array
+          - 'null'
+          items:
+            type: object
+            additionalProperties:
+              type:
+              - string
+              - 'null'
+        tribunalNotificationDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        marketValueExplanation:
+          type:
+          - string
+          - 'null'
+        firstMonthRentRequestedViaGoodlord:
+          type:
+          - string
+          - 'null'
+        keysHandedOverDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        tenantOccupationDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        detailsOfAntiSocialBehaviour:
+          type:
+          - string
+          - 'null'
+        dateAwareOfAntiSocialBehaviour:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        rraInfoSheetIssueDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        rraInfoSheetIssueMethod:
+          type:
+          - string
+          - 'null'
+        statementOfTermsInTenancyAgreement:
+          type:
+          - string
+          - 'null'
+        statementOfTermsIssuedDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        statementOfTermsIssuedMethod:
+          type:
+          - string
+          - 'null'
+        firstMonthRentRequestedBeforeSigning:
+          type:
+          - string
+          - 'null'
+        firstMonthRentRequestedDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        originalTenancyStartDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+    Payment:
+      type: object
+      properties:
+        id:
+          readOnly: true
+          type: string
+        referenceNumber:
+          readOnly: true
+          type: string
+        paymentStatusIdentifier:
+          readOnly: true
+          type: string
+        paymentStatusDescription:
+          readOnly: true
+          type: string
+        insurer:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        paymentDate:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+          format: date-time
+        paymentCreatedAt:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+          format: date-time
+        paymentSubmittedAt:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+          format: date-time
+        paymentPaidAt:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+          format: date-time
+        refundDueAmount:
+          readOnly: true
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            anyOf:
+            - type: integer
+            - type: string
+        customerPaymentUpdate:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        paymentAmount:
+          readOnly: true
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            anyOf:
+            - type: integer
+            - type: string
+        createdAt:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+          format: date-time
+        insuranceClaim:
+          readOnly: true
+          type: string
+          format: iri-reference
+          example: https://example.com/
+    RentSchedule:
+      type: object
+      properties:
+        id:
+          readOnly: true
+          type: string
+        submittedAt:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+          format: date-time
+        syncedAt:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+          format: date-time
+        deletedAt:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+          format: date-time
+        createdAt:
+          readOnly: true
+          type: string
+          format: date-time
+        updatedAt:
+          readOnly: true
+          type: string
+          format: date-time
+        insuranceClaim:
+          readOnly: true
+          type: string
+          format: iri-reference
+          example: https://example.com/
+        rentScheduleRows:
+          readOnly: true
+          type: array
+          items:
+            type: string
+            format: iri-reference
+            example: https://example.com/
+    Company-insurance_claim.read:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type:
+          - string
+          - 'null'
+        externalId:
+          type: string
+    Company:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type:
+          - string
+          - 'null'
+        externalId:
+          type: string
+    RentScheduleRowAuditGetDto:
+      type: object
+      properties:
+        type:
+          type: string
+        text:
+          type: string
+        changedBy:
+          type:
+          - string
+          - 'null'
+        changedAt:
+          type: string
+          format: date-time
+        changes:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+    Payment.csv-insurance_claim.read:
+      type: object
+      properties:
+        id:
+          readOnly: true
+          type: string
+        referenceNumber:
+          readOnly: true
+          type: string
+        paymentStatusIdentifier:
+          readOnly: true
+          type: string
+        paymentStatusDescription:
+          readOnly: true
+          type: string
+        insurer:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        paymentDate:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+          format: date-time
+        paymentCreatedAt:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+          format: date-time
+        paymentSubmittedAt:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+          format: date-time
+        paymentPaidAt:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+          format: date-time
+        refundDueAmount:
+          readOnly: true
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            anyOf:
+            - type: integer
+            - type: string
+        customerPaymentUpdate:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        paymentAmount:
+          readOnly: true
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            anyOf:
+            - type: integer
+            - type: string
+        createdAt:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+          format: date-time
+    ConstraintViolation:
+      type: object
+      description: Unprocessable entity
+      properties:
+        status:
+          default: 422
+          type: integer
+        detail:
+          readOnly: true
+          type: string
+        type:
+          readOnly: true
+          type: string
+        title:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        instance:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+    RentSchedule.jsonapi:
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+            attributes:
+              $ref: '#/components/schemas/RentSchedule'
+            relationships:
+              type: object
+              properties:
+                insuranceClaim:
+                  properties:
+                    data:
+                      oneOf:
+                      - type: 'null'
+                      - type: object
+                        properties:
+                          type:
+                            type: string
+                          id:
+                            type: string
+                            format: iri-reference
+                rentScheduleRows:
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          type:
+                            type: string
+                          id:
+                            type: string
+                            format: iri-reference
+          required:
+          - type
+          - id
+        included:
+          description: Related resources requested via the "include" query parameter.
+          type: array
+          items:
+            anyOf:
+            - $ref: '#/components/schemas/InsuranceClaim.jsonapi'
+            - $ref: '#/components/schemas/RentScheduleRow.jsonapi'
+          readOnly: true
+          externalDocs:
+            url: https://jsonapi.org/format/#fetching-includes
+    Payment.jsonapi:
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+            attributes:
+              $ref: '#/components/schemas/Payment'
+            relationships:
+              type: object
+              properties:
+                insuranceClaim:
+                  properties:
+                    data:
+                      oneOf:
+                      - type: 'null'
+                      - type: object
+                        properties:
+                          type:
+                            type: string
+                          id:
+                            type: string
+                            format: iri-reference
+          required:
+          - type
+          - id
+        included:
+          description: Related resources requested via the "include" query parameter.
+          type: array
+          items:
+            anyOf:
+            - $ref: '#/components/schemas/InsuranceClaim.jsonapi'
+          readOnly: true
+          externalDocs:
+            url: https://jsonapi.org/format/#fetching-includes
+    InsuranceClaim-insurance_claim.read:
+      type: object
+      properties:
+        id:
+          type: string
+        externalId:
+          type: string
+        createdAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        updatedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        propertyAddress:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+        claimStatus:
+          type: string
+        totalPaymentAmount:
+          type: object
+          additionalProperties:
+            anyOf:
+            - type: integer
+            - type: string
+        claimReference:
+          type: string
+        firstArrearsDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        mediationResponse:
+          type:
+          - string
+          - 'null'
+        claimStatusDescription:
+          type: string
+        claimDate:
+          type: string
+          format: date-time
+        policyId:
+          type: integer
+        company:
+          $ref: '#/components/schemas/Company-insurance_claim.read'
+        tenancyId:
+          type:
+          - string
+          - 'null'
+        legalStatus:
+          type:
+          - string
+          - 'null'
+        latestPaymentDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        solicitorsClaimReference:
+          type:
+          - string
+          - 'null'
+        firmInstructed:
+          type:
+          - string
+          - 'null'
+        dateLegalInstructed:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        section8DateServed:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        section8DateExpired:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        section21DateServed:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        section21DateExpired:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        dateProceedingsIssued:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        dateOfHearing:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        court:
+          type:
+          - string
+          - 'null'
+        hearingOutcome:
+          type:
+          - string
+          - 'null'
+        possessionDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        warrantsAppliedFor:
+          type:
+          - string
+          - 'null'
+        dateOfEviction:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        typeOfClaim:
+          type:
+          - string
+          - 'null'
+        rentScheduleStatus:
+          type:
+          - string
+          - 'null'
+        rentSchedule:
+          type:
+          - string
+          - 'null'
+          format: iri-reference
+          example: https://example.com/
+        files:
+          type: array
+          items:
+            $ref: '#/components/schemas/File-insurance_claim.read'
+        payments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Payment-insurance_claim.read'
+        rpiUniqueReferenceNumber:
+          type:
+          - string
+          - 'null'
+        agencyName:
+          type:
+          - string
+          - 'null'
+        agentName:
+          type:
+          - string
+          - 'null'
+        agencyEmail:
+          type:
+          - string
+          - 'null'
+        agencyPhone:
+          type:
+          - string
+          - 'null'
+        lettingAgentRegistrationNumber:
+          type:
+          - string
+          - 'null'
+        tenants:
+          type:
+          - array
+          - 'null'
+          items:
+            type: object
+            additionalProperties:
+              type:
+              - string
+              - 'null'
+        guarantors:
+          type:
+          - array
+          - 'null'
+          items:
+            type: object
+            additionalProperties:
+              type:
+              - string
+              - 'null'
+        landlords:
+          type:
+          - array
+          - 'null'
+          items:
+            type: object
+            additionalProperties:
+              type:
+              - string
+              - 'null'
+        landlordRegistrationNumber:
+          type:
+          - string
+          - 'null'
+        permittedOccupiersName:
+          type:
+          - string
+          - 'null'
+        isTenancyCreatedOnGoodlord:
+          type:
+          - string
+          - 'null'
+        isTenancyRemovedAndNowOnFixedTerm:
+          type:
+          - string
+          - 'null'
+        dateBecamePeriodic:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        referencingCompletedByGoodlord:
+          type:
+          - string
+          - 'null'
+        isGasAtProperty:
+          type:
+          - string
+          - 'null'
+        didUploadEpcToGoodlord:
+          type:
+          - string
+          - 'null'
+        dateEpcWasProvidedToTenant:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        howEpcWasGivenToTenant:
+          type:
+          - string
+          - 'null'
+        isEicrOnGoodlord:
+          type:
+          - string
+          - 'null'
+        depositType:
+          type:
+          - string
+          - 'null'
+        depositCollectedByGoodlord:
+          type:
+          - string
+          - 'null'
+        depositPaidBy:
+          type:
+          - string
+          - 'null'
+        dateDepositWasPaid:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        isDepositCertificateOnGoodlord:
+          type:
+          - string
+          - 'null'
+        dateDepositProtected:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        prescribedInformationGiven:
+          type:
+          - string
+          - 'null'
+        depositReplacementCoverLevel:
+          type:
+          - string
+          - 'null'
+        propertyRequiresLicense:
+          type:
+          - string
+          - 'null'
+        dateOfRentArrears:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        rentOutstanding:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            anyOf:
+            - type: integer
+            - type: string
+        reasonForNonPayment:
+          type:
+          - string
+          - 'null'
+        tenantsInDebtRespiteScheme:
+          type:
+          - string
+          - 'null'
+        detailsOfBreach:
+          type:
+          - string
+          - 'null'
+        dateAwareOfBreach:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        worksBeingClaimedForDamage:
+          type:
+          - string
+          - 'null'
+        depositUsedFor:
+          type:
+          - string
+          - 'null'
+        datePropertyDamageIdentified:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        currentDisputeInfo:
+          type:
+          - string
+          - 'null'
+        dateAwareOfDispute:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        trespassOrNuisanceInfo:
+          type:
+          - string
+          - 'null'
+        dateAwareOfTrespassOrNuisance:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        isPropertyStillOccupied:
+          type:
+          - string
+          - 'null'
+        verificationTenantIsStillOccupyingProperty:
+          type:
+          - string
+          - 'null'
+        dateLastInspection:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        dateTenantVacated:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        isClaimAgainstDepositFinalisedByDepositScheme:
+          type:
+          - string
+          - 'null'
+        isClaimAgainstDepositReplacementFinalised:
+          type:
+          - string
+          - 'null'
+        amountAwardedForRentArrears:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            anyOf:
+            - type: integer
+            - type: string
+        depositUseBreakdown:
+          type:
+          - string
+          - 'null'
+        howDepositClaimWasSettled:
+          type:
+          - string
+          - 'null'
+        depositReplacementUseBreakdown:
+          type:
+          - string
+          - 'null'
+        forwardingAddress:
+          type:
+          - string
+          - 'null'
+        agencyInstructedToReLet:
+          type:
+          - string
+          - 'null'
+        isPropertyAlreadyReLet:
+          type:
+          - string
+          - 'null'
+        dateNewTenancy:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        possessionNoticesServed:
+          type:
+          - string
+          - 'null'
+        otherNoticesServed:
+          type:
+          - string
+          - 'null'
+        disputesBetweenTenantAndLandlord:
+          type:
+          - string
+          - 'null'
+        detailsOfDisputesBetweenTenantAndLandlord:
+          type:
+          - string
+          - 'null'
+        otherRelevantClaimInfo:
+          type:
+          - string
+          - 'null'
+        noticesServedToLandlord:
+          type:
+          - string
+          - 'null'
+        agencyAccountName:
+          type:
+          - string
+          - 'null'
+        agencyAccountNumber:
+          type:
+          - string
+          - 'null'
+        agencySortCode:
+          type:
+          - string
+          - 'null'
+        remittanceEmail:
+          type:
+          - string
+          - 'null'
+        gasSafetyCertificates:
+          type:
+          - array
+          - 'null'
+          items:
+            type: object
+            additionalProperties:
+              type:
+              - string
+              - 'null'
+        howToRentGuides:
+          type:
+          - array
+          - 'null'
+          items:
+            type: object
+            additionalProperties:
+              type:
+              - string
+              - 'null'
+        tribunalNotificationDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        marketValueExplanation:
+          type:
+          - string
+          - 'null'
+        firstMonthRentRequestedViaGoodlord:
+          type:
+          - string
+          - 'null'
+        keysHandedOverDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        tenantOccupationDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        detailsOfAntiSocialBehaviour:
+          type:
+          - string
+          - 'null'
+        dateAwareOfAntiSocialBehaviour:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        rraInfoSheetIssueDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        rraInfoSheetIssueMethod:
+          type:
+          - string
+          - 'null'
+        statementOfTermsInTenancyAgreement:
+          type:
+          - string
+          - 'null'
+        statementOfTermsIssuedDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        statementOfTermsIssuedMethod:
+          type:
+          - string
+          - 'null'
+        firstMonthRentRequestedBeforeSigning:
+          type:
+          - string
+          - 'null'
+        firstMonthRentRequestedDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        originalTenancyStartDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+    InsuranceClaimUpdate.InsuranceClaimGetDto-insurance_claim.read:
+      type: object
+      properties:
+        id:
+          type: string
+        externalId:
+          type: string
+        createdAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        updatedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        propertyAddress:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+        claimStatus:
+          type: string
+        totalPaymentAmount:
+          type: object
+          additionalProperties:
+            anyOf:
+            - type: integer
+            - type: string
+        claimReference:
+          type: string
+        firstArrearsDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        mediationResponse:
+          type:
+          - string
+          - 'null'
+        claimStatusDescription:
+          type: string
+        claimDate:
+          type: string
+          format: date-time
+        policyId:
+          type: integer
+        company:
+          $ref: '#/components/schemas/Company-insurance_claim.read'
+        tenancyId:
+          type:
+          - string
+          - 'null'
+        legalStatus:
+          type:
+          - string
+          - 'null'
+        latestPaymentDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        solicitorsClaimReference:
+          type:
+          - string
+          - 'null'
+        firmInstructed:
+          type:
+          - string
+          - 'null'
+        dateLegalInstructed:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        section8DateServed:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        section8DateExpired:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        section21DateServed:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        section21DateExpired:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        dateProceedingsIssued:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        dateOfHearing:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        court:
+          type:
+          - string
+          - 'null'
+        hearingOutcome:
+          type:
+          - string
+          - 'null'
+        possessionDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        warrantsAppliedFor:
+          type:
+          - string
+          - 'null'
+        dateOfEviction:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        typeOfClaim:
+          type:
+          - string
+          - 'null'
+        rentScheduleStatus:
+          type:
+          - string
+          - 'null'
+        rentSchedule:
+          type:
+          - string
+          - 'null'
+          format: iri-reference
+          example: https://example.com/
+        files:
+          type: array
+          items:
+            $ref: '#/components/schemas/File-insurance_claim.read'
+        payments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Payment-insurance_claim.read'
+        rpiUniqueReferenceNumber:
+          type:
+          - string
+          - 'null'
+        agencyName:
+          type:
+          - string
+          - 'null'
+        agentName:
+          type:
+          - string
+          - 'null'
+        agencyEmail:
+          type:
+          - string
+          - 'null'
+        agencyPhone:
+          type:
+          - string
+          - 'null'
+        lettingAgentRegistrationNumber:
+          type:
+          - string
+          - 'null'
+        tenants:
+          type:
+          - array
+          - 'null'
+          items:
+            type: object
+            additionalProperties:
+              type:
+              - string
+              - 'null'
+        guarantors:
+          type:
+          - array
+          - 'null'
+          items:
+            type: object
+            additionalProperties:
+              type:
+              - string
+              - 'null'
+        landlords:
+          type:
+          - array
+          - 'null'
+          items:
+            type: object
+            additionalProperties:
+              type:
+              - string
+              - 'null'
+        landlordRegistrationNumber:
+          type:
+          - string
+          - 'null'
+        permittedOccupiersName:
+          type:
+          - string
+          - 'null'
+        isTenancyCreatedOnGoodlord:
+          type:
+          - string
+          - 'null'
+        isTenancyRemovedAndNowOnFixedTerm:
+          type:
+          - string
+          - 'null'
+        dateBecamePeriodic:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        referencingCompletedByGoodlord:
+          type:
+          - string
+          - 'null'
+        isGasAtProperty:
+          type:
+          - string
+          - 'null'
+        didUploadEpcToGoodlord:
+          type:
+          - string
+          - 'null'
+        dateEpcWasProvidedToTenant:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        howEpcWasGivenToTenant:
+          type:
+          - string
+          - 'null'
+        isEicrOnGoodlord:
+          type:
+          - string
+          - 'null'
+        depositType:
+          type:
+          - string
+          - 'null'
+        depositCollectedByGoodlord:
+          type:
+          - string
+          - 'null'
+        depositPaidBy:
+          type:
+          - string
+          - 'null'
+        dateDepositWasPaid:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        isDepositCertificateOnGoodlord:
+          type:
+          - string
+          - 'null'
+        dateDepositProtected:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        prescribedInformationGiven:
+          type:
+          - string
+          - 'null'
+        depositReplacementCoverLevel:
+          type:
+          - string
+          - 'null'
+        propertyRequiresLicense:
+          type:
+          - string
+          - 'null'
+        dateOfRentArrears:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        rentOutstanding:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            anyOf:
+            - type: integer
+            - type: string
+        reasonForNonPayment:
+          type:
+          - string
+          - 'null'
+        tenantsInDebtRespiteScheme:
+          type:
+          - string
+          - 'null'
+        detailsOfBreach:
+          type:
+          - string
+          - 'null'
+        dateAwareOfBreach:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        worksBeingClaimedForDamage:
+          type:
+          - string
+          - 'null'
+        depositUsedFor:
+          type:
+          - string
+          - 'null'
+        datePropertyDamageIdentified:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        currentDisputeInfo:
+          type:
+          - string
+          - 'null'
+        dateAwareOfDispute:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        trespassOrNuisanceInfo:
+          type:
+          - string
+          - 'null'
+        dateAwareOfTrespassOrNuisance:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        isPropertyStillOccupied:
+          type:
+          - string
+          - 'null'
+        verificationTenantIsStillOccupyingProperty:
+          type:
+          - string
+          - 'null'
+        dateLastInspection:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        dateTenantVacated:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        isClaimAgainstDepositFinalisedByDepositScheme:
+          type:
+          - string
+          - 'null'
+        isClaimAgainstDepositReplacementFinalised:
+          type:
+          - string
+          - 'null'
+        amountAwardedForRentArrears:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            anyOf:
+            - type: integer
+            - type: string
+        depositUseBreakdown:
+          type:
+          - string
+          - 'null'
+        howDepositClaimWasSettled:
+          type:
+          - string
+          - 'null'
+        depositReplacementUseBreakdown:
+          type:
+          - string
+          - 'null'
+        forwardingAddress:
+          type:
+          - string
+          - 'null'
+        agencyInstructedToReLet:
+          type:
+          - string
+          - 'null'
+        isPropertyAlreadyReLet:
+          type:
+          - string
+          - 'null'
+        dateNewTenancy:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        possessionNoticesServed:
+          type:
+          - string
+          - 'null'
+        otherNoticesServed:
+          type:
+          - string
+          - 'null'
+        disputesBetweenTenantAndLandlord:
+          type:
+          - string
+          - 'null'
+        detailsOfDisputesBetweenTenantAndLandlord:
+          type:
+          - string
+          - 'null'
+        otherRelevantClaimInfo:
+          type:
+          - string
+          - 'null'
+        noticesServedToLandlord:
+          type:
+          - string
+          - 'null'
+        agencyAccountName:
+          type:
+          - string
+          - 'null'
+        agencyAccountNumber:
+          type:
+          - string
+          - 'null'
+        agencySortCode:
+          type:
+          - string
+          - 'null'
+        remittanceEmail:
+          type:
+          - string
+          - 'null'
+        gasSafetyCertificates:
+          type:
+          - array
+          - 'null'
+          items:
+            type: object
+            additionalProperties:
+              type:
+              - string
+              - 'null'
+        howToRentGuides:
+          type:
+          - array
+          - 'null'
+          items:
+            type: object
+            additionalProperties:
+              type:
+              - string
+              - 'null'
+        tribunalNotificationDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        marketValueExplanation:
+          type:
+          - string
+          - 'null'
+        firstMonthRentRequestedViaGoodlord:
+          type:
+          - string
+          - 'null'
+        keysHandedOverDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        tenantOccupationDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        detailsOfAntiSocialBehaviour:
+          type:
+          - string
+          - 'null'
+        dateAwareOfAntiSocialBehaviour:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        rraInfoSheetIssueDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        rraInfoSheetIssueMethod:
+          type:
+          - string
+          - 'null'
+        statementOfTermsInTenancyAgreement:
+          type:
+          - string
+          - 'null'
+        statementOfTermsIssuedDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        statementOfTermsIssuedMethod:
+          type:
+          - string
+          - 'null'
+        firstMonthRentRequestedBeforeSigning:
+          type:
+          - string
+          - 'null'
+        firstMonthRentRequestedDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        originalTenancyStartDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+    Company.csv-insurance_claim.read:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type:
+          - string
+          - 'null'
+        externalId:
+          type: string
+    File.csv-insurance_claim.read:
+      type: object
+      properties:
+        id:
+          readOnly: true
+          type: string
+        fileName:
+          readOnly: true
+          type: string
+        originalFileName:
+          readOnly: true
+          type: string
+        fileSize:
+          readOnly: true
+          type:
+          - integer
+          - 'null'
+        mimeType:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        fileType:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        createdAt:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+          format: date-time
+    InsuranceClaim:
+      type: object
+      properties:
+        id:
+          type: string
+        externalId:
+          type: string
+        createdAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        updatedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        propertyAddress:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+        claimStatus:
+          type: string
+        totalPaymentAmount:
+          type: object
+          additionalProperties:
+            anyOf:
+            - type: integer
+            - type: string
+        claimReference:
+          type: string
+        firstArrearsDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        mediationResponse:
+          type:
+          - string
+          - 'null'
+        claimStatusDescription:
+          type: string
+        claimDate:
+          type: string
+          format: date-time
+        policyId:
+          type: integer
+        company:
+          type: string
+          format: iri-reference
+          example: https://example.com/
+        tenancyId:
+          type:
+          - string
+          - 'null'
+        legalStatus:
+          type:
+          - string
+          - 'null'
+        latestPaymentDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        solicitorsClaimReference:
+          type:
+          - string
+          - 'null'
+        firmInstructed:
+          type:
+          - string
+          - 'null'
+        dateLegalInstructed:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        section8DateServed:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        section8DateExpired:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        section21DateServed:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        section21DateExpired:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        dateProceedingsIssued:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        dateOfHearing:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        court:
+          type:
+          - string
+          - 'null'
+        hearingOutcome:
+          type:
+          - string
+          - 'null'
+        possessionDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        warrantsAppliedFor:
+          type:
+          - string
+          - 'null'
+        dateOfEviction:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        typeOfClaim:
+          type:
+          - string
+          - 'null'
+        rentScheduleStatus:
+          type:
+          - string
+          - 'null'
+        rentSchedule:
+          type:
+          - string
+          - 'null'
+          format: iri-reference
+          example: https://example.com/
+        files:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+            format: iri-reference
+            example: https://example.com/
+        payments:
+          type: array
+          items:
+            type: string
+            format: iri-reference
+            example: https://example.com/
+        rpiUniqueReferenceNumber:
+          type:
+          - string
+          - 'null'
+        agencyName:
+          type:
+          - string
+          - 'null'
+        agentName:
+          type:
+          - string
+          - 'null'
+        agencyEmail:
+          type:
+          - string
+          - 'null'
+        agencyPhone:
+          type:
+          - string
+          - 'null'
+        lettingAgentRegistrationNumber:
+          type:
+          - string
+          - 'null'
+        tenants:
+          type:
+          - array
+          - 'null'
+          items:
+            type: object
+            additionalProperties:
+              type:
+              - string
+              - 'null'
+        guarantors:
+          type:
+          - array
+          - 'null'
+          items:
+            type: object
+            additionalProperties:
+              type:
+              - string
+              - 'null'
+        landlords:
+          type:
+          - array
+          - 'null'
+          items:
+            type: object
+            additionalProperties:
+              type:
+              - string
+              - 'null'
+        landlordRegistrationNumber:
+          type:
+          - string
+          - 'null'
+        permittedOccupiersName:
+          type:
+          - string
+          - 'null'
+        isTenancyCreatedOnGoodlord:
+          type:
+          - string
+          - 'null'
+        isTenancyRemovedAndNowOnFixedTerm:
+          type:
+          - string
+          - 'null'
+        dateBecamePeriodic:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        referencingCompletedByGoodlord:
+          type:
+          - string
+          - 'null'
+        isGasAtProperty:
+          type:
+          - string
+          - 'null'
+        didUploadEpcToGoodlord:
+          type:
+          - string
+          - 'null'
+        dateEpcWasProvidedToTenant:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        howEpcWasGivenToTenant:
+          type:
+          - string
+          - 'null'
+        isEicrOnGoodlord:
+          type:
+          - string
+          - 'null'
+        depositType:
+          type:
+          - string
+          - 'null'
+        depositCollectedByGoodlord:
+          type:
+          - string
+          - 'null'
+        depositPaidBy:
+          type:
+          - string
+          - 'null'
+        dateDepositWasPaid:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        isDepositCertificateOnGoodlord:
+          type:
+          - string
+          - 'null'
+        dateDepositProtected:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        prescribedInformationGiven:
+          type:
+          - string
+          - 'null'
+        depositReplacementCoverLevel:
+          type:
+          - string
+          - 'null'
+        propertyRequiresLicense:
+          type:
+          - string
+          - 'null'
+        dateOfRentArrears:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        rentOutstanding:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            anyOf:
+            - type: integer
+            - type: string
+        reasonForNonPayment:
+          type:
+          - string
+          - 'null'
+        tenantsInDebtRespiteScheme:
+          type:
+          - string
+          - 'null'
+        detailsOfBreach:
+          type:
+          - string
+          - 'null'
+        dateAwareOfBreach:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        worksBeingClaimedForDamage:
+          type:
+          - string
+          - 'null'
+        depositUsedFor:
+          type:
+          - string
+          - 'null'
+        datePropertyDamageIdentified:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        currentDisputeInfo:
+          type:
+          - string
+          - 'null'
+        dateAwareOfDispute:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        trespassOrNuisanceInfo:
+          type:
+          - string
+          - 'null'
+        dateAwareOfTrespassOrNuisance:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        isPropertyStillOccupied:
+          type:
+          - string
+          - 'null'
+        verificationTenantIsStillOccupyingProperty:
+          type:
+          - string
+          - 'null'
+        dateLastInspection:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        dateTenantVacated:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        isClaimAgainstDepositFinalisedByDepositScheme:
+          type:
+          - string
+          - 'null'
+        isClaimAgainstDepositReplacementFinalised:
+          type:
+          - string
+          - 'null'
+        amountAwardedForRentArrears:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            anyOf:
+            - type: integer
+            - type: string
+        depositUseBreakdown:
+          type:
+          - string
+          - 'null'
+        howDepositClaimWasSettled:
+          type:
+          - string
+          - 'null'
+        depositReplacementUseBreakdown:
+          type:
+          - string
+          - 'null'
+        forwardingAddress:
+          type:
+          - string
+          - 'null'
+        agencyInstructedToReLet:
+          type:
+          - string
+          - 'null'
+        isPropertyAlreadyReLet:
+          type:
+          - string
+          - 'null'
+        dateNewTenancy:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        possessionNoticesServed:
+          type:
+          - string
+          - 'null'
+        otherNoticesServed:
+          type:
+          - string
+          - 'null'
+        disputesBetweenTenantAndLandlord:
+          type:
+          - string
+          - 'null'
+        detailsOfDisputesBetweenTenantAndLandlord:
+          type:
+          - string
+          - 'null'
+        otherRelevantClaimInfo:
+          type:
+          - string
+          - 'null'
+        noticesServedToLandlord:
+          type:
+          - string
+          - 'null'
+        agencyAccountName:
+          type:
+          - string
+          - 'null'
+        agencyAccountNumber:
+          type:
+          - string
+          - 'null'
+        agencySortCode:
+          type:
+          - string
+          - 'null'
+        remittanceEmail:
+          type:
+          - string
+          - 'null'
+        gasSafetyCertificates:
+          type:
+          - array
+          - 'null'
+          items:
+            type: object
+            additionalProperties:
+              type:
+              - string
+              - 'null'
+        howToRentGuides:
+          type:
+          - array
+          - 'null'
+          items:
+            type: object
+            additionalProperties:
+              type:
+              - string
+              - 'null'
+        tribunalNotificationDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        marketValueExplanation:
+          type:
+          - string
+          - 'null'
+        firstMonthRentRequestedViaGoodlord:
+          type:
+          - string
+          - 'null'
+        keysHandedOverDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        tenantOccupationDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        detailsOfAntiSocialBehaviour:
+          type:
+          - string
+          - 'null'
+        dateAwareOfAntiSocialBehaviour:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        rraInfoSheetIssueDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        rraInfoSheetIssueMethod:
+          type:
+          - string
+          - 'null'
+        statementOfTermsInTenancyAgreement:
+          type:
+          - string
+          - 'null'
+        statementOfTermsIssuedDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        statementOfTermsIssuedMethod:
+          type:
+          - string
+          - 'null'
+        firstMonthRentRequestedBeforeSigning:
+          type:
+          - string
+          - 'null'
+        firstMonthRentRequestedDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        originalTenancyStartDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+    InsuranceClaimCreate.InsuranceClaimGetDto.csv-insurance_claim.read:
+      type: object
+      properties:
+        id:
+          type: string
+        externalId:
+          type: string
+        createdAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        updatedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        propertyAddress:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+        claimStatus:
+          type: string
+        totalPaymentAmount:
+          type: object
+          additionalProperties:
+            anyOf:
+            - type: integer
+            - type: string
+        claimReference:
+          type: string
+        firstArrearsDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        mediationResponse:
+          type:
+          - string
+          - 'null'
+        claimStatusDescription:
+          type: string
+        claimDate:
+          type: string
+          format: date-time
+        policyId:
+          type: integer
+        company:
+          $ref: '#/components/schemas/Company.csv-insurance_claim.read'
+        tenancyId:
+          type:
+          - string
+          - 'null'
+        legalStatus:
+          type:
+          - string
+          - 'null'
+        latestPaymentDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        solicitorsClaimReference:
+          type:
+          - string
+          - 'null'
+        firmInstructed:
+          type:
+          - string
+          - 'null'
+        dateLegalInstructed:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        section8DateServed:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        section8DateExpired:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        section21DateServed:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        section21DateExpired:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        dateProceedingsIssued:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        dateOfHearing:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        court:
+          type:
+          - string
+          - 'null'
+        hearingOutcome:
+          type:
+          - string
+          - 'null'
+        possessionDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        warrantsAppliedFor:
+          type:
+          - string
+          - 'null'
+        dateOfEviction:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        typeOfClaim:
+          type:
+          - string
+          - 'null'
+        rentScheduleStatus:
+          type:
+          - string
+          - 'null'
+        rentSchedule:
+          type:
+          - string
+          - 'null'
+          format: iri-reference
+          example: https://example.com/
+        files:
+          type: array
+          items:
+            $ref: '#/components/schemas/File.csv-insurance_claim.read'
+        payments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Payment.csv-insurance_claim.read'
+        rpiUniqueReferenceNumber:
+          type:
+          - string
+          - 'null'
+        agencyName:
+          type:
+          - string
+          - 'null'
+        agentName:
+          type:
+          - string
+          - 'null'
+        agencyEmail:
+          type:
+          - string
+          - 'null'
+        agencyPhone:
+          type:
+          - string
+          - 'null'
+        lettingAgentRegistrationNumber:
+          type:
+          - string
+          - 'null'
+        tenants:
+          type:
+          - array
+          - 'null'
+          items:
+            type: object
+            additionalProperties:
+              type:
+              - string
+              - 'null'
+        guarantors:
+          type:
+          - array
+          - 'null'
+          items:
+            type: object
+            additionalProperties:
+              type:
+              - string
+              - 'null'
+        landlords:
+          type:
+          - array
+          - 'null'
+          items:
+            type: object
+            additionalProperties:
+              type:
+              - string
+              - 'null'
+        landlordRegistrationNumber:
+          type:
+          - string
+          - 'null'
+        permittedOccupiersName:
+          type:
+          - string
+          - 'null'
+        isTenancyCreatedOnGoodlord:
+          type:
+          - string
+          - 'null'
+        isTenancyRemovedAndNowOnFixedTerm:
+          type:
+          - string
+          - 'null'
+        dateBecamePeriodic:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        referencingCompletedByGoodlord:
+          type:
+          - string
+          - 'null'
+        isGasAtProperty:
+          type:
+          - string
+          - 'null'
+        didUploadEpcToGoodlord:
+          type:
+          - string
+          - 'null'
+        dateEpcWasProvidedToTenant:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        howEpcWasGivenToTenant:
+          type:
+          - string
+          - 'null'
+        isEicrOnGoodlord:
+          type:
+          - string
+          - 'null'
+        depositType:
+          type:
+          - string
+          - 'null'
+        depositCollectedByGoodlord:
+          type:
+          - string
+          - 'null'
+        depositPaidBy:
+          type:
+          - string
+          - 'null'
+        dateDepositWasPaid:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        isDepositCertificateOnGoodlord:
+          type:
+          - string
+          - 'null'
+        dateDepositProtected:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        prescribedInformationGiven:
+          type:
+          - string
+          - 'null'
+        depositReplacementCoverLevel:
+          type:
+          - string
+          - 'null'
+        propertyRequiresLicense:
+          type:
+          - string
+          - 'null'
+        dateOfRentArrears:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        rentOutstanding:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            anyOf:
+            - type: integer
+            - type: string
+        reasonForNonPayment:
+          type:
+          - string
+          - 'null'
+        tenantsInDebtRespiteScheme:
+          type:
+          - string
+          - 'null'
+        detailsOfBreach:
+          type:
+          - string
+          - 'null'
+        dateAwareOfBreach:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        worksBeingClaimedForDamage:
+          type:
+          - string
+          - 'null'
+        depositUsedFor:
+          type:
+          - string
+          - 'null'
+        datePropertyDamageIdentified:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        currentDisputeInfo:
+          type:
+          - string
+          - 'null'
+        dateAwareOfDispute:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        trespassOrNuisanceInfo:
+          type:
+          - string
+          - 'null'
+        dateAwareOfTrespassOrNuisance:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        isPropertyStillOccupied:
+          type:
+          - string
+          - 'null'
+        verificationTenantIsStillOccupyingProperty:
+          type:
+          - string
+          - 'null'
+        dateLastInspection:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        dateTenantVacated:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        isClaimAgainstDepositFinalisedByDepositScheme:
+          type:
+          - string
+          - 'null'
+        isClaimAgainstDepositReplacementFinalised:
+          type:
+          - string
+          - 'null'
+        amountAwardedForRentArrears:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            anyOf:
+            - type: integer
+            - type: string
+        depositUseBreakdown:
+          type:
+          - string
+          - 'null'
+        howDepositClaimWasSettled:
+          type:
+          - string
+          - 'null'
+        depositReplacementUseBreakdown:
+          type:
+          - string
+          - 'null'
+        forwardingAddress:
+          type:
+          - string
+          - 'null'
+        agencyInstructedToReLet:
+          type:
+          - string
+          - 'null'
+        isPropertyAlreadyReLet:
+          type:
+          - string
+          - 'null'
+        dateNewTenancy:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        possessionNoticesServed:
+          type:
+          - string
+          - 'null'
+        otherNoticesServed:
+          type:
+          - string
+          - 'null'
+        disputesBetweenTenantAndLandlord:
+          type:
+          - string
+          - 'null'
+        detailsOfDisputesBetweenTenantAndLandlord:
+          type:
+          - string
+          - 'null'
+        otherRelevantClaimInfo:
+          type:
+          - string
+          - 'null'
+        noticesServedToLandlord:
+          type:
+          - string
+          - 'null'
+        agencyAccountName:
+          type:
+          - string
+          - 'null'
+        agencyAccountNumber:
+          type:
+          - string
+          - 'null'
+        agencySortCode:
+          type:
+          - string
+          - 'null'
+        remittanceEmail:
+          type:
+          - string
+          - 'null'
+        gasSafetyCertificates:
+          type:
+          - array
+          - 'null'
+          items:
+            type: object
+            additionalProperties:
+              type:
+              - string
+              - 'null'
+        howToRentGuides:
+          type:
+          - array
+          - 'null'
+          items:
+            type: object
+            additionalProperties:
+              type:
+              - string
+              - 'null'
+        tribunalNotificationDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        marketValueExplanation:
+          type:
+          - string
+          - 'null'
+        firstMonthRentRequestedViaGoodlord:
+          type:
+          - string
+          - 'null'
+        keysHandedOverDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        tenantOccupationDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        detailsOfAntiSocialBehaviour:
+          type:
+          - string
+          - 'null'
+        dateAwareOfAntiSocialBehaviour:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        rraInfoSheetIssueDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        rraInfoSheetIssueMethod:
+          type:
+          - string
+          - 'null'
+        statementOfTermsInTenancyAgreement:
+          type:
+          - string
+          - 'null'
+        statementOfTermsIssuedDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        statementOfTermsIssuedMethod:
+          type:
+          - string
+          - 'null'
+        firstMonthRentRequestedBeforeSigning:
+          type:
+          - string
+          - 'null'
+        firstMonthRentRequestedDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        originalTenancyStartDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+    Payment-insurance_claim.read:
+      type: object
+      properties:
+        id:
+          readOnly: true
+          type: string
+        referenceNumber:
+          readOnly: true
+          type: string
+        paymentStatusIdentifier:
+          readOnly: true
+          type: string
+        paymentStatusDescription:
+          readOnly: true
+          type: string
+        insurer:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        paymentDate:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+          format: date-time
+        paymentCreatedAt:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+          format: date-time
+        paymentSubmittedAt:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+          format: date-time
+        paymentPaidAt:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+          format: date-time
+        refundDueAmount:
+          readOnly: true
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            anyOf:
+            - type: integer
+            - type: string
+        customerPaymentUpdate:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        paymentAmount:
+          readOnly: true
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            anyOf:
+            - type: integer
+            - type: string
+        createdAt:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+          format: date-time
+    RentScheduleRow:
+      type: object
+      properties:
+        audits:
+          type: array
+          items:
+            $ref: '#/components/schemas/RentScheduleRowAuditGetDto'
+        balance:
+          readOnly: true
+          description: API serialization - returns an array to avoid JSON:API wrapping of Money objects.
+          type: object
+          additionalProperties:
+            anyOf:
+            - type: integer
+            - type: string
+        id:
+          readOnly: true
+          type: string
+        rowType:
+          readOnly: true
+          description: API serialization - returns the string value to avoid JSON:API wrapping of enums.
+          type: string
+        date:
+          readOnly: true
+          type: string
+          format: date-time
+        amount:
+          type: object
+          properties:
+            amount:
+              type: integer
+              example: 123
+            currency:
+              type: string
+              example: GBP
+        note:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        submittedAt:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+          format: date-time
+        createdAt:
+          readOnly: true
+          type: string
+          format: date-time
+        updatedAt:
+          readOnly: true
+          type: string
+          format: date-time
+        deletedAt:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+          format: date-time
+        rentSchedule:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+          format: iri-reference
+          example: https://example.com/
+        insuranceClaim:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+          format: iri-reference
+          example: https://example.com/
+        insuranceClaimId:
+          readOnly: true
+          type: string
+        companyExternalId:
+          readOnly: true
+          description: 'Helper method for voter - gets company external ID directly from entity
+
+            without creating a DTO (which can fail in certain test contexts).'
+          type:
+          - string
+          - 'null'
+    File.jsonapi:
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+            attributes:
+              $ref: '#/components/schemas/File'
+            relationships:
+              type: object
+              properties:
+                insuranceClaim:
+                  properties:
+                    data:
+                      oneOf:
+                      - type: 'null'
+                      - type: object
+                        properties:
+                          type:
+                            type: string
+                          id:
+                            type: string
+                            format: iri-reference
+          required:
+          - type
+          - id
+        included:
+          description: Related resources requested via the "include" query parameter.
+          type: array
+          items:
+            anyOf:
+            - $ref: '#/components/schemas/InsuranceClaim.jsonapi'
+          readOnly: true
+          externalDocs:
+            url: https://jsonapi.org/format/#fetching-includes
+    ConstraintViolation.jsonapi:
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+            attributes:
+              $ref: '#/components/schemas/ConstraintViolation'
+          required:
+          - type
+          - id
+    InsuranceClaim.csv-insurance_claim.read:
+      type: object
+      properties:
+        id:
+          type: string
+        externalId:
+          type: string
+        createdAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        updatedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        propertyAddress:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+        claimStatus:
+          type: string
+        totalPaymentAmount:
+          type: object
+          additionalProperties:
+            anyOf:
+            - type: integer
+            - type: string
+        claimReference:
+          type: string
+        firstArrearsDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        mediationResponse:
+          type:
+          - string
+          - 'null'
+        claimStatusDescription:
+          type: string
+        claimDate:
+          type: string
+          format: date-time
+        policyId:
+          type: integer
+        company:
+          $ref: '#/components/schemas/Company.csv-insurance_claim.read'
+        tenancyId:
+          type:
+          - string
+          - 'null'
+        legalStatus:
+          type:
+          - string
+          - 'null'
+        latestPaymentDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        solicitorsClaimReference:
+          type:
+          - string
+          - 'null'
+        firmInstructed:
+          type:
+          - string
+          - 'null'
+        dateLegalInstructed:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        section8DateServed:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        section8DateExpired:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        section21DateServed:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        section21DateExpired:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        dateProceedingsIssued:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        dateOfHearing:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        court:
+          type:
+          - string
+          - 'null'
+        hearingOutcome:
+          type:
+          - string
+          - 'null'
+        possessionDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        warrantsAppliedFor:
+          type:
+          - string
+          - 'null'
+        dateOfEviction:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        typeOfClaim:
+          type:
+          - string
+          - 'null'
+        rentScheduleStatus:
+          type:
+          - string
+          - 'null'
+        rentSchedule:
+          type:
+          - string
+          - 'null'
+          format: iri-reference
+          example: https://example.com/
+        files:
+          type: array
+          items:
+            $ref: '#/components/schemas/File.csv-insurance_claim.read'
+        payments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Payment.csv-insurance_claim.read'
+        rpiUniqueReferenceNumber:
+          type:
+          - string
+          - 'null'
+        agencyName:
+          type:
+          - string
+          - 'null'
+        agentName:
+          type:
+          - string
+          - 'null'
+        agencyEmail:
+          type:
+          - string
+          - 'null'
+        agencyPhone:
+          type:
+          - string
+          - 'null'
+        lettingAgentRegistrationNumber:
+          type:
+          - string
+          - 'null'
+        tenants:
+          type:
+          - array
+          - 'null'
+          items:
+            type: object
+            additionalProperties:
+              type:
+              - string
+              - 'null'
+        guarantors:
+          type:
+          - array
+          - 'null'
+          items:
+            type: object
+            additionalProperties:
+              type:
+              - string
+              - 'null'
+        landlords:
+          type:
+          - array
+          - 'null'
+          items:
+            type: object
+            additionalProperties:
+              type:
+              - string
+              - 'null'
+        landlordRegistrationNumber:
+          type:
+          - string
+          - 'null'
+        permittedOccupiersName:
+          type:
+          - string
+          - 'null'
+        isTenancyCreatedOnGoodlord:
+          type:
+          - string
+          - 'null'
+        isTenancyRemovedAndNowOnFixedTerm:
+          type:
+          - string
+          - 'null'
+        dateBecamePeriodic:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        referencingCompletedByGoodlord:
+          type:
+          - string
+          - 'null'
+        isGasAtProperty:
+          type:
+          - string
+          - 'null'
+        didUploadEpcToGoodlord:
+          type:
+          - string
+          - 'null'
+        dateEpcWasProvidedToTenant:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        howEpcWasGivenToTenant:
+          type:
+          - string
+          - 'null'
+        isEicrOnGoodlord:
+          type:
+          - string
+          - 'null'
+        depositType:
+          type:
+          - string
+          - 'null'
+        depositCollectedByGoodlord:
+          type:
+          - string
+          - 'null'
+        depositPaidBy:
+          type:
+          - string
+          - 'null'
+        dateDepositWasPaid:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        isDepositCertificateOnGoodlord:
+          type:
+          - string
+          - 'null'
+        dateDepositProtected:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        prescribedInformationGiven:
+          type:
+          - string
+          - 'null'
+        depositReplacementCoverLevel:
+          type:
+          - string
+          - 'null'
+        propertyRequiresLicense:
+          type:
+          - string
+          - 'null'
+        dateOfRentArrears:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        rentOutstanding:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            anyOf:
+            - type: integer
+            - type: string
+        reasonForNonPayment:
+          type:
+          - string
+          - 'null'
+        tenantsInDebtRespiteScheme:
+          type:
+          - string
+          - 'null'
+        detailsOfBreach:
+          type:
+          - string
+          - 'null'
+        dateAwareOfBreach:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        worksBeingClaimedForDamage:
+          type:
+          - string
+          - 'null'
+        depositUsedFor:
+          type:
+          - string
+          - 'null'
+        datePropertyDamageIdentified:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        currentDisputeInfo:
+          type:
+          - string
+          - 'null'
+        dateAwareOfDispute:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        trespassOrNuisanceInfo:
+          type:
+          - string
+          - 'null'
+        dateAwareOfTrespassOrNuisance:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        isPropertyStillOccupied:
+          type:
+          - string
+          - 'null'
+        verificationTenantIsStillOccupyingProperty:
+          type:
+          - string
+          - 'null'
+        dateLastInspection:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        dateTenantVacated:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        isClaimAgainstDepositFinalisedByDepositScheme:
+          type:
+          - string
+          - 'null'
+        isClaimAgainstDepositReplacementFinalised:
+          type:
+          - string
+          - 'null'
+        amountAwardedForRentArrears:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            anyOf:
+            - type: integer
+            - type: string
+        depositUseBreakdown:
+          type:
+          - string
+          - 'null'
+        howDepositClaimWasSettled:
+          type:
+          - string
+          - 'null'
+        depositReplacementUseBreakdown:
+          type:
+          - string
+          - 'null'
+        forwardingAddress:
+          type:
+          - string
+          - 'null'
+        agencyInstructedToReLet:
+          type:
+          - string
+          - 'null'
+        isPropertyAlreadyReLet:
+          type:
+          - string
+          - 'null'
+        dateNewTenancy:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        possessionNoticesServed:
+          type:
+          - string
+          - 'null'
+        otherNoticesServed:
+          type:
+          - string
+          - 'null'
+        disputesBetweenTenantAndLandlord:
+          type:
+          - string
+          - 'null'
+        detailsOfDisputesBetweenTenantAndLandlord:
+          type:
+          - string
+          - 'null'
+        otherRelevantClaimInfo:
+          type:
+          - string
+          - 'null'
+        noticesServedToLandlord:
+          type:
+          - string
+          - 'null'
+        agencyAccountName:
+          type:
+          - string
+          - 'null'
+        agencyAccountNumber:
+          type:
+          - string
+          - 'null'
+        agencySortCode:
+          type:
+          - string
+          - 'null'
+        remittanceEmail:
+          type:
+          - string
+          - 'null'
+        gasSafetyCertificates:
+          type:
+          - array
+          - 'null'
+          items:
+            type: object
+            additionalProperties:
+              type:
+              - string
+              - 'null'
+        howToRentGuides:
+          type:
+          - array
+          - 'null'
+          items:
+            type: object
+            additionalProperties:
+              type:
+              - string
+              - 'null'
+        tribunalNotificationDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        marketValueExplanation:
+          type:
+          - string
+          - 'null'
+        firstMonthRentRequestedViaGoodlord:
+          type:
+          - string
+          - 'null'
+        keysHandedOverDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        tenantOccupationDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        detailsOfAntiSocialBehaviour:
+          type:
+          - string
+          - 'null'
+        dateAwareOfAntiSocialBehaviour:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        rraInfoSheetIssueDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        rraInfoSheetIssueMethod:
+          type:
+          - string
+          - 'null'
+        statementOfTermsInTenancyAgreement:
+          type:
+          - string
+          - 'null'
+        statementOfTermsIssuedDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        statementOfTermsIssuedMethod:
+          type:
+          - string
+          - 'null'
+        firstMonthRentRequestedBeforeSigning:
+          type:
+          - string
+          - 'null'
+        firstMonthRentRequestedDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        originalTenancyStartDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+    InsuranceClaim.jsonapi:
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+            attributes:
+              $ref: '#/components/schemas/InsuranceClaim'
+            relationships:
+              type: object
+              properties:
+                company:
+                  properties:
+                    data:
+                      oneOf:
+                      - type: 'null'
+                      - type: object
+                        properties:
+                          type:
+                            type: string
+                          id:
+                            type: string
+                            format: iri-reference
+                rentSchedule:
+                  properties:
+                    data:
+                      oneOf:
+                      - type: 'null'
+                      - type: object
+                        properties:
+                          type:
+                            type: string
+                          id:
+                            type: string
+                            format: iri-reference
+                files:
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          type:
+                            type: string
+                          id:
+                            type: string
+                            format: iri-reference
+                payments:
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          type:
+                            type: string
+                          id:
+                            type: string
+                            format: iri-reference
+          required:
+          - type
+          - id
+        included:
+          description: Related resources requested via the "include" query parameter.
+          type: array
+          items:
+            anyOf:
+            - $ref: '#/components/schemas/Company.jsonapi'
+            - $ref: '#/components/schemas/RentSchedule.jsonapi'
+            - $ref: '#/components/schemas/File.jsonapi'
+            - $ref: '#/components/schemas/Payment.jsonapi'
+          readOnly: true
+          externalDocs:
+            url: https://jsonapi.org/format/#fetching-includes
+    InsuranceClaimCreate.InsuranceClaimGetDto-insurance_claim.read:
+      type: object
+      properties:
+        id:
+          type: string
+        externalId:
+          type: string
+        createdAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        updatedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        propertyAddress:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+        claimStatus:
+          type: string
+        totalPaymentAmount:
+          type: object
+          additionalProperties:
+            anyOf:
+            - type: integer
+            - type: string
+        claimReference:
+          type: string
+        firstArrearsDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        mediationResponse:
+          type:
+          - string
+          - 'null'
+        claimStatusDescription:
+          type: string
+        claimDate:
+          type: string
+          format: date-time
+        policyId:
+          type: integer
+        company:
+          $ref: '#/components/schemas/Company-insurance_claim.read'
+        tenancyId:
+          type:
+          - string
+          - 'null'
+        legalStatus:
+          type:
+          - string
+          - 'null'
+        latestPaymentDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        solicitorsClaimReference:
+          type:
+          - string
+          - 'null'
+        firmInstructed:
+          type:
+          - string
+          - 'null'
+        dateLegalInstructed:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        section8DateServed:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        section8DateExpired:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        section21DateServed:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        section21DateExpired:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        dateProceedingsIssued:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        dateOfHearing:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        court:
+          type:
+          - string
+          - 'null'
+        hearingOutcome:
+          type:
+          - string
+          - 'null'
+        possessionDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        warrantsAppliedFor:
+          type:
+          - string
+          - 'null'
+        dateOfEviction:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        typeOfClaim:
+          type:
+          - string
+          - 'null'
+        rentScheduleStatus:
+          type:
+          - string
+          - 'null'
+        rentSchedule:
+          type:
+          - string
+          - 'null'
+          format: iri-reference
+          example: https://example.com/
+        files:
+          type: array
+          items:
+            $ref: '#/components/schemas/File-insurance_claim.read'
+        payments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Payment-insurance_claim.read'
+        rpiUniqueReferenceNumber:
+          type:
+          - string
+          - 'null'
+        agencyName:
+          type:
+          - string
+          - 'null'
+        agentName:
+          type:
+          - string
+          - 'null'
+        agencyEmail:
+          type:
+          - string
+          - 'null'
+        agencyPhone:
+          type:
+          - string
+          - 'null'
+        lettingAgentRegistrationNumber:
+          type:
+          - string
+          - 'null'
+        tenants:
+          type:
+          - array
+          - 'null'
+          items:
+            type: object
+            additionalProperties:
+              type:
+              - string
+              - 'null'
+        guarantors:
+          type:
+          - array
+          - 'null'
+          items:
+            type: object
+            additionalProperties:
+              type:
+              - string
+              - 'null'
+        landlords:
+          type:
+          - array
+          - 'null'
+          items:
+            type: object
+            additionalProperties:
+              type:
+              - string
+              - 'null'
+        landlordRegistrationNumber:
+          type:
+          - string
+          - 'null'
+        permittedOccupiersName:
+          type:
+          - string
+          - 'null'
+        isTenancyCreatedOnGoodlord:
+          type:
+          - string
+          - 'null'
+        isTenancyRemovedAndNowOnFixedTerm:
+          type:
+          - string
+          - 'null'
+        dateBecamePeriodic:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        referencingCompletedByGoodlord:
+          type:
+          - string
+          - 'null'
+        isGasAtProperty:
+          type:
+          - string
+          - 'null'
+        didUploadEpcToGoodlord:
+          type:
+          - string
+          - 'null'
+        dateEpcWasProvidedToTenant:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        howEpcWasGivenToTenant:
+          type:
+          - string
+          - 'null'
+        isEicrOnGoodlord:
+          type:
+          - string
+          - 'null'
+        depositType:
+          type:
+          - string
+          - 'null'
+        depositCollectedByGoodlord:
+          type:
+          - string
+          - 'null'
+        depositPaidBy:
+          type:
+          - string
+          - 'null'
+        dateDepositWasPaid:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        isDepositCertificateOnGoodlord:
+          type:
+          - string
+          - 'null'
+        dateDepositProtected:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        prescribedInformationGiven:
+          type:
+          - string
+          - 'null'
+        depositReplacementCoverLevel:
+          type:
+          - string
+          - 'null'
+        propertyRequiresLicense:
+          type:
+          - string
+          - 'null'
+        dateOfRentArrears:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        rentOutstanding:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            anyOf:
+            - type: integer
+            - type: string
+        reasonForNonPayment:
+          type:
+          - string
+          - 'null'
+        tenantsInDebtRespiteScheme:
+          type:
+          - string
+          - 'null'
+        detailsOfBreach:
+          type:
+          - string
+          - 'null'
+        dateAwareOfBreach:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        worksBeingClaimedForDamage:
+          type:
+          - string
+          - 'null'
+        depositUsedFor:
+          type:
+          - string
+          - 'null'
+        datePropertyDamageIdentified:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        currentDisputeInfo:
+          type:
+          - string
+          - 'null'
+        dateAwareOfDispute:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        trespassOrNuisanceInfo:
+          type:
+          - string
+          - 'null'
+        dateAwareOfTrespassOrNuisance:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        isPropertyStillOccupied:
+          type:
+          - string
+          - 'null'
+        verificationTenantIsStillOccupyingProperty:
+          type:
+          - string
+          - 'null'
+        dateLastInspection:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        dateTenantVacated:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        isClaimAgainstDepositFinalisedByDepositScheme:
+          type:
+          - string
+          - 'null'
+        isClaimAgainstDepositReplacementFinalised:
+          type:
+          - string
+          - 'null'
+        amountAwardedForRentArrears:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            anyOf:
+            - type: integer
+            - type: string
+        depositUseBreakdown:
+          type:
+          - string
+          - 'null'
+        howDepositClaimWasSettled:
+          type:
+          - string
+          - 'null'
+        depositReplacementUseBreakdown:
+          type:
+          - string
+          - 'null'
+        forwardingAddress:
+          type:
+          - string
+          - 'null'
+        agencyInstructedToReLet:
+          type:
+          - string
+          - 'null'
+        isPropertyAlreadyReLet:
+          type:
+          - string
+          - 'null'
+        dateNewTenancy:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        possessionNoticesServed:
+          type:
+          - string
+          - 'null'
+        otherNoticesServed:
+          type:
+          - string
+          - 'null'
+        disputesBetweenTenantAndLandlord:
+          type:
+          - string
+          - 'null'
+        detailsOfDisputesBetweenTenantAndLandlord:
+          type:
+          - string
+          - 'null'
+        otherRelevantClaimInfo:
+          type:
+          - string
+          - 'null'
+        noticesServedToLandlord:
+          type:
+          - string
+          - 'null'
+        agencyAccountName:
+          type:
+          - string
+          - 'null'
+        agencyAccountNumber:
+          type:
+          - string
+          - 'null'
+        agencySortCode:
+          type:
+          - string
+          - 'null'
+        remittanceEmail:
+          type:
+          - string
+          - 'null'
+        gasSafetyCertificates:
+          type:
+          - array
+          - 'null'
+          items:
+            type: object
+            additionalProperties:
+              type:
+              - string
+              - 'null'
+        howToRentGuides:
+          type:
+          - array
+          - 'null'
+          items:
+            type: object
+            additionalProperties:
+              type:
+              - string
+              - 'null'
+        tribunalNotificationDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        marketValueExplanation:
+          type:
+          - string
+          - 'null'
+        firstMonthRentRequestedViaGoodlord:
+          type:
+          - string
+          - 'null'
+        keysHandedOverDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        tenantOccupationDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        detailsOfAntiSocialBehaviour:
+          type:
+          - string
+          - 'null'
+        dateAwareOfAntiSocialBehaviour:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        rraInfoSheetIssueDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        rraInfoSheetIssueMethod:
+          type:
+          - string
+          - 'null'
+        statementOfTermsInTenancyAgreement:
+          type:
+          - string
+          - 'null'
+        statementOfTermsIssuedDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        statementOfTermsIssuedMethod:
+          type:
+          - string
+          - 'null'
+        firstMonthRentRequestedBeforeSigning:
+          type:
+          - string
+          - 'null'
+        firstMonthRentRequestedDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        originalTenancyStartDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+    Error.jsonapi:
+      properties:
+        errors:
+          type: array
+          items:
+            allOf:
+            - $ref: '#/components/schemas/Error'
+            - type: object
+              properties:
+                source:
+                  type: object
+                status:
+                  type: string
+    InsuranceClaimCreate.InsuranceClaimPostDto.jsonapi-insurance_claim.read:
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+            attributes:
+              $ref: '#/components/schemas/InsuranceClaimCreate.InsuranceClaimGetDto-insurance_claim.read'
+          required:
+          - type
+          - id
+    RentScheduleRow.jsonapi:
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+            attributes:
+              $ref: '#/components/schemas/RentScheduleRow'
+            relationships:
+              type: object
+              properties:
+                rentSchedule:
+                  properties:
+                    data:
+                      oneOf:
+                      - type: 'null'
+                      - type: object
+                        properties:
+                          type:
+                            type: string
+                          id:
+                            type: string
+                            format: iri-reference
+                insuranceClaim:
+                  properties:
+                    data:
+                      oneOf:
+                      - type: 'null'
+                      - type: object
+                        properties:
+                          type:
+                            type: string
+                          id:
+                            type: string
+                            format: iri-reference
+          required:
+          - type
+          - id
+        included:
+          description: Related resources requested via the "include" query parameter.
+          type: array
+          items:
+            anyOf:
+            - $ref: '#/components/schemas/RentSchedule.jsonapi'
+            - $ref: '#/components/schemas/InsuranceClaim.jsonapi'
+          readOnly: true
+          externalDocs:
+            url: https://jsonapi.org/format/#fetching-includes
+    InsuranceClaimUpdate.InsuranceClaimGetDto.csv-insurance_claim.read:
+      type: object
+      properties:
+        id:
+          type: string
+        externalId:
+          type: string
+        createdAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        updatedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        propertyAddress:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+        claimStatus:
+          type: string
+        totalPaymentAmount:
+          type: object
+          additionalProperties:
+            anyOf:
+            - type: integer
+            - type: string
+        claimReference:
+          type: string
+        firstArrearsDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        mediationResponse:
+          type:
+          - string
+          - 'null'
+        claimStatusDescription:
+          type: string
+        claimDate:
+          type: string
+          format: date-time
+        policyId:
+          type: integer
+        company:
+          $ref: '#/components/schemas/Company.csv-insurance_claim.read'
+        tenancyId:
+          type:
+          - string
+          - 'null'
+        legalStatus:
+          type:
+          - string
+          - 'null'
+        latestPaymentDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        solicitorsClaimReference:
+          type:
+          - string
+          - 'null'
+        firmInstructed:
+          type:
+          - string
+          - 'null'
+        dateLegalInstructed:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        section8DateServed:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        section8DateExpired:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        section21DateServed:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        section21DateExpired:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        dateProceedingsIssued:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        dateOfHearing:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        court:
+          type:
+          - string
+          - 'null'
+        hearingOutcome:
+          type:
+          - string
+          - 'null'
+        possessionDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        warrantsAppliedFor:
+          type:
+          - string
+          - 'null'
+        dateOfEviction:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        typeOfClaim:
+          type:
+          - string
+          - 'null'
+        rentScheduleStatus:
+          type:
+          - string
+          - 'null'
+        rentSchedule:
+          type:
+          - string
+          - 'null'
+          format: iri-reference
+          example: https://example.com/
+        files:
+          type: array
+          items:
+            $ref: '#/components/schemas/File.csv-insurance_claim.read'
+        payments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Payment.csv-insurance_claim.read'
+        rpiUniqueReferenceNumber:
+          type:
+          - string
+          - 'null'
+        agencyName:
+          type:
+          - string
+          - 'null'
+        agentName:
+          type:
+          - string
+          - 'null'
+        agencyEmail:
+          type:
+          - string
+          - 'null'
+        agencyPhone:
+          type:
+          - string
+          - 'null'
+        lettingAgentRegistrationNumber:
+          type:
+          - string
+          - 'null'
+        tenants:
+          type:
+          - array
+          - 'null'
+          items:
+            type: object
+            additionalProperties:
+              type:
+              - string
+              - 'null'
+        guarantors:
+          type:
+          - array
+          - 'null'
+          items:
+            type: object
+            additionalProperties:
+              type:
+              - string
+              - 'null'
+        landlords:
+          type:
+          - array
+          - 'null'
+          items:
+            type: object
+            additionalProperties:
+              type:
+              - string
+              - 'null'
+        landlordRegistrationNumber:
+          type:
+          - string
+          - 'null'
+        permittedOccupiersName:
+          type:
+          - string
+          - 'null'
+        isTenancyCreatedOnGoodlord:
+          type:
+          - string
+          - 'null'
+        isTenancyRemovedAndNowOnFixedTerm:
+          type:
+          - string
+          - 'null'
+        dateBecamePeriodic:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        referencingCompletedByGoodlord:
+          type:
+          - string
+          - 'null'
+        isGasAtProperty:
+          type:
+          - string
+          - 'null'
+        didUploadEpcToGoodlord:
+          type:
+          - string
+          - 'null'
+        dateEpcWasProvidedToTenant:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        howEpcWasGivenToTenant:
+          type:
+          - string
+          - 'null'
+        isEicrOnGoodlord:
+          type:
+          - string
+          - 'null'
+        depositType:
+          type:
+          - string
+          - 'null'
+        depositCollectedByGoodlord:
+          type:
+          - string
+          - 'null'
+        depositPaidBy:
+          type:
+          - string
+          - 'null'
+        dateDepositWasPaid:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        isDepositCertificateOnGoodlord:
+          type:
+          - string
+          - 'null'
+        dateDepositProtected:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        prescribedInformationGiven:
+          type:
+          - string
+          - 'null'
+        depositReplacementCoverLevel:
+          type:
+          - string
+          - 'null'
+        propertyRequiresLicense:
+          type:
+          - string
+          - 'null'
+        dateOfRentArrears:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        rentOutstanding:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            anyOf:
+            - type: integer
+            - type: string
+        reasonForNonPayment:
+          type:
+          - string
+          - 'null'
+        tenantsInDebtRespiteScheme:
+          type:
+          - string
+          - 'null'
+        detailsOfBreach:
+          type:
+          - string
+          - 'null'
+        dateAwareOfBreach:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        worksBeingClaimedForDamage:
+          type:
+          - string
+          - 'null'
+        depositUsedFor:
+          type:
+          - string
+          - 'null'
+        datePropertyDamageIdentified:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        currentDisputeInfo:
+          type:
+          - string
+          - 'null'
+        dateAwareOfDispute:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        trespassOrNuisanceInfo:
+          type:
+          - string
+          - 'null'
+        dateAwareOfTrespassOrNuisance:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        isPropertyStillOccupied:
+          type:
+          - string
+          - 'null'
+        verificationTenantIsStillOccupyingProperty:
+          type:
+          - string
+          - 'null'
+        dateLastInspection:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        dateTenantVacated:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        isClaimAgainstDepositFinalisedByDepositScheme:
+          type:
+          - string
+          - 'null'
+        isClaimAgainstDepositReplacementFinalised:
+          type:
+          - string
+          - 'null'
+        amountAwardedForRentArrears:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            anyOf:
+            - type: integer
+            - type: string
+        depositUseBreakdown:
+          type:
+          - string
+          - 'null'
+        howDepositClaimWasSettled:
+          type:
+          - string
+          - 'null'
+        depositReplacementUseBreakdown:
+          type:
+          - string
+          - 'null'
+        forwardingAddress:
+          type:
+          - string
+          - 'null'
+        agencyInstructedToReLet:
+          type:
+          - string
+          - 'null'
+        isPropertyAlreadyReLet:
+          type:
+          - string
+          - 'null'
+        dateNewTenancy:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        possessionNoticesServed:
+          type:
+          - string
+          - 'null'
+        otherNoticesServed:
+          type:
+          - string
+          - 'null'
+        disputesBetweenTenantAndLandlord:
+          type:
+          - string
+          - 'null'
+        detailsOfDisputesBetweenTenantAndLandlord:
+          type:
+          - string
+          - 'null'
+        otherRelevantClaimInfo:
+          type:
+          - string
+          - 'null'
+        noticesServedToLandlord:
+          type:
+          - string
+          - 'null'
+        agencyAccountName:
+          type:
+          - string
+          - 'null'
+        agencyAccountNumber:
+          type:
+          - string
+          - 'null'
+        agencySortCode:
+          type:
+          - string
+          - 'null'
+        remittanceEmail:
+          type:
+          - string
+          - 'null'
+        gasSafetyCertificates:
+          type:
+          - array
+          - 'null'
+          items:
+            type: object
+            additionalProperties:
+              type:
+              - string
+              - 'null'
+        howToRentGuides:
+          type:
+          - array
+          - 'null'
+          items:
+            type: object
+            additionalProperties:
+              type:
+              - string
+              - 'null'
+        tribunalNotificationDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        marketValueExplanation:
+          type:
+          - string
+          - 'null'
+        firstMonthRentRequestedViaGoodlord:
+          type:
+          - string
+          - 'null'
+        keysHandedOverDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        tenantOccupationDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        detailsOfAntiSocialBehaviour:
+          type:
+          - string
+          - 'null'
+        dateAwareOfAntiSocialBehaviour:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        rraInfoSheetIssueDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        rraInfoSheetIssueMethod:
+          type:
+          - string
+          - 'null'
+        statementOfTermsInTenancyAgreement:
+          type:
+          - string
+          - 'null'
+        statementOfTermsIssuedDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        statementOfTermsIssuedMethod:
+          type:
+          - string
+          - 'null'
+        firstMonthRentRequestedBeforeSigning:
+          type:
+          - string
+          - 'null'
+        firstMonthRentRequestedDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        originalTenancyStartDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+    Error:
+      type: object
+      description: A representation of common errors.
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        title:
+          readOnly: true
+          description: A short, human-readable summary of the problem.
+          type:
+          - string
+          - 'null'
+        detail:
+          readOnly: true
+          description: A human-readable explanation specific to this occurrence of the problem.
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - number
+          - 'null'
+          examples:
+          - 404
+          default: 400
+        instance:
+          readOnly: true
+          description: A URI reference that identifies the specific occurrence of the problem. It may or may not yield further information if dereferenced.
+          type:
+          - string
+          - 'null'
+        type:
+          readOnly: true
+          description: A URI reference that identifies the problem type
+          type: string
+        meta:
+          type: object
+        source:
+          type: object
+          properties:
+            pointer:
+              type: string
+            parameter:
+              type: string
+            header:
+              type: string
+    File:
+      type: object
+      properties:
+        id:
+          readOnly: true
+          type: string
+        fileName:
+          readOnly: true
+          type: string
+        originalFileName:
+          readOnly: true
+          type: string
+        fileSize:
+          readOnly: true
+          type:
+          - integer
+          - 'null'
+        mimeType:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        fileType:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        createdAt:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+          format: date-time
+        podioFileId:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        insuranceClaim:
+          readOnly: true
+          description: Insurance claim reference - lazy-loaded to avoid circular references.
+          type:
+          - string
+          - 'null'
+          format: iri-reference
+          example: https://example.com/
+    File-insurance_claim.read:
+      type: object
+      properties:
+        id:
+          readOnly: true
+          type: string
+        fileName:
+          readOnly: true
+          type: string
+        originalFileName:
+          readOnly: true
+          type: string
+        fileSize:
+          readOnly: true
+          type:
+          - integer
+          - 'null'
+        mimeType:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        fileType:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        createdAt:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+          format: date-time
+    Company.jsonapi:
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+            attributes:
+              $ref: '#/components/schemas/Company'
+          required:
+          - type
+          - id
+    InsuranceClaimUpdate.InsuranceClaimPatchDto.jsonapi-insurance_claim.read:
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+            attributes:
+              $ref: '#/components/schemas/InsuranceClaimUpdate.InsuranceClaimGetDto-insurance_claim.read'
+          required:
+          - type
+          - id
+  securitySchemes:
+    JWT:
+      type: apiKey
+      description: Value for the Authorization header parameter.
+      name: Authorization
+      in: header

@@ -1,0 +1,753 @@
+openapi: 3.2.0
+info:
+  title: Insurance App Role API
+  description: Resource 'Role' operations.
+  version: 0.1.0
+servers:
+- url: https://insurance-app.goodlord.co/
+  description: Development
+- url: https://insurance-app.staging.goodoverlord.com/
+  description: Staging
+- url: https://insurance-app.qa1.goodoverlord.com/
+  description: QA1
+- url: https://insurance-app.demo.goodlord.co/
+  description: Demo
+security:
+- JWT: []
+tags:
+- name: Role
+  description: Resource 'Role' operations.
+paths:
+  /api/v1/roles:
+    get:
+      operationId: api_roles_get_collection
+      tags:
+      - Role
+      responses:
+        '200':
+          description: Role collection
+          content:
+            application/vnd.api+json:
+              schema:
+                description: Role.jsonapi collection.
+                allOf:
+                - $ref: '#/components/schemas/JsonApiCollectionBaseSchema'
+                - type: object
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: string
+                          type:
+                            type: string
+                          attributes:
+                            $ref: '#/components/schemas/Role'
+                          relationships:
+                            type: object
+                            properties:
+                              roleGroups:
+                                properties:
+                                  data:
+                                    type: array
+                                    items:
+                                      type: object
+                                      properties:
+                                        type:
+                                          type: string
+                                        id:
+                                          type: string
+                                          format: iri-reference
+                        required:
+                        - type
+                        - id
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Role'
+            text/csv:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Role.csv'
+        '403':
+          description: Forbidden
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Error.jsonapi'
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          links: {}
+      summary: Retrieves the collection of Role resources.
+      description: Retrieves the collection of Role resources.
+      parameters:
+      - name: page
+        in: query
+        description: The collection page number
+        required: false
+        deprecated: false
+        schema:
+          type: integer
+          default: 1
+        style: form
+        explode: false
+      - name: itemsPerPage
+        in: query
+        description: The number of items per page
+        required: false
+        deprecated: false
+        schema:
+          type: integer
+          default: 50
+          minimum: 0
+          maximum: 100
+        style: form
+        explode: false
+    post:
+      operationId: api_roles_post
+      tags:
+      - Role
+      responses:
+        '201':
+          description: Role resource created
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Role.jsonapi'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Role'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Role.csv'
+          links: {}
+        '400':
+          description: Invalid input
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Error.jsonapi'
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          links: {}
+        '422':
+          description: An error occurred
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/ConstraintViolation.jsonapi'
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ConstraintViolation'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConstraintViolation'
+          links: {}
+        '403':
+          description: Forbidden
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Error.jsonapi'
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          links: {}
+      summary: Creates a Role resource.
+      description: Creates a Role resource.
+      parameters: []
+      requestBody:
+        description: The new Role resource
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Role.jsonapi'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Role'
+          text/csv:
+            schema:
+              $ref: '#/components/schemas/Role.csv'
+        required: true
+  /api/v1/roles/{id}:
+    get:
+      operationId: api_roles_id_get
+      tags:
+      - Role
+      responses:
+        '200':
+          description: Role resource
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Role.jsonapi'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Role'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Role.csv'
+        '403':
+          description: Forbidden
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Error.jsonapi'
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          links: {}
+        '404':
+          description: Not found
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Error.jsonapi'
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          links: {}
+      summary: Retrieves a Role resource.
+      description: Retrieves a Role resource.
+      parameters:
+      - name: id
+        in: path
+        description: Role identifier
+        required: true
+        deprecated: false
+        schema:
+          type: string
+        style: simple
+        explode: false
+    delete:
+      operationId: api_roles_id_delete
+      tags:
+      - Role
+      responses:
+        '204':
+          description: Role resource deleted
+        '403':
+          description: Forbidden
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Error.jsonapi'
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          links: {}
+        '404':
+          description: Not found
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Error.jsonapi'
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          links: {}
+      summary: Removes the Role resource.
+      description: Removes the Role resource.
+      parameters:
+      - name: id
+        in: path
+        description: Role identifier
+        required: true
+        deprecated: false
+        schema:
+          type: string
+        style: simple
+        explode: false
+    patch:
+      operationId: api_roles_id_patch
+      tags:
+      - Role
+      responses:
+        '200':
+          description: Role resource updated
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Role.jsonapi'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Role'
+            text/csv:
+              schema:
+                $ref: '#/components/schemas/Role.csv'
+          links: {}
+        '400':
+          description: Invalid input
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Error.jsonapi'
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          links: {}
+        '422':
+          description: An error occurred
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/ConstraintViolation.jsonapi'
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ConstraintViolation'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConstraintViolation'
+          links: {}
+        '403':
+          description: Forbidden
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Error.jsonapi'
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          links: {}
+        '404':
+          description: Not found
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Error.jsonapi'
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          links: {}
+      summary: Updates the Role resource.
+      description: Updates the Role resource.
+      parameters:
+      - name: id
+        in: path
+        description: Role identifier
+        required: true
+        deprecated: false
+        schema:
+          type: string
+        style: simple
+        explode: false
+      requestBody:
+        description: The updated Role resource
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/Role.jsonapi'
+          application/merge-patch+json:
+            schema:
+              $ref: '#/components/schemas/Role.jsonMergePatch'
+        required: true
+components:
+  schemas:
+    JsonApiCollectionBaseSchema:
+      allOf:
+      - $ref: '#/components/schemas/JsonApiCollectionBaseSchemaNoPagination'
+      - type: object
+        properties:
+          links:
+            type: object
+            properties:
+              first:
+                type: string
+                format: iri-reference
+              prev:
+                type: string
+                format: iri-reference
+              next:
+                type: string
+                format: iri-reference
+              last:
+                type: string
+                format: iri-reference
+            example:
+              first: string
+              prev: string
+              next: string
+              last: string
+          meta:
+            type: object
+            properties:
+              itemsPerPage:
+                type: integer
+                minimum: 0
+              currentPage:
+                type: integer
+                minimum: 0
+    JsonApiCollectionBaseSchemaNoPagination:
+      type: object
+      properties:
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+              format: iri-reference
+          example:
+            self: string
+        meta:
+          type: object
+          properties:
+            totalItems:
+              type: integer
+              minimum: 0
+        data:
+          type: array
+      required:
+      - data
+    Role.jsonapi:
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+            attributes:
+              $ref: '#/components/schemas/Role'
+            relationships:
+              type: object
+              properties:
+                roleGroups:
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          type:
+                            type: string
+                          id:
+                            type: string
+                            format: iri-reference
+          required:
+          - type
+          - id
+        included:
+          description: Related resources requested via the "include" query parameter.
+          type: array
+          items:
+            anyOf:
+            - $ref: '#/components/schemas/RoleGroup.jsonapi'
+          readOnly: true
+          externalDocs:
+            url: https://jsonapi.org/format/#fetching-includes
+    RoleGroup.jsonapi:
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+            attributes:
+              $ref: '#/components/schemas/RoleGroup'
+            relationships:
+              type: object
+              properties:
+                roles:
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          type:
+                            type: string
+                          id:
+                            type: string
+                            format: iri-reference
+          required:
+          - type
+          - id
+        included:
+          description: Related resources requested via the "include" query parameter.
+          type: array
+          items:
+            anyOf:
+            - $ref: '#/components/schemas/Role.jsonapi'
+          readOnly: true
+          externalDocs:
+            url: https://jsonapi.org/format/#fetching-includes
+    ConstraintViolation.jsonapi:
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+            attributes:
+              $ref: '#/components/schemas/ConstraintViolation'
+          required:
+          - type
+          - id
+    ConstraintViolation:
+      type: object
+      description: Unprocessable entity
+      properties:
+        status:
+          default: 422
+          type: integer
+        detail:
+          readOnly: true
+          type: string
+        type:
+          readOnly: true
+          type: string
+        title:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        instance:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+    RoleGroup:
+      type: object
+      properties:
+        name:
+          type: string
+        roles:
+          type: array
+          items:
+            type: string
+            format: iri-reference
+            example: https://example.com/
+        id:
+          readOnly: true
+          type: string
+          format: uuid
+        deletedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        admin:
+          readOnly: true
+          type: boolean
+        agent:
+          readOnly: true
+          type: boolean
+        logContext:
+          readOnly: true
+          type: array
+          items:
+            type:
+            - string
+            - 'null'
+        deleted:
+          readOnly: true
+          description: Check if the entity has been soft deleted.
+          type: boolean
+    Role.csv:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          pattern: ^(ROLE_[A-Z_]+)$
+          type: string
+        roleGroups:
+          type: array
+          items:
+            type: string
+            format: iri-reference
+            example: https://example.com/
+        id:
+          readOnly: true
+          type: string
+          format: uuid
+        deletedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        logContext:
+          readOnly: true
+          type: array
+          items:
+            type:
+            - string
+            - 'null'
+        deleted:
+          readOnly: true
+          description: Check if the entity has been soft deleted.
+          type: boolean
+    Error.jsonapi:
+      properties:
+        errors:
+          type: array
+          items:
+            allOf:
+            - $ref: '#/components/schemas/Error'
+            - type: object
+              properties:
+                source:
+                  type: object
+                status:
+                  type: string
+    Role:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          pattern: ^(ROLE_[A-Z_]+)$
+          type: string
+        roleGroups:
+          type: array
+          items:
+            type: string
+            format: iri-reference
+            example: https://example.com/
+        id:
+          readOnly: true
+          type: string
+          format: uuid
+        deletedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        logContext:
+          readOnly: true
+          type: array
+          items:
+            type:
+            - string
+            - 'null'
+        deleted:
+          readOnly: true
+          description: Check if the entity has been soft deleted.
+          type: boolean
+    Error:
+      type: object
+      description: A representation of common errors.
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        title:
+          readOnly: true
+          description: A short, human-readable summary of the problem.
+          type:
+          - string
+          - 'null'
+        detail:
+          readOnly: true
+          description: A human-readable explanation specific to this occurrence of the problem.
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - number
+          - 'null'
+          examples:
+          - 404
+          default: 400
+        instance:
+          readOnly: true
+          description: A URI reference that identifies the specific occurrence of the problem. It may or may not yield further information if dereferenced.
+          type:
+          - string
+          - 'null'
+        type:
+          readOnly: true
+          description: A URI reference that identifies the problem type
+          type: string
+        meta:
+          type: object
+        source:
+          type: object
+          properties:
+            pointer:
+              type: string
+            parameter:
+              type: string
+            header:
+              type: string
+    Role.jsonMergePatch:
+      type: object
+      properties:
+        name:
+          pattern: ^(ROLE_[A-Z_]+)$
+          type: string
+        roleGroups:
+          type: array
+          items:
+            type: string
+            format: iri-reference
+            example: https://example.com/
+        id:
+          readOnly: true
+          type: string
+          format: uuid
+        deletedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        logContext:
+          readOnly: true
+          type: array
+          items:
+            type:
+            - string
+            - 'null'
+        deleted:
+          readOnly: true
+          description: Check if the entity has been soft deleted.
+          type: boolean
+  securitySchemes:
+    JWT:
+      type: apiKey
+      description: Value for the Authorization header parameter.
+      name: Authorization
+      in: header
