@@ -280,6 +280,8 @@ apis:
   humanURL: https://portal.goodlord.co/portal/catalogue-products/referencing-product-1
   baseURL: https://api.goodoverlord.com
   tags:
+  - Payments
+  tags_raw:
   - Payment
   properties:
   - type: OpenAPI
