@@ -1,0 +1,17 @@
+# Pricing transcribed from the provider's own page — see provenance. Numbers are quoted, not derived.
+generated: '2026-09-20'
+method: searched
+source: https://www.goodlord.com/platform
+sources:
+- https://www.goodlord.com/platform
+provenance:
+  tool: planning/api-economics/harvest_pricing.py
+  run: 20260920T120546
+  grounding: every price_text was found verbatim in the fetched page text
+audience: business-product
+pricing_basis: negotiated
+published: false
+note: No numeric price is published on the pricing page; Product/platform marketing page for letting agents;
+  no numeric prices shown, only 'Book a demo' / 'Talk to us' calls to action.
+plan_count: 0
+plans: []

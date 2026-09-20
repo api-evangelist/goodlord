@@ -501,6 +501,8 @@ apis:
   - type: APIReference
     url: https://insurance-app.goodlord.co/api/v1/docs
 common:
+- type: Plans
+  url: plans/goodlord-plans-pricing.yml
 - type: CapabilityMap
   url: capabilities/goodlord-capability-edges.yml
   name: Goodlord Business Capability Map
