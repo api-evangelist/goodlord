@@ -11,7 +11,7 @@ capability_model:
   attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
     CC BY 4.0
   notice: NOTICE
-edge_count: 4
+edge_count: 5
 edges:
 - tag: Application
   spec_file: goodlord-application-api-openapi.yml
@@ -46,6 +46,18 @@ edges:
   reason: CRUD over roles and role groups inside the application is authorisation/permission administration,
     which maps to Identity & Access Management rather than any real-estate business capability. Confidence
     held below 0.9 because it is generic platform plumbing that some would leave unmapped.
+- tag: InsuranceClaim
+  spec_file: goodlord-insuranceclaim-api-openapi.yml
+  capability_id: BC-2160.10
+  capability_id_l1: BC-2160
+  capability_name: First Notice of Loss Management
+  confidence: 0.72
+  evidence: POST /api/v1/insurance_claims/{id}/submit — "Submit an insurance claim"; "Update insurance
+    claim details"
+  reason: Operations create, amend and submit insurance claims for the vendor's rent protection insurance,
+    which is claim notification/registration and lifecycle handling. FNOL/intake is the closest L2 to
+    a create-and-submit surface, though the claim lifecycle is broader, hence moderate confidence.
+  recovered_from: vertical-insurance-edges.json
 - tag: RoleGroup
   spec_file: goodlord-rolegroup-api-openapi.yml
   capability_id: BC-620.20
