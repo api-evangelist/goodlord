@@ -1,20 +1,18 @@
 openapi: 3.2.0
 info:
-  title: Goodlord Application API
-  version: 1.0.0
+  title: Referencing Application API
+  description: Here you can find the Public API information of the Goodlord Referencing product. This API will allow you to create rental applications, assess Applicants and Guarantors through the rental process and manage them along the way.
+  termsOfService: http://swagger.io/terms/
   contact:
     email: devs@vouch.co.uk
     name: Goodlord
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
-  termsOfService: http://swagger.io/terms/
-  description: 'Operations tagged Application across 2 of this provider''s published API definitions: goodlord-referencing-api-openapi.json, goodlord-referencing-api-sandbox-openapi.json. Each path carries the servers of the definition it was published in.'
+  version: 1.0.0
 servers:
 - url: https://api.goodoverlord.com
   description: Live Server
-- url: https://api-sandbox.goodlord.co
-  description: Sandbox Server
 security:
 - OAuth2: []
 tags:
@@ -103,9 +101,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiMessageResponse'
-    servers:
-    - url: https://api.goodoverlord.com
-      description: Live Server
   /referencing/application/{applicationId}:
     parameters:
     - name: applicationId
@@ -242,10 +237,17 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiMessageResponse'
-    servers:
-    - url: https://api.goodoverlord.com
-      description: Live Server
 components:
+  parameters:
+    CompanyId:
+      name: Company-ID
+      in: header
+      description: A unique GUID identifying your company, issued alongside your API keys. This value may differ between production and sandbox environments. This is a mandatory header for all application and subject endpoints.
+      required: true
+      schema:
+        type: string
+        format: uuid
+      example: e2baa1a0-1234-5678-9abc-def012345678
   schemas:
     Application:
       title: Application
@@ -303,21 +305,12 @@ components:
         createdAt:
           type: string
       required: []
-    ApiMessageResponse:
-      type: object
-      properties:
-        message:
-          type: string
-          example: Something happened that I need to alert you about
-      xml:
-        name: '##default'
-    PatchApplicationRequest:
-      title: Patch Application Request
+    CreateApplicationRequest:
+      title: Create Application Request
       type: object
       properties:
         tenancy:
           type: object
-          description: One of moveInDate, term or monthlyCost are required
           properties:
             moveInDate:
               type: string
@@ -333,26 +326,55 @@ components:
               description: Monthly cost in GBP
             address:
               type: object
-              description: Address of application
-              required:
-              - line1
-              - country
-              - postcode
-              - city
               properties:
                 line1:
-                  type: string
-                line2:
+                  example: 22 Street
                   type: string
                 city:
+                  example: Sheffield
                   type: string
                 postcode:
+                  example: S1 123
                   type: string
                 country:
+                  example: England
+                  description: 'Must be one of: ''England'' | ''Scotland'' | ''Wales''. Tenancies created within England are subject to right to rent checks and sharecode collection'
                   type: string
-          required: []
+              required:
+              - line1
+              - city
+              - postcode
+              - country
+          required:
+          - moveInDate
+          - term
+          - monthlyCost
+          - address
+        agency:
+          type: object
+          properties:
+            companyName:
+              type: string
+              description: The name of your lettings agency. This is used by our referencing team to identify your agency
+              example: John Smith Lettings
+            agentName:
+              type: string
+              description: The name of your estate agent who is assigned to this application
+              example: John Smith
+            agentMobile:
+              type: string
+              description: The mobile number of your estate agent who is assigned to this application. We require this as our referencing may need to contact them to provide updates and chasers.
+              example: 07293838394
+            agentEmail:
+              type: string
+              description: The email address of your estate agent who is assigned to this application. We require this as our referencing may need to contact them to provide updates and chasers.
+              example: john.smith@example.com
+          required:
+          - companyName
+          - agentName
       required:
       - tenancy
+      - agency
     Subject:
       title: Subject
       type: object
@@ -780,12 +802,13 @@ components:
           type: array
           items: {}
       required: []
-    CreateApplicationRequest:
-      title: Create Application Request
+    PatchApplicationRequest:
+      title: Patch Application Request
       type: object
       properties:
         tenancy:
           type: object
+          description: One of moveInDate, term or monthlyCost are required
           properties:
             moveInDate:
               type: string
@@ -801,55 +824,26 @@ components:
               description: Monthly cost in GBP
             address:
               type: object
-              properties:
-                line1:
-                  example: 22 Street
-                  type: string
-                city:
-                  example: Sheffield
-                  type: string
-                postcode:
-                  example: S1 123
-                  type: string
-                country:
-                  example: England
-                  description: 'Must be one of: ''England'' | ''Scotland'' | ''Wales''. Tenancies created within England are subject to right to rent checks and sharecode collection'
-                  type: string
+              description: Address of application
               required:
               - line1
-              - city
-              - postcode
               - country
-          required:
-          - moveInDate
-          - term
-          - monthlyCost
-          - address
-        agency:
-          type: object
-          properties:
-            companyName:
-              type: string
-              description: The name of your lettings agency. This is used by our referencing team to identify your agency
-              example: John Smith Lettings
-            agentName:
-              type: string
-              description: The name of your estate agent who is assigned to this application
-              example: John Smith
-            agentMobile:
-              type: string
-              description: The mobile number of your estate agent who is assigned to this application. We require this as our referencing may need to contact them to provide updates and chasers.
-              example: 07293838394
-            agentEmail:
-              type: string
-              description: The email address of your estate agent who is assigned to this application. We require this as our referencing may need to contact them to provide updates and chasers.
-              example: john.smith@example.com
-          required:
-          - companyName
-          - agentName
+              - postcode
+              - city
+              properties:
+                line1:
+                  type: string
+                line2:
+                  type: string
+                city:
+                  type: string
+                postcode:
+                  type: string
+                country:
+                  type: string
+          required: []
       required:
       - tenancy
-      - agency
     APIErrorResponse:
       type: object
       properties:
@@ -869,16 +863,14 @@ components:
             - description
       required:
       - errors
-  parameters:
-    CompanyId:
-      name: Company-ID
-      in: header
-      description: A unique GUID identifying your company, issued alongside your API keys. This value may differ between production and sandbox environments. This is a mandatory header for all application and subject endpoints.
-      required: true
-      schema:
-        type: string
-        format: uuid
-      example: e2baa1a0-1234-5678-9abc-def012345678
+    ApiMessageResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: Something happened that I need to alert you about
+      xml:
+        name: '##default'
   securitySchemes:
     OAuth2:
       description: 'This API uses OAuth2 to authenticate requests. You must use your client credentials to obtain a token.
@@ -892,6 +884,3 @@ components:
 externalDocs:
   description: Understanding Goodlord's Referencing API
   url: https://portal.goodlord.co/blog/2024/8/20/getting-started-with-goodlord-referencing-api
-x-refined-from:
-- goodlord-referencing-api-openapi.json
-- goodlord-referencing-api-sandbox-openapi.json

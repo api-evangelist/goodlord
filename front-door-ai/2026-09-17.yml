@@ -1,0 +1,27 @@
+# Front Door AI Index — goodlord — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: goodlord
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: www.goodlord.com
+  final_host: www.goodlord.com
+  ownership: own
+  owner: goodlord
+  shares_host_with: null
+  inherited_from: null
+  verdict: scored
+  score: 5
+  host_score: 5
+  density: 4.04
+  words: 1237
+  tiers:
+    agentic: 1
+    core: 4
+    model: 0
+  ambiguous: 15
+  top_terms:
+    agent: 15
+    AI: 4
+    prompts: 1

@@ -1,0 +1,52 @@
+{
+  "provider": "goodlord",
+  "sources": [
+    "_original/goodlord-insurance-app-api-openapi.json",
+    "_original/goodlord-referencing-api-openapi.json"
+  ],
+  "outputs": [
+    "goodlord-agent-api-openapi.yml",
+    "goodlord-company-api-openapi.yml",
+    "goodlord-file-api-openapi.yml",
+    "goodlord-insuranceclaim-api-openapi.yml",
+    "goodlord-payment-api-openapi.yml",
+    "goodlord-rentschedule-api-openapi.yml",
+    "goodlord-rentschedulerow-api-openapi.yml",
+    "goodlord-rentschedulerowpostdto-api-openapi.yml",
+    "goodlord-rentschedulerowupdate-api-openapi.yml",
+    "goodlord-role-api-openapi.yml",
+    "goodlord-rolegroup-api-openapi.yml",
+    "goodlord-application-api-openapi.yml",
+    "goodlord-authentication-api-openapi.yml",
+    "goodlord-media-api-openapi.yml",
+    "goodlord-subject-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "1 archived document(s) dropped as subsets of other archived documents",
+    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "goodlord-insurance-app-api-openapi.json: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "goodlord-referencing-api-openapi.json: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "_original/goodlord-referencing-api-sandbox-openapi.json: archived document superseded by a larger archived document",
+    "goodlord-agent-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "goodlord-application-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "goodlord-authentication-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "goodlord-company-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "goodlord-file-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "goodlord-insuranceclaim-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "goodlord-media-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "goodlord-payment-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "goodlord-rentschedule-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "goodlord-rentschedulerow-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "goodlord-rentschedulerowpostdto-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "goodlord-rentschedulerowupdate-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "goodlord-role-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "goodlord-rolegroup-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "goodlord-subject-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
+}

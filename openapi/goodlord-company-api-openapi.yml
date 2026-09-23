@@ -71,7 +71,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           links: {}
-      summary: Retrieves the collection of Company resources.
+      summary: Retrieves the collection of Company resources
       description: Retrieves the collection of Company resources.
       parameters:
       - name: page
@@ -140,7 +140,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           links: {}
-      summary: Retrieves a Company resource.
+      summary: Retrieves a Company resource
       description: Retrieves a Company resource.
       parameters:
       - name: id
@@ -188,6 +188,31 @@ components:
               currentPage:
                 type: integer
                 minimum: 0
+    Error.jsonapi:
+      properties:
+        errors:
+          type: array
+          items:
+            allOf:
+            - $ref: '#/components/schemas/Error'
+            - type: object
+              properties:
+                source:
+                  type: object
+                status:
+                  type: string
+    Company.csv:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type:
+          - string
+          - 'null'
+        externalId:
+          type: string
     JsonApiCollectionBaseSchemaNoPagination:
       type: object
       properties:
@@ -209,57 +234,6 @@ components:
           type: array
       required:
       - data
-    Company.csv:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        name:
-          type:
-          - string
-          - 'null'
-        externalId:
-          type: string
-    Company.jsonapi:
-      properties:
-        data:
-          type: object
-          properties:
-            id:
-              type: string
-            type:
-              type: string
-            attributes:
-              $ref: '#/components/schemas/Company'
-          required:
-          - type
-          - id
-    Error.jsonapi:
-      properties:
-        errors:
-          type: array
-          items:
-            allOf:
-            - $ref: '#/components/schemas/Error'
-            - type: object
-              properties:
-                source:
-                  type: object
-                status:
-                  type: string
-    Company:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        name:
-          type:
-          - string
-          - 'null'
-        externalId:
-          type: string
     Error:
       type: object
       description: A representation of common errors.
@@ -308,6 +282,32 @@ components:
               type: string
             header:
               type: string
+    Company:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type:
+          - string
+          - 'null'
+        externalId:
+          type: string
+    Company.jsonapi:
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+            attributes:
+              $ref: '#/components/schemas/Company'
+          required:
+          - type
+          - id
   securitySchemes:
     JWT:
       type: apiKey

@@ -1,20 +1,18 @@
 openapi: 3.2.0
 info:
-  title: Goodlord Authentication API
-  version: 1.0.0
+  title: Referencing Authentication API
+  description: Here you can find the Public API information of the Goodlord Referencing product. This API will allow you to create rental applications, assess Applicants and Guarantors through the rental process and manage them along the way.
+  termsOfService: http://swagger.io/terms/
   contact:
     email: devs@vouch.co.uk
     name: Goodlord
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
-  termsOfService: http://swagger.io/terms/
-  description: 'Operations tagged Authentication across 2 of this provider''s published API definitions: goodlord-referencing-api-openapi.json, goodlord-referencing-api-sandbox-openapi.json. Each path carries the servers of the definition it was published in.'
+  version: 1.0.0
 servers:
 - url: https://api.goodoverlord.com
   description: Live Server
-- url: https://api-sandbox.goodlord.co
-  description: Sandbox Server
 security:
 - OAuth2: []
 tags:
@@ -78,9 +76,6 @@ paths:
                   token_type:
                     type: string
                     example: Bearer
-    servers:
-    - url: https://api.goodoverlord.com
-      description: Live Server
 components:
   securitySchemes:
     OAuth2:
@@ -95,6 +90,3 @@ components:
 externalDocs:
   description: Understanding Goodlord's Referencing API
   url: https://portal.goodlord.co/blog/2024/8/20/getting-started-with-goodlord-referencing-api
-x-refined-from:
-- goodlord-referencing-api-openapi.json
-- goodlord-referencing-api-sandbox-openapi.json

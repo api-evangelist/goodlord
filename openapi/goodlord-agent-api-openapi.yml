@@ -86,7 +86,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           links: {}
-      summary: Retrieves the collection of Agent resources.
+      summary: Retrieves the collection of Agent resources
       description: Retrieves the collection of Agent resources.
       parameters:
       - name: page
@@ -168,7 +168,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           links: {}
-      summary: Creates a Agent resource.
+      summary: Creates a Agent resource
       description: Creates a Agent resource.
       parameters: []
       requestBody:
@@ -228,7 +228,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           links: {}
-      summary: Retrieves a Agent resource.
+      summary: Retrieves a Agent resource
       description: Retrieves a Agent resource.
       parameters:
       - name: id
@@ -310,7 +310,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           links: {}
-      summary: Updates the Agent resource.
+      summary: Updates the Agent resource
       description: Updates the Agent resource.
       parameters:
       - name: id
@@ -376,7 +376,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
           links: {}
-      summary: Retrieves a Agent resource.
+      summary: Retrieves a Agent resource
       description: Retrieves a Agent resource.
       parameters:
       - name: include
@@ -390,185 +390,6 @@ paths:
         explode: false
 components:
   schemas:
-    Agent.csv-me.get:
-      type: object
-      properties:
-        id:
-          type: string
-        email:
-          type: string
-        roles:
-          type: array
-          items:
-            type: string
-        roleGroups:
-          type: array
-          items:
-            type: string
-        companies:
-          type: array
-          items:
-            $ref: '#/components/schemas/Company.csv-me.get'
-    JsonApiCollectionBaseSchema:
-      allOf:
-      - $ref: '#/components/schemas/JsonApiCollectionBaseSchemaNoPagination'
-      - type: object
-        properties:
-          links:
-            type: object
-            properties:
-              first:
-                type: string
-                format: iri-reference
-              prev:
-                type: string
-                format: iri-reference
-              next:
-                type: string
-                format: iri-reference
-              last:
-                type: string
-                format: iri-reference
-            example:
-              first: string
-              prev: string
-              next: string
-              last: string
-          meta:
-            type: object
-            properties:
-              itemsPerPage:
-                type: integer
-                minimum: 0
-              currentPage:
-                type: integer
-                minimum: 0
-    JsonApiCollectionBaseSchemaNoPagination:
-      type: object
-      properties:
-        links:
-          type: object
-          properties:
-            self:
-              type: string
-              format: iri-reference
-          example:
-            self: string
-        meta:
-          type: object
-          properties:
-            totalItems:
-              type: integer
-              minimum: 0
-        data:
-          type: array
-      required:
-      - data
-    Agent.UserWithClaimData.csv-me.get:
-      type: object
-      properties:
-        user:
-          $ref: '#/components/schemas/Agent.csv-me.get'
-        companies:
-          type: array
-          items:
-            type:
-            - string
-            - 'null'
-        userRoles:
-          type: array
-          items:
-            type: string
-        userTypes:
-          type: array
-          items:
-            type: string
-    Agent-agent_user.read:
-      type: object
-      properties:
-        id:
-          type: string
-        email:
-          type: string
-        roleGroups:
-          type: array
-          items:
-            type: string
-        companies:
-          type: array
-          items:
-            $ref: '#/components/schemas/Company-agent_user.read'
-    Company:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        name:
-          type:
-          - string
-          - 'null'
-        externalId:
-          type: string
-    Company-agent_user.read:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        name:
-          type:
-          - string
-          - 'null'
-    Company.csv-me.get:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        name:
-          type:
-          - string
-          - 'null'
-    Company-me.get:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        name:
-          type:
-          - string
-          - 'null'
-    Agent.UserWithClaimData-me.get:
-      type: object
-      properties:
-        user:
-          $ref: '#/components/schemas/Agent-me.get'
-        companies:
-          type: array
-          items:
-            type:
-            - string
-            - 'null'
-        userRoles:
-          type: array
-          items:
-            type: string
-        userTypes:
-          type: array
-          items:
-            type: string
-    Company.csv-agent_user.read:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        name:
-          type:
-          - string
-          - 'null'
     Agent.jsonapi:
       properties:
         data:
@@ -607,111 +428,56 @@ components:
           readOnly: true
           externalDocs:
             url: https://jsonapi.org/format/#fetching-includes
-    ConstraintViolation:
+    Company.csv-agent_user.read:
       type: object
-      description: Unprocessable entity
       properties:
-        status:
-          default: 422
-          type: integer
-        detail:
-          readOnly: true
+        id:
           type: string
-        type:
-          readOnly: true
-          type: string
-        title:
-          readOnly: true
+          format: uuid
+        name:
           type:
           - string
           - 'null'
-        instance:
-          readOnly: true
-          type:
-          - string
-          - 'null'
-    Agent.csv-agent_user.read:
+    JsonApiCollectionBaseSchemaNoPagination:
       type: object
       properties:
-        id:
-          type: string
-        email:
-          type: string
-        roleGroups:
-          type: array
-          items:
-            type: string
-        companies:
-          type: array
-          items:
-            $ref: '#/components/schemas/Company.csv-agent_user.read'
-    Agent.jsonMergePatch:
-      type: object
-      properties:
-        id:
-          type: string
-        email:
-          type: string
-        roles:
-          type: array
-          items:
-            type: string
-        roleGroups:
-          type: array
-          items:
-            type: string
-        companies:
-          type: array
-          items:
-            type: string
-            format: iri-reference
-            example: https://example.com/
-    Agent-me.get:
-      type: object
-      properties:
-        id:
-          type: string
-        email:
-          type: string
-        roles:
-          type: array
-          items:
-            type: string
-        roleGroups:
-          type: array
-          items:
-            type: string
-        companies:
-          type: array
-          items:
-            $ref: '#/components/schemas/Company-me.get'
-    ConstraintViolation.jsonapi:
-      properties:
-        data:
+        links:
           type: object
           properties:
-            id:
+            self:
               type: string
-            type:
-              type: string
-            attributes:
-              $ref: '#/components/schemas/ConstraintViolation'
-          required:
-          - type
-          - id
-    Error.jsonapi:
+              format: iri-reference
+          example:
+            self: string
+        meta:
+          type: object
+          properties:
+            totalItems:
+              type: integer
+              minimum: 0
+        data:
+          type: array
+      required:
+      - data
+    Agent.csv-me.get:
+      type: object
       properties:
-        errors:
+        id:
+          type: string
+        email:
+          type: string
+        roles:
           type: array
           items:
-            allOf:
-            - $ref: '#/components/schemas/Error'
-            - type: object
-              properties:
-                source:
-                  type: object
-                status:
-                  type: string
+            type: string
+        roleGroups:
+          type: array
+          items:
+            type: string
+        companies:
+          type: array
+          items:
+            $ref: '#/components/schemas/Company.csv-me.get'
     Error:
       type: object
       description: A representation of common errors.
@@ -760,17 +526,13 @@ components:
               type: string
             header:
               type: string
-    Agent.csv:
+    Agent-agent_user.read:
       type: object
       properties:
         id:
           type: string
         email:
           type: string
-        roles:
-          type: array
-          items:
-            type: string
         roleGroups:
           type: array
           items:
@@ -778,9 +540,82 @@ components:
         companies:
           type: array
           items:
+            $ref: '#/components/schemas/Company-agent_user.read'
+    Company:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type:
+          - string
+          - 'null'
+        externalId:
+          type: string
+    Agent.UserWithClaimData-me.get:
+      type: object
+      properties:
+        user:
+          $ref: '#/components/schemas/Agent-me.get'
+        companies:
+          type: array
+          items:
+            type:
+            - string
+            - 'null'
+        userRoles:
+          type: array
+          items:
             type: string
-            format: iri-reference
-            example: https://example.com/
+        userTypes:
+          type: array
+          items:
+            type: string
+    Company.csv-me.get:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type:
+          - string
+          - 'null'
+    JsonApiCollectionBaseSchema:
+      allOf:
+      - $ref: '#/components/schemas/JsonApiCollectionBaseSchemaNoPagination'
+      - type: object
+        properties:
+          links:
+            type: object
+            properties:
+              first:
+                type: string
+                format: iri-reference
+              prev:
+                type: string
+                format: iri-reference
+              next:
+                type: string
+                format: iri-reference
+              last:
+                type: string
+                format: iri-reference
+            example:
+              first: string
+              prev: string
+              next: string
+              last: string
+          meta:
+            type: object
+            properties:
+              itemsPerPage:
+                type: integer
+                minimum: 0
+              currentPage:
+                type: integer
+                minimum: 0
     Agent:
       type: object
       properties:
@@ -802,6 +637,25 @@ components:
             type: string
             format: iri-reference
             example: https://example.com/
+    Agent.UserWithClaimData.csv-me.get:
+      type: object
+      properties:
+        user:
+          $ref: '#/components/schemas/Agent.csv-me.get'
+        companies:
+          type: array
+          items:
+            type:
+            - string
+            - 'null'
+        userRoles:
+          type: array
+          items:
+            type: string
+        userTypes:
+          type: array
+          items:
+            type: string
     Company.jsonapi:
       properties:
         data:
@@ -816,6 +670,16 @@ components:
           required:
           - type
           - id
+    Company-agent_user.read:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type:
+          - string
+          - 'null'
     Agent.AppUserGetDto.jsonapi-me.get:
       properties:
         data:
@@ -854,6 +718,142 @@ components:
           readOnly: true
           externalDocs:
             url: https://jsonapi.org/format/#fetching-includes
+    ConstraintViolation.jsonapi:
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+            attributes:
+              $ref: '#/components/schemas/ConstraintViolation'
+          required:
+          - type
+          - id
+    Company-me.get:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type:
+          - string
+          - 'null'
+    Error.jsonapi:
+      properties:
+        errors:
+          type: array
+          items:
+            allOf:
+            - $ref: '#/components/schemas/Error'
+            - type: object
+              properties:
+                source:
+                  type: object
+                status:
+                  type: string
+    ConstraintViolation:
+      type: object
+      description: Unprocessable entity
+      properties:
+        status:
+          default: 422
+          type: integer
+        detail:
+          readOnly: true
+          type: string
+        type:
+          readOnly: true
+          type: string
+        title:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        instance:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+    Agent.csv-agent_user.read:
+      type: object
+      properties:
+        id:
+          type: string
+        email:
+          type: string
+        roleGroups:
+          type: array
+          items:
+            type: string
+        companies:
+          type: array
+          items:
+            $ref: '#/components/schemas/Company.csv-agent_user.read'
+    Agent-me.get:
+      type: object
+      properties:
+        id:
+          type: string
+        email:
+          type: string
+        roles:
+          type: array
+          items:
+            type: string
+        roleGroups:
+          type: array
+          items:
+            type: string
+        companies:
+          type: array
+          items:
+            $ref: '#/components/schemas/Company-me.get'
+    Agent.jsonMergePatch:
+      type: object
+      properties:
+        id:
+          type: string
+        email:
+          type: string
+        roles:
+          type: array
+          items:
+            type: string
+        roleGroups:
+          type: array
+          items:
+            type: string
+        companies:
+          type: array
+          items:
+            type: string
+            format: iri-reference
+            example: https://example.com/
+    Agent.csv:
+      type: object
+      properties:
+        id:
+          type: string
+        email:
+          type: string
+        roles:
+          type: array
+          items:
+            type: string
+        roleGroups:
+          type: array
+          items:
+            type: string
+        companies:
+          type: array
+          items:
+            type: string
+            format: iri-reference
+            example: https://example.com/
   securitySchemes:
     JWT:
       type: apiKey
