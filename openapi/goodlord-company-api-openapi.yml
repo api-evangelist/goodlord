@@ -154,54 +154,21 @@ paths:
         explode: false
 components:
   schemas:
-    JsonApiCollectionBaseSchema:
-      allOf:
-      - $ref: '#/components/schemas/JsonApiCollectionBaseSchemaNoPagination'
-      - type: object
-        properties:
-          links:
-            type: object
-            properties:
-              first:
-                type: string
-                format: iri-reference
-              prev:
-                type: string
-                format: iri-reference
-              next:
-                type: string
-                format: iri-reference
-              last:
-                type: string
-                format: iri-reference
-            example:
-              first: string
-              prev: string
-              next: string
-              last: string
-          meta:
-            type: object
-            properties:
-              itemsPerPage:
-                type: integer
-                minimum: 0
-              currentPage:
-                type: integer
-                minimum: 0
-    Error.jsonapi:
+    Company.jsonapi:
       properties:
-        errors:
-          type: array
-          items:
-            allOf:
-            - $ref: '#/components/schemas/Error'
-            - type: object
-              properties:
-                source:
-                  type: object
-                status:
-                  type: string
-    Company.csv:
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+            attributes:
+              $ref: '#/components/schemas/Company'
+          required:
+          - type
+          - id
+    Company:
       type: object
       properties:
         id:
@@ -213,27 +180,6 @@ components:
           - 'null'
         externalId:
           type: string
-    JsonApiCollectionBaseSchemaNoPagination:
-      type: object
-      properties:
-        links:
-          type: object
-          properties:
-            self:
-              type: string
-              format: iri-reference
-          example:
-            self: string
-        meta:
-          type: object
-          properties:
-            totalItems:
-              type: integer
-              minimum: 0
-        data:
-          type: array
-      required:
-      - data
     Error:
       type: object
       description: A representation of common errors.
@@ -282,7 +228,75 @@ components:
               type: string
             header:
               type: string
-    Company:
+    Error.jsonapi:
+      properties:
+        errors:
+          type: array
+          items:
+            allOf:
+            - $ref: '#/components/schemas/Error'
+            - type: object
+              properties:
+                source:
+                  type: object
+                status:
+                  type: string
+    JsonApiCollectionBaseSchema:
+      allOf:
+      - $ref: '#/components/schemas/JsonApiCollectionBaseSchemaNoPagination'
+      - type: object
+        properties:
+          links:
+            type: object
+            properties:
+              first:
+                type: string
+                format: iri-reference
+              prev:
+                type: string
+                format: iri-reference
+              next:
+                type: string
+                format: iri-reference
+              last:
+                type: string
+                format: iri-reference
+            example:
+              first: string
+              prev: string
+              next: string
+              last: string
+          meta:
+            type: object
+            properties:
+              itemsPerPage:
+                type: integer
+                minimum: 0
+              currentPage:
+                type: integer
+                minimum: 0
+    JsonApiCollectionBaseSchemaNoPagination:
+      type: object
+      properties:
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+              format: iri-reference
+          example:
+            self: string
+        meta:
+          type: object
+          properties:
+            totalItems:
+              type: integer
+              minimum: 0
+        data:
+          type: array
+      required:
+      - data
+    Company.csv:
       type: object
       properties:
         id:
@@ -294,20 +308,6 @@ components:
           - 'null'
         externalId:
           type: string
-    Company.jsonapi:
-      properties:
-        data:
-          type: object
-          properties:
-            id:
-              type: string
-            type:
-              type: string
-            attributes:
-              $ref: '#/components/schemas/Company'
-          required:
-          - type
-          - id
   securitySchemes:
     JWT:
       type: apiKey

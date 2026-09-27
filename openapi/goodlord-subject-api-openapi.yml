@@ -1063,17 +1063,284 @@ paths:
                 xml:
                   name: '##default'
 components:
-  parameters:
-    CompanyId:
-      name: Company-ID
-      in: header
-      description: A unique GUID identifying your company, issued alongside your API keys. This value may differ between production and sandbox environments. This is a mandatory header for all application and subject endpoints.
-      required: true
-      schema:
-        type: string
-        format: uuid
-      example: e2baa1a0-1234-5678-9abc-def012345678
   schemas:
+    PatchSubjectOutcomeConditionsRequest:
+      title: Patch Subject Outcome Conditions Request
+      type: object
+      description: Patch a subject's outcome conditions
+      properties:
+        conditions:
+          type: object
+          description: Dictionary mapping condition type to confirmation status. Valid keys are `confirmedIdOnPerson` and `confirmedProofOfAddress`.
+          properties:
+            confirmedIdOnPerson:
+              type: boolean
+              description: Whether the individual's ID has been confirmed in person.
+            confirmedProofOfAddress:
+              type: boolean
+              description: Whether proof of address has been confirmed.
+          example:
+            confirmedProofOfAddress: true
+        requestedBy:
+          type: string
+          example: User123
+          description: Identifier of the user or system that made the confirmation request.
+      required:
+      - conditions
+      - requestedBy
+    CreateSubjectRequest:
+      title: Create Subject Request
+      type: object
+      required:
+      - rentalDetails
+      - context
+      - type
+      - attachedSubjects
+      properties:
+        externalId:
+          type: string
+        rentalDetails:
+          type: object
+          required:
+          - priceShare
+          properties:
+            priceShare:
+              type: number
+              description: The portion of the monthly rent attributed to this subject, in GBP. For sole tenants this equals the property's monthly rent; for shared tenancies it is the per-tenant share.
+            affordabilityRatio:
+              type: number
+              minimum: 1
+              description: 'Minimum income-to-rent multiplier the subject''s income must satisfy. Typical values: 2.5 for applicants, 3.0 for guarantors. Must be >= 1. Note: API consumers always operate within a company that has a pre-configured affordability ratio (`TenantAffordabilityRatio` for applicants, `GuarantorAffordabilityRatio` for guarantors), so the value supplied here will be silently replaced by the company-configured value before storage. The request still returns 200, but the stored value is the company-configured one and is what subsequent GETs will return. To confirm or change your company''s configured value, contact your Goodlord account manager.'
+        context:
+          type: object
+          required:
+          - firstName
+          - lastName
+          - email
+          - product
+          properties:
+            firstName:
+              type: string
+            lastName:
+              type: string
+            email:
+              type: string
+            mobile:
+              type: string
+            redirectUrlOnJourneyComplete:
+              type: string
+            tenancyRenewal:
+              type: boolean
+            product:
+              type: string
+              enum:
+              - Pro
+              - Essential
+              - Priority
+              - Corporate
+              - None
+            idvt:
+              type: string
+              enum:
+              - Required
+              - NotRequired
+              description: Whether IDVT (Identity document validation technolgy) is Required to be used against the subjects provided documents
+              default: NotRequired
+              example: NotRequired
+            pepSanctions:
+              type: string
+              enum:
+              - Required
+              - NotRequired
+              description: Whether PEP and Sanction checks will be run against the subject
+              default: NotRequired
+              example: NotRequired
+            communicationPreferences:
+              type: object
+              properties:
+                sendInitialTenantEmail:
+                  type: boolean
+                  example: false
+                  description: Whether to send the initial tenant email. This is used to notify the tenant that they have been added to a referencing application. You may wish to disable this if you wish to send your own emails rather than relying on Goodlord to send them. Please note that this email does include a link to the referencing bot journey that an applicant is required to fill out to submit their application.
+                disableRentProtectionComms:
+                  type: boolean
+                  example: true
+                  description: Whether to show Rent Protection Insurance (RPI) copy & coverage in the subject referencing PDF report
+                disableTCLIComms:
+                  type: boolean
+                  example: true
+                  description: Whether to show Tenant Contents and Liability Insurance (TCLI) banner in subject referencing PDF report
+                disableTenancyServicesComms:
+                  type: boolean
+                  example: true
+                  description: Whether to show tenancy services banner in subject referencing PDF report
+            company:
+              examples:
+              - null
+              description: Company information, only required when ProductType is Corporate
+              type: object
+              nullable: true
+              properties:
+                name:
+                  type: string
+                  description: The name of the company to be referenced for the Corporate Let
+                  example: Acme Corporation
+                companyNumber:
+                  type: string
+                  description: The company number of the company to be referenced for the Corporate Let
+                  example: '12345678'
+              required:
+              - name
+            guarantorCollection:
+              type: object
+              nullable: true
+              description: 'Indicates that this applicant requires a guarantor. When `required` is `true`, Goodlord will trigger guarantor collection workflows: a recommendation is created on the applicant and a ''guarantor required'' email is sent. The actual guarantor subject is created later, either by the tenant via the bot journey or by you via a follow-up Create Subject call. Only valid on subjects with `type: applicant` - supplying this on a guarantor subject will return a 400 with error code `GuarantorCollectionInvalidSubjectType`.'
+              required:
+              - required
+              - product
+              - affordabilityRatio
+              properties:
+                required:
+                  type: boolean
+                  description: Whether a guarantor is required for this applicant. Set to `true` to trigger guarantor collection workflows. When `false`, the other fields are still validated against their schema but no recommendation or email is generated.
+                  example: true
+                product:
+                  type: string
+                  description: The referencing product the guarantor will go through when they begin their journey.
+                  enum:
+                  - Pro
+                  - Essential
+                  - Priority
+                  - Corporate
+                  example: Pro
+                affordabilityRatio:
+                  type: number
+                  minimum: 1
+                  description: 'Minimum income-to-rent multiplier the guarantor''s income must satisfy. Typically 3.0 (guarantors are usually held to a higher standard than the tenant). Must be >= 1. Note: API consumers always operate within a company that has a pre-configured `GuarantorAffordabilityRatio`, so the value supplied here will be silently replaced by the company-configured value before storage. The request still returns 200, but the stored value is the company-configured one and is what subsequent GETs will return. To confirm or change your company''s configured value, contact your Goodlord account manager.'
+                  example: 3.0
+        type:
+          type: string
+          enum:
+          - applicant
+          - guarantor
+          - supplementary
+        attachedSubjects:
+          type: array
+          items:
+            type: object
+            required:
+            - id
+            - type
+            properties:
+              id:
+                type: string
+              type:
+                type: string
+    PatchSubjectRequest:
+      title: Patch Subject Request
+      type: object
+      description: Supply only the properties you wish to change. The `context` block is required and must include at least one property; `rentalDetails` is optional.
+      required:
+      - context
+      properties:
+        context:
+          type: object
+          description: Subject context fields to update. Omitted fields remain unchanged. Must include at least one property.
+          minProperties: 1
+          properties:
+            email:
+              type: string
+              description: The new email address you would like to change the subject to have
+              example: john@smith.com
+            product:
+              type: string
+              description: The product you wish to change the subject to have. Must be one of `Pro`, `Essential`, or `Priority`. PATCH only supports tier upgrades (e.g. Essential -> Pro -> Priority); switching to/from Corporate or None is not supported via PATCH and requires a new subject.
+              enum:
+              - Pro
+              - Essential
+              - Priority
+              example: Pro
+            mobile:
+              type: string
+              description: The new mobile you would like to change the subject to have
+              example: 07123456789
+            firstName:
+              type: string
+              description: The new first name you would like to change the subject to have
+              example: Simon
+            lastName:
+              type: string
+              description: The new last name you would like to change the subject to have
+              example: Shaw
+            guarantorCollection:
+              type: object
+              nullable: true
+              description: 'Update the guarantor collection configuration on an applicant. Omit from context to leave unchanged. Supply with `required: true` to add or update the requirement (creates a recommendation and sends a ''guarantor required'' email when transitioning to true); supply with `required: false` to mark as not-required (expires active guarantor recommendations); or supply `null` to remove the guarantorCollection from the subject entirely. Only meaningful on subjects with `type: applicant`. Note: changes to `product` or `affordabilityRatio` alone (without a change in `required`) do not re-trigger the workflow.'
+              required:
+              - required
+              - product
+              - affordabilityRatio
+              properties:
+                required:
+                  type: boolean
+                  description: Whether a guarantor is required for this applicant.
+                  example: true
+                product:
+                  type: string
+                  description: The referencing product the guarantor will go through.
+                  enum:
+                  - Pro
+                  - Essential
+                  - Priority
+                  - Corporate
+                  example: Pro
+                affordabilityRatio:
+                  type: number
+                  minimum: 1
+                  description: 'Minimum income-to-rent multiplier the guarantor''s income must satisfy. Must be >= 1. Note: API consumers always operate within a company that has a pre-configured `GuarantorAffordabilityRatio`, so the value supplied here will be silently replaced by the company-configured value before storage.'
+                  example: 3.0
+        rentalDetails:
+          type: object
+          description: Update the subject's rental details. Omitted fields remain unchanged.
+          properties:
+            priceShare:
+              type: number
+              exclusiveMinimum: 0
+              description: The new monthly rent share for this subject, in GBP. Must be > 0 and <= the application's monthly cost.
+              example: 1000
+            affordabilityRatio:
+              type: number
+              minimum: 1
+              description: 'New minimum income-to-rent multiplier. Must be >= 1. Note: API consumers always operate within a company that has a pre-configured affordability ratio (`TenantAffordabilityRatio` for applicants, `GuarantorAffordabilityRatio` for guarantors), so the value supplied here will be silently replaced by the company-configured value before storage. The PATCH still returns 200, but the stored ratio will snap back to the company-configured value.'
+              example: 3.0
+    APIEmail:
+      type: object
+      description: The information about an email sent to an applicant
+      properties:
+        emailAddress:
+          type: string
+          nullable: 'true'
+          example: test@example.com
+        emailSubject:
+          type: string
+          nullable: 'false'
+          example: Start your referencing.
+        date:
+          type: string
+          format: date-time
+          description: The date and time the email was sent, in ISO 8601 format. All timestamps are in UTC (indicated by the Z suffix).
+          example: '2025-10-01T12:34:56.789Z'
+        status:
+          type: string
+          nullable: 'true'
+          description: The delivery status of the email.
+          enum:
+          - Draft
+          - Sent
+          - Delivered
+          - Failed
+          - Opened
+          example: Sent
     APITouchpointAuthor:
       title: API Touchpoint Author
       type: object
@@ -1550,58 +1817,6 @@ components:
           type: array
           items: {}
       required: []
-    PatchSubjectOutcomeConditionsRequest:
-      title: Patch Subject Outcome Conditions Request
-      type: object
-      description: Patch a subject's outcome conditions
-      properties:
-        conditions:
-          type: object
-          description: Dictionary mapping condition type to confirmation status. Valid keys are `confirmedIdOnPerson` and `confirmedProofOfAddress`.
-          properties:
-            confirmedIdOnPerson:
-              type: boolean
-              description: Whether the individual's ID has been confirmed in person.
-            confirmedProofOfAddress:
-              type: boolean
-              description: Whether proof of address has been confirmed.
-          example:
-            confirmedProofOfAddress: true
-        requestedBy:
-          type: string
-          example: User123
-          description: Identifier of the user or system that made the confirmation request.
-      required:
-      - conditions
-      - requestedBy
-    APIEmail:
-      type: object
-      description: The information about an email sent to an applicant
-      properties:
-        emailAddress:
-          type: string
-          nullable: 'true'
-          example: test@example.com
-        emailSubject:
-          type: string
-          nullable: 'false'
-          example: Start your referencing.
-        date:
-          type: string
-          format: date-time
-          description: The date and time the email was sent, in ISO 8601 format. All timestamps are in UTC (indicated by the Z suffix).
-          example: '2025-10-01T12:34:56.789Z'
-        status:
-          type: string
-          nullable: 'true'
-          description: The delivery status of the email.
-          enum:
-          - Draft
-          - Sent
-          - Delivered
-          - Failed
-          - Opened
-          example: Sent
     APIErrorResponse:
       type: object
       properties:
@@ -1621,231 +1836,16 @@ components:
             - description
       required:
       - errors
-    CreateSubjectRequest:
-      title: Create Subject Request
-      type: object
-      required:
-      - rentalDetails
-      - context
-      - type
-      - attachedSubjects
-      properties:
-        externalId:
-          type: string
-        rentalDetails:
-          type: object
-          required:
-          - priceShare
-          properties:
-            priceShare:
-              type: number
-              description: The portion of the monthly rent attributed to this subject, in GBP. For sole tenants this equals the property's monthly rent; for shared tenancies it is the per-tenant share.
-            affordabilityRatio:
-              type: number
-              minimum: 1
-              description: 'Minimum income-to-rent multiplier the subject''s income must satisfy. Typical values: 2.5 for applicants, 3.0 for guarantors. Must be >= 1. Note: API consumers always operate within a company that has a pre-configured affordability ratio (`TenantAffordabilityRatio` for applicants, `GuarantorAffordabilityRatio` for guarantors), so the value supplied here will be silently replaced by the company-configured value before storage. The request still returns 200, but the stored value is the company-configured one and is what subsequent GETs will return. To confirm or change your company''s configured value, contact your Goodlord account manager.'
-        context:
-          type: object
-          required:
-          - firstName
-          - lastName
-          - email
-          - product
-          properties:
-            firstName:
-              type: string
-            lastName:
-              type: string
-            email:
-              type: string
-            mobile:
-              type: string
-            redirectUrlOnJourneyComplete:
-              type: string
-            tenancyRenewal:
-              type: boolean
-            product:
-              type: string
-              enum:
-              - Pro
-              - Essential
-              - Priority
-              - Corporate
-              - None
-            idvt:
-              type: string
-              enum:
-              - Required
-              - NotRequired
-              description: Whether IDVT (Identity document validation technolgy) is Required to be used against the subjects provided documents
-              default: NotRequired
-              example: NotRequired
-            pepSanctions:
-              type: string
-              enum:
-              - Required
-              - NotRequired
-              description: Whether PEP and Sanction checks will be run against the subject
-              default: NotRequired
-              example: NotRequired
-            communicationPreferences:
-              type: object
-              properties:
-                sendInitialTenantEmail:
-                  type: boolean
-                  example: false
-                  description: Whether to send the initial tenant email. This is used to notify the tenant that they have been added to a referencing application. You may wish to disable this if you wish to send your own emails rather than relying on Goodlord to send them. Please note that this email does include a link to the referencing bot journey that an applicant is required to fill out to submit their application.
-                disableRentProtectionComms:
-                  type: boolean
-                  example: true
-                  description: Whether to show Rent Protection Insurance (RPI) copy & coverage in the subject referencing PDF report
-                disableTCLIComms:
-                  type: boolean
-                  example: true
-                  description: Whether to show Tenant Contents and Liability Insurance (TCLI) banner in subject referencing PDF report
-                disableTenancyServicesComms:
-                  type: boolean
-                  example: true
-                  description: Whether to show tenancy services banner in subject referencing PDF report
-            company:
-              examples:
-              - null
-              description: Company information, only required when ProductType is Corporate
-              type: object
-              nullable: true
-              properties:
-                name:
-                  type: string
-                  description: The name of the company to be referenced for the Corporate Let
-                  example: Acme Corporation
-                companyNumber:
-                  type: string
-                  description: The company number of the company to be referenced for the Corporate Let
-                  example: '12345678'
-              required:
-              - name
-            guarantorCollection:
-              type: object
-              nullable: true
-              description: 'Indicates that this applicant requires a guarantor. When `required` is `true`, Goodlord will trigger guarantor collection workflows: a recommendation is created on the applicant and a ''guarantor required'' email is sent. The actual guarantor subject is created later, either by the tenant via the bot journey or by you via a follow-up Create Subject call. Only valid on subjects with `type: applicant` - supplying this on a guarantor subject will return a 400 with error code `GuarantorCollectionInvalidSubjectType`.'
-              required:
-              - required
-              - product
-              - affordabilityRatio
-              properties:
-                required:
-                  type: boolean
-                  description: Whether a guarantor is required for this applicant. Set to `true` to trigger guarantor collection workflows. When `false`, the other fields are still validated against their schema but no recommendation or email is generated.
-                  example: true
-                product:
-                  type: string
-                  description: The referencing product the guarantor will go through when they begin their journey.
-                  enum:
-                  - Pro
-                  - Essential
-                  - Priority
-                  - Corporate
-                  example: Pro
-                affordabilityRatio:
-                  type: number
-                  minimum: 1
-                  description: 'Minimum income-to-rent multiplier the guarantor''s income must satisfy. Typically 3.0 (guarantors are usually held to a higher standard than the tenant). Must be >= 1. Note: API consumers always operate within a company that has a pre-configured `GuarantorAffordabilityRatio`, so the value supplied here will be silently replaced by the company-configured value before storage. The request still returns 200, but the stored value is the company-configured one and is what subsequent GETs will return. To confirm or change your company''s configured value, contact your Goodlord account manager.'
-                  example: 3.0
-        type:
-          type: string
-          enum:
-          - applicant
-          - guarantor
-          - supplementary
-        attachedSubjects:
-          type: array
-          items:
-            type: object
-            required:
-            - id
-            - type
-            properties:
-              id:
-                type: string
-              type:
-                type: string
-    PatchSubjectRequest:
-      title: Patch Subject Request
-      type: object
-      description: Supply only the properties you wish to change. The `context` block is required and must include at least one property; `rentalDetails` is optional.
-      required:
-      - context
-      properties:
-        context:
-          type: object
-          description: Subject context fields to update. Omitted fields remain unchanged. Must include at least one property.
-          minProperties: 1
-          properties:
-            email:
-              type: string
-              description: The new email address you would like to change the subject to have
-              example: john@smith.com
-            product:
-              type: string
-              description: The product you wish to change the subject to have. Must be one of `Pro`, `Essential`, or `Priority`. PATCH only supports tier upgrades (e.g. Essential -> Pro -> Priority); switching to/from Corporate or None is not supported via PATCH and requires a new subject.
-              enum:
-              - Pro
-              - Essential
-              - Priority
-              example: Pro
-            mobile:
-              type: string
-              description: The new mobile you would like to change the subject to have
-              example: 07123456789
-            firstName:
-              type: string
-              description: The new first name you would like to change the subject to have
-              example: Simon
-            lastName:
-              type: string
-              description: The new last name you would like to change the subject to have
-              example: Shaw
-            guarantorCollection:
-              type: object
-              nullable: true
-              description: 'Update the guarantor collection configuration on an applicant. Omit from context to leave unchanged. Supply with `required: true` to add or update the requirement (creates a recommendation and sends a ''guarantor required'' email when transitioning to true); supply with `required: false` to mark as not-required (expires active guarantor recommendations); or supply `null` to remove the guarantorCollection from the subject entirely. Only meaningful on subjects with `type: applicant`. Note: changes to `product` or `affordabilityRatio` alone (without a change in `required`) do not re-trigger the workflow.'
-              required:
-              - required
-              - product
-              - affordabilityRatio
-              properties:
-                required:
-                  type: boolean
-                  description: Whether a guarantor is required for this applicant.
-                  example: true
-                product:
-                  type: string
-                  description: The referencing product the guarantor will go through.
-                  enum:
-                  - Pro
-                  - Essential
-                  - Priority
-                  - Corporate
-                  example: Pro
-                affordabilityRatio:
-                  type: number
-                  minimum: 1
-                  description: 'Minimum income-to-rent multiplier the guarantor''s income must satisfy. Must be >= 1. Note: API consumers always operate within a company that has a pre-configured `GuarantorAffordabilityRatio`, so the value supplied here will be silently replaced by the company-configured value before storage.'
-                  example: 3.0
-        rentalDetails:
-          type: object
-          description: Update the subject's rental details. Omitted fields remain unchanged.
-          properties:
-            priceShare:
-              type: number
-              exclusiveMinimum: 0
-              description: The new monthly rent share for this subject, in GBP. Must be > 0 and <= the application's monthly cost.
-              example: 1000
-            affordabilityRatio:
-              type: number
-              minimum: 1
-              description: 'New minimum income-to-rent multiplier. Must be >= 1. Note: API consumers always operate within a company that has a pre-configured affordability ratio (`TenantAffordabilityRatio` for applicants, `GuarantorAffordabilityRatio` for guarantors), so the value supplied here will be silently replaced by the company-configured value before storage. The PATCH still returns 200, but the stored ratio will snap back to the company-configured value.'
-              example: 3.0
+  parameters:
+    CompanyId:
+      name: Company-ID
+      in: header
+      description: A unique GUID identifying your company, issued alongside your API keys. This value may differ between production and sandbox environments. This is a mandatory header for all application and subject endpoints.
+      required: true
+      schema:
+        type: string
+        format: uuid
+      example: e2baa1a0-1234-5678-9abc-def012345678
   securitySchemes:
     OAuth2:
       description: 'This API uses OAuth2 to authenticate requests. You must use your client credentials to obtain a token.

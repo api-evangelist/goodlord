@@ -187,112 +187,20 @@ paths:
         explode: false
 components:
   schemas:
-    RentScheduleRow:
-      type: object
+    Company.jsonapi:
       properties:
-        audits:
-          type: array
-          items:
-            $ref: '#/components/schemas/RentScheduleRowAuditGetDto'
-        balance:
-          readOnly: true
-          description: API serialization - returns an array to avoid JSON:API wrapping of Money objects.
-          type: object
-          additionalProperties:
-            anyOf:
-            - type: integer
-            - type: string
-        id:
-          readOnly: true
-          type: string
-        rowType:
-          readOnly: true
-          description: API serialization - returns the string value to avoid JSON:API wrapping of enums.
-          type: string
-        date:
-          readOnly: true
-          type: string
-          format: date-time
-        amount:
-          type: object
-          properties:
-            amount:
-              type: integer
-              example: 123
-            currency:
-              type: string
-              example: GBP
-        note:
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        submittedAt:
-          readOnly: true
-          type:
-          - string
-          - 'null'
-          format: date-time
-        createdAt:
-          readOnly: true
-          type: string
-          format: date-time
-        updatedAt:
-          readOnly: true
-          type: string
-          format: date-time
-        deletedAt:
-          readOnly: true
-          type:
-          - string
-          - 'null'
-          format: date-time
-        rentSchedule:
-          readOnly: true
-          type:
-          - string
-          - 'null'
-          format: iri-reference
-          example: https://example.com/
-        insuranceClaim:
-          readOnly: true
-          type:
-          - string
-          - 'null'
-          format: iri-reference
-          example: https://example.com/
-        insuranceClaimId:
-          readOnly: true
-          type: string
-        companyExternalId:
-          readOnly: true
-          description: 'Helper method for voter - gets company external ID directly from entity
-
-            without creating a DTO (which can fail in certain test contexts).'
-          type:
-          - string
-          - 'null'
-    JsonApiCollectionBaseSchemaNoPagination:
-      type: object
-      properties:
-        links:
-          type: object
-          properties:
-            self:
-              type: string
-              format: iri-reference
-          example:
-            self: string
-        meta:
-          type: object
-          properties:
-            totalItems:
-              type: integer
-              minimum: 0
         data:
-          type: array
-      required:
-      - data
+          type: object
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+            attributes:
+              $ref: '#/components/schemas/Company'
+          required:
+          - type
+          - id
     Error:
       type: object
       description: A representation of common errors.
@@ -341,333 +249,6 @@ components:
               type: string
             header:
               type: string
-    Company:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        name:
-          type:
-          - string
-          - 'null'
-        externalId:
-          type: string
-    Payment-payment.read:
-      type: object
-      properties:
-        id:
-          readOnly: true
-          type: string
-        referenceNumber:
-          readOnly: true
-          type: string
-        paymentStatusIdentifier:
-          readOnly: true
-          type: string
-        paymentStatusDescription:
-          readOnly: true
-          type: string
-        insurer:
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        paymentDate:
-          readOnly: true
-          type:
-          - string
-          - 'null'
-          format: date-time
-        paymentCreatedAt:
-          readOnly: true
-          type:
-          - string
-          - 'null'
-          format: date-time
-        paymentSubmittedAt:
-          readOnly: true
-          type:
-          - string
-          - 'null'
-          format: date-time
-        paymentPaidAt:
-          readOnly: true
-          type:
-          - string
-          - 'null'
-          format: date-time
-        refundDueAmount:
-          readOnly: true
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            anyOf:
-            - type: integer
-            - type: string
-        customerPaymentUpdate:
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        paymentAmount:
-          readOnly: true
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            anyOf:
-            - type: integer
-            - type: string
-        createdAt:
-          readOnly: true
-          type:
-          - string
-          - 'null'
-          format: date-time
-        insuranceClaim:
-          readOnly: true
-          type: string
-          format: iri-reference
-          example: https://example.com/
-    JsonApiCollectionBaseSchema:
-      allOf:
-      - $ref: '#/components/schemas/JsonApiCollectionBaseSchemaNoPagination'
-      - type: object
-        properties:
-          links:
-            type: object
-            properties:
-              first:
-                type: string
-                format: iri-reference
-              prev:
-                type: string
-                format: iri-reference
-              next:
-                type: string
-                format: iri-reference
-              last:
-                type: string
-                format: iri-reference
-            example:
-              first: string
-              prev: string
-              next: string
-              last: string
-          meta:
-            type: object
-            properties:
-              itemsPerPage:
-                type: integer
-                minimum: 0
-              currentPage:
-                type: integer
-                minimum: 0
-    File.jsonapi:
-      properties:
-        data:
-          type: object
-          properties:
-            id:
-              type: string
-            type:
-              type: string
-            attributes:
-              $ref: '#/components/schemas/File'
-            relationships:
-              type: object
-              properties:
-                insuranceClaim:
-                  properties:
-                    data:
-                      oneOf:
-                      - type: 'null'
-                      - type: object
-                        properties:
-                          type:
-                            type: string
-                          id:
-                            type: string
-                            format: iri-reference
-          required:
-          - type
-          - id
-        included:
-          description: Related resources requested via the "include" query parameter.
-          type: array
-          items:
-            anyOf:
-            - $ref: '#/components/schemas/InsuranceClaim.jsonapi'
-          readOnly: true
-          externalDocs:
-            url: https://jsonapi.org/format/#fetching-includes
-    Payment.csv-payment.read:
-      type: object
-      properties:
-        id:
-          readOnly: true
-          type: string
-        referenceNumber:
-          readOnly: true
-          type: string
-        paymentStatusIdentifier:
-          readOnly: true
-          type: string
-        paymentStatusDescription:
-          readOnly: true
-          type: string
-        insurer:
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        paymentDate:
-          readOnly: true
-          type:
-          - string
-          - 'null'
-          format: date-time
-        paymentCreatedAt:
-          readOnly: true
-          type:
-          - string
-          - 'null'
-          format: date-time
-        paymentSubmittedAt:
-          readOnly: true
-          type:
-          - string
-          - 'null'
-          format: date-time
-        paymentPaidAt:
-          readOnly: true
-          type:
-          - string
-          - 'null'
-          format: date-time
-        refundDueAmount:
-          readOnly: true
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            anyOf:
-            - type: integer
-            - type: string
-        customerPaymentUpdate:
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        paymentAmount:
-          readOnly: true
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            anyOf:
-            - type: integer
-            - type: string
-        createdAt:
-          readOnly: true
-          type:
-          - string
-          - 'null'
-          format: date-time
-        insuranceClaim:
-          readOnly: true
-          type: string
-          format: iri-reference
-          example: https://example.com/
-    Company.jsonapi:
-      properties:
-        data:
-          type: object
-          properties:
-            id:
-              type: string
-            type:
-              type: string
-            attributes:
-              $ref: '#/components/schemas/Company'
-          required:
-          - type
-          - id
-    RentScheduleRowAuditGetDto:
-      type: object
-      properties:
-        type:
-          type: string
-        text:
-          type: string
-        changedBy:
-          type:
-          - string
-          - 'null'
-        changedAt:
-          type: string
-          format: date-time
-        changes:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            type:
-            - string
-            - 'null'
-    RentScheduleRow.jsonapi:
-      properties:
-        data:
-          type: object
-          properties:
-            id:
-              type: string
-            type:
-              type: string
-            attributes:
-              $ref: '#/components/schemas/RentScheduleRow'
-            relationships:
-              type: object
-              properties:
-                rentSchedule:
-                  properties:
-                    data:
-                      oneOf:
-                      - type: 'null'
-                      - type: object
-                        properties:
-                          type:
-                            type: string
-                          id:
-                            type: string
-                            format: iri-reference
-                insuranceClaim:
-                  properties:
-                    data:
-                      oneOf:
-                      - type: 'null'
-                      - type: object
-                        properties:
-                          type:
-                            type: string
-                          id:
-                            type: string
-                            format: iri-reference
-          required:
-          - type
-          - id
-        included:
-          description: Related resources requested via the "include" query parameter.
-          type: array
-          items:
-            anyOf:
-            - $ref: '#/components/schemas/RentSchedule.jsonapi'
-            - $ref: '#/components/schemas/InsuranceClaim.jsonapi'
-          readOnly: true
-          externalDocs:
-            url: https://jsonapi.org/format/#fetching-includes
     InsuranceClaim:
       type: object
       properties:
@@ -1217,20 +798,7 @@ components:
           - string
           - 'null'
           format: date-time
-    Error.jsonapi:
-      properties:
-        errors:
-          type: array
-          items:
-            allOf:
-            - $ref: '#/components/schemas/Error'
-            - type: object
-              properties:
-                source:
-                  type: object
-                status:
-                  type: string
-    Payment.jsonapi:
+    File.jsonapi:
       properties:
         data:
           type: object
@@ -1240,7 +808,7 @@ components:
             type:
               type: string
             attributes:
-              $ref: '#/components/schemas/Payment'
+              $ref: '#/components/schemas/File'
             relationships:
               type: object
               properties:
@@ -1268,178 +836,106 @@ components:
           readOnly: true
           externalDocs:
             url: https://jsonapi.org/format/#fetching-includes
-    RentSchedule.jsonapi:
-      properties:
-        data:
-          type: object
-          properties:
-            id:
-              type: string
-            type:
-              type: string
-            attributes:
-              $ref: '#/components/schemas/RentSchedule'
-            relationships:
-              type: object
-              properties:
-                insuranceClaim:
-                  properties:
-                    data:
-                      oneOf:
-                      - type: 'null'
-                      - type: object
-                        properties:
-                          type:
-                            type: string
-                          id:
-                            type: string
-                            format: iri-reference
-                rentScheduleRows:
-                  properties:
-                    data:
-                      type: array
-                      items:
-                        type: object
-                        properties:
-                          type:
-                            type: string
-                          id:
-                            type: string
-                            format: iri-reference
-          required:
-          - type
-          - id
-        included:
-          description: Related resources requested via the "include" query parameter.
-          type: array
-          items:
-            anyOf:
-            - $ref: '#/components/schemas/InsuranceClaim.jsonapi'
-            - $ref: '#/components/schemas/RentScheduleRow.jsonapi'
-          readOnly: true
-          externalDocs:
-            url: https://jsonapi.org/format/#fetching-includes
-    InsuranceClaim.jsonapi:
-      properties:
-        data:
-          type: object
-          properties:
-            id:
-              type: string
-            type:
-              type: string
-            attributes:
-              $ref: '#/components/schemas/InsuranceClaim'
-            relationships:
-              type: object
-              properties:
-                company:
-                  properties:
-                    data:
-                      oneOf:
-                      - type: 'null'
-                      - type: object
-                        properties:
-                          type:
-                            type: string
-                          id:
-                            type: string
-                            format: iri-reference
-                rentSchedule:
-                  properties:
-                    data:
-                      oneOf:
-                      - type: 'null'
-                      - type: object
-                        properties:
-                          type:
-                            type: string
-                          id:
-                            type: string
-                            format: iri-reference
-                files:
-                  properties:
-                    data:
-                      type: array
-                      items:
-                        type: object
-                        properties:
-                          type:
-                            type: string
-                          id:
-                            type: string
-                            format: iri-reference
-                payments:
-                  properties:
-                    data:
-                      type: array
-                      items:
-                        type: object
-                        properties:
-                          type:
-                            type: string
-                          id:
-                            type: string
-                            format: iri-reference
-          required:
-          - type
-          - id
-        included:
-          description: Related resources requested via the "include" query parameter.
-          type: array
-          items:
-            anyOf:
-            - $ref: '#/components/schemas/Company.jsonapi'
-            - $ref: '#/components/schemas/RentSchedule.jsonapi'
-            - $ref: '#/components/schemas/File.jsonapi'
-            - $ref: '#/components/schemas/Payment.jsonapi'
-          readOnly: true
-          externalDocs:
-            url: https://jsonapi.org/format/#fetching-includes
-    RentSchedule:
+    Payment-payment.read:
       type: object
       properties:
         id:
           readOnly: true
           type: string
-        submittedAt:
+        referenceNumber:
+          readOnly: true
+          type: string
+        paymentStatusIdentifier:
+          readOnly: true
+          type: string
+        paymentStatusDescription:
+          readOnly: true
+          type: string
+        insurer:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        paymentDate:
           readOnly: true
           type:
           - string
           - 'null'
           format: date-time
-        syncedAt:
+        paymentCreatedAt:
           readOnly: true
           type:
           - string
           - 'null'
           format: date-time
-        deletedAt:
+        paymentSubmittedAt:
           readOnly: true
           type:
           - string
           - 'null'
           format: date-time
+        paymentPaidAt:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+          format: date-time
+        refundDueAmount:
+          readOnly: true
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            anyOf:
+            - type: integer
+            - type: string
+        customerPaymentUpdate:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        paymentAmount:
+          readOnly: true
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            anyOf:
+            - type: integer
+            - type: string
         createdAt:
           readOnly: true
-          type: string
-          format: date-time
-        updatedAt:
-          readOnly: true
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
         insuranceClaim:
           readOnly: true
           type: string
           format: iri-reference
           example: https://example.com/
-        rentScheduleRows:
-          readOnly: true
-          type: array
-          items:
-            type: string
-            format: iri-reference
-            example: https://example.com/
+    RentScheduleRowAuditGetDto:
+      type: object
+      properties:
+        type:
+          type: string
+        text:
+          type: string
+        changedBy:
+          type:
+          - string
+          - 'null'
+        changedAt:
+          type: string
+          format: date-time
+        changes:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type:
+            - string
+            - 'null'
     File:
       type: object
       properties:
@@ -1486,6 +982,258 @@ components:
           - 'null'
           format: iri-reference
           example: https://example.com/
+    RentScheduleRow.jsonapi:
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+            attributes:
+              $ref: '#/components/schemas/RentScheduleRow'
+            relationships:
+              type: object
+              properties:
+                rentSchedule:
+                  properties:
+                    data:
+                      oneOf:
+                      - type: 'null'
+                      - type: object
+                        properties:
+                          type:
+                            type: string
+                          id:
+                            type: string
+                            format: iri-reference
+                insuranceClaim:
+                  properties:
+                    data:
+                      oneOf:
+                      - type: 'null'
+                      - type: object
+                        properties:
+                          type:
+                            type: string
+                          id:
+                            type: string
+                            format: iri-reference
+          required:
+          - type
+          - id
+        included:
+          description: Related resources requested via the "include" query parameter.
+          type: array
+          items:
+            anyOf:
+            - $ref: '#/components/schemas/RentSchedule.jsonapi'
+            - $ref: '#/components/schemas/InsuranceClaim.jsonapi'
+          readOnly: true
+          externalDocs:
+            url: https://jsonapi.org/format/#fetching-includes
+    Payment.jsonapi:
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+            attributes:
+              $ref: '#/components/schemas/Payment'
+            relationships:
+              type: object
+              properties:
+                insuranceClaim:
+                  properties:
+                    data:
+                      oneOf:
+                      - type: 'null'
+                      - type: object
+                        properties:
+                          type:
+                            type: string
+                          id:
+                            type: string
+                            format: iri-reference
+          required:
+          - type
+          - id
+        included:
+          description: Related resources requested via the "include" query parameter.
+          type: array
+          items:
+            anyOf:
+            - $ref: '#/components/schemas/InsuranceClaim.jsonapi'
+          readOnly: true
+          externalDocs:
+            url: https://jsonapi.org/format/#fetching-includes
+    RentScheduleRow:
+      type: object
+      properties:
+        audits:
+          type: array
+          items:
+            $ref: '#/components/schemas/RentScheduleRowAuditGetDto'
+        balance:
+          readOnly: true
+          description: API serialization - returns an array to avoid JSON:API wrapping of Money objects.
+          type: object
+          additionalProperties:
+            anyOf:
+            - type: integer
+            - type: string
+        id:
+          readOnly: true
+          type: string
+        rowType:
+          readOnly: true
+          description: API serialization - returns the string value to avoid JSON:API wrapping of enums.
+          type: string
+        date:
+          readOnly: true
+          type: string
+          format: date-time
+        amount:
+          type: object
+          properties:
+            amount:
+              type: integer
+              example: 123
+            currency:
+              type: string
+              example: GBP
+        note:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        submittedAt:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+          format: date-time
+        createdAt:
+          readOnly: true
+          type: string
+          format: date-time
+        updatedAt:
+          readOnly: true
+          type: string
+          format: date-time
+        deletedAt:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+          format: date-time
+        rentSchedule:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+          format: iri-reference
+          example: https://example.com/
+        insuranceClaim:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+          format: iri-reference
+          example: https://example.com/
+        insuranceClaimId:
+          readOnly: true
+          type: string
+        companyExternalId:
+          readOnly: true
+          description: 'Helper method for voter - gets company external ID directly from entity
+
+            without creating a DTO (which can fail in certain test contexts).'
+          type:
+          - string
+          - 'null'
+    JsonApiCollectionBaseSchema:
+      allOf:
+      - $ref: '#/components/schemas/JsonApiCollectionBaseSchemaNoPagination'
+      - type: object
+        properties:
+          links:
+            type: object
+            properties:
+              first:
+                type: string
+                format: iri-reference
+              prev:
+                type: string
+                format: iri-reference
+              next:
+                type: string
+                format: iri-reference
+              last:
+                type: string
+                format: iri-reference
+            example:
+              first: string
+              prev: string
+              next: string
+              last: string
+          meta:
+            type: object
+            properties:
+              itemsPerPage:
+                type: integer
+                minimum: 0
+              currentPage:
+                type: integer
+                minimum: 0
+    RentSchedule:
+      type: object
+      properties:
+        id:
+          readOnly: true
+          type: string
+        submittedAt:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+          format: date-time
+        syncedAt:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+          format: date-time
+        deletedAt:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+          format: date-time
+        createdAt:
+          readOnly: true
+          type: string
+          format: date-time
+        updatedAt:
+          readOnly: true
+          type: string
+          format: date-time
+        insuranceClaim:
+          readOnly: true
+          type: string
+          format: iri-reference
+          example: https://example.com/
+        rentScheduleRows:
+          readOnly: true
+          type: array
+          items:
+            type: string
+            format: iri-reference
+            example: https://example.com/
     Payment:
       type: object
       properties:
@@ -1564,6 +1312,258 @@ components:
           type: string
           format: iri-reference
           example: https://example.com/
+    Company:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type:
+          - string
+          - 'null'
+        externalId:
+          type: string
+    RentSchedule.jsonapi:
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+            attributes:
+              $ref: '#/components/schemas/RentSchedule'
+            relationships:
+              type: object
+              properties:
+                insuranceClaim:
+                  properties:
+                    data:
+                      oneOf:
+                      - type: 'null'
+                      - type: object
+                        properties:
+                          type:
+                            type: string
+                          id:
+                            type: string
+                            format: iri-reference
+                rentScheduleRows:
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          type:
+                            type: string
+                          id:
+                            type: string
+                            format: iri-reference
+          required:
+          - type
+          - id
+        included:
+          description: Related resources requested via the "include" query parameter.
+          type: array
+          items:
+            anyOf:
+            - $ref: '#/components/schemas/InsuranceClaim.jsonapi'
+            - $ref: '#/components/schemas/RentScheduleRow.jsonapi'
+          readOnly: true
+          externalDocs:
+            url: https://jsonapi.org/format/#fetching-includes
+    Error.jsonapi:
+      properties:
+        errors:
+          type: array
+          items:
+            allOf:
+            - $ref: '#/components/schemas/Error'
+            - type: object
+              properties:
+                source:
+                  type: object
+                status:
+                  type: string
+    Payment.csv-payment.read:
+      type: object
+      properties:
+        id:
+          readOnly: true
+          type: string
+        referenceNumber:
+          readOnly: true
+          type: string
+        paymentStatusIdentifier:
+          readOnly: true
+          type: string
+        paymentStatusDescription:
+          readOnly: true
+          type: string
+        insurer:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        paymentDate:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+          format: date-time
+        paymentCreatedAt:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+          format: date-time
+        paymentSubmittedAt:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+          format: date-time
+        paymentPaidAt:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+          format: date-time
+        refundDueAmount:
+          readOnly: true
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            anyOf:
+            - type: integer
+            - type: string
+        customerPaymentUpdate:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        paymentAmount:
+          readOnly: true
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            anyOf:
+            - type: integer
+            - type: string
+        createdAt:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+          format: date-time
+        insuranceClaim:
+          readOnly: true
+          type: string
+          format: iri-reference
+          example: https://example.com/
+    JsonApiCollectionBaseSchemaNoPagination:
+      type: object
+      properties:
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+              format: iri-reference
+          example:
+            self: string
+        meta:
+          type: object
+          properties:
+            totalItems:
+              type: integer
+              minimum: 0
+        data:
+          type: array
+      required:
+      - data
+    InsuranceClaim.jsonapi:
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+            attributes:
+              $ref: '#/components/schemas/InsuranceClaim'
+            relationships:
+              type: object
+              properties:
+                company:
+                  properties:
+                    data:
+                      oneOf:
+                      - type: 'null'
+                      - type: object
+                        properties:
+                          type:
+                            type: string
+                          id:
+                            type: string
+                            format: iri-reference
+                rentSchedule:
+                  properties:
+                    data:
+                      oneOf:
+                      - type: 'null'
+                      - type: object
+                        properties:
+                          type:
+                            type: string
+                          id:
+                            type: string
+                            format: iri-reference
+                files:
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          type:
+                            type: string
+                          id:
+                            type: string
+                            format: iri-reference
+                payments:
+                  properties:
+                    data:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          type:
+                            type: string
+                          id:
+                            type: string
+                            format: iri-reference
+          required:
+          - type
+          - id
+        included:
+          description: Related resources requested via the "include" query parameter.
+          type: array
+          items:
+            anyOf:
+            - $ref: '#/components/schemas/Company.jsonapi'
+            - $ref: '#/components/schemas/RentSchedule.jsonapi'
+            - $ref: '#/components/schemas/File.jsonapi'
+            - $ref: '#/components/schemas/Payment.jsonapi'
+          readOnly: true
+          externalDocs:
+            url: https://jsonapi.org/format/#fetching-includes
   securitySchemes:
     JWT:
       type: apiKey

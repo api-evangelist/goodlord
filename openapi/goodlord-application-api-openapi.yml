@@ -249,62 +249,6 @@ components:
         format: uuid
       example: e2baa1a0-1234-5678-9abc-def012345678
   schemas:
-    Application:
-      title: Application
-      type: object
-      description: An application contains rental information and all of the applicants/guarantors which are applying for a tenancy.
-      properties:
-        id:
-          type: string
-        tenancy:
-          type: object
-          properties:
-            moveInDate:
-              type: string
-              example: '2024-10-01'
-            term:
-              type: number
-              example: 12
-            monthlyCost:
-              type: number
-              example: 1000
-            address:
-              type: object
-              properties:
-                line1:
-                  type: string
-                  example: 22 Street
-                city:
-                  type: string
-                  example: Sheffield
-                postcode:
-                  type: string
-                  example: S1 123
-                country:
-                  type: string
-                  example: England
-        subjects:
-          type: array
-          items:
-            $ref: '#/components/schemas/Subject'
-        agency:
-          type: object
-          properties:
-            companyName:
-              type: string
-              example: John Smith Lettings
-            agentName:
-              type: string
-              example: John Smith
-            agentMobile:
-              type: string
-              example: 07912345678
-            agentEmail:
-              type: string
-              example: john.smith@example.com
-        createdAt:
-          type: string
-      required: []
     CreateApplicationRequest:
       title: Create Application Request
       type: object
@@ -802,6 +746,70 @@ components:
           type: array
           items: {}
       required: []
+    ApiMessageResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: Something happened that I need to alert you about
+      xml:
+        name: '##default'
+    Application:
+      title: Application
+      type: object
+      description: An application contains rental information and all of the applicants/guarantors which are applying for a tenancy.
+      properties:
+        id:
+          type: string
+        tenancy:
+          type: object
+          properties:
+            moveInDate:
+              type: string
+              example: '2024-10-01'
+            term:
+              type: number
+              example: 12
+            monthlyCost:
+              type: number
+              example: 1000
+            address:
+              type: object
+              properties:
+                line1:
+                  type: string
+                  example: 22 Street
+                city:
+                  type: string
+                  example: Sheffield
+                postcode:
+                  type: string
+                  example: S1 123
+                country:
+                  type: string
+                  example: England
+        subjects:
+          type: array
+          items:
+            $ref: '#/components/schemas/Subject'
+        agency:
+          type: object
+          properties:
+            companyName:
+              type: string
+              example: John Smith Lettings
+            agentName:
+              type: string
+              example: John Smith
+            agentMobile:
+              type: string
+              example: 07912345678
+            agentEmail:
+              type: string
+              example: john.smith@example.com
+        createdAt:
+          type: string
+      required: []
     PatchApplicationRequest:
       title: Patch Application Request
       type: object
@@ -863,14 +871,6 @@ components:
             - description
       required:
       - errors
-    ApiMessageResponse:
-      type: object
-      properties:
-        message:
-          type: string
-          example: Something happened that I need to alert you about
-      xml:
-        name: '##default'
   securitySchemes:
     OAuth2:
       description: 'This API uses OAuth2 to authenticate requests. You must use your client credentials to obtain a token.

@@ -49,7 +49,7 @@ accessModel:
   method: derived
 image: https://www.goodlord.com/hubfs/goodlord-logo-1.jpg
 tags:
-- Real-Estate
+- Real Estate
 - United Kingdom
 - PropTech
 - Property Management
@@ -70,6 +70,7 @@ tags_raw:
 - Tenancy Management
 - Insurance
 - Payments
+- Real-Estate
 created: '2026-07-26'
 modified: '2026-07-26'
 specificationVersion: '0.23'
