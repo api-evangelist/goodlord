@@ -154,32 +154,27 @@ paths:
         explode: false
 components:
   schemas:
-    Company.jsonapi:
-      properties:
-        data:
-          type: object
-          properties:
-            id:
-              type: string
-            type:
-              type: string
-            attributes:
-              $ref: '#/components/schemas/Company'
-          required:
-          - type
-          - id
-    Company:
+    JsonApiCollectionBaseSchemaNoPagination:
       type: object
       properties:
-        id:
-          type: string
-          format: uuid
-        name:
-          type:
-          - string
-          - 'null'
-        externalId:
-          type: string
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+              format: iri-reference
+          example:
+            self: string
+        meta:
+          type: object
+          properties:
+            totalItems:
+              type: integer
+              minimum: 0
+        data:
+          type: array
+      required:
+      - data
     Error:
       type: object
       description: A representation of common errors.
@@ -228,19 +223,44 @@ components:
               type: string
             header:
               type: string
-    Error.jsonapi:
+    Company:
+      type: object
       properties:
-        errors:
-          type: array
-          items:
-            allOf:
-            - $ref: '#/components/schemas/Error'
-            - type: object
-              properties:
-                source:
-                  type: object
-                status:
-                  type: string
+        id:
+          type: string
+          format: uuid
+        name:
+          type:
+          - string
+          - 'null'
+        externalId:
+          type: string
+    Company.jsonapi:
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+            attributes:
+              $ref: '#/components/schemas/Company'
+          required:
+          - type
+          - id
+    Company.csv:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type:
+          - string
+          - 'null'
+        externalId:
+          type: string
     JsonApiCollectionBaseSchema:
       allOf:
       - $ref: '#/components/schemas/JsonApiCollectionBaseSchemaNoPagination'
@@ -275,39 +295,19 @@ components:
               currentPage:
                 type: integer
                 minimum: 0
-    JsonApiCollectionBaseSchemaNoPagination:
-      type: object
+    Error.jsonapi:
       properties:
-        links:
-          type: object
-          properties:
-            self:
-              type: string
-              format: iri-reference
-          example:
-            self: string
-        meta:
-          type: object
-          properties:
-            totalItems:
-              type: integer
-              minimum: 0
-        data:
+        errors:
           type: array
-      required:
-      - data
-    Company.csv:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        name:
-          type:
-          - string
-          - 'null'
-        externalId:
-          type: string
+          items:
+            allOf:
+            - $ref: '#/components/schemas/Error'
+            - type: object
+              properties:
+                source:
+                  type: object
+                status:
+                  type: string
   securitySchemes:
     JWT:
       type: apiKey

@@ -379,20 +379,100 @@ paths:
         required: true
 components:
   schemas:
-    ConstraintViolation.jsonapi:
+    ConstraintViolation:
+      type: object
+      description: Unprocessable entity
       properties:
-        data:
+        status:
+          default: 422
+          type: integer
+        detail:
+          readOnly: true
+          type: string
+        type:
+          readOnly: true
+          type: string
+        title:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        instance:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+    RoleGroup.jsonMergePatch:
+      type: object
+      properties:
+        name:
+          type: string
+        roles:
+          type: array
+          items:
+            type: string
+            format: iri-reference
+            example: https://example.com/
+        id:
+          readOnly: true
+          type: string
+          format: uuid
+        deletedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        admin:
+          readOnly: true
+          type: boolean
+        agent:
+          readOnly: true
+          type: boolean
+        logContext:
+          readOnly: true
+          type: array
+          items:
+            type:
+            - string
+            - 'null'
+        deleted:
+          readOnly: true
+          description: Check if the entity has been soft deleted.
+          type: boolean
+    Error.jsonapi:
+      properties:
+        errors:
+          type: array
+          items:
+            allOf:
+            - $ref: '#/components/schemas/Error'
+            - type: object
+              properties:
+                source:
+                  type: object
+                status:
+                  type: string
+    JsonApiCollectionBaseSchemaNoPagination:
+      type: object
+      properties:
+        links:
           type: object
           properties:
-            id:
+            self:
               type: string
-            type:
-              type: string
-            attributes:
-              $ref: '#/components/schemas/ConstraintViolation'
-          required:
-          - type
-          - id
+              format: iri-reference
+          example:
+            self: string
+        meta:
+          type: object
+          properties:
+            totalItems:
+              type: integer
+              minimum: 0
+        data:
+          type: array
+      required:
+      - data
     Role.jsonapi:
       properties:
         data:
@@ -431,29 +511,6 @@ components:
           readOnly: true
           externalDocs:
             url: https://jsonapi.org/format/#fetching-includes
-    ConstraintViolation:
-      type: object
-      description: Unprocessable entity
-      properties:
-        status:
-          default: 422
-          type: integer
-        detail:
-          readOnly: true
-          type: string
-        type:
-          readOnly: true
-          type: string
-        title:
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        instance:
-          readOnly: true
-          type:
-          - string
-          - 'null'
     Error:
       type: object
       description: A representation of common errors.
@@ -502,20 +559,41 @@ components:
               type: string
             header:
               type: string
-    Error.jsonapi:
+    Role:
+      type: object
+      required:
+      - name
       properties:
-        errors:
+        name:
+          pattern: ^(ROLE_[A-Z_]+)$
+          type: string
+        roleGroups:
           type: array
           items:
-            allOf:
-            - $ref: '#/components/schemas/Error'
-            - type: object
-              properties:
-                source:
-                  type: object
-                status:
-                  type: string
-    RoleGroup:
+            type: string
+            format: iri-reference
+            example: https://example.com/
+        id:
+          readOnly: true
+          type: string
+          format: uuid
+        deletedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        logContext:
+          readOnly: true
+          type: array
+          items:
+            type:
+            - string
+            - 'null'
+        deleted:
+          readOnly: true
+          description: Check if the entity has been soft deleted.
+          type: boolean
+    RoleGroup.csv:
       type: object
       properties:
         name:
@@ -586,7 +664,7 @@ components:
               currentPage:
                 type: integer
                 minimum: 0
-    RoleGroup.jsonMergePatch:
+    RoleGroup:
       type: object
       properties:
         name:
@@ -623,98 +701,20 @@ components:
           readOnly: true
           description: Check if the entity has been soft deleted.
           type: boolean
-    RoleGroup.csv:
-      type: object
+    ConstraintViolation.jsonapi:
       properties:
-        name:
-          type: string
-        roles:
-          type: array
-          items:
-            type: string
-            format: iri-reference
-            example: https://example.com/
-        id:
-          readOnly: true
-          type: string
-          format: uuid
-        deletedAt:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        admin:
-          readOnly: true
-          type: boolean
-        agent:
-          readOnly: true
-          type: boolean
-        logContext:
-          readOnly: true
-          type: array
-          items:
-            type:
-            - string
-            - 'null'
-        deleted:
-          readOnly: true
-          description: Check if the entity has been soft deleted.
-          type: boolean
-    JsonApiCollectionBaseSchemaNoPagination:
-      type: object
-      properties:
-        links:
-          type: object
-          properties:
-            self:
-              type: string
-              format: iri-reference
-          example:
-            self: string
-        meta:
-          type: object
-          properties:
-            totalItems:
-              type: integer
-              minimum: 0
         data:
-          type: array
-      required:
-      - data
-    Role:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          pattern: ^(ROLE_[A-Z_]+)$
-          type: string
-        roleGroups:
-          type: array
-          items:
-            type: string
-            format: iri-reference
-            example: https://example.com/
-        id:
-          readOnly: true
-          type: string
-          format: uuid
-        deletedAt:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        logContext:
-          readOnly: true
-          type: array
-          items:
+          type: object
+          properties:
+            id:
+              type: string
             type:
-            - string
-            - 'null'
-        deleted:
-          readOnly: true
-          description: Check if the entity has been soft deleted.
-          type: boolean
+              type: string
+            attributes:
+              $ref: '#/components/schemas/ConstraintViolation'
+          required:
+          - type
+          - id
     RoleGroup.jsonapi:
       properties:
         data:

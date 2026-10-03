@@ -99,150 +99,6 @@ paths:
         required: true
 components:
   schemas:
-    RentScheduleRowPostDto.RentScheduleRowGetModel:
-      type: object
-      properties:
-        audits:
-          type: array
-          items:
-            $ref: '#/components/schemas/RentScheduleRowAuditGetDto'
-        balance:
-          readOnly: true
-          description: API serialization - returns an array to avoid JSON:API wrapping of Money objects.
-          type: object
-          additionalProperties:
-            anyOf:
-            - type: integer
-            - type: string
-        id:
-          readOnly: true
-          type: string
-        rowType:
-          readOnly: true
-          description: API serialization - returns the string value to avoid JSON:API wrapping of enums.
-          type: string
-        date:
-          readOnly: true
-          type: string
-          format: date-time
-        amount:
-          type: object
-          properties:
-            amount:
-              type: integer
-              example: 123
-            currency:
-              type: string
-              example: GBP
-        note:
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        submittedAt:
-          readOnly: true
-          type:
-          - string
-          - 'null'
-          format: date-time
-        createdAt:
-          readOnly: true
-          type: string
-          format: date-time
-        updatedAt:
-          readOnly: true
-          type: string
-          format: date-time
-        deletedAt:
-          readOnly: true
-          type:
-          - string
-          - 'null'
-          format: date-time
-        rentSchedule:
-          readOnly: true
-          type:
-          - string
-          - 'null'
-          format: iri-reference
-          example: https://example.com/
-        insuranceClaim:
-          readOnly: true
-          type:
-          - string
-          - 'null'
-          format: iri-reference
-          example: https://example.com/
-        insuranceClaimId:
-          readOnly: true
-          type: string
-        companyExternalId:
-          readOnly: true
-          description: 'Helper method for voter - gets company external ID directly from entity
-
-            without creating a DTO (which can fail in certain test contexts).'
-          type:
-          - string
-          - 'null'
-    ConstraintViolation.jsonapi:
-      properties:
-        data:
-          type: object
-          properties:
-            id:
-              type: string
-            type:
-              type: string
-            attributes:
-              $ref: '#/components/schemas/ConstraintViolation'
-          required:
-          - type
-          - id
-    ConstraintViolation:
-      type: object
-      description: Unprocessable entity
-      properties:
-        status:
-          default: 422
-          type: integer
-        detail:
-          readOnly: true
-          type: string
-        type:
-          readOnly: true
-          type: string
-        title:
-          readOnly: true
-          type:
-          - string
-          - 'null'
-        instance:
-          readOnly: true
-          type:
-          - string
-          - 'null'
-    RentScheduleRowAuditGetDto.csv:
-      type: object
-      properties:
-        type:
-          type: string
-        text:
-          type: string
-        changedBy:
-          type:
-          - string
-          - 'null'
-        changedAt:
-          type: string
-          format: date-time
-        changes:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            type:
-            - string
-            - 'null'
     RentScheduleRowPostDto.RentScheduleRowGetModel.csv:
       type: object
       properties:
@@ -328,6 +184,43 @@ components:
           type:
           - string
           - 'null'
+    ConstraintViolation:
+      type: object
+      description: Unprocessable entity
+      properties:
+        status:
+          default: 422
+          type: integer
+        detail:
+          readOnly: true
+          type: string
+        type:
+          readOnly: true
+          type: string
+        title:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        instance:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+    RentScheduleRowPostDto.RentScheduleRowPostDto.jsonapi:
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+            attributes:
+              $ref: '#/components/schemas/RentScheduleRowPostDto.RentScheduleRowGetModel'
+          required:
+          - type
+          - id
     RentScheduleRowAuditGetDto:
       type: object
       properties:
@@ -350,19 +243,6 @@ components:
             type:
             - string
             - 'null'
-    Error.jsonapi:
-      properties:
-        errors:
-          type: array
-          items:
-            allOf:
-            - $ref: '#/components/schemas/Error'
-            - type: object
-              properties:
-                source:
-                  type: object
-                status:
-                  type: string
     Error:
       type: object
       description: A representation of common errors.
@@ -411,6 +291,28 @@ components:
               type: string
             header:
               type: string
+    RentScheduleRowAuditGetDto.csv:
+      type: object
+      properties:
+        type:
+          type: string
+        text:
+          type: string
+        changedBy:
+          type:
+          - string
+          - 'null'
+        changedAt:
+          type: string
+          format: date-time
+        changes:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type:
+            - string
+            - 'null'
     RentScheduleRowPostDto.csv:
       type: object
       required:
@@ -447,6 +349,132 @@ components:
           type:
           - string
           - 'null'
+    RentScheduleRowPostDto.RentScheduleRowGetModel:
+      type: object
+      properties:
+        audits:
+          type: array
+          items:
+            $ref: '#/components/schemas/RentScheduleRowAuditGetDto'
+        balance:
+          readOnly: true
+          description: API serialization - returns an array to avoid JSON:API wrapping of Money objects.
+          type: object
+          additionalProperties:
+            anyOf:
+            - type: integer
+            - type: string
+        id:
+          readOnly: true
+          type: string
+        rowType:
+          readOnly: true
+          description: API serialization - returns the string value to avoid JSON:API wrapping of enums.
+          type: string
+        date:
+          readOnly: true
+          type: string
+          format: date-time
+        amount:
+          type: object
+          properties:
+            amount:
+              type: integer
+              example: 123
+            currency:
+              type: string
+              example: GBP
+        note:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+        submittedAt:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+          format: date-time
+        createdAt:
+          readOnly: true
+          type: string
+          format: date-time
+        updatedAt:
+          readOnly: true
+          type: string
+          format: date-time
+        deletedAt:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+          format: date-time
+        rentSchedule:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+          format: iri-reference
+          example: https://example.com/
+        insuranceClaim:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+          format: iri-reference
+          example: https://example.com/
+        insuranceClaimId:
+          readOnly: true
+          type: string
+        companyExternalId:
+          readOnly: true
+          description: 'Helper method for voter - gets company external ID directly from entity
+
+            without creating a DTO (which can fail in certain test contexts).'
+          type:
+          - string
+          - 'null'
+    RentScheduleRowPostDto.jsonapi:
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+            attributes:
+              $ref: '#/components/schemas/RentScheduleRowPostDto'
+          required:
+          - type
+          - id
+    Error.jsonapi:
+      properties:
+        errors:
+          type: array
+          items:
+            allOf:
+            - $ref: '#/components/schemas/Error'
+            - type: object
+              properties:
+                source:
+                  type: object
+                status:
+                  type: string
+    ConstraintViolation.jsonapi:
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+            attributes:
+              $ref: '#/components/schemas/ConstraintViolation'
+          required:
+          - type
+          - id
     RentScheduleRowPostDto:
       type: object
       required:
@@ -483,34 +511,6 @@ components:
           type:
           - string
           - 'null'
-    RentScheduleRowPostDto.RentScheduleRowPostDto.jsonapi:
-      properties:
-        data:
-          type: object
-          properties:
-            id:
-              type: string
-            type:
-              type: string
-            attributes:
-              $ref: '#/components/schemas/RentScheduleRowPostDto.RentScheduleRowGetModel'
-          required:
-          - type
-          - id
-    RentScheduleRowPostDto.jsonapi:
-      properties:
-        data:
-          type: object
-          properties:
-            id:
-              type: string
-            type:
-              type: string
-            attributes:
-              $ref: '#/components/schemas/RentScheduleRowPostDto'
-          required:
-          - type
-          - id
   securitySchemes:
     JWT:
       type: apiKey
