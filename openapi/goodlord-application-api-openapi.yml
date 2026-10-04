@@ -239,6 +239,201 @@ paths:
                 $ref: '#/components/schemas/ApiMessageResponse'
 components:
   schemas:
+    CreateApplicationRequest:
+      title: Create Application Request
+      type: object
+      properties:
+        tenancy:
+          type: object
+          properties:
+            moveInDate:
+              type: string
+              description: Move in date in YYYY-MM-DD format. This must be a date in the future, but no longer than 14 months in the future.
+              example: '2024-10-01'
+            term:
+              type: number
+              example: 12
+              description: Term of rental tenancy in months. Maximum 120 months (10 years)
+            monthlyCost:
+              type: number
+              example: 1000
+              description: Monthly cost in GBP
+            address:
+              type: object
+              properties:
+                line1:
+                  example: 22 Street
+                  type: string
+                city:
+                  example: Sheffield
+                  type: string
+                postcode:
+                  example: S1 123
+                  type: string
+                country:
+                  example: England
+                  description: 'Must be one of: ''England'' | ''Scotland'' | ''Wales''. Tenancies created within England are subject to right to rent checks and sharecode collection'
+                  type: string
+              required:
+              - line1
+              - city
+              - postcode
+              - country
+          required:
+          - moveInDate
+          - term
+          - monthlyCost
+          - address
+        agency:
+          type: object
+          properties:
+            companyName:
+              type: string
+              description: The name of your lettings agency. This is used by our referencing team to identify your agency
+              example: John Smith Lettings
+            agentName:
+              type: string
+              description: The name of your estate agent who is assigned to this application
+              example: John Smith
+            agentMobile:
+              type: string
+              description: The mobile number of your estate agent who is assigned to this application. We require this as our referencing may need to contact them to provide updates and chasers.
+              example: 07293838394
+            agentEmail:
+              type: string
+              description: The email address of your estate agent who is assigned to this application. We require this as our referencing may need to contact them to provide updates and chasers.
+              example: john.smith@example.com
+          required:
+          - companyName
+          - agentName
+      required:
+      - tenancy
+      - agency
+    PatchApplicationRequest:
+      title: Patch Application Request
+      type: object
+      properties:
+        tenancy:
+          type: object
+          description: One of moveInDate, term or monthlyCost are required
+          properties:
+            moveInDate:
+              type: string
+              description: Move in date in YYYY-MM-DD format. This must be a date in the future, but no longer than 14 months in the future.
+              example: '2024-10-01'
+            term:
+              type: number
+              example: 12
+              description: Term of rental tenancy in months. Maximum 120 months (10 years)
+            monthlyCost:
+              type: number
+              example: 1000
+              description: Monthly cost in GBP
+            address:
+              type: object
+              description: Address of application
+              required:
+              - line1
+              - country
+              - postcode
+              - city
+              properties:
+                line1:
+                  type: string
+                line2:
+                  type: string
+                city:
+                  type: string
+                postcode:
+                  type: string
+                country:
+                  type: string
+          required: []
+      required:
+      - tenancy
+    APIErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              reason:
+                type: string
+                example: PropertyIsInvalid
+              description:
+                type: string
+                example: Request.Property is Invalid
+            required:
+            - reason
+            - description
+      required:
+      - errors
+    ApiMessageResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: Something happened that I need to alert you about
+      xml:
+        name: '##default'
+    Application:
+      title: Application
+      type: object
+      description: An application contains rental information and all of the applicants/guarantors which are applying for a tenancy.
+      properties:
+        id:
+          type: string
+        tenancy:
+          type: object
+          properties:
+            moveInDate:
+              type: string
+              example: '2024-10-01'
+            term:
+              type: number
+              example: 12
+            monthlyCost:
+              type: number
+              example: 1000
+            address:
+              type: object
+              properties:
+                line1:
+                  type: string
+                  example: 22 Street
+                city:
+                  type: string
+                  example: Sheffield
+                postcode:
+                  type: string
+                  example: S1 123
+                country:
+                  type: string
+                  example: England
+        subjects:
+          type: array
+          items:
+            $ref: '#/components/schemas/Subject'
+        agency:
+          type: object
+          properties:
+            companyName:
+              type: string
+              example: John Smith Lettings
+            agentName:
+              type: string
+              example: John Smith
+            agentMobile:
+              type: string
+              example: 07912345678
+            agentEmail:
+              type: string
+              example: john.smith@example.com
+        createdAt:
+          type: string
+      required: []
     Subject:
       title: Subject
       type: object
@@ -666,201 +861,6 @@ components:
           type: array
           items: {}
       required: []
-    Application:
-      title: Application
-      type: object
-      description: An application contains rental information and all of the applicants/guarantors which are applying for a tenancy.
-      properties:
-        id:
-          type: string
-        tenancy:
-          type: object
-          properties:
-            moveInDate:
-              type: string
-              example: '2024-10-01'
-            term:
-              type: number
-              example: 12
-            monthlyCost:
-              type: number
-              example: 1000
-            address:
-              type: object
-              properties:
-                line1:
-                  type: string
-                  example: 22 Street
-                city:
-                  type: string
-                  example: Sheffield
-                postcode:
-                  type: string
-                  example: S1 123
-                country:
-                  type: string
-                  example: England
-        subjects:
-          type: array
-          items:
-            $ref: '#/components/schemas/Subject'
-        agency:
-          type: object
-          properties:
-            companyName:
-              type: string
-              example: John Smith Lettings
-            agentName:
-              type: string
-              example: John Smith
-            agentMobile:
-              type: string
-              example: 07912345678
-            agentEmail:
-              type: string
-              example: john.smith@example.com
-        createdAt:
-          type: string
-      required: []
-    ApiMessageResponse:
-      type: object
-      properties:
-        message:
-          type: string
-          example: Something happened that I need to alert you about
-      xml:
-        name: '##default'
-    CreateApplicationRequest:
-      title: Create Application Request
-      type: object
-      properties:
-        tenancy:
-          type: object
-          properties:
-            moveInDate:
-              type: string
-              description: Move in date in YYYY-MM-DD format. This must be a date in the future, but no longer than 14 months in the future.
-              example: '2024-10-01'
-            term:
-              type: number
-              example: 12
-              description: Term of rental tenancy in months. Maximum 120 months (10 years)
-            monthlyCost:
-              type: number
-              example: 1000
-              description: Monthly cost in GBP
-            address:
-              type: object
-              properties:
-                line1:
-                  example: 22 Street
-                  type: string
-                city:
-                  example: Sheffield
-                  type: string
-                postcode:
-                  example: S1 123
-                  type: string
-                country:
-                  example: England
-                  description: 'Must be one of: ''England'' | ''Scotland'' | ''Wales''. Tenancies created within England are subject to right to rent checks and sharecode collection'
-                  type: string
-              required:
-              - line1
-              - city
-              - postcode
-              - country
-          required:
-          - moveInDate
-          - term
-          - monthlyCost
-          - address
-        agency:
-          type: object
-          properties:
-            companyName:
-              type: string
-              description: The name of your lettings agency. This is used by our referencing team to identify your agency
-              example: John Smith Lettings
-            agentName:
-              type: string
-              description: The name of your estate agent who is assigned to this application
-              example: John Smith
-            agentMobile:
-              type: string
-              description: The mobile number of your estate agent who is assigned to this application. We require this as our referencing may need to contact them to provide updates and chasers.
-              example: 07293838394
-            agentEmail:
-              type: string
-              description: The email address of your estate agent who is assigned to this application. We require this as our referencing may need to contact them to provide updates and chasers.
-              example: john.smith@example.com
-          required:
-          - companyName
-          - agentName
-      required:
-      - tenancy
-      - agency
-    PatchApplicationRequest:
-      title: Patch Application Request
-      type: object
-      properties:
-        tenancy:
-          type: object
-          description: One of moveInDate, term or monthlyCost are required
-          properties:
-            moveInDate:
-              type: string
-              description: Move in date in YYYY-MM-DD format. This must be a date in the future, but no longer than 14 months in the future.
-              example: '2024-10-01'
-            term:
-              type: number
-              example: 12
-              description: Term of rental tenancy in months. Maximum 120 months (10 years)
-            monthlyCost:
-              type: number
-              example: 1000
-              description: Monthly cost in GBP
-            address:
-              type: object
-              description: Address of application
-              required:
-              - line1
-              - country
-              - postcode
-              - city
-              properties:
-                line1:
-                  type: string
-                line2:
-                  type: string
-                city:
-                  type: string
-                postcode:
-                  type: string
-                country:
-                  type: string
-          required: []
-      required:
-      - tenancy
-    APIErrorResponse:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              reason:
-                type: string
-                example: PropertyIsInvalid
-              description:
-                type: string
-                example: Request.Property is Invalid
-            required:
-            - reason
-            - description
-      required:
-      - errors
   parameters:
     CompanyId:
       name: Company-ID
