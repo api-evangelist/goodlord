@@ -48,6 +48,9 @@ accessModel:
   generated: '2026-09-02'
   method: derived
 image: https://www.goodlord.com/hubfs/goodlord-logo-1.jpg
+x-docs-platform: redocly
+x-docs-platform-confidence: medium
+x-docs-platform-checked: 2026-10-03
 tags:
 - Real Estate
 - United Kingdom
