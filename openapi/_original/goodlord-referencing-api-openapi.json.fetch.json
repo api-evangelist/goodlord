@@ -1,0 +1,12 @@
+{
+ "url": "https://portal.goodlord.co/system/api_details/dHlrL3Byb2QtcmVmZXJlbmNpbmctYXBp/oasdocument/live-referencing-api.20260602142430937915.json",
+ "requested_url": "https://portal.goodlord.co/system/api_details/dHlrL3Byb2QtcmVmZXJlbmNpbmctYXBp/oasdocument/live-referencing-api.20260602142430937915.json",
+ "status": 200,
+ "content_type": "application/json",
+ "bytes": 121862,
+ "sha256": "535900077506cc78ced8fea6564011f4977e0bfbd941461d3e9109529700dbe3",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "byte-identical",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the archived file is byte-identical to what the provider serves."
+}
