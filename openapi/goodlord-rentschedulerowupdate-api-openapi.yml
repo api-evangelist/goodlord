@@ -131,78 +131,54 @@ paths:
         required: true
 components:
   schemas:
-    ConstraintViolation.jsonapi:
-      properties:
-        data:
-          type: object
-          properties:
-            id:
-              type: string
-            type:
-              type: string
-            attributes:
-              $ref: '#/components/schemas/ConstraintViolation'
-          required:
-          - type
-          - id
-    RentScheduleRowAuditGetDto.csv:
+    Error:
       type: object
+      description: A representation of common errors.
       properties:
-        type:
-          type: string
-        text:
-          type: string
-        changedBy:
+        id:
           type:
           - string
           - 'null'
-        changedAt:
-          type: string
-          format: date-time
-        changes:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            type:
-            - string
-            - 'null'
-    RentScheduleRowUpdate.jsonapi:
-      properties:
-        data:
-          type: object
-          properties:
-            id:
-              type: string
-            type:
-              type: string
-            attributes:
-              $ref: '#/components/schemas/RentScheduleRowUpdate.jsonMergePatch'
-          required:
-          - type
-          - id
-    RentScheduleRowAuditGetDto:
-      type: object
-      properties:
-        type:
-          type: string
-        text:
-          type: string
-        changedBy:
+        title:
+          readOnly: true
+          description: A short, human-readable summary of the problem.
           type:
           - string
           - 'null'
-        changedAt:
-          type: string
-          format: date-time
-        changes:
+        detail:
+          readOnly: true
+          description: A human-readable explanation specific to this occurrence of the problem.
           type:
-          - object
+          - string
           - 'null'
-          additionalProperties:
-            type:
-            - string
-            - 'null'
+        status:
+          type:
+          - number
+          - 'null'
+          examples:
+          - 404
+          default: 400
+        instance:
+          readOnly: true
+          description: A URI reference that identifies the specific occurrence of the problem. It may or may not yield further information if dereferenced.
+          type:
+          - string
+          - 'null'
+        type:
+          readOnly: true
+          description: A URI reference that identifies the problem type
+          type: string
+        meta:
+          type: object
+        source:
+          type: object
+          properties:
+            pointer:
+              type: string
+            parameter:
+              type: string
+            header:
+              type: string
     RentScheduleRowUpdate.RentScheduleRowGetModel:
       type: object
       properties:
@@ -288,6 +264,55 @@ components:
           type:
           - string
           - 'null'
+    Error.jsonapi:
+      properties:
+        errors:
+          type: array
+          items:
+            allOf:
+            - $ref: '#/components/schemas/Error'
+            - type: object
+              properties:
+                source:
+                  type: object
+                status:
+                  type: string
+    RentScheduleRowUpdate.jsonapi:
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+            attributes:
+              $ref: '#/components/schemas/RentScheduleRowUpdate.jsonMergePatch'
+          required:
+          - type
+          - id
+    RentScheduleRowAuditGetDto:
+      type: object
+      properties:
+        type:
+          type: string
+        text:
+          type: string
+        changedBy:
+          type:
+          - string
+          - 'null'
+        changedAt:
+          type: string
+          format: date-time
+        changes:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type:
+            - string
+            - 'null'
     RentScheduleRowUpdate.RentScheduleRowPatchDto.jsonapi:
       properties:
         data:
@@ -302,90 +327,50 @@ components:
           required:
           - type
           - id
-    Error.jsonapi:
-      properties:
-        errors:
-          type: array
-          items:
-            allOf:
-            - $ref: '#/components/schemas/Error'
-            - type: object
-              properties:
-                source:
-                  type: object
-                status:
-                  type: string
-    ConstraintViolation:
+    RentScheduleRowUpdate.jsonMergePatch:
       type: object
-      description: Unprocessable entity
       properties:
-        status:
-          default: 422
-          type: integer
-        detail:
-          readOnly: true
-          type: string
-        type:
-          readOnly: true
-          type: string
-        title:
-          readOnly: true
+        date:
           type:
           - string
           - 'null'
-        instance:
-          readOnly: true
-          type:
-          - string
-          - 'null'
-    Error:
-      type: object
-      description: A representation of common errors.
-      properties:
-        id:
-          type:
-          - string
-          - 'null'
-        title:
-          readOnly: true
-          description: A short, human-readable summary of the problem.
-          type:
-          - string
-          - 'null'
-        detail:
-          readOnly: true
-          description: A human-readable explanation specific to this occurrence of the problem.
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - number
-          - 'null'
-          examples:
-          - 404
-          default: 400
-        instance:
-          readOnly: true
-          description: A URI reference that identifies the specific occurrence of the problem. It may or may not yield further information if dereferenced.
-          type:
-          - string
-          - 'null'
-        type:
-          readOnly: true
-          description: A URI reference that identifies the problem type
-          type: string
-        meta:
-          type: object
-        source:
+          format: date-time
+        amount:
           type: object
           properties:
-            pointer:
+            amount:
+              type: integer
+              example: 123
+            currency:
               type: string
-            parameter:
-              type: string
-            header:
-              type: string
+              example: GBP
+        note:
+          maxLength: 2000
+          type:
+          - string
+          - 'null'
+    RentScheduleRowAuditGetDto.csv:
+      type: object
+      properties:
+        type:
+          type: string
+        text:
+          type: string
+        changedBy:
+          type:
+          - string
+          - 'null'
+        changedAt:
+          type: string
+          format: date-time
+        changes:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type:
+            - string
+            - 'null'
     RentScheduleRowUpdate.RentScheduleRowGetModel.csv:
       type: object
       properties:
@@ -471,28 +456,43 @@ components:
           type:
           - string
           - 'null'
-    RentScheduleRowUpdate.jsonMergePatch:
+    ConstraintViolation:
       type: object
+      description: Unprocessable entity
       properties:
-        date:
+        status:
+          default: 422
+          type: integer
+        detail:
+          readOnly: true
+          type: string
+        type:
+          readOnly: true
+          type: string
+        title:
+          readOnly: true
           type:
           - string
           - 'null'
-          format: date-time
-        amount:
+        instance:
+          readOnly: true
+          type:
+          - string
+          - 'null'
+    ConstraintViolation.jsonapi:
+      properties:
+        data:
           type: object
           properties:
-            amount:
-              type: integer
-              example: 123
-            currency:
+            id:
               type: string
-              example: GBP
-        note:
-          maxLength: 2000
-          type:
-          - string
-          - 'null'
+            type:
+              type: string
+            attributes:
+              $ref: '#/components/schemas/ConstraintViolation'
+          required:
+          - type
+          - id
   securitySchemes:
     JWT:
       type: apiKey
