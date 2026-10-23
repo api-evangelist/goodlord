@@ -505,6 +505,8 @@ apis:
   - type: APIReference
     url: https://insurance-app.goodlord.co/api/v1/docs
 common:
+- type: PostmanWorkspace
+  url: https://www.postman.com/kinlaneapi/goodlord/overview
 - type: Plans
   url: plans/goodlord-plans-pricing.yml
 - type: CapabilityMap
