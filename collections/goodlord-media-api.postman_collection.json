@@ -1,0 +1,313 @@
+{
+  "info": {
+    "_postman_id": "961ac511-c1dc-4bd7-8362-adf464748a45",
+    "name": "Referencing Media API",
+    "description": "Here you can find the Public API information of the Goodlord Referencing product. This API will allow you to create rental applications, assess Applicants and Guarantors through the rental process and manage them along the way.\n\nContact Support:\n Name: Goodlord\n Email: devs@vouch.co.uk",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T19:50:12.000Z",
+    "updatedAt": "2026-10-21T19:50:12.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-961ac511-c1dc-4bd7-8362-adf464748a45"
+  },
+  "item": [
+    {
+      "name": "referencing",
+      "item": [
+        {
+          "name": "media",
+          "item": [
+            {
+              "name": "document",
+              "item": [
+                {
+                  "name": "{documentId}",
+                  "item": [
+                    {
+                      "name": "Get Authenticated File Url",
+                      "id": "c87f93dd-4e61-4743-8ddd-e93fa802606b",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/referencing/media/document/:documentId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "referencing",
+                            "media",
+                            "document",
+                            ":documentId"
+                          ],
+                          "variable": [
+                            {
+                              "id": "7e23417d-78ab-48e8-a781-a7c478ed69cc",
+                              "key": "documentId",
+                              "value": "<string>",
+                              "description": "(Required) documentId you wish to view"
+                            }
+                          ]
+                        },
+                        "description": "Generates an authenticated link, which allows you to access a users document for up to 10 minutes"
+                      },
+                      "response": [
+                        {
+                          "id": "07313817-dd4d-4c0e-824d-cdf236da33bb",
+                          "name": "Successful operation",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/referencing/media/document/:documentId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "referencing",
+                                "media",
+                                "document",
+                                ":documentId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "documentId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"authenticatedUrl\": \"<string>\"\n}",
+                          "createdAt": "2026-10-21T19:50:12.000Z",
+                          "updatedAt": "2026-10-21T19:50:12.000Z",
+                          "uid": "35240-07313817-dd4d-4c0e-824d-cdf236da33bb"
+                        },
+                        {
+                          "id": "28b8b0ec-680c-450d-93cf-219b1caf3808",
+                          "name": "Bad Request",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/referencing/media/document/:documentId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "referencing",
+                                "media",
+                                "document",
+                                ":documentId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "documentId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"reason\": \"<string>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"reason\": \"<string>\",\n      \"description\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-10-21T19:50:12.000Z",
+                          "updatedAt": "2026-10-21T19:50:12.000Z",
+                          "uid": "35240-28b8b0ec-680c-450d-93cf-219b1caf3808"
+                        },
+                        {
+                          "id": "353e1e8e-0375-4546-a59c-890c33ef2101",
+                          "name": "Not Found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/referencing/media/document/:documentId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "referencing",
+                                "media",
+                                "document",
+                                ":documentId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "documentId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-10-21T19:50:12.000Z",
+                          "updatedAt": "2026-10-21T19:50:12.000Z",
+                          "uid": "35240-353e1e8e-0375-4546-a59c-890c33ef2101"
+                        },
+                        {
+                          "id": "e0f47e73-8194-4b8b-847e-9018e3f8143c",
+                          "name": "Internal Server Error",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/referencing/media/document/:documentId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "referencing",
+                                "media",
+                                "document",
+                                ":documentId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "documentId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-10-21T19:50:12.000Z",
+                          "updatedAt": "2026-10-21T19:50:12.000Z",
+                          "uid": "35240-e0f47e73-8194-4b8b-847e-9018e3f8143c"
+                        }
+                      ],
+                      "createdAt": "2026-10-21T19:50:12.000Z",
+                      "updatedAt": "2026-10-21T19:50:12.000Z",
+                      "uid": "35240-c87f93dd-4e61-4743-8ddd-e93fa802606b"
+                    }
+                  ],
+                  "id": "d876c13e-8072-44d7-94e4-2ccd3763e4fd",
+                  "createdAt": "2026-10-21T19:50:12.000Z",
+                  "updatedAt": "2026-10-21T19:50:12.000Z",
+                  "uid": "35240-d876c13e-8072-44d7-94e4-2ccd3763e4fd"
+                }
+              ],
+              "id": "b2c095ee-fef3-483a-aa39-7b718507b5e1",
+              "createdAt": "2026-10-21T19:50:12.000Z",
+              "updatedAt": "2026-10-21T19:50:12.000Z",
+              "uid": "35240-b2c095ee-fef3-483a-aa39-7b718507b5e1"
+            }
+          ],
+          "id": "5d56d035-d82b-4d6c-99ff-73cf688d6a89",
+          "createdAt": "2026-10-21T19:50:12.000Z",
+          "updatedAt": "2026-10-21T19:50:12.000Z",
+          "uid": "35240-5d56d035-d82b-4d6c-99ff-73cf688d6a89"
+        }
+      ],
+      "id": "2b89aa49-7280-45a7-8b88-092ba508ccf4",
+      "createdAt": "2026-10-21T19:50:12.000Z",
+      "updatedAt": "2026-10-21T19:50:12.000Z",
+      "uid": "35240-2b89aa49-7280-45a7-8b88-092ba508ccf4"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "accessTokenUrl",
+        "value": "https://api.goodoverlord.com/auth/token",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "client_credentials",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.goodoverlord.com"
+    }
+  ]
+}

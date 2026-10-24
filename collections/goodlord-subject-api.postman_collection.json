@@ -1,0 +1,2692 @@
+{
+  "info": {
+    "_postman_id": "110b0bad-1732-453f-be99-050172b2814c",
+    "name": "Referencing Subject API",
+    "description": "Here you can find the Public API information of the Goodlord Referencing product. This API will allow you to create rental applications, assess Applicants and Guarantors through the rental process and manage them along the way.\n\nContact Support:\n Name: Goodlord\n Email: devs@vouch.co.uk",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T19:51:01.000Z",
+    "updatedAt": "2026-10-21T19:51:02.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-110b0bad-1732-453f-be99-050172b2814c"
+  },
+  "item": [
+    {
+      "name": "referencing",
+      "item": [
+        {
+          "name": "subject",
+          "item": [
+            {
+              "name": "{subjectId}",
+              "item": [
+                {
+                  "name": "auth",
+                  "item": [
+                    {
+                      "name": "token",
+                      "item": [
+                        {
+                          "name": "Get Bot JWT Token",
+                          "id": "822d2119-3d9a-4390-b66b-6f8e4ab604dd",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/referencing/subject/:subjectId/auth/token",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "referencing",
+                                "subject",
+                                ":subjectId",
+                                "auth",
+                                "token"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "c168ba7a-5837-45ab-8e26-590befff0c5d",
+                                  "key": "subjectId",
+                                  "value": "<string>",
+                                  "description": "(Required) SubjectId you wish to generate a token for"
+                                }
+                              ]
+                            },
+                            "description": "Deprecated: Use the POST method on this endpoint instead.\n\nGenerate a new JWT token, which can be used as a redirect URL to send your user down the bot flow."
+                          },
+                          "response": [
+                            {
+                              "id": "ea709808-b473-49a2-acbb-f879a5a059f3",
+                              "name": "Successful operation",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/referencing/subject/:subjectId/auth/token",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "referencing",
+                                    "subject",
+                                    ":subjectId",
+                                    "auth",
+                                    "token"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "subjectId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"token\": \"<string>\",\n  \"url\": \"<string>\"\n}",
+                              "createdAt": "2026-10-21T19:51:02.000Z",
+                              "updatedAt": "2026-10-21T19:51:02.000Z",
+                              "uid": "35240-ea709808-b473-49a2-acbb-f879a5a059f3"
+                            },
+                            {
+                              "id": "0e6fae2b-9e21-409d-8bc9-6653090a136e",
+                              "name": "Bad Request",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/referencing/subject/:subjectId/auth/token",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "referencing",
+                                    "subject",
+                                    ":subjectId",
+                                    "auth",
+                                    "token"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "subjectId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"errors\": [\n    {\n      \"reason\": \"<string>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"reason\": \"<string>\",\n      \"description\": \"<string>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-10-21T19:51:02.000Z",
+                              "updatedAt": "2026-10-21T19:51:02.000Z",
+                              "uid": "35240-0e6fae2b-9e21-409d-8bc9-6653090a136e"
+                            },
+                            {
+                              "id": "57a797cb-7eeb-4de9-8e1d-4ec63727050a",
+                              "name": "Not Found",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/referencing/subject/:subjectId/auth/token",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "referencing",
+                                    "subject",
+                                    ":subjectId",
+                                    "auth",
+                                    "token"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "subjectId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"message\": \"<string>\"\n}",
+                              "createdAt": "2026-10-21T19:51:02.000Z",
+                              "updatedAt": "2026-10-21T19:51:02.000Z",
+                              "uid": "35240-57a797cb-7eeb-4de9-8e1d-4ec63727050a"
+                            },
+                            {
+                              "id": "64a8d2a3-0b8d-46e4-b41c-51d6e393f4aa",
+                              "name": "Internal Server Error",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/referencing/subject/:subjectId/auth/token",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "referencing",
+                                    "subject",
+                                    ":subjectId",
+                                    "auth",
+                                    "token"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "subjectId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Internal Server Error",
+                              "code": 500,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"message\": \"<string>\"\n}",
+                              "createdAt": "2026-10-21T19:51:02.000Z",
+                              "updatedAt": "2026-10-21T19:51:02.000Z",
+                              "uid": "35240-64a8d2a3-0b8d-46e4-b41c-51d6e393f4aa"
+                            }
+                          ],
+                          "createdAt": "2026-10-21T19:51:02.000Z",
+                          "updatedAt": "2026-10-21T19:51:02.000Z",
+                          "uid": "35240-822d2119-3d9a-4390-b66b-6f8e4ab604dd"
+                        },
+                        {
+                          "name": "Create Bot JWT Token",
+                          "id": "7135c7d3-c378-4719-b982-74788a3b5f8e",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"authorType\": \"Applicant\",\n  \"requestedBy\": \"<string>\",\n  \"requestedByEmail\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/referencing/subject/:subjectId/auth/token",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "referencing",
+                                "subject",
+                                ":subjectId",
+                                "auth",
+                                "token"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "1e617017-6f23-4d23-9f47-1d011721409b",
+                                  "key": "subjectId",
+                                  "value": "<string>",
+                                  "description": "(Required) SubjectId you wish to generate a token for"
+                                }
+                              ]
+                            },
+                            "description": "Generate a new JWT token, which can be used as a redirect URL to send your user down the bot flow.\nThis endpoint replaces the deprecated GET method on the same path."
+                          },
+                          "response": [
+                            {
+                              "id": "62510a41-61ec-407e-b4f3-e791b7b4bfc5",
+                              "name": "Successful operation",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"authorType\": \"Applicant\",\n  \"requestedBy\": \"<string>\",\n  \"requestedByEmail\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/referencing/subject/:subjectId/auth/token",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "referencing",
+                                    "subject",
+                                    ":subjectId",
+                                    "auth",
+                                    "token"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "subjectId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"token\": \"<string>\",\n  \"url\": \"<string>\"\n}",
+                              "createdAt": "2026-10-21T19:51:02.000Z",
+                              "updatedAt": "2026-10-21T19:51:02.000Z",
+                              "uid": "35240-62510a41-61ec-407e-b4f3-e791b7b4bfc5"
+                            },
+                            {
+                              "id": "ef6e82f5-1b4c-4e8c-b9f0-6fb0c0e442d9",
+                              "name": "Bad Request",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"authorType\": \"Applicant\",\n  \"requestedBy\": \"<string>\",\n  \"requestedByEmail\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/referencing/subject/:subjectId/auth/token",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "referencing",
+                                    "subject",
+                                    ":subjectId",
+                                    "auth",
+                                    "token"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "subjectId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"errors\": [\n    {\n      \"reason\": \"<string>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"reason\": \"<string>\",\n      \"description\": \"<string>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-10-21T19:51:02.000Z",
+                              "updatedAt": "2026-10-21T19:51:02.000Z",
+                              "uid": "35240-ef6e82f5-1b4c-4e8c-b9f0-6fb0c0e442d9"
+                            },
+                            {
+                              "id": "0e55567a-bb31-4a6f-8943-f04b0c031e18",
+                              "name": "Not Found",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"authorType\": \"Applicant\",\n  \"requestedBy\": \"<string>\",\n  \"requestedByEmail\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/referencing/subject/:subjectId/auth/token",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "referencing",
+                                    "subject",
+                                    ":subjectId",
+                                    "auth",
+                                    "token"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "subjectId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"message\": \"<string>\"\n}",
+                              "createdAt": "2026-10-21T19:51:02.000Z",
+                              "updatedAt": "2026-10-21T19:51:02.000Z",
+                              "uid": "35240-0e55567a-bb31-4a6f-8943-f04b0c031e18"
+                            },
+                            {
+                              "id": "913593df-b9ec-417e-ba1a-59650c1e2699",
+                              "name": "Internal Server Error",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"authorType\": \"Applicant\",\n  \"requestedBy\": \"<string>\",\n  \"requestedByEmail\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/referencing/subject/:subjectId/auth/token",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "referencing",
+                                    "subject",
+                                    ":subjectId",
+                                    "auth",
+                                    "token"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "subjectId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Internal Server Error",
+                              "code": 500,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"message\": \"<string>\"\n}",
+                              "createdAt": "2026-10-21T19:51:02.000Z",
+                              "updatedAt": "2026-10-21T19:51:02.000Z",
+                              "uid": "35240-913593df-b9ec-417e-ba1a-59650c1e2699"
+                            }
+                          ],
+                          "createdAt": "2026-10-21T19:51:02.000Z",
+                          "updatedAt": "2026-10-21T19:51:02.000Z",
+                          "uid": "35240-7135c7d3-c378-4719-b982-74788a3b5f8e"
+                        }
+                      ],
+                      "id": "cf5e092a-e638-446e-b76a-2fea009f27a4",
+                      "createdAt": "2026-10-21T19:51:02.000Z",
+                      "updatedAt": "2026-10-21T19:51:02.000Z",
+                      "uid": "35240-cf5e092a-e638-446e-b76a-2fea009f27a4"
+                    }
+                  ],
+                  "id": "dcfec4c3-c5aa-47b4-be90-9c0eeb56d5e5",
+                  "createdAt": "2026-10-21T19:51:02.000Z",
+                  "updatedAt": "2026-10-21T19:51:02.000Z",
+                  "uid": "35240-dcfec4c3-c5aa-47b4-be90-9c0eeb56d5e5"
+                },
+                {
+                  "name": "touchpoints",
+                  "item": [
+                    {
+                      "name": "Get Subject Touchpoints",
+                      "id": "d4d19647-bee5-494b-9907-8bca3e1f13dc",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/referencing/subject/:subjectId/touchpoints",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "referencing",
+                            "subject",
+                            ":subjectId",
+                            "touchpoints"
+                          ],
+                          "variable": [
+                            {
+                              "id": "781fca16-8004-405f-8bcf-fced33747aa7",
+                              "key": "subjectId",
+                              "value": "<string>",
+                              "description": "(Required) SubjectId you wish to retrieve touchpoints for"
+                            }
+                          ]
+                        },
+                        "description": "Retrieve all touchpoints for a subject, including communications and interactions"
+                      },
+                      "response": [
+                        {
+                          "id": "f4120776-6cc5-49dc-9195-41886efefe1d",
+                          "name": "Successful operation",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/referencing/subject/:subjectId/touchpoints",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "referencing",
+                                "subject",
+                                ":subjectId",
+                                "touchpoints"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "subjectId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "[\n  {\n    \"id\": \"<string>\",\n    \"subjectId\": \"<string>\",\n    \"category\": \"<string>\",\n    \"author\": {\n      \"type\": \"<string>\",\n      \"id\": \"<string>\",\n      \"email\": \"<string>\"\n    },\n    \"message\": \"<string>\",\n    \"createdAt\": \"<dateTime>\"\n  },\n  {\n    \"id\": \"<string>\",\n    \"subjectId\": \"<string>\",\n    \"category\": \"<string>\",\n    \"author\": {\n      \"type\": \"<string>\",\n      \"id\": \"<string>\",\n      \"email\": \"<string>\"\n    },\n    \"message\": \"<string>\",\n    \"createdAt\": \"<dateTime>\"\n  }\n]",
+                          "createdAt": "2026-10-21T19:51:02.000Z",
+                          "updatedAt": "2026-10-21T19:51:02.000Z",
+                          "uid": "35240-f4120776-6cc5-49dc-9195-41886efefe1d"
+                        },
+                        {
+                          "id": "a1e76141-cad7-4e6c-a5c6-c02238050213",
+                          "name": "Bad Request",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/referencing/subject/:subjectId/touchpoints",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "referencing",
+                                "subject",
+                                ":subjectId",
+                                "touchpoints"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "subjectId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"reason\": \"<string>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"reason\": \"<string>\",\n      \"description\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-10-21T19:51:02.000Z",
+                          "updatedAt": "2026-10-21T19:51:02.000Z",
+                          "uid": "35240-a1e76141-cad7-4e6c-a5c6-c02238050213"
+                        },
+                        {
+                          "id": "7be162bb-d75d-4c30-8764-ea73efd1f00b",
+                          "name": "Not Found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/referencing/subject/:subjectId/touchpoints",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "referencing",
+                                "subject",
+                                ":subjectId",
+                                "touchpoints"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "subjectId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-10-21T19:51:02.000Z",
+                          "updatedAt": "2026-10-21T19:51:02.000Z",
+                          "uid": "35240-7be162bb-d75d-4c30-8764-ea73efd1f00b"
+                        },
+                        {
+                          "id": "61f6980e-ea72-48a6-adfb-7781073bc064",
+                          "name": "Internal Server Error",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/referencing/subject/:subjectId/touchpoints",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "referencing",
+                                "subject",
+                                ":subjectId",
+                                "touchpoints"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "subjectId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-10-21T19:51:02.000Z",
+                          "updatedAt": "2026-10-21T19:51:02.000Z",
+                          "uid": "35240-61f6980e-ea72-48a6-adfb-7781073bc064"
+                        }
+                      ],
+                      "createdAt": "2026-10-21T19:51:02.000Z",
+                      "updatedAt": "2026-10-21T19:51:02.000Z",
+                      "uid": "35240-d4d19647-bee5-494b-9907-8bca3e1f13dc"
+                    }
+                  ],
+                  "id": "0553469a-d8eb-448d-9d04-277223c1e85c",
+                  "createdAt": "2026-10-21T19:51:02.000Z",
+                  "updatedAt": "2026-10-21T19:51:02.000Z",
+                  "uid": "35240-0553469a-d8eb-448d-9d04-277223c1e85c"
+                },
+                {
+                  "name": "outcome",
+                  "item": [
+                    {
+                      "name": "conditions",
+                      "item": [
+                        {
+                          "name": "Patch Subject Outcome Conditions",
+                          "id": "89673ad6-efb9-421f-8a04-e7555dc5bda8",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"conditions\": {\n    \"confirmedIdOnPerson\": \"<boolean>\",\n    \"confirmedProofOfAddress\": \"<boolean>\"\n  },\n  \"requestedBy\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/referencing/subject/:subjectId/outcome/conditions",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "referencing",
+                                "subject",
+                                ":subjectId",
+                                "outcome",
+                                "conditions"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "8d18fae3-d79a-42e0-865e-ca01498e3cc6",
+                                  "key": "subjectId",
+                                  "value": "<string>",
+                                  "description": "(Required) SubjectId you wish to patch outcome conditions for."
+                                }
+                              ]
+                            },
+                            "description": "Patch the outcome conditions of a subject you have already created"
+                          },
+                          "response": [
+                            {
+                              "id": "e73e5062-7f6d-4bd8-97e5-0d2e6683f442",
+                              "name": "Successful operation",
+                              "originalRequest": {
+                                "method": "PATCH",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"conditions\": {\n    \"confirmedIdOnPerson\": \"<boolean>\",\n    \"confirmedProofOfAddress\": \"<boolean>\"\n  },\n  \"requestedBy\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/referencing/subject/:subjectId/outcome/conditions",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "referencing",
+                                    "subject",
+                                    ":subjectId",
+                                    "outcome",
+                                    "conditions"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "subjectId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"externalId\": \"<string>\",\n  \"rentalDetails\": {\n    \"priceShare\": \"<number>\",\n    \"affordabilityRatio\": \"<number>\"\n  },\n  \"context\": {\n    \"name\": \"<string>\",\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"email\": \"<string>\",\n    \"mobile\": \"<string>\",\n    \"redirectUrlOnJourneyComplete\": \"<string>\",\n    \"tenancyRenewal\": \"<boolean>\",\n    \"product\": \"<string>\",\n    \"addresses\": [\n      {\n        \"id\": \"<string>\",\n        \"addressType\": \"<string>\",\n        \"bedroomIdentifier\": \"<string>\",\n        \"name\": \"<string>\",\n        \"startDate\": \"<string>\",\n        \"status\": \"<string>\",\n        \"line1\": \"<string>\",\n        \"normalizedLine1\": \"<string>\",\n        \"line2\": \"<string>\",\n        \"city\": \"<string>\",\n        \"county\": {},\n        \"postcode\": \"<string>\",\n        \"country\": \"<string>\",\n        \"countryCodeAlpha2\": \"<string>\",\n        \"referee\": {\n          \"id\": \"<string>\",\n          \"name\": \"<string>\",\n          \"email\": \"<string>\",\n          \"mobile\": \"<string>\",\n          \"createdAt\": \"<string>\"\n        }\n      },\n      {\n        \"id\": \"<string>\",\n        \"addressType\": \"<string>\",\n        \"bedroomIdentifier\": \"<string>\",\n        \"name\": \"<string>\",\n        \"startDate\": \"<string>\",\n        \"status\": \"<string>\",\n        \"line1\": \"<string>\",\n        \"normalizedLine1\": \"<string>\",\n        \"line2\": \"<string>\",\n        \"city\": \"<string>\",\n        \"county\": {},\n        \"postcode\": \"<string>\",\n        \"country\": \"<string>\",\n        \"countryCodeAlpha2\": \"<string>\",\n        \"referee\": {\n          \"id\": \"<string>\",\n          \"name\": \"<string>\",\n          \"email\": \"<string>\",\n          \"mobile\": \"<string>\",\n          \"createdAt\": \"<string>\"\n        }\n      }\n    ],\n    \"incomes\": [\n      {\n        \"company\": \"<string>\",\n        \"position\": \"<string>\",\n        \"contractType\": \"<string>\",\n        \"contractSchedule\": \"<string>\",\n        \"guaranteedBonus\": {},\n        \"startDate\": \"<string>\",\n        \"endDate\": {},\n        \"address\": {\n          \"id\": {},\n          \"addressType\": \"<string>\",\n          \"name\": {},\n          \"startDate\": {},\n          \"status\": {},\n          \"line1\": \"<string>\",\n          \"normalizedLine1\": \"<string>\",\n          \"line2\": \"<string>\",\n          \"line3\": {},\n          \"city\": \"<string>\",\n          \"county\": {},\n          \"postcode\": \"<string>\",\n          \"country\": \"<string>\",\n          \"countryCodeAlpha2\": {}\n        },\n        \"referee\": {\n          \"id\": \"<string>\",\n          \"name\": \"<string>\",\n          \"email\": \"<string>\",\n          \"mobile\": \"<string>\",\n          \"createdAt\": \"<string>\",\n          \"isNonProfessionalEmail\": \"<boolean>\"\n        },\n        \"type\": \"<string>\",\n        \"evidenceType\": \"<string>\",\n        \"income\": {\n          \"value\": \"<number>\",\n          \"currency\": \"<string>\",\n          \"frequency\": \"<string>\"\n        },\n        \"id\": \"<string>\"\n      },\n      {\n        \"company\": \"<string>\",\n        \"position\": \"<string>\",\n        \"contractType\": \"<string>\",\n        \"contractSchedule\": \"<string>\",\n        \"guaranteedBonus\": {},\n        \"startDate\": \"<string>\",\n        \"endDate\": {},\n        \"address\": {\n          \"id\": {},\n          \"addressType\": \"<string>\",\n          \"name\": {},\n          \"startDate\": {},\n          \"status\": {},\n          \"line1\": \"<string>\",\n          \"normalizedLine1\": \"<string>\",\n          \"line2\": \"<string>\",\n          \"line3\": {},\n          \"city\": \"<string>\",\n          \"county\": {},\n          \"postcode\": \"<string>\",\n          \"country\": \"<string>\",\n          \"countryCodeAlpha2\": {}\n        },\n        \"referee\": {\n          \"id\": \"<string>\",\n          \"name\": \"<string>\",\n          \"email\": \"<string>\",\n          \"mobile\": \"<string>\",\n          \"createdAt\": \"<string>\",\n          \"isNonProfessionalEmail\": \"<boolean>\"\n        },\n        \"type\": \"<string>\",\n        \"evidenceType\": \"<string>\",\n        \"income\": {\n          \"value\": \"<number>\",\n          \"currency\": \"<string>\",\n          \"frequency\": \"<string>\"\n        },\n        \"id\": \"<string>\"\n      }\n    ],\n    \"incomeSummary\": {\n      \"totalIncome\": \"<number>\",\n      \"totalVerifiedIncome\": \"<number>\",\n      \"maximumAffordabilityPercentage\": \"<number>\",\n      \"openBanking\": {\n        \"provider\": \"<string>\",\n        \"status\": \"<string>\",\n        \"outcome\": {\n          \"estimatedAnnualNetIncome\": \"<number>\",\n          \"estimatedAnnualGrossIncome\": \"<number>\"\n        },\n        \"optOutReason\": {\n          \"category\": \"incomeAccuracy\",\n          \"additionalInformation\": \"<string>\"\n        }\n      }\n    },\n    \"credit\": {\n      \"hasAdverseCredit\": \"<boolean>\",\n      \"adverseCreditDeclared\": \"<boolean>\"\n    },\n    \"documents\": [\n      {\n        \"id\": \"<string>\",\n        \"fileName\": \"<string>\",\n        \"thumbnail\": \"<string>\",\n        \"documentType\": \"<string>\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"fileName\": \"<string>\",\n        \"thumbnail\": \"<string>\",\n        \"documentType\": \"<string>\"\n      }\n    ],\n    \"communicationPreferences\": {\n      \"sendInitialTenantEmail\": \"<boolean>\",\n      \"disableRentProtectionComms\": \"<boolean>\",\n      \"disableTCLIComms\": \"<boolean>\",\n      \"disableTenancyServicesComms\": \"<boolean>\"\n    },\n    \"guarantorCollection\": {\n      \"required\": \"<boolean>\",\n      \"product\": \"Essential\",\n      \"affordabilityRatio\": \"<number>\"\n    },\n    \"identity\": {\n      \"nationality\": \"<string>\",\n      \"nationalInsuranceNumber\": \"<string>\",\n      \"r2rShareCode\": \"<string>\",\n      \"idvt\": {\n        \"idCheckStatus\": \"Pending\",\n        \"r2rCheckStatus\": \"NotPerformed\"\n      },\n      \"pepsSanctions\": {\n        \"pepsStatus\": \"ActionRequired\",\n        \"sanctionsStatus\": \"NotFound\"\n      }\n    }\n  },\n  \"outcome\": {\n    \"status\": \"<string>\",\n    \"comments\": \"<string>\",\n    \"rpi\": {\n      \"eligibility\": \"<string>\",\n      \"comments\": \"<string>\"\n    },\n    \"sections\": [\n      {\n        \"name\": \"<string>\",\n        \"status\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"status\": \"<string>\"\n      }\n    ]\n  },\n  \"id\": \"<string>\",\n  \"type\": \"applicant\",\n  \"attachedSubjects\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"milestones\": [\n    {\n      \"type\": \"<string>\",\n      \"event\": \"<string>\",\n      \"createdAt\": \"<string>\",\n      \"updatedAt\": \"<string>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"event\": \"<string>\",\n      \"createdAt\": \"<string>\",\n      \"updatedAt\": \"<string>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-10-21T19:51:02.000Z",
+                              "updatedAt": "2026-10-21T19:51:02.000Z",
+                              "uid": "35240-e73e5062-7f6d-4bd8-97e5-0d2e6683f442"
+                            },
+                            {
+                              "id": "54a0172f-136b-4a85-b499-59e92326e4d1",
+                              "name": "Bad Request",
+                              "originalRequest": {
+                                "method": "PATCH",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"conditions\": {\n    \"confirmedIdOnPerson\": \"<boolean>\",\n    \"confirmedProofOfAddress\": \"<boolean>\"\n  },\n  \"requestedBy\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/referencing/subject/:subjectId/outcome/conditions",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "referencing",
+                                    "subject",
+                                    ":subjectId",
+                                    "outcome",
+                                    "conditions"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "subjectId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"errors\": [\n    {\n      \"reason\": \"<string>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"reason\": \"<string>\",\n      \"description\": \"<string>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-10-21T19:51:02.000Z",
+                              "updatedAt": "2026-10-21T19:51:02.000Z",
+                              "uid": "35240-54a0172f-136b-4a85-b499-59e92326e4d1"
+                            },
+                            {
+                              "id": "6ca9406a-39d6-4677-8b79-ba1615a328fc",
+                              "name": "Not Found",
+                              "originalRequest": {
+                                "method": "PATCH",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"conditions\": {\n    \"confirmedIdOnPerson\": \"<boolean>\",\n    \"confirmedProofOfAddress\": \"<boolean>\"\n  },\n  \"requestedBy\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/referencing/subject/:subjectId/outcome/conditions",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "referencing",
+                                    "subject",
+                                    ":subjectId",
+                                    "outcome",
+                                    "conditions"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "subjectId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"message\": \"<string>\"\n}",
+                              "createdAt": "2026-10-21T19:51:02.000Z",
+                              "updatedAt": "2026-10-21T19:51:02.000Z",
+                              "uid": "35240-6ca9406a-39d6-4677-8b79-ba1615a328fc"
+                            },
+                            {
+                              "id": "7a482aca-8a8e-412d-9689-03b08f0eee70",
+                              "name": "Internal Server Error",
+                              "originalRequest": {
+                                "method": "PATCH",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"conditions\": {\n    \"confirmedIdOnPerson\": \"<boolean>\",\n    \"confirmedProofOfAddress\": \"<boolean>\"\n  },\n  \"requestedBy\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/referencing/subject/:subjectId/outcome/conditions",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "referencing",
+                                    "subject",
+                                    ":subjectId",
+                                    "outcome",
+                                    "conditions"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "subjectId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Internal Server Error",
+                              "code": 500,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"message\": \"<string>\"\n}",
+                              "createdAt": "2026-10-21T19:51:02.000Z",
+                              "updatedAt": "2026-10-21T19:51:02.000Z",
+                              "uid": "35240-7a482aca-8a8e-412d-9689-03b08f0eee70"
+                            }
+                          ],
+                          "createdAt": "2026-10-21T19:51:02.000Z",
+                          "updatedAt": "2026-10-21T19:51:02.000Z",
+                          "uid": "35240-89673ad6-efb9-421f-8a04-e7555dc5bda8"
+                        }
+                      ],
+                      "id": "669be32a-3fb6-48a2-9d0c-ca880ec31613",
+                      "createdAt": "2026-10-21T19:51:02.000Z",
+                      "updatedAt": "2026-10-21T19:51:02.000Z",
+                      "uid": "35240-669be32a-3fb6-48a2-9d0c-ca880ec31613"
+                    }
+                  ],
+                  "id": "eace4477-9d94-49c3-b85f-d08b506e910e",
+                  "createdAt": "2026-10-21T19:51:02.000Z",
+                  "updatedAt": "2026-10-21T19:51:02.000Z",
+                  "uid": "35240-eace4477-9d94-49c3-b85f-d08b506e910e"
+                },
+                {
+                  "name": "emails",
+                  "item": [
+                    {
+                      "name": "Get Subject Emails",
+                      "id": "269d520b-0864-4cfb-a2c9-96079e2e5cf4",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/referencing/subject/:subjectId/emails",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "referencing",
+                            "subject",
+                            ":subjectId",
+                            "emails"
+                          ],
+                          "variable": [
+                            {
+                              "id": "4aa87239-2a26-4ce9-bf9d-aaa8026f8056",
+                              "key": "subjectId",
+                              "value": "<string>",
+                              "description": "(Required) subjectId for which, you wish to view email information"
+                            }
+                          ]
+                        },
+                        "description": "Get information about emails sent to the requested subject"
+                      },
+                      "response": [
+                        {
+                          "id": "211f8333-b2b4-4efc-969e-0748262f5357",
+                          "name": "Successful operation",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/referencing/subject/:subjectId/emails",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "referencing",
+                                "subject",
+                                ":subjectId",
+                                "emails"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "subjectId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "[\n  {\n    \"emailAddress\": \"<string>\",\n    \"emailSubject\": \"<string>\",\n    \"date\": \"<dateTime>\",\n    \"status\": \"Draft\"\n  },\n  {\n    \"emailAddress\": \"<string>\",\n    \"emailSubject\": \"<string>\",\n    \"date\": \"<dateTime>\",\n    \"status\": \"Failed\"\n  }\n]",
+                          "createdAt": "2026-10-21T19:51:02.000Z",
+                          "updatedAt": "2026-10-21T19:51:02.000Z",
+                          "uid": "35240-211f8333-b2b4-4efc-969e-0748262f5357"
+                        },
+                        {
+                          "id": "48df56fc-43db-44b8-bd5c-82606cdb6c50",
+                          "name": "Bad Request",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/referencing/subject/:subjectId/emails",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "referencing",
+                                "subject",
+                                ":subjectId",
+                                "emails"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "subjectId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"reason\": \"<string>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"reason\": \"<string>\",\n      \"description\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-10-21T19:51:02.000Z",
+                          "updatedAt": "2026-10-21T19:51:02.000Z",
+                          "uid": "35240-48df56fc-43db-44b8-bd5c-82606cdb6c50"
+                        },
+                        {
+                          "id": "fb60041d-1339-4186-9b2d-cee9a99198b5",
+                          "name": "Not Found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/referencing/subject/:subjectId/emails",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "referencing",
+                                "subject",
+                                ":subjectId",
+                                "emails"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "subjectId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-10-21T19:51:02.000Z",
+                          "updatedAt": "2026-10-21T19:51:02.000Z",
+                          "uid": "35240-fb60041d-1339-4186-9b2d-cee9a99198b5"
+                        },
+                        {
+                          "id": "58abdbd9-9351-410a-9bd2-3c10aad7fb2d",
+                          "name": "Internal Server Error",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/referencing/subject/:subjectId/emails",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "referencing",
+                                "subject",
+                                ":subjectId",
+                                "emails"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "subjectId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-10-21T19:51:02.000Z",
+                          "updatedAt": "2026-10-21T19:51:02.000Z",
+                          "uid": "35240-58abdbd9-9351-410a-9bd2-3c10aad7fb2d"
+                        }
+                      ],
+                      "createdAt": "2026-10-21T19:51:02.000Z",
+                      "updatedAt": "2026-10-21T19:51:02.000Z",
+                      "uid": "35240-269d520b-0864-4cfb-a2c9-96079e2e5cf4"
+                    }
+                  ],
+                  "id": "66c975b4-8723-4079-ae80-3339bc1c72ce",
+                  "createdAt": "2026-10-21T19:51:02.000Z",
+                  "updatedAt": "2026-10-21T19:51:02.000Z",
+                  "uid": "35240-66c975b4-8723-4079-ae80-3339bc1c72ce"
+                },
+                {
+                  "name": "Get Subject",
+                  "id": "be5e9667-bb3d-445f-ba39-d95a01b8dc34",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "(Required) A unique GUID identifying your company, issued alongside your API keys. This value may differ between production and sandbox environments. This is a mandatory header for all application and subject endpoints.",
+                        "key": "Company-ID",
+                        "value": "<uuid>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/referencing/subject/:subjectId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "referencing",
+                        "subject",
+                        ":subjectId"
+                      ],
+                      "variable": [
+                        {
+                          "id": "b93956d1-21a5-4142-a4c2-db64057aa6f4",
+                          "key": "subjectId",
+                          "value": "<string>",
+                          "description": "(Required) SubjectId you wish to generate a token for"
+                        }
+                      ]
+                    },
+                    "description": "Retrieve a created subject"
+                  },
+                  "response": [
+                    {
+                      "id": "3c7f07b3-7244-4a2f-9015-56e30a6571b7",
+                      "name": "Successful operation.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "(Required) A unique GUID identifying your company, issued alongside your API keys. This value may differ between production and sandbox environments. This is a mandatory header for all application and subject endpoints.",
+                            "key": "Company-ID",
+                            "value": "<uuid>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/referencing/subject/:subjectId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "referencing",
+                            "subject",
+                            ":subjectId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "subjectId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"externalId\": \"<string>\",\n  \"rentalDetails\": {\n    \"priceShare\": \"<number>\",\n    \"affordabilityRatio\": \"<number>\"\n  },\n  \"context\": {\n    \"name\": \"<string>\",\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"email\": \"<string>\",\n    \"mobile\": \"<string>\",\n    \"redirectUrlOnJourneyComplete\": \"<string>\",\n    \"tenancyRenewal\": \"<boolean>\",\n    \"product\": \"<string>\",\n    \"addresses\": [\n      {\n        \"id\": \"<string>\",\n        \"addressType\": \"<string>\",\n        \"bedroomIdentifier\": \"<string>\",\n        \"name\": \"<string>\",\n        \"startDate\": \"<string>\",\n        \"status\": \"<string>\",\n        \"line1\": \"<string>\",\n        \"normalizedLine1\": \"<string>\",\n        \"line2\": \"<string>\",\n        \"city\": \"<string>\",\n        \"county\": {},\n        \"postcode\": \"<string>\",\n        \"country\": \"<string>\",\n        \"countryCodeAlpha2\": \"<string>\",\n        \"referee\": {\n          \"id\": \"<string>\",\n          \"name\": \"<string>\",\n          \"email\": \"<string>\",\n          \"mobile\": \"<string>\",\n          \"createdAt\": \"<string>\"\n        }\n      },\n      {\n        \"id\": \"<string>\",\n        \"addressType\": \"<string>\",\n        \"bedroomIdentifier\": \"<string>\",\n        \"name\": \"<string>\",\n        \"startDate\": \"<string>\",\n        \"status\": \"<string>\",\n        \"line1\": \"<string>\",\n        \"normalizedLine1\": \"<string>\",\n        \"line2\": \"<string>\",\n        \"city\": \"<string>\",\n        \"county\": {},\n        \"postcode\": \"<string>\",\n        \"country\": \"<string>\",\n        \"countryCodeAlpha2\": \"<string>\",\n        \"referee\": {\n          \"id\": \"<string>\",\n          \"name\": \"<string>\",\n          \"email\": \"<string>\",\n          \"mobile\": \"<string>\",\n          \"createdAt\": \"<string>\"\n        }\n      }\n    ],\n    \"incomes\": [\n      {\n        \"company\": \"<string>\",\n        \"position\": \"<string>\",\n        \"contractType\": \"<string>\",\n        \"contractSchedule\": \"<string>\",\n        \"guaranteedBonus\": {},\n        \"startDate\": \"<string>\",\n        \"endDate\": {},\n        \"address\": {\n          \"id\": {},\n          \"addressType\": \"<string>\",\n          \"name\": {},\n          \"startDate\": {},\n          \"status\": {},\n          \"line1\": \"<string>\",\n          \"normalizedLine1\": \"<string>\",\n          \"line2\": \"<string>\",\n          \"line3\": {},\n          \"city\": \"<string>\",\n          \"county\": {},\n          \"postcode\": \"<string>\",\n          \"country\": \"<string>\",\n          \"countryCodeAlpha2\": {}\n        },\n        \"referee\": {\n          \"id\": \"<string>\",\n          \"name\": \"<string>\",\n          \"email\": \"<string>\",\n          \"mobile\": \"<string>\",\n          \"createdAt\": \"<string>\",\n          \"isNonProfessionalEmail\": \"<boolean>\"\n        },\n        \"type\": \"<string>\",\n        \"evidenceType\": \"<string>\",\n        \"income\": {\n          \"value\": \"<number>\",\n          \"currency\": \"<string>\",\n          \"frequency\": \"<string>\"\n        },\n        \"id\": \"<string>\"\n      },\n      {\n        \"company\": \"<string>\",\n        \"position\": \"<string>\",\n        \"contractType\": \"<string>\",\n        \"contractSchedule\": \"<string>\",\n        \"guaranteedBonus\": {},\n        \"startDate\": \"<string>\",\n        \"endDate\": {},\n        \"address\": {\n          \"id\": {},\n          \"addressType\": \"<string>\",\n          \"name\": {},\n          \"startDate\": {},\n          \"status\": {},\n          \"line1\": \"<string>\",\n          \"normalizedLine1\": \"<string>\",\n          \"line2\": \"<string>\",\n          \"line3\": {},\n          \"city\": \"<string>\",\n          \"county\": {},\n          \"postcode\": \"<string>\",\n          \"country\": \"<string>\",\n          \"countryCodeAlpha2\": {}\n        },\n        \"referee\": {\n          \"id\": \"<string>\",\n          \"name\": \"<string>\",\n          \"email\": \"<string>\",\n          \"mobile\": \"<string>\",\n          \"createdAt\": \"<string>\",\n          \"isNonProfessionalEmail\": \"<boolean>\"\n        },\n        \"type\": \"<string>\",\n        \"evidenceType\": \"<string>\",\n        \"income\": {\n          \"value\": \"<number>\",\n          \"currency\": \"<string>\",\n          \"frequency\": \"<string>\"\n        },\n        \"id\": \"<string>\"\n      }\n    ],\n    \"incomeSummary\": {\n      \"totalIncome\": \"<number>\",\n      \"totalVerifiedIncome\": \"<number>\",\n      \"maximumAffordabilityPercentage\": \"<number>\",\n      \"openBanking\": {\n        \"provider\": \"<string>\",\n        \"status\": \"<string>\",\n        \"outcome\": {\n          \"estimatedAnnualNetIncome\": \"<number>\",\n          \"estimatedAnnualGrossIncome\": \"<number>\"\n        },\n        \"optOutReason\": {\n          \"category\": \"incomeAccuracy\",\n          \"additionalInformation\": \"<string>\"\n        }\n      }\n    },\n    \"credit\": {\n      \"hasAdverseCredit\": \"<boolean>\",\n      \"adverseCreditDeclared\": \"<boolean>\"\n    },\n    \"documents\": [\n      {\n        \"id\": \"<string>\",\n        \"fileName\": \"<string>\",\n        \"thumbnail\": \"<string>\",\n        \"documentType\": \"<string>\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"fileName\": \"<string>\",\n        \"thumbnail\": \"<string>\",\n        \"documentType\": \"<string>\"\n      }\n    ],\n    \"communicationPreferences\": {\n      \"sendInitialTenantEmail\": \"<boolean>\",\n      \"disableRentProtectionComms\": \"<boolean>\",\n      \"disableTCLIComms\": \"<boolean>\",\n      \"disableTenancyServicesComms\": \"<boolean>\"\n    },\n    \"guarantorCollection\": {\n      \"required\": \"<boolean>\",\n      \"product\": \"Essential\",\n      \"affordabilityRatio\": \"<number>\"\n    },\n    \"identity\": {\n      \"nationality\": \"<string>\",\n      \"nationalInsuranceNumber\": \"<string>\",\n      \"r2rShareCode\": \"<string>\",\n      \"idvt\": {\n        \"idCheckStatus\": \"Pending\",\n        \"r2rCheckStatus\": \"NotPerformed\"\n      },\n      \"pepsSanctions\": {\n        \"pepsStatus\": \"ActionRequired\",\n        \"sanctionsStatus\": \"NotFound\"\n      }\n    }\n  },\n  \"outcome\": {\n    \"status\": \"<string>\",\n    \"comments\": \"<string>\",\n    \"rpi\": {\n      \"eligibility\": \"<string>\",\n      \"comments\": \"<string>\"\n    },\n    \"sections\": [\n      {\n        \"name\": \"<string>\",\n        \"status\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"status\": \"<string>\"\n      }\n    ]\n  },\n  \"id\": \"<string>\",\n  \"type\": \"applicant\",\n  \"attachedSubjects\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"milestones\": [\n    {\n      \"type\": \"<string>\",\n      \"event\": \"<string>\",\n      \"createdAt\": \"<string>\",\n      \"updatedAt\": \"<string>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"event\": \"<string>\",\n      \"createdAt\": \"<string>\",\n      \"updatedAt\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-21T19:51:02.000Z",
+                      "updatedAt": "2026-10-21T19:51:02.000Z",
+                      "uid": "35240-3c7f07b3-7244-4a2f-9015-56e30a6571b7"
+                    },
+                    {
+                      "id": "94bc1d61-a15b-4916-a13f-a4ecb11118a1",
+                      "name": "Bad Request",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "(Required) A unique GUID identifying your company, issued alongside your API keys. This value may differ between production and sandbox environments. This is a mandatory header for all application and subject endpoints.",
+                            "key": "Company-ID",
+                            "value": "<uuid>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/referencing/subject/:subjectId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "referencing",
+                            "subject",
+                            ":subjectId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "subjectId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"reason\": \"<string>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"reason\": \"<string>\",\n      \"description\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-21T19:51:02.000Z",
+                      "updatedAt": "2026-10-21T19:51:02.000Z",
+                      "uid": "35240-94bc1d61-a15b-4916-a13f-a4ecb11118a1"
+                    },
+                    {
+                      "id": "d734e6cc-4025-4768-aa8a-114bdb3c13a6",
+                      "name": "Not Found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "(Required) A unique GUID identifying your company, issued alongside your API keys. This value may differ between production and sandbox environments. This is a mandatory header for all application and subject endpoints.",
+                            "key": "Company-ID",
+                            "value": "<uuid>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/referencing/subject/:subjectId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "referencing",
+                            "subject",
+                            ":subjectId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "subjectId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-10-21T19:51:02.000Z",
+                      "updatedAt": "2026-10-21T19:51:02.000Z",
+                      "uid": "35240-d734e6cc-4025-4768-aa8a-114bdb3c13a6"
+                    },
+                    {
+                      "id": "78e06ead-98fd-4bad-93d1-4b599b1201a6",
+                      "name": "Internal Server Error",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "(Required) A unique GUID identifying your company, issued alongside your API keys. This value may differ between production and sandbox environments. This is a mandatory header for all application and subject endpoints.",
+                            "key": "Company-ID",
+                            "value": "<uuid>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/referencing/subject/:subjectId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "referencing",
+                            "subject",
+                            ":subjectId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "subjectId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-10-21T19:51:02.000Z",
+                      "updatedAt": "2026-10-21T19:51:02.000Z",
+                      "uid": "35240-78e06ead-98fd-4bad-93d1-4b599b1201a6"
+                    }
+                  ],
+                  "createdAt": "2026-10-21T19:51:02.000Z",
+                  "updatedAt": "2026-10-21T19:51:02.000Z",
+                  "uid": "35240-be5e9667-bb3d-445f-ba39-d95a01b8dc34"
+                },
+                {
+                  "name": "Patch Subject",
+                  "id": "aa013b3a-12a6-4452-956d-5bd3223c6639",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "description": "(Required) A unique GUID identifying your company, issued alongside your API keys. This value may differ between production and sandbox environments. This is a mandatory header for all application and subject endpoints.",
+                        "key": "Company-ID",
+                        "value": "<uuid>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"context\": {\n    \"email\": \"<string>\",\n    \"product\": \"Essential\",\n    \"mobile\": \"<string>\",\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"guarantorCollection\": {\n      \"required\": \"<boolean>\",\n      \"product\": \"Priority\",\n      \"affordabilityRatio\": \"<number>\"\n    }\n  },\n  \"rentalDetails\": {\n    \"priceShare\": \"<number>\",\n    \"affordabilityRatio\": \"<number>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/referencing/subject/:subjectId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "referencing",
+                        "subject",
+                        ":subjectId"
+                      ],
+                      "variable": [
+                        {
+                          "id": "9aabc2fa-08e5-470f-92bb-092b1a2aa34a",
+                          "key": "subjectId",
+                          "value": "<string>",
+                          "description": "(Required) SubjectId you wish to generate a token for"
+                        }
+                      ]
+                    },
+                    "description": "Patch a subject you have already created"
+                  },
+                  "response": [
+                    {
+                      "id": "5bd78793-1063-4feb-a352-d56408603138",
+                      "name": "Successful operation",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "description": "(Required) A unique GUID identifying your company, issued alongside your API keys. This value may differ between production and sandbox environments. This is a mandatory header for all application and subject endpoints.",
+                            "key": "Company-ID",
+                            "value": "<uuid>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"context\": {\n    \"email\": \"<string>\",\n    \"product\": \"Essential\",\n    \"mobile\": \"<string>\",\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"guarantorCollection\": {\n      \"required\": \"<boolean>\",\n      \"product\": \"Priority\",\n      \"affordabilityRatio\": \"<number>\"\n    }\n  },\n  \"rentalDetails\": {\n    \"priceShare\": \"<number>\",\n    \"affordabilityRatio\": \"<number>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/referencing/subject/:subjectId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "referencing",
+                            "subject",
+                            ":subjectId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "subjectId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"externalId\": \"<string>\",\n  \"rentalDetails\": {\n    \"priceShare\": \"<number>\",\n    \"affordabilityRatio\": \"<number>\"\n  },\n  \"context\": {\n    \"name\": \"<string>\",\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"email\": \"<string>\",\n    \"mobile\": \"<string>\",\n    \"redirectUrlOnJourneyComplete\": \"<string>\",\n    \"tenancyRenewal\": \"<boolean>\",\n    \"product\": \"<string>\",\n    \"addresses\": [\n      {\n        \"id\": \"<string>\",\n        \"addressType\": \"<string>\",\n        \"bedroomIdentifier\": \"<string>\",\n        \"name\": \"<string>\",\n        \"startDate\": \"<string>\",\n        \"status\": \"<string>\",\n        \"line1\": \"<string>\",\n        \"normalizedLine1\": \"<string>\",\n        \"line2\": \"<string>\",\n        \"city\": \"<string>\",\n        \"county\": {},\n        \"postcode\": \"<string>\",\n        \"country\": \"<string>\",\n        \"countryCodeAlpha2\": \"<string>\",\n        \"referee\": {\n          \"id\": \"<string>\",\n          \"name\": \"<string>\",\n          \"email\": \"<string>\",\n          \"mobile\": \"<string>\",\n          \"createdAt\": \"<string>\"\n        }\n      },\n      {\n        \"id\": \"<string>\",\n        \"addressType\": \"<string>\",\n        \"bedroomIdentifier\": \"<string>\",\n        \"name\": \"<string>\",\n        \"startDate\": \"<string>\",\n        \"status\": \"<string>\",\n        \"line1\": \"<string>\",\n        \"normalizedLine1\": \"<string>\",\n        \"line2\": \"<string>\",\n        \"city\": \"<string>\",\n        \"county\": {},\n        \"postcode\": \"<string>\",\n        \"country\": \"<string>\",\n        \"countryCodeAlpha2\": \"<string>\",\n        \"referee\": {\n          \"id\": \"<string>\",\n          \"name\": \"<string>\",\n          \"email\": \"<string>\",\n          \"mobile\": \"<string>\",\n          \"createdAt\": \"<string>\"\n        }\n      }\n    ],\n    \"incomes\": [\n      {\n        \"company\": \"<string>\",\n        \"position\": \"<string>\",\n        \"contractType\": \"<string>\",\n        \"contractSchedule\": \"<string>\",\n        \"guaranteedBonus\": {},\n        \"startDate\": \"<string>\",\n        \"endDate\": {},\n        \"address\": {\n          \"id\": {},\n          \"addressType\": \"<string>\",\n          \"name\": {},\n          \"startDate\": {},\n          \"status\": {},\n          \"line1\": \"<string>\",\n          \"normalizedLine1\": \"<string>\",\n          \"line2\": \"<string>\",\n          \"line3\": {},\n          \"city\": \"<string>\",\n          \"county\": {},\n          \"postcode\": \"<string>\",\n          \"country\": \"<string>\",\n          \"countryCodeAlpha2\": {}\n        },\n        \"referee\": {\n          \"id\": \"<string>\",\n          \"name\": \"<string>\",\n          \"email\": \"<string>\",\n          \"mobile\": \"<string>\",\n          \"createdAt\": \"<string>\",\n          \"isNonProfessionalEmail\": \"<boolean>\"\n        },\n        \"type\": \"<string>\",\n        \"evidenceType\": \"<string>\",\n        \"income\": {\n          \"value\": \"<number>\",\n          \"currency\": \"<string>\",\n          \"frequency\": \"<string>\"\n        },\n        \"id\": \"<string>\"\n      },\n      {\n        \"company\": \"<string>\",\n        \"position\": \"<string>\",\n        \"contractType\": \"<string>\",\n        \"contractSchedule\": \"<string>\",\n        \"guaranteedBonus\": {},\n        \"startDate\": \"<string>\",\n        \"endDate\": {},\n        \"address\": {\n          \"id\": {},\n          \"addressType\": \"<string>\",\n          \"name\": {},\n          \"startDate\": {},\n          \"status\": {},\n          \"line1\": \"<string>\",\n          \"normalizedLine1\": \"<string>\",\n          \"line2\": \"<string>\",\n          \"line3\": {},\n          \"city\": \"<string>\",\n          \"county\": {},\n          \"postcode\": \"<string>\",\n          \"country\": \"<string>\",\n          \"countryCodeAlpha2\": {}\n        },\n        \"referee\": {\n          \"id\": \"<string>\",\n          \"name\": \"<string>\",\n          \"email\": \"<string>\",\n          \"mobile\": \"<string>\",\n          \"createdAt\": \"<string>\",\n          \"isNonProfessionalEmail\": \"<boolean>\"\n        },\n        \"type\": \"<string>\",\n        \"evidenceType\": \"<string>\",\n        \"income\": {\n          \"value\": \"<number>\",\n          \"currency\": \"<string>\",\n          \"frequency\": \"<string>\"\n        },\n        \"id\": \"<string>\"\n      }\n    ],\n    \"incomeSummary\": {\n      \"totalIncome\": \"<number>\",\n      \"totalVerifiedIncome\": \"<number>\",\n      \"maximumAffordabilityPercentage\": \"<number>\",\n      \"openBanking\": {\n        \"provider\": \"<string>\",\n        \"status\": \"<string>\",\n        \"outcome\": {\n          \"estimatedAnnualNetIncome\": \"<number>\",\n          \"estimatedAnnualGrossIncome\": \"<number>\"\n        },\n        \"optOutReason\": {\n          \"category\": \"incomeAccuracy\",\n          \"additionalInformation\": \"<string>\"\n        }\n      }\n    },\n    \"credit\": {\n      \"hasAdverseCredit\": \"<boolean>\",\n      \"adverseCreditDeclared\": \"<boolean>\"\n    },\n    \"documents\": [\n      {\n        \"id\": \"<string>\",\n        \"fileName\": \"<string>\",\n        \"thumbnail\": \"<string>\",\n        \"documentType\": \"<string>\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"fileName\": \"<string>\",\n        \"thumbnail\": \"<string>\",\n        \"documentType\": \"<string>\"\n      }\n    ],\n    \"communicationPreferences\": {\n      \"sendInitialTenantEmail\": \"<boolean>\",\n      \"disableRentProtectionComms\": \"<boolean>\",\n      \"disableTCLIComms\": \"<boolean>\",\n      \"disableTenancyServicesComms\": \"<boolean>\"\n    },\n    \"guarantorCollection\": {\n      \"required\": \"<boolean>\",\n      \"product\": \"Essential\",\n      \"affordabilityRatio\": \"<number>\"\n    },\n    \"identity\": {\n      \"nationality\": \"<string>\",\n      \"nationalInsuranceNumber\": \"<string>\",\n      \"r2rShareCode\": \"<string>\",\n      \"idvt\": {\n        \"idCheckStatus\": \"Pending\",\n        \"r2rCheckStatus\": \"NotPerformed\"\n      },\n      \"pepsSanctions\": {\n        \"pepsStatus\": \"ActionRequired\",\n        \"sanctionsStatus\": \"NotFound\"\n      }\n    }\n  },\n  \"outcome\": {\n    \"status\": \"<string>\",\n    \"comments\": \"<string>\",\n    \"rpi\": {\n      \"eligibility\": \"<string>\",\n      \"comments\": \"<string>\"\n    },\n    \"sections\": [\n      {\n        \"name\": \"<string>\",\n        \"status\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"status\": \"<string>\"\n      }\n    ]\n  },\n  \"id\": \"<string>\",\n  \"type\": \"applicant\",\n  \"attachedSubjects\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"milestones\": [\n    {\n      \"type\": \"<string>\",\n      \"event\": \"<string>\",\n      \"createdAt\": \"<string>\",\n      \"updatedAt\": \"<string>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"event\": \"<string>\",\n      \"createdAt\": \"<string>\",\n      \"updatedAt\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-21T19:51:02.000Z",
+                      "updatedAt": "2026-10-21T19:51:02.000Z",
+                      "uid": "35240-5bd78793-1063-4feb-a352-d56408603138"
+                    },
+                    {
+                      "id": "512fd025-df63-4f2c-8360-fc460a864477",
+                      "name": "Bad Request",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "description": "(Required) A unique GUID identifying your company, issued alongside your API keys. This value may differ between production and sandbox environments. This is a mandatory header for all application and subject endpoints.",
+                            "key": "Company-ID",
+                            "value": "<uuid>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"context\": {\n    \"email\": \"<string>\",\n    \"product\": \"Essential\",\n    \"mobile\": \"<string>\",\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"guarantorCollection\": {\n      \"required\": \"<boolean>\",\n      \"product\": \"Priority\",\n      \"affordabilityRatio\": \"<number>\"\n    }\n  },\n  \"rentalDetails\": {\n    \"priceShare\": \"<number>\",\n    \"affordabilityRatio\": \"<number>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/referencing/subject/:subjectId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "referencing",
+                            "subject",
+                            ":subjectId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "subjectId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"reason\": \"<string>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"reason\": \"<string>\",\n      \"description\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-21T19:51:02.000Z",
+                      "updatedAt": "2026-10-21T19:51:02.000Z",
+                      "uid": "35240-512fd025-df63-4f2c-8360-fc460a864477"
+                    },
+                    {
+                      "id": "aa219522-2fbe-43e0-a6a3-bcf99646056c",
+                      "name": "Not Found",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "description": "(Required) A unique GUID identifying your company, issued alongside your API keys. This value may differ between production and sandbox environments. This is a mandatory header for all application and subject endpoints.",
+                            "key": "Company-ID",
+                            "value": "<uuid>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"context\": {\n    \"email\": \"<string>\",\n    \"product\": \"Essential\",\n    \"mobile\": \"<string>\",\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"guarantorCollection\": {\n      \"required\": \"<boolean>\",\n      \"product\": \"Priority\",\n      \"affordabilityRatio\": \"<number>\"\n    }\n  },\n  \"rentalDetails\": {\n    \"priceShare\": \"<number>\",\n    \"affordabilityRatio\": \"<number>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/referencing/subject/:subjectId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "referencing",
+                            "subject",
+                            ":subjectId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "subjectId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-10-21T19:51:02.000Z",
+                      "updatedAt": "2026-10-21T19:51:02.000Z",
+                      "uid": "35240-aa219522-2fbe-43e0-a6a3-bcf99646056c"
+                    },
+                    {
+                      "id": "bed61039-9848-4cde-a47a-79ae34473095",
+                      "name": "Internal Server Error",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "description": "(Required) A unique GUID identifying your company, issued alongside your API keys. This value may differ between production and sandbox environments. This is a mandatory header for all application and subject endpoints.",
+                            "key": "Company-ID",
+                            "value": "<uuid>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"context\": {\n    \"email\": \"<string>\",\n    \"product\": \"Essential\",\n    \"mobile\": \"<string>\",\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"guarantorCollection\": {\n      \"required\": \"<boolean>\",\n      \"product\": \"Priority\",\n      \"affordabilityRatio\": \"<number>\"\n    }\n  },\n  \"rentalDetails\": {\n    \"priceShare\": \"<number>\",\n    \"affordabilityRatio\": \"<number>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/referencing/subject/:subjectId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "referencing",
+                            "subject",
+                            ":subjectId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "subjectId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-10-21T19:51:02.000Z",
+                      "updatedAt": "2026-10-21T19:51:02.000Z",
+                      "uid": "35240-bed61039-9848-4cde-a47a-79ae34473095"
+                    }
+                  ],
+                  "createdAt": "2026-10-21T19:51:02.000Z",
+                  "updatedAt": "2026-10-21T19:51:02.000Z",
+                  "uid": "35240-aa013b3a-12a6-4452-956d-5bd3223c6639"
+                },
+                {
+                  "name": "Delete Subject",
+                  "id": "6d591636-48df-4a6a-9513-58c0d314fb30",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "(Required) A unique GUID identifying your company, issued alongside your API keys. This value may differ between production and sandbox environments. This is a mandatory header for all application and subject endpoints.",
+                        "key": "Company-ID",
+                        "value": "<uuid>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/referencing/subject/:subjectId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "referencing",
+                        "subject",
+                        ":subjectId"
+                      ],
+                      "variable": [
+                        {
+                          "id": "2a6223d1-c3a0-4821-9fff-8e810708ea54",
+                          "key": "subjectId",
+                          "value": "<string>",
+                          "description": "(Required) SubjectId you wish to generate a token for"
+                        }
+                      ]
+                    },
+                    "description": "Soft delete a subject which you have already created"
+                  },
+                  "response": [
+                    {
+                      "id": "06e3dec2-d5c1-4dff-9aba-90e0c1953566",
+                      "name": "Successful operation",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "(Required) A unique GUID identifying your company, issued alongside your API keys. This value may differ between production and sandbox environments. This is a mandatory header for all application and subject endpoints.",
+                            "key": "Company-ID",
+                            "value": "<uuid>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/referencing/subject/:subjectId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "referencing",
+                            "subject",
+                            ":subjectId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "subjectId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"externalId\": \"<string>\",\n  \"rentalDetails\": {\n    \"priceShare\": \"<number>\",\n    \"affordabilityRatio\": \"<number>\"\n  },\n  \"context\": {\n    \"name\": \"<string>\",\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"email\": \"<string>\",\n    \"mobile\": \"<string>\",\n    \"redirectUrlOnJourneyComplete\": \"<string>\",\n    \"tenancyRenewal\": \"<boolean>\",\n    \"product\": \"<string>\",\n    \"addresses\": [\n      {\n        \"id\": \"<string>\",\n        \"addressType\": \"<string>\",\n        \"bedroomIdentifier\": \"<string>\",\n        \"name\": \"<string>\",\n        \"startDate\": \"<string>\",\n        \"status\": \"<string>\",\n        \"line1\": \"<string>\",\n        \"normalizedLine1\": \"<string>\",\n        \"line2\": \"<string>\",\n        \"city\": \"<string>\",\n        \"county\": {},\n        \"postcode\": \"<string>\",\n        \"country\": \"<string>\",\n        \"countryCodeAlpha2\": \"<string>\",\n        \"referee\": {\n          \"id\": \"<string>\",\n          \"name\": \"<string>\",\n          \"email\": \"<string>\",\n          \"mobile\": \"<string>\",\n          \"createdAt\": \"<string>\"\n        }\n      },\n      {\n        \"id\": \"<string>\",\n        \"addressType\": \"<string>\",\n        \"bedroomIdentifier\": \"<string>\",\n        \"name\": \"<string>\",\n        \"startDate\": \"<string>\",\n        \"status\": \"<string>\",\n        \"line1\": \"<string>\",\n        \"normalizedLine1\": \"<string>\",\n        \"line2\": \"<string>\",\n        \"city\": \"<string>\",\n        \"county\": {},\n        \"postcode\": \"<string>\",\n        \"country\": \"<string>\",\n        \"countryCodeAlpha2\": \"<string>\",\n        \"referee\": {\n          \"id\": \"<string>\",\n          \"name\": \"<string>\",\n          \"email\": \"<string>\",\n          \"mobile\": \"<string>\",\n          \"createdAt\": \"<string>\"\n        }\n      }\n    ],\n    \"incomes\": [\n      {\n        \"company\": \"<string>\",\n        \"position\": \"<string>\",\n        \"contractType\": \"<string>\",\n        \"contractSchedule\": \"<string>\",\n        \"guaranteedBonus\": {},\n        \"startDate\": \"<string>\",\n        \"endDate\": {},\n        \"address\": {\n          \"id\": {},\n          \"addressType\": \"<string>\",\n          \"name\": {},\n          \"startDate\": {},\n          \"status\": {},\n          \"line1\": \"<string>\",\n          \"normalizedLine1\": \"<string>\",\n          \"line2\": \"<string>\",\n          \"line3\": {},\n          \"city\": \"<string>\",\n          \"county\": {},\n          \"postcode\": \"<string>\",\n          \"country\": \"<string>\",\n          \"countryCodeAlpha2\": {}\n        },\n        \"referee\": {\n          \"id\": \"<string>\",\n          \"name\": \"<string>\",\n          \"email\": \"<string>\",\n          \"mobile\": \"<string>\",\n          \"createdAt\": \"<string>\",\n          \"isNonProfessionalEmail\": \"<boolean>\"\n        },\n        \"type\": \"<string>\",\n        \"evidenceType\": \"<string>\",\n        \"income\": {\n          \"value\": \"<number>\",\n          \"currency\": \"<string>\",\n          \"frequency\": \"<string>\"\n        },\n        \"id\": \"<string>\"\n      },\n      {\n        \"company\": \"<string>\",\n        \"position\": \"<string>\",\n        \"contractType\": \"<string>\",\n        \"contractSchedule\": \"<string>\",\n        \"guaranteedBonus\": {},\n        \"startDate\": \"<string>\",\n        \"endDate\": {},\n        \"address\": {\n          \"id\": {},\n          \"addressType\": \"<string>\",\n          \"name\": {},\n          \"startDate\": {},\n          \"status\": {},\n          \"line1\": \"<string>\",\n          \"normalizedLine1\": \"<string>\",\n          \"line2\": \"<string>\",\n          \"line3\": {},\n          \"city\": \"<string>\",\n          \"county\": {},\n          \"postcode\": \"<string>\",\n          \"country\": \"<string>\",\n          \"countryCodeAlpha2\": {}\n        },\n        \"referee\": {\n          \"id\": \"<string>\",\n          \"name\": \"<string>\",\n          \"email\": \"<string>\",\n          \"mobile\": \"<string>\",\n          \"createdAt\": \"<string>\",\n          \"isNonProfessionalEmail\": \"<boolean>\"\n        },\n        \"type\": \"<string>\",\n        \"evidenceType\": \"<string>\",\n        \"income\": {\n          \"value\": \"<number>\",\n          \"currency\": \"<string>\",\n          \"frequency\": \"<string>\"\n        },\n        \"id\": \"<string>\"\n      }\n    ],\n    \"incomeSummary\": {\n      \"totalIncome\": \"<number>\",\n      \"totalVerifiedIncome\": \"<number>\",\n      \"maximumAffordabilityPercentage\": \"<number>\",\n      \"openBanking\": {\n        \"provider\": \"<string>\",\n        \"status\": \"<string>\",\n        \"outcome\": {\n          \"estimatedAnnualNetIncome\": \"<number>\",\n          \"estimatedAnnualGrossIncome\": \"<number>\"\n        },\n        \"optOutReason\": {\n          \"category\": \"incomeAccuracy\",\n          \"additionalInformation\": \"<string>\"\n        }\n      }\n    },\n    \"credit\": {\n      \"hasAdverseCredit\": \"<boolean>\",\n      \"adverseCreditDeclared\": \"<boolean>\"\n    },\n    \"documents\": [\n      {\n        \"id\": \"<string>\",\n        \"fileName\": \"<string>\",\n        \"thumbnail\": \"<string>\",\n        \"documentType\": \"<string>\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"fileName\": \"<string>\",\n        \"thumbnail\": \"<string>\",\n        \"documentType\": \"<string>\"\n      }\n    ],\n    \"communicationPreferences\": {\n      \"sendInitialTenantEmail\": \"<boolean>\",\n      \"disableRentProtectionComms\": \"<boolean>\",\n      \"disableTCLIComms\": \"<boolean>\",\n      \"disableTenancyServicesComms\": \"<boolean>\"\n    },\n    \"guarantorCollection\": {\n      \"required\": \"<boolean>\",\n      \"product\": \"Essential\",\n      \"affordabilityRatio\": \"<number>\"\n    },\n    \"identity\": {\n      \"nationality\": \"<string>\",\n      \"nationalInsuranceNumber\": \"<string>\",\n      \"r2rShareCode\": \"<string>\",\n      \"idvt\": {\n        \"idCheckStatus\": \"Pending\",\n        \"r2rCheckStatus\": \"NotPerformed\"\n      },\n      \"pepsSanctions\": {\n        \"pepsStatus\": \"ActionRequired\",\n        \"sanctionsStatus\": \"NotFound\"\n      }\n    }\n  },\n  \"outcome\": {\n    \"status\": \"<string>\",\n    \"comments\": \"<string>\",\n    \"rpi\": {\n      \"eligibility\": \"<string>\",\n      \"comments\": \"<string>\"\n    },\n    \"sections\": [\n      {\n        \"name\": \"<string>\",\n        \"status\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"status\": \"<string>\"\n      }\n    ]\n  },\n  \"id\": \"<string>\",\n  \"type\": \"applicant\",\n  \"attachedSubjects\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"milestones\": [\n    {\n      \"type\": \"<string>\",\n      \"event\": \"<string>\",\n      \"createdAt\": \"<string>\",\n      \"updatedAt\": \"<string>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"event\": \"<string>\",\n      \"createdAt\": \"<string>\",\n      \"updatedAt\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-21T19:51:02.000Z",
+                      "updatedAt": "2026-10-21T19:51:02.000Z",
+                      "uid": "35240-06e3dec2-d5c1-4dff-9aba-90e0c1953566"
+                    },
+                    {
+                      "id": "3d26bfc5-f4f0-4e69-876c-0812b6bf7708",
+                      "name": "Bad Request",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "(Required) A unique GUID identifying your company, issued alongside your API keys. This value may differ between production and sandbox environments. This is a mandatory header for all application and subject endpoints.",
+                            "key": "Company-ID",
+                            "value": "<uuid>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/referencing/subject/:subjectId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "referencing",
+                            "subject",
+                            ":subjectId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "subjectId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"reason\": \"<string>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"reason\": \"<string>\",\n      \"description\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-21T19:51:02.000Z",
+                      "updatedAt": "2026-10-21T19:51:02.000Z",
+                      "uid": "35240-3d26bfc5-f4f0-4e69-876c-0812b6bf7708"
+                    },
+                    {
+                      "id": "652c29f4-fac3-4013-8f50-968812a8e08e",
+                      "name": "Not Found",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "(Required) A unique GUID identifying your company, issued alongside your API keys. This value may differ between production and sandbox environments. This is a mandatory header for all application and subject endpoints.",
+                            "key": "Company-ID",
+                            "value": "<uuid>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/referencing/subject/:subjectId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "referencing",
+                            "subject",
+                            ":subjectId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "subjectId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-10-21T19:51:02.000Z",
+                      "updatedAt": "2026-10-21T19:51:02.000Z",
+                      "uid": "35240-652c29f4-fac3-4013-8f50-968812a8e08e"
+                    },
+                    {
+                      "id": "17c7bf80-eace-47e1-a2d7-43ac6fa65623",
+                      "name": "Internal Server Error",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "(Required) A unique GUID identifying your company, issued alongside your API keys. This value may differ between production and sandbox environments. This is a mandatory header for all application and subject endpoints.",
+                            "key": "Company-ID",
+                            "value": "<uuid>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/referencing/subject/:subjectId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "referencing",
+                            "subject",
+                            ":subjectId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "subjectId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-10-21T19:51:02.000Z",
+                      "updatedAt": "2026-10-21T19:51:02.000Z",
+                      "uid": "35240-17c7bf80-eace-47e1-a2d7-43ac6fa65623"
+                    }
+                  ],
+                  "createdAt": "2026-10-21T19:51:02.000Z",
+                  "updatedAt": "2026-10-21T19:51:02.000Z",
+                  "uid": "35240-6d591636-48df-4a6a-9513-58c0d314fb30"
+                }
+              ],
+              "id": "20782bd0-fd63-406a-b039-a0fcf61134b3",
+              "createdAt": "2026-10-21T19:51:02.000Z",
+              "updatedAt": "2026-10-21T19:51:02.000Z",
+              "uid": "35240-20782bd0-fd63-406a-b039-a0fcf61134b3"
+            },
+            {
+              "name": "application",
+              "item": [
+                {
+                  "name": "{applicationId}",
+                  "item": [
+                    {
+                      "name": "Create Subject",
+                      "id": "43c6c508-7620-4b13-8582-fc8faf753001",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "description": "(Required) A unique GUID identifying your company, issued alongside your API keys. This value may differ between production and sandbox environments. This is a mandatory header for all application and subject endpoints.",
+                            "key": "Company-ID",
+                            "value": "<uuid>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"rentalDetails\": {\n    \"priceShare\": \"<number>\",\n    \"affordabilityRatio\": \"<number>\"\n  },\n  \"context\": {\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"email\": \"<string>\",\n    \"product\": \"None\",\n    \"mobile\": \"<string>\",\n    \"redirectUrlOnJourneyComplete\": \"<string>\",\n    \"tenancyRenewal\": \"<boolean>\",\n    \"idvt\": \"NotRequired\",\n    \"pepSanctions\": \"NotRequired\",\n    \"communicationPreferences\": {\n      \"sendInitialTenantEmail\": \"<boolean>\",\n      \"disableRentProtectionComms\": \"<boolean>\",\n      \"disableTCLIComms\": \"<boolean>\",\n      \"disableTenancyServicesComms\": \"<boolean>\"\n    },\n    \"company\": {\n      \"name\": \"<string>\",\n      \"companyNumber\": \"<string>\"\n    },\n    \"guarantorCollection\": {\n      \"required\": \"<boolean>\",\n      \"product\": \"Essential\",\n      \"affordabilityRatio\": \"<number>\"\n    }\n  },\n  \"type\": \"guarantor\",\n  \"attachedSubjects\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"externalId\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/referencing/subject/application/:applicationId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "referencing",
+                            "subject",
+                            "application",
+                            ":applicationId"
+                          ],
+                          "variable": [
+                            {
+                              "id": "158eb236-7497-4643-a228-40013d659aa5",
+                              "key": "applicationId",
+                              "value": "<string>",
+                              "description": "(Required) ApplicationId you wish to add the new subject to"
+                            }
+                          ]
+                        },
+                        "description": "Create a new subject"
+                      },
+                      "response": [
+                        {
+                          "id": "b7934c5a-e589-4d7e-ab66-720a0e0e1ffa",
+                          "name": "Successful operation",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "description": "(Required) A unique GUID identifying your company, issued alongside your API keys. This value may differ between production and sandbox environments. This is a mandatory header for all application and subject endpoints.",
+                                "key": "Company-ID",
+                                "value": "<uuid>"
+                              },
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"rentalDetails\": {\n    \"priceShare\": \"<number>\",\n    \"affordabilityRatio\": \"<number>\"\n  },\n  \"context\": {\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"email\": \"<string>\",\n    \"product\": \"None\",\n    \"mobile\": \"<string>\",\n    \"redirectUrlOnJourneyComplete\": \"<string>\",\n    \"tenancyRenewal\": \"<boolean>\",\n    \"idvt\": \"NotRequired\",\n    \"pepSanctions\": \"NotRequired\",\n    \"communicationPreferences\": {\n      \"sendInitialTenantEmail\": \"<boolean>\",\n      \"disableRentProtectionComms\": \"<boolean>\",\n      \"disableTCLIComms\": \"<boolean>\",\n      \"disableTenancyServicesComms\": \"<boolean>\"\n    },\n    \"company\": {\n      \"name\": \"<string>\",\n      \"companyNumber\": \"<string>\"\n    },\n    \"guarantorCollection\": {\n      \"required\": \"<boolean>\",\n      \"product\": \"Essential\",\n      \"affordabilityRatio\": \"<number>\"\n    }\n  },\n  \"type\": \"guarantor\",\n  \"attachedSubjects\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"externalId\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/referencing/subject/application/:applicationId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "referencing",
+                                "subject",
+                                "application",
+                                ":applicationId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "applicationId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"externalId\": \"<string>\",\n  \"rentalDetails\": {\n    \"priceShare\": \"<number>\",\n    \"affordabilityRatio\": \"<number>\"\n  },\n  \"context\": {\n    \"name\": \"<string>\",\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"email\": \"<string>\",\n    \"mobile\": \"<string>\",\n    \"redirectUrlOnJourneyComplete\": \"<string>\",\n    \"tenancyRenewal\": \"<boolean>\",\n    \"product\": \"<string>\",\n    \"addresses\": [\n      {\n        \"id\": \"<string>\",\n        \"addressType\": \"<string>\",\n        \"bedroomIdentifier\": \"<string>\",\n        \"name\": \"<string>\",\n        \"startDate\": \"<string>\",\n        \"status\": \"<string>\",\n        \"line1\": \"<string>\",\n        \"normalizedLine1\": \"<string>\",\n        \"line2\": \"<string>\",\n        \"city\": \"<string>\",\n        \"county\": {},\n        \"postcode\": \"<string>\",\n        \"country\": \"<string>\",\n        \"countryCodeAlpha2\": \"<string>\",\n        \"referee\": {\n          \"id\": \"<string>\",\n          \"name\": \"<string>\",\n          \"email\": \"<string>\",\n          \"mobile\": \"<string>\",\n          \"createdAt\": \"<string>\"\n        }\n      },\n      {\n        \"id\": \"<string>\",\n        \"addressType\": \"<string>\",\n        \"bedroomIdentifier\": \"<string>\",\n        \"name\": \"<string>\",\n        \"startDate\": \"<string>\",\n        \"status\": \"<string>\",\n        \"line1\": \"<string>\",\n        \"normalizedLine1\": \"<string>\",\n        \"line2\": \"<string>\",\n        \"city\": \"<string>\",\n        \"county\": {},\n        \"postcode\": \"<string>\",\n        \"country\": \"<string>\",\n        \"countryCodeAlpha2\": \"<string>\",\n        \"referee\": {\n          \"id\": \"<string>\",\n          \"name\": \"<string>\",\n          \"email\": \"<string>\",\n          \"mobile\": \"<string>\",\n          \"createdAt\": \"<string>\"\n        }\n      }\n    ],\n    \"incomes\": [\n      {\n        \"company\": \"<string>\",\n        \"position\": \"<string>\",\n        \"contractType\": \"<string>\",\n        \"contractSchedule\": \"<string>\",\n        \"guaranteedBonus\": {},\n        \"startDate\": \"<string>\",\n        \"endDate\": {},\n        \"address\": {\n          \"id\": {},\n          \"addressType\": \"<string>\",\n          \"name\": {},\n          \"startDate\": {},\n          \"status\": {},\n          \"line1\": \"<string>\",\n          \"normalizedLine1\": \"<string>\",\n          \"line2\": \"<string>\",\n          \"line3\": {},\n          \"city\": \"<string>\",\n          \"county\": {},\n          \"postcode\": \"<string>\",\n          \"country\": \"<string>\",\n          \"countryCodeAlpha2\": {}\n        },\n        \"referee\": {\n          \"id\": \"<string>\",\n          \"name\": \"<string>\",\n          \"email\": \"<string>\",\n          \"mobile\": \"<string>\",\n          \"createdAt\": \"<string>\",\n          \"isNonProfessionalEmail\": \"<boolean>\"\n        },\n        \"type\": \"<string>\",\n        \"evidenceType\": \"<string>\",\n        \"income\": {\n          \"value\": \"<number>\",\n          \"currency\": \"<string>\",\n          \"frequency\": \"<string>\"\n        },\n        \"id\": \"<string>\"\n      },\n      {\n        \"company\": \"<string>\",\n        \"position\": \"<string>\",\n        \"contractType\": \"<string>\",\n        \"contractSchedule\": \"<string>\",\n        \"guaranteedBonus\": {},\n        \"startDate\": \"<string>\",\n        \"endDate\": {},\n        \"address\": {\n          \"id\": {},\n          \"addressType\": \"<string>\",\n          \"name\": {},\n          \"startDate\": {},\n          \"status\": {},\n          \"line1\": \"<string>\",\n          \"normalizedLine1\": \"<string>\",\n          \"line2\": \"<string>\",\n          \"line3\": {},\n          \"city\": \"<string>\",\n          \"county\": {},\n          \"postcode\": \"<string>\",\n          \"country\": \"<string>\",\n          \"countryCodeAlpha2\": {}\n        },\n        \"referee\": {\n          \"id\": \"<string>\",\n          \"name\": \"<string>\",\n          \"email\": \"<string>\",\n          \"mobile\": \"<string>\",\n          \"createdAt\": \"<string>\",\n          \"isNonProfessionalEmail\": \"<boolean>\"\n        },\n        \"type\": \"<string>\",\n        \"evidenceType\": \"<string>\",\n        \"income\": {\n          \"value\": \"<number>\",\n          \"currency\": \"<string>\",\n          \"frequency\": \"<string>\"\n        },\n        \"id\": \"<string>\"\n      }\n    ],\n    \"incomeSummary\": {\n      \"totalIncome\": \"<number>\",\n      \"totalVerifiedIncome\": \"<number>\",\n      \"maximumAffordabilityPercentage\": \"<number>\",\n      \"openBanking\": {\n        \"provider\": \"<string>\",\n        \"status\": \"<string>\",\n        \"outcome\": {\n          \"estimatedAnnualNetIncome\": \"<number>\",\n          \"estimatedAnnualGrossIncome\": \"<number>\"\n        },\n        \"optOutReason\": {\n          \"category\": \"incomeAccuracy\",\n          \"additionalInformation\": \"<string>\"\n        }\n      }\n    },\n    \"credit\": {\n      \"hasAdverseCredit\": \"<boolean>\",\n      \"adverseCreditDeclared\": \"<boolean>\"\n    },\n    \"documents\": [\n      {\n        \"id\": \"<string>\",\n        \"fileName\": \"<string>\",\n        \"thumbnail\": \"<string>\",\n        \"documentType\": \"<string>\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"fileName\": \"<string>\",\n        \"thumbnail\": \"<string>\",\n        \"documentType\": \"<string>\"\n      }\n    ],\n    \"communicationPreferences\": {\n      \"sendInitialTenantEmail\": \"<boolean>\",\n      \"disableRentProtectionComms\": \"<boolean>\",\n      \"disableTCLIComms\": \"<boolean>\",\n      \"disableTenancyServicesComms\": \"<boolean>\"\n    },\n    \"guarantorCollection\": {\n      \"required\": \"<boolean>\",\n      \"product\": \"Essential\",\n      \"affordabilityRatio\": \"<number>\"\n    },\n    \"identity\": {\n      \"nationality\": \"<string>\",\n      \"nationalInsuranceNumber\": \"<string>\",\n      \"r2rShareCode\": \"<string>\",\n      \"idvt\": {\n        \"idCheckStatus\": \"Pending\",\n        \"r2rCheckStatus\": \"NotPerformed\"\n      },\n      \"pepsSanctions\": {\n        \"pepsStatus\": \"ActionRequired\",\n        \"sanctionsStatus\": \"NotFound\"\n      }\n    }\n  },\n  \"outcome\": {\n    \"status\": \"<string>\",\n    \"comments\": \"<string>\",\n    \"rpi\": {\n      \"eligibility\": \"<string>\",\n      \"comments\": \"<string>\"\n    },\n    \"sections\": [\n      {\n        \"name\": \"<string>\",\n        \"status\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"status\": \"<string>\"\n      }\n    ]\n  },\n  \"id\": \"<string>\",\n  \"type\": \"applicant\",\n  \"attachedSubjects\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"milestones\": [\n    {\n      \"type\": \"<string>\",\n      \"event\": \"<string>\",\n      \"createdAt\": \"<string>\",\n      \"updatedAt\": \"<string>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"event\": \"<string>\",\n      \"createdAt\": \"<string>\",\n      \"updatedAt\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-10-21T19:51:02.000Z",
+                          "updatedAt": "2026-10-21T19:51:02.000Z",
+                          "uid": "35240-b7934c5a-e589-4d7e-ab66-720a0e0e1ffa"
+                        },
+                        {
+                          "id": "998a9572-22ee-490b-b406-65c6165709c1",
+                          "name": "Bad Request",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "description": "(Required) A unique GUID identifying your company, issued alongside your API keys. This value may differ between production and sandbox environments. This is a mandatory header for all application and subject endpoints.",
+                                "key": "Company-ID",
+                                "value": "<uuid>"
+                              },
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"rentalDetails\": {\n    \"priceShare\": \"<number>\",\n    \"affordabilityRatio\": \"<number>\"\n  },\n  \"context\": {\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"email\": \"<string>\",\n    \"product\": \"None\",\n    \"mobile\": \"<string>\",\n    \"redirectUrlOnJourneyComplete\": \"<string>\",\n    \"tenancyRenewal\": \"<boolean>\",\n    \"idvt\": \"NotRequired\",\n    \"pepSanctions\": \"NotRequired\",\n    \"communicationPreferences\": {\n      \"sendInitialTenantEmail\": \"<boolean>\",\n      \"disableRentProtectionComms\": \"<boolean>\",\n      \"disableTCLIComms\": \"<boolean>\",\n      \"disableTenancyServicesComms\": \"<boolean>\"\n    },\n    \"company\": {\n      \"name\": \"<string>\",\n      \"companyNumber\": \"<string>\"\n    },\n    \"guarantorCollection\": {\n      \"required\": \"<boolean>\",\n      \"product\": \"Essential\",\n      \"affordabilityRatio\": \"<number>\"\n    }\n  },\n  \"type\": \"guarantor\",\n  \"attachedSubjects\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"externalId\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/referencing/subject/application/:applicationId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "referencing",
+                                "subject",
+                                "application",
+                                ":applicationId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "applicationId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"reason\": \"<string>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"reason\": \"<string>\",\n      \"description\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-10-21T19:51:02.000Z",
+                          "updatedAt": "2026-10-21T19:51:02.000Z",
+                          "uid": "35240-998a9572-22ee-490b-b406-65c6165709c1"
+                        },
+                        {
+                          "id": "6b832322-b818-41b4-b193-950568cb2a04",
+                          "name": "Not Found",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "description": "(Required) A unique GUID identifying your company, issued alongside your API keys. This value may differ between production and sandbox environments. This is a mandatory header for all application and subject endpoints.",
+                                "key": "Company-ID",
+                                "value": "<uuid>"
+                              },
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"rentalDetails\": {\n    \"priceShare\": \"<number>\",\n    \"affordabilityRatio\": \"<number>\"\n  },\n  \"context\": {\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"email\": \"<string>\",\n    \"product\": \"None\",\n    \"mobile\": \"<string>\",\n    \"redirectUrlOnJourneyComplete\": \"<string>\",\n    \"tenancyRenewal\": \"<boolean>\",\n    \"idvt\": \"NotRequired\",\n    \"pepSanctions\": \"NotRequired\",\n    \"communicationPreferences\": {\n      \"sendInitialTenantEmail\": \"<boolean>\",\n      \"disableRentProtectionComms\": \"<boolean>\",\n      \"disableTCLIComms\": \"<boolean>\",\n      \"disableTenancyServicesComms\": \"<boolean>\"\n    },\n    \"company\": {\n      \"name\": \"<string>\",\n      \"companyNumber\": \"<string>\"\n    },\n    \"guarantorCollection\": {\n      \"required\": \"<boolean>\",\n      \"product\": \"Essential\",\n      \"affordabilityRatio\": \"<number>\"\n    }\n  },\n  \"type\": \"guarantor\",\n  \"attachedSubjects\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"externalId\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/referencing/subject/application/:applicationId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "referencing",
+                                "subject",
+                                "application",
+                                ":applicationId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "applicationId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-10-21T19:51:02.000Z",
+                          "updatedAt": "2026-10-21T19:51:02.000Z",
+                          "uid": "35240-6b832322-b818-41b4-b193-950568cb2a04"
+                        },
+                        {
+                          "id": "afd37b20-1c4b-4dde-aff5-2b2682ef27b3",
+                          "name": "Internal Server Error",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "description": "(Required) A unique GUID identifying your company, issued alongside your API keys. This value may differ between production and sandbox environments. This is a mandatory header for all application and subject endpoints.",
+                                "key": "Company-ID",
+                                "value": "<uuid>"
+                              },
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"rentalDetails\": {\n    \"priceShare\": \"<number>\",\n    \"affordabilityRatio\": \"<number>\"\n  },\n  \"context\": {\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"email\": \"<string>\",\n    \"product\": \"None\",\n    \"mobile\": \"<string>\",\n    \"redirectUrlOnJourneyComplete\": \"<string>\",\n    \"tenancyRenewal\": \"<boolean>\",\n    \"idvt\": \"NotRequired\",\n    \"pepSanctions\": \"NotRequired\",\n    \"communicationPreferences\": {\n      \"sendInitialTenantEmail\": \"<boolean>\",\n      \"disableRentProtectionComms\": \"<boolean>\",\n      \"disableTCLIComms\": \"<boolean>\",\n      \"disableTenancyServicesComms\": \"<boolean>\"\n    },\n    \"company\": {\n      \"name\": \"<string>\",\n      \"companyNumber\": \"<string>\"\n    },\n    \"guarantorCollection\": {\n      \"required\": \"<boolean>\",\n      \"product\": \"Essential\",\n      \"affordabilityRatio\": \"<number>\"\n    }\n  },\n  \"type\": \"guarantor\",\n  \"attachedSubjects\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"externalId\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/referencing/subject/application/:applicationId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "referencing",
+                                "subject",
+                                "application",
+                                ":applicationId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "applicationId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-10-21T19:51:02.000Z",
+                          "updatedAt": "2026-10-21T19:51:02.000Z",
+                          "uid": "35240-afd37b20-1c4b-4dde-aff5-2b2682ef27b3"
+                        }
+                      ],
+                      "createdAt": "2026-10-21T19:51:02.000Z",
+                      "updatedAt": "2026-10-21T19:51:02.000Z",
+                      "uid": "35240-43c6c508-7620-4b13-8582-fc8faf753001"
+                    }
+                  ],
+                  "id": "8a4f142e-0089-4fdb-a327-7a5f8c60b020",
+                  "createdAt": "2026-10-21T19:51:02.000Z",
+                  "updatedAt": "2026-10-21T19:51:02.000Z",
+                  "uid": "35240-8a4f142e-0089-4fdb-a327-7a5f8c60b020"
+                }
+              ],
+              "id": "92f7cab9-c988-410b-a632-0f12e8bd6f2b",
+              "createdAt": "2026-10-21T19:51:02.000Z",
+              "updatedAt": "2026-10-21T19:51:02.000Z",
+              "uid": "35240-92f7cab9-c988-410b-a632-0f12e8bd6f2b"
+            }
+          ],
+          "id": "5a14d2ab-3d47-432d-a90d-1dd1f4eadc50",
+          "createdAt": "2026-10-21T19:51:02.000Z",
+          "updatedAt": "2026-10-21T19:51:02.000Z",
+          "uid": "35240-5a14d2ab-3d47-432d-a90d-1dd1f4eadc50"
+        }
+      ],
+      "id": "a3105622-5771-4d3e-908c-f789f0c41eb5",
+      "createdAt": "2026-10-21T19:51:02.000Z",
+      "updatedAt": "2026-10-21T19:51:02.000Z",
+      "uid": "35240-a3105622-5771-4d3e-908c-f789f0c41eb5"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "accessTokenUrl",
+        "value": "https://api.goodoverlord.com/auth/token",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "client_credentials",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.goodoverlord.com"
+    }
+  ]
+}

@@ -1,0 +1,156 @@
+{
+  "info": {
+    "_postman_id": "22be9f4a-c112-47cf-9a54-f238fc39a7fa",
+    "name": "Referencing Authentication API",
+    "description": "Here you can find the Public API information of the Goodlord Referencing product. This API will allow you to create rental applications, assess Applicants and Guarantors through the rental process and manage them along the way.\n\nContact Support:\n Name: Goodlord\n Email: devs@vouch.co.uk",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T19:49:51.000Z",
+    "updatedAt": "2026-10-21T19:49:51.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-22be9f4a-c112-47cf-9a54-f238fc39a7fa"
+  },
+  "item": [
+    {
+      "name": "auth",
+      "item": [
+        {
+          "name": "token",
+          "item": [
+            {
+              "name": "Obtain a JWT token",
+              "id": "ae8fc368-d5e8-4887-850b-7a10575c1445",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"client_id\": \"<string>\",\n  \"client_secret\": \"<string>\",\n  \"grant_type\": \"client_credentials\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/auth/token",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "token"
+                  ]
+                },
+                "description": "Obtain a JWT token to authenticate your requests.\nThe `access_token` property of the response contains the Bearer token that should be included in the Authorization header of all requests to the API.\nIt is recommended to use the `expires_in` property to determine when the token will expire and to request a new token before it expires."
+              },
+              "response": [
+                {
+                  "id": "89c0d674-f02c-4ecb-a26d-d554c93612cb",
+                  "name": "Successful operation",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"client_id\": \"<string>\",\n  \"client_secret\": \"<string>\",\n  \"grant_type\": \"client_credentials\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/auth/token",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "auth",
+                        "token"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"access_token\": \"<string>\",\n  \"scope\": \"<string>\",\n  \"expires_in\": \"<number>\",\n  \"token_type\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T19:49:51.000Z",
+                  "updatedAt": "2026-10-21T19:49:51.000Z",
+                  "uid": "35240-89c0d674-f02c-4ecb-a26d-d554c93612cb"
+                }
+              ],
+              "createdAt": "2026-10-21T19:49:51.000Z",
+              "updatedAt": "2026-10-21T19:49:51.000Z",
+              "uid": "35240-ae8fc368-d5e8-4887-850b-7a10575c1445"
+            }
+          ],
+          "id": "5a00ec97-5ef8-4a0e-a8c5-08de65c4a2b3",
+          "createdAt": "2026-10-21T19:49:51.000Z",
+          "updatedAt": "2026-10-21T19:49:51.000Z",
+          "uid": "35240-5a00ec97-5ef8-4a0e-a8c5-08de65c4a2b3"
+        }
+      ],
+      "id": "e538a12a-d606-4f28-a613-576807b6b648",
+      "createdAt": "2026-10-21T19:49:51.000Z",
+      "updatedAt": "2026-10-21T19:49:51.000Z",
+      "uid": "35240-e538a12a-d606-4f28-a613-576807b6b648"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "accessTokenUrl",
+        "value": "https://api.goodoverlord.com/auth/token",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "client_credentials",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.goodoverlord.com"
+    }
+  ]
+}

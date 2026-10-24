@@ -1,0 +1,1263 @@
+{
+  "info": {
+    "_postman_id": "67bec143-48ed-4eb6-9dd3-f435a0509306",
+    "name": "Insurance App Role API",
+    "description": "Resource 'Role' operations.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T19:50:49.000Z",
+    "updatedAt": "2026-10-21T19:50:49.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-67bec143-48ed-4eb6-9dd3-f435a0509306"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "roles",
+              "item": [
+                {
+                  "name": "{id}",
+                  "item": [
+                    {
+                      "name": "Retrieves a Role resource",
+                      "id": "b9aa29b3-04aa-44bd-8a17-fcb741c0b3e7",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/roles/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "roles",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "985a1785-4235-4fc9-a1bd-c24061de32d3",
+                              "key": "id",
+                              "value": "<string>",
+                              "description": "(Required) Role identifier"
+                            }
+                          ]
+                        },
+                        "description": "Retrieves a Role resource."
+                      },
+                      "response": [
+                        {
+                          "id": "970276ad-1aec-43ec-a788-6f6d2bfec9e9",
+                          "name": "Role resource",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/vnd.api+json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/roles/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "roles",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"name\": \"ROLE_YEPZ\",\n  \"roleGroups\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"id\": \"<uuid>\",\n  \"deletedAt\": \"<string,null-date-time>\",\n  \"logContext\": [\n    \"<string,null>\",\n    \"<string,null>\"\n  ],\n  \"deleted\": \"<boolean>\"\n}",
+                          "createdAt": "2026-10-21T19:50:49.000Z",
+                          "updatedAt": "2026-10-21T19:50:49.000Z",
+                          "uid": "35240-970276ad-1aec-43ec-a788-6f6d2bfec9e9"
+                        },
+                        {
+                          "id": "fc33adab-a66e-4df7-8c93-bd370ed9a2bb",
+                          "name": "Forbidden",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/vnd.api+json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/roles/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "roles",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string,null>\",\n  \"title\": \"<string,null>\",\n  \"detail\": \"<string,null>\",\n  \"status\": 400,\n  \"instance\": \"<string,null>\",\n  \"type\": \"<string>\",\n  \"meta\": {},\n  \"source\": {\n    \"pointer\": \"<string>\",\n    \"parameter\": \"<string>\",\n    \"header\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-10-21T19:50:49.000Z",
+                          "updatedAt": "2026-10-21T19:50:49.000Z",
+                          "uid": "35240-fc33adab-a66e-4df7-8c93-bd370ed9a2bb"
+                        },
+                        {
+                          "id": "239a7248-9669-40c3-b232-8ce21ea098f6",
+                          "name": "Not found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/vnd.api+json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/roles/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "roles",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string,null>\",\n  \"title\": \"<string,null>\",\n  \"detail\": \"<string,null>\",\n  \"status\": 400,\n  \"instance\": \"<string,null>\",\n  \"type\": \"<string>\",\n  \"meta\": {},\n  \"source\": {\n    \"pointer\": \"<string>\",\n    \"parameter\": \"<string>\",\n    \"header\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-10-21T19:50:49.000Z",
+                          "updatedAt": "2026-10-21T19:50:49.000Z",
+                          "uid": "35240-239a7248-9669-40c3-b232-8ce21ea098f6"
+                        }
+                      ],
+                      "createdAt": "2026-10-21T19:50:49.000Z",
+                      "updatedAt": "2026-10-21T19:50:49.000Z",
+                      "uid": "35240-b9aa29b3-04aa-44bd-8a17-fcb741c0b3e7"
+                    },
+                    {
+                      "name": "Removes the Role resource",
+                      "id": "f3d590e5-7a77-4055-93b0-0e6c7eee799d",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/roles/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "roles",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "fd14de5b-ae3c-4e43-9ca9-bbbd553bd244",
+                              "key": "id",
+                              "value": "<string>",
+                              "description": "(Required) Role identifier"
+                            }
+                          ]
+                        },
+                        "description": "Removes the Role resource."
+                      },
+                      "response": [
+                        {
+                          "id": "25063814-6bd2-482e-9635-5c89d4234678",
+                          "name": "Role resource deleted",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/roles/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "roles",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "No Content",
+                          "code": 204,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-10-21T19:50:49.000Z",
+                          "updatedAt": "2026-10-21T19:50:49.000Z",
+                          "uid": "35240-25063814-6bd2-482e-9635-5c89d4234678"
+                        },
+                        {
+                          "id": "58cef954-2223-4b3c-82f3-2f93680569ab",
+                          "name": "Forbidden",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/vnd.api+json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/roles/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "roles",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string,null>\",\n  \"title\": \"<string,null>\",\n  \"detail\": \"<string,null>\",\n  \"status\": 400,\n  \"instance\": \"<string,null>\",\n  \"type\": \"<string>\",\n  \"meta\": {},\n  \"source\": {\n    \"pointer\": \"<string>\",\n    \"parameter\": \"<string>\",\n    \"header\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-10-21T19:50:49.000Z",
+                          "updatedAt": "2026-10-21T19:50:49.000Z",
+                          "uid": "35240-58cef954-2223-4b3c-82f3-2f93680569ab"
+                        },
+                        {
+                          "id": "f71aa809-6896-4f1c-b93f-4251257eecd6",
+                          "name": "Not found",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/vnd.api+json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/roles/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "roles",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string,null>\",\n  \"title\": \"<string,null>\",\n  \"detail\": \"<string,null>\",\n  \"status\": 400,\n  \"instance\": \"<string,null>\",\n  \"type\": \"<string>\",\n  \"meta\": {},\n  \"source\": {\n    \"pointer\": \"<string>\",\n    \"parameter\": \"<string>\",\n    \"header\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-10-21T19:50:49.000Z",
+                          "updatedAt": "2026-10-21T19:50:49.000Z",
+                          "uid": "35240-f71aa809-6896-4f1c-b93f-4251257eecd6"
+                        }
+                      ],
+                      "createdAt": "2026-10-21T19:50:49.000Z",
+                      "updatedAt": "2026-10-21T19:50:49.000Z",
+                      "uid": "35240-f3d590e5-7a77-4055-93b0-0e6c7eee799d"
+                    },
+                    {
+                      "name": "Updates the Role resource",
+                      "id": "aad66b41-f7b4-4527-8897-33a2ccae069f",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/vnd.api+json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"ROLE_A_JQVD_I\",\n      \"roleGroups\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"id\": \"<uuid>\",\n      \"deletedAt\": \"<string,null-date-time>\",\n      \"logContext\": [\n        \"<string,null>\",\n        \"<string,null>\"\n      ],\n      \"deleted\": \"<boolean>\"\n    },\n    \"relationships\": {\n      \"roleGroups\": {\n        \"data\": [\n          {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\"\n          },\n          {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\"\n          }\n        ]\n      }\n    }\n  },\n  \"included\": [\n    {\n      \"data\": {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"attributes\": {\n          \"name\": \"<string>\",\n          \"roles\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"id\": \"<uuid>\",\n          \"deletedAt\": \"<string,null-date-time>\",\n          \"admin\": \"<boolean>\",\n          \"agent\": \"<boolean>\",\n          \"logContext\": [\n            \"<string,null>\",\n            \"<string,null>\"\n          ],\n          \"deleted\": \"<boolean>\"\n        },\n        \"relationships\": {\n          \"roles\": {\n            \"data\": [\n              {\n                \"type\": \"<string>\",\n                \"id\": \"<string>\"\n              },\n              {\n                \"type\": \"<string>\",\n                \"id\": \"<string>\"\n              }\n            ]\n          }\n        }\n      },\n      \"included\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Role.jsonapi detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Role.jsonapi detected>\"\n        }\n      ]\n    },\n    {\n      \"data\": {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"attributes\": {\n          \"name\": \"<string>\",\n          \"roles\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"id\": \"<uuid>\",\n          \"deletedAt\": \"<string,null-date-time>\",\n          \"admin\": \"<boolean>\",\n          \"agent\": \"<boolean>\",\n          \"logContext\": [\n            \"<string,null>\",\n            \"<string,null>\"\n          ],\n          \"deleted\": \"<boolean>\"\n        },\n        \"relationships\": {\n          \"roles\": {\n            \"data\": [\n              {\n                \"type\": \"<string>\",\n                \"id\": \"<string>\"\n              },\n              {\n                \"type\": \"<string>\",\n                \"id\": \"<string>\"\n              }\n            ]\n          }\n        }\n      },\n      \"included\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Role.jsonapi detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Role.jsonapi detected>\"\n        }\n      ]\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/roles/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "roles",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "dbd28e55-2e69-4d4d-9c73-15e3cf458a7e",
+                              "key": "id",
+                              "value": "<string>",
+                              "description": "(Required) Role identifier"
+                            }
+                          ]
+                        },
+                        "description": "Updates the Role resource."
+                      },
+                      "response": [
+                        {
+                          "id": "b4045421-9b69-495f-8a26-843830bf4473",
+                          "name": "Role resource updated",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/vnd.api+json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/vnd.api+json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"ROLE_A_JQVD_I\",\n      \"roleGroups\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"id\": \"<uuid>\",\n      \"deletedAt\": \"<string,null-date-time>\",\n      \"logContext\": [\n        \"<string,null>\",\n        \"<string,null>\"\n      ],\n      \"deleted\": \"<boolean>\"\n    },\n    \"relationships\": {\n      \"roleGroups\": {\n        \"data\": [\n          {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\"\n          },\n          {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\"\n          }\n        ]\n      }\n    }\n  },\n  \"included\": [\n    {\n      \"data\": {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"attributes\": {\n          \"name\": \"<string>\",\n          \"roles\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"id\": \"<uuid>\",\n          \"deletedAt\": \"<string,null-date-time>\",\n          \"admin\": \"<boolean>\",\n          \"agent\": \"<boolean>\",\n          \"logContext\": [\n            \"<string,null>\",\n            \"<string,null>\"\n          ],\n          \"deleted\": \"<boolean>\"\n        },\n        \"relationships\": {\n          \"roles\": {\n            \"data\": [\n              {\n                \"type\": \"<string>\",\n                \"id\": \"<string>\"\n              },\n              {\n                \"type\": \"<string>\",\n                \"id\": \"<string>\"\n              }\n            ]\n          }\n        }\n      },\n      \"included\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Role.jsonapi detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Role.jsonapi detected>\"\n        }\n      ]\n    },\n    {\n      \"data\": {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"attributes\": {\n          \"name\": \"<string>\",\n          \"roles\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"id\": \"<uuid>\",\n          \"deletedAt\": \"<string,null-date-time>\",\n          \"admin\": \"<boolean>\",\n          \"agent\": \"<boolean>\",\n          \"logContext\": [\n            \"<string,null>\",\n            \"<string,null>\"\n          ],\n          \"deleted\": \"<boolean>\"\n        },\n        \"relationships\": {\n          \"roles\": {\n            \"data\": [\n              {\n                \"type\": \"<string>\",\n                \"id\": \"<string>\"\n              },\n              {\n                \"type\": \"<string>\",\n                \"id\": \"<string>\"\n              }\n            ]\n          }\n        }\n      },\n      \"included\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Role.jsonapi detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Role.jsonapi detected>\"\n        }\n      ]\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/roles/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "roles",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"name\": \"ROLE_YEPZ\",\n  \"roleGroups\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"id\": \"<uuid>\",\n  \"deletedAt\": \"<string,null-date-time>\",\n  \"logContext\": [\n    \"<string,null>\",\n    \"<string,null>\"\n  ],\n  \"deleted\": \"<boolean>\"\n}",
+                          "createdAt": "2026-10-21T19:50:49.000Z",
+                          "updatedAt": "2026-10-21T19:50:49.000Z",
+                          "uid": "35240-b4045421-9b69-495f-8a26-843830bf4473"
+                        },
+                        {
+                          "id": "88923860-b692-4621-9678-2b82acf348a5",
+                          "name": "Invalid input",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/vnd.api+json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/vnd.api+json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"ROLE_A_JQVD_I\",\n      \"roleGroups\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"id\": \"<uuid>\",\n      \"deletedAt\": \"<string,null-date-time>\",\n      \"logContext\": [\n        \"<string,null>\",\n        \"<string,null>\"\n      ],\n      \"deleted\": \"<boolean>\"\n    },\n    \"relationships\": {\n      \"roleGroups\": {\n        \"data\": [\n          {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\"\n          },\n          {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\"\n          }\n        ]\n      }\n    }\n  },\n  \"included\": [\n    {\n      \"data\": {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"attributes\": {\n          \"name\": \"<string>\",\n          \"roles\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"id\": \"<uuid>\",\n          \"deletedAt\": \"<string,null-date-time>\",\n          \"admin\": \"<boolean>\",\n          \"agent\": \"<boolean>\",\n          \"logContext\": [\n            \"<string,null>\",\n            \"<string,null>\"\n          ],\n          \"deleted\": \"<boolean>\"\n        },\n        \"relationships\": {\n          \"roles\": {\n            \"data\": [\n              {\n                \"type\": \"<string>\",\n                \"id\": \"<string>\"\n              },\n              {\n                \"type\": \"<string>\",\n                \"id\": \"<string>\"\n              }\n            ]\n          }\n        }\n      },\n      \"included\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Role.jsonapi detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Role.jsonapi detected>\"\n        }\n      ]\n    },\n    {\n      \"data\": {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"attributes\": {\n          \"name\": \"<string>\",\n          \"roles\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"id\": \"<uuid>\",\n          \"deletedAt\": \"<string,null-date-time>\",\n          \"admin\": \"<boolean>\",\n          \"agent\": \"<boolean>\",\n          \"logContext\": [\n            \"<string,null>\",\n            \"<string,null>\"\n          ],\n          \"deleted\": \"<boolean>\"\n        },\n        \"relationships\": {\n          \"roles\": {\n            \"data\": [\n              {\n                \"type\": \"<string>\",\n                \"id\": \"<string>\"\n              },\n              {\n                \"type\": \"<string>\",\n                \"id\": \"<string>\"\n              }\n            ]\n          }\n        }\n      },\n      \"included\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Role.jsonapi detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Role.jsonapi detected>\"\n        }\n      ]\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/roles/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "roles",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string,null>\",\n  \"title\": \"<string,null>\",\n  \"detail\": \"<string,null>\",\n  \"status\": 400,\n  \"instance\": \"<string,null>\",\n  \"type\": \"<string>\",\n  \"meta\": {},\n  \"source\": {\n    \"pointer\": \"<string>\",\n    \"parameter\": \"<string>\",\n    \"header\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-10-21T19:50:49.000Z",
+                          "updatedAt": "2026-10-21T19:50:49.000Z",
+                          "uid": "35240-88923860-b692-4621-9678-2b82acf348a5"
+                        },
+                        {
+                          "id": "9e9b69bf-7f2e-4958-b36a-744a559041bb",
+                          "name": "Forbidden",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/vnd.api+json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/vnd.api+json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"ROLE_A_JQVD_I\",\n      \"roleGroups\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"id\": \"<uuid>\",\n      \"deletedAt\": \"<string,null-date-time>\",\n      \"logContext\": [\n        \"<string,null>\",\n        \"<string,null>\"\n      ],\n      \"deleted\": \"<boolean>\"\n    },\n    \"relationships\": {\n      \"roleGroups\": {\n        \"data\": [\n          {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\"\n          },\n          {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\"\n          }\n        ]\n      }\n    }\n  },\n  \"included\": [\n    {\n      \"data\": {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"attributes\": {\n          \"name\": \"<string>\",\n          \"roles\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"id\": \"<uuid>\",\n          \"deletedAt\": \"<string,null-date-time>\",\n          \"admin\": \"<boolean>\",\n          \"agent\": \"<boolean>\",\n          \"logContext\": [\n            \"<string,null>\",\n            \"<string,null>\"\n          ],\n          \"deleted\": \"<boolean>\"\n        },\n        \"relationships\": {\n          \"roles\": {\n            \"data\": [\n              {\n                \"type\": \"<string>\",\n                \"id\": \"<string>\"\n              },\n              {\n                \"type\": \"<string>\",\n                \"id\": \"<string>\"\n              }\n            ]\n          }\n        }\n      },\n      \"included\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Role.jsonapi detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Role.jsonapi detected>\"\n        }\n      ]\n    },\n    {\n      \"data\": {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"attributes\": {\n          \"name\": \"<string>\",\n          \"roles\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"id\": \"<uuid>\",\n          \"deletedAt\": \"<string,null-date-time>\",\n          \"admin\": \"<boolean>\",\n          \"agent\": \"<boolean>\",\n          \"logContext\": [\n            \"<string,null>\",\n            \"<string,null>\"\n          ],\n          \"deleted\": \"<boolean>\"\n        },\n        \"relationships\": {\n          \"roles\": {\n            \"data\": [\n              {\n                \"type\": \"<string>\",\n                \"id\": \"<string>\"\n              },\n              {\n                \"type\": \"<string>\",\n                \"id\": \"<string>\"\n              }\n            ]\n          }\n        }\n      },\n      \"included\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Role.jsonapi detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Role.jsonapi detected>\"\n        }\n      ]\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/roles/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "roles",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string,null>\",\n  \"title\": \"<string,null>\",\n  \"detail\": \"<string,null>\",\n  \"status\": 400,\n  \"instance\": \"<string,null>\",\n  \"type\": \"<string>\",\n  \"meta\": {},\n  \"source\": {\n    \"pointer\": \"<string>\",\n    \"parameter\": \"<string>\",\n    \"header\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-10-21T19:50:49.000Z",
+                          "updatedAt": "2026-10-21T19:50:49.000Z",
+                          "uid": "35240-9e9b69bf-7f2e-4958-b36a-744a559041bb"
+                        },
+                        {
+                          "id": "226bffd9-a51f-410f-ac46-f14cf40effc9",
+                          "name": "Not found",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/vnd.api+json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/vnd.api+json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"ROLE_A_JQVD_I\",\n      \"roleGroups\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"id\": \"<uuid>\",\n      \"deletedAt\": \"<string,null-date-time>\",\n      \"logContext\": [\n        \"<string,null>\",\n        \"<string,null>\"\n      ],\n      \"deleted\": \"<boolean>\"\n    },\n    \"relationships\": {\n      \"roleGroups\": {\n        \"data\": [\n          {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\"\n          },\n          {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\"\n          }\n        ]\n      }\n    }\n  },\n  \"included\": [\n    {\n      \"data\": {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"attributes\": {\n          \"name\": \"<string>\",\n          \"roles\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"id\": \"<uuid>\",\n          \"deletedAt\": \"<string,null-date-time>\",\n          \"admin\": \"<boolean>\",\n          \"agent\": \"<boolean>\",\n          \"logContext\": [\n            \"<string,null>\",\n            \"<string,null>\"\n          ],\n          \"deleted\": \"<boolean>\"\n        },\n        \"relationships\": {\n          \"roles\": {\n            \"data\": [\n              {\n                \"type\": \"<string>\",\n                \"id\": \"<string>\"\n              },\n              {\n                \"type\": \"<string>\",\n                \"id\": \"<string>\"\n              }\n            ]\n          }\n        }\n      },\n      \"included\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Role.jsonapi detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Role.jsonapi detected>\"\n        }\n      ]\n    },\n    {\n      \"data\": {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"attributes\": {\n          \"name\": \"<string>\",\n          \"roles\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"id\": \"<uuid>\",\n          \"deletedAt\": \"<string,null-date-time>\",\n          \"admin\": \"<boolean>\",\n          \"agent\": \"<boolean>\",\n          \"logContext\": [\n            \"<string,null>\",\n            \"<string,null>\"\n          ],\n          \"deleted\": \"<boolean>\"\n        },\n        \"relationships\": {\n          \"roles\": {\n            \"data\": [\n              {\n                \"type\": \"<string>\",\n                \"id\": \"<string>\"\n              },\n              {\n                \"type\": \"<string>\",\n                \"id\": \"<string>\"\n              }\n            ]\n          }\n        }\n      },\n      \"included\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Role.jsonapi detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Role.jsonapi detected>\"\n        }\n      ]\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/roles/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "roles",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string,null>\",\n  \"title\": \"<string,null>\",\n  \"detail\": \"<string,null>\",\n  \"status\": 400,\n  \"instance\": \"<string,null>\",\n  \"type\": \"<string>\",\n  \"meta\": {},\n  \"source\": {\n    \"pointer\": \"<string>\",\n    \"parameter\": \"<string>\",\n    \"header\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-10-21T19:50:49.000Z",
+                          "updatedAt": "2026-10-21T19:50:49.000Z",
+                          "uid": "35240-226bffd9-a51f-410f-ac46-f14cf40effc9"
+                        },
+                        {
+                          "id": "ebee6369-dcb3-4ecc-93d9-720d85967b94",
+                          "name": "An error occurred",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/vnd.api+json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/vnd.api+json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"name\": \"ROLE_A_JQVD_I\",\n      \"roleGroups\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"id\": \"<uuid>\",\n      \"deletedAt\": \"<string,null-date-time>\",\n      \"logContext\": [\n        \"<string,null>\",\n        \"<string,null>\"\n      ],\n      \"deleted\": \"<boolean>\"\n    },\n    \"relationships\": {\n      \"roleGroups\": {\n        \"data\": [\n          {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\"\n          },\n          {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\"\n          }\n        ]\n      }\n    }\n  },\n  \"included\": [\n    {\n      \"data\": {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"attributes\": {\n          \"name\": \"<string>\",\n          \"roles\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"id\": \"<uuid>\",\n          \"deletedAt\": \"<string,null-date-time>\",\n          \"admin\": \"<boolean>\",\n          \"agent\": \"<boolean>\",\n          \"logContext\": [\n            \"<string,null>\",\n            \"<string,null>\"\n          ],\n          \"deleted\": \"<boolean>\"\n        },\n        \"relationships\": {\n          \"roles\": {\n            \"data\": [\n              {\n                \"type\": \"<string>\",\n                \"id\": \"<string>\"\n              },\n              {\n                \"type\": \"<string>\",\n                \"id\": \"<string>\"\n              }\n            ]\n          }\n        }\n      },\n      \"included\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Role.jsonapi detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Role.jsonapi detected>\"\n        }\n      ]\n    },\n    {\n      \"data\": {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"attributes\": {\n          \"name\": \"<string>\",\n          \"roles\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"id\": \"<uuid>\",\n          \"deletedAt\": \"<string,null-date-time>\",\n          \"admin\": \"<boolean>\",\n          \"agent\": \"<boolean>\",\n          \"logContext\": [\n            \"<string,null>\",\n            \"<string,null>\"\n          ],\n          \"deleted\": \"<boolean>\"\n        },\n        \"relationships\": {\n          \"roles\": {\n            \"data\": [\n              {\n                \"type\": \"<string>\",\n                \"id\": \"<string>\"\n              },\n              {\n                \"type\": \"<string>\",\n                \"id\": \"<string>\"\n              }\n            ]\n          }\n        }\n      },\n      \"included\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Role.jsonapi detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Role.jsonapi detected>\"\n        }\n      ]\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/roles/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "roles",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"status\": 422,\n  \"detail\": \"<string>\",\n  \"type\": \"<string>\",\n  \"title\": \"<string,null>\",\n  \"instance\": \"<string,null>\"\n}",
+                          "createdAt": "2026-10-21T19:50:49.000Z",
+                          "updatedAt": "2026-10-21T19:50:49.000Z",
+                          "uid": "35240-ebee6369-dcb3-4ecc-93d9-720d85967b94"
+                        }
+                      ],
+                      "createdAt": "2026-10-21T19:50:49.000Z",
+                      "updatedAt": "2026-10-21T19:50:49.000Z",
+                      "uid": "35240-aad66b41-f7b4-4527-8897-33a2ccae069f"
+                    }
+                  ],
+                  "id": "86d19e4b-6bd8-41e8-99fb-c6b5efd2b814",
+                  "createdAt": "2026-10-21T19:50:49.000Z",
+                  "updatedAt": "2026-10-21T19:50:49.000Z",
+                  "uid": "35240-86d19e4b-6bd8-41e8-99fb-c6b5efd2b814"
+                },
+                {
+                  "name": "Retrieves the collection of Role resources",
+                  "id": "95f4cbd3-24b7-47d0-b7ac-38569960031d",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/v1/roles?page=1&itemsPerPage=50",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "roles"
+                      ],
+                      "query": [
+                        {
+                          "description": "The collection page number",
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "description": "The number of items per page",
+                          "key": "itemsPerPage",
+                          "value": "50"
+                        }
+                      ]
+                    },
+                    "description": "Retrieves the collection of Role resources."
+                  },
+                  "response": [
+                    {
+                      "id": "6302773c-f97f-4ce7-82d8-54d4aa110927",
+                      "name": "Role collection",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/roles?page=1&itemsPerPage=50",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "roles"
+                          ],
+                          "query": [
+                            {
+                              "description": "The collection page number",
+                              "key": "page",
+                              "value": "1"
+                            },
+                            {
+                              "description": "The number of items per page",
+                              "key": "itemsPerPage",
+                              "value": "50"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "[\n  {\n    \"name\": \"ROLE_RWJ_\",\n    \"roleGroups\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"id\": \"<uuid>\",\n    \"deletedAt\": \"<string,null-date-time>\",\n    \"logContext\": [\n      \"<string,null>\",\n      \"<string,null>\"\n    ],\n    \"deleted\": \"<boolean>\"\n  },\n  {\n    \"name\": \"ROLE_MZCJOEQ\",\n    \"roleGroups\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"id\": \"<uuid>\",\n    \"deletedAt\": \"<string,null-date-time>\",\n    \"logContext\": [\n      \"<string,null>\",\n      \"<string,null>\"\n    ],\n    \"deleted\": \"<boolean>\"\n  }\n]",
+                      "createdAt": "2026-10-21T19:50:49.000Z",
+                      "updatedAt": "2026-10-21T19:50:49.000Z",
+                      "uid": "35240-6302773c-f97f-4ce7-82d8-54d4aa110927"
+                    },
+                    {
+                      "id": "dbaacd9d-0fcc-4d7e-854b-65ed98813921",
+                      "name": "Forbidden",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/roles?page=1&itemsPerPage=50",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "roles"
+                          ],
+                          "query": [
+                            {
+                              "description": "The collection page number",
+                              "key": "page",
+                              "value": "1"
+                            },
+                            {
+                              "description": "The number of items per page",
+                              "key": "itemsPerPage",
+                              "value": "50"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string,null>\",\n  \"title\": \"<string,null>\",\n  \"detail\": \"<string,null>\",\n  \"status\": 400,\n  \"instance\": \"<string,null>\",\n  \"type\": \"<string>\",\n  \"meta\": {},\n  \"source\": {\n    \"pointer\": \"<string>\",\n    \"parameter\": \"<string>\",\n    \"header\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-21T19:50:49.000Z",
+                      "updatedAt": "2026-10-21T19:50:49.000Z",
+                      "uid": "35240-dbaacd9d-0fcc-4d7e-854b-65ed98813921"
+                    }
+                  ],
+                  "createdAt": "2026-10-21T19:50:49.000Z",
+                  "updatedAt": "2026-10-21T19:50:49.000Z",
+                  "uid": "35240-95f4cbd3-24b7-47d0-b7ac-38569960031d"
+                },
+                {
+                  "name": "Creates a Role resource",
+                  "id": "b58ab1f6-5bff-4cb4-b486-014b7fdda0fa",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"ROLE_YEPZ\",\n  \"roleGroups\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"id\": \"<uuid>\",\n  \"deletedAt\": \"<string,null-date-time>\",\n  \"logContext\": [\n    \"<string,null>\",\n    \"<string,null>\"\n  ],\n  \"deleted\": \"<boolean>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/v1/roles",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "roles"
+                      ]
+                    },
+                    "description": "Creates a Role resource."
+                  },
+                  "response": [
+                    {
+                      "id": "c2b4a36f-dfe3-463a-b8f5-f89b5c418b45",
+                      "name": "Role resource created",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"ROLE_YEPZ\",\n  \"roleGroups\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"id\": \"<uuid>\",\n  \"deletedAt\": \"<string,null-date-time>\",\n  \"logContext\": [\n    \"<string,null>\",\n    \"<string,null>\"\n  ],\n  \"deleted\": \"<boolean>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/roles",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "roles"
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"name\": \"ROLE_YEPZ\",\n  \"roleGroups\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"id\": \"<uuid>\",\n  \"deletedAt\": \"<string,null-date-time>\",\n  \"logContext\": [\n    \"<string,null>\",\n    \"<string,null>\"\n  ],\n  \"deleted\": \"<boolean>\"\n}",
+                      "createdAt": "2026-10-21T19:50:49.000Z",
+                      "updatedAt": "2026-10-21T19:50:49.000Z",
+                      "uid": "35240-c2b4a36f-dfe3-463a-b8f5-f89b5c418b45"
+                    },
+                    {
+                      "id": "31382743-6bc3-4033-9689-38d77566d26f",
+                      "name": "Invalid input",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"ROLE_YEPZ\",\n  \"roleGroups\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"id\": \"<uuid>\",\n  \"deletedAt\": \"<string,null-date-time>\",\n  \"logContext\": [\n    \"<string,null>\",\n    \"<string,null>\"\n  ],\n  \"deleted\": \"<boolean>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/roles",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "roles"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string,null>\",\n  \"title\": \"<string,null>\",\n  \"detail\": \"<string,null>\",\n  \"status\": 400,\n  \"instance\": \"<string,null>\",\n  \"type\": \"<string>\",\n  \"meta\": {},\n  \"source\": {\n    \"pointer\": \"<string>\",\n    \"parameter\": \"<string>\",\n    \"header\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-21T19:50:49.000Z",
+                      "updatedAt": "2026-10-21T19:50:49.000Z",
+                      "uid": "35240-31382743-6bc3-4033-9689-38d77566d26f"
+                    },
+                    {
+                      "id": "2c3992c6-5b6c-48c8-8e91-4e8098c5f7db",
+                      "name": "Forbidden",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"ROLE_YEPZ\",\n  \"roleGroups\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"id\": \"<uuid>\",\n  \"deletedAt\": \"<string,null-date-time>\",\n  \"logContext\": [\n    \"<string,null>\",\n    \"<string,null>\"\n  ],\n  \"deleted\": \"<boolean>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/roles",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "roles"
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string,null>\",\n  \"title\": \"<string,null>\",\n  \"detail\": \"<string,null>\",\n  \"status\": 400,\n  \"instance\": \"<string,null>\",\n  \"type\": \"<string>\",\n  \"meta\": {},\n  \"source\": {\n    \"pointer\": \"<string>\",\n    \"parameter\": \"<string>\",\n    \"header\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-21T19:50:49.000Z",
+                      "updatedAt": "2026-10-21T19:50:49.000Z",
+                      "uid": "35240-2c3992c6-5b6c-48c8-8e91-4e8098c5f7db"
+                    },
+                    {
+                      "id": "1cf3deae-d6e0-47d2-ae9f-c8449b5d18af",
+                      "name": "An error occurred",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"ROLE_YEPZ\",\n  \"roleGroups\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"id\": \"<uuid>\",\n  \"deletedAt\": \"<string,null-date-time>\",\n  \"logContext\": [\n    \"<string,null>\",\n    \"<string,null>\"\n  ],\n  \"deleted\": \"<boolean>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/roles",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "roles"
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": 422,\n  \"detail\": \"<string>\",\n  \"type\": \"<string>\",\n  \"title\": \"<string,null>\",\n  \"instance\": \"<string,null>\"\n}",
+                      "createdAt": "2026-10-21T19:50:49.000Z",
+                      "updatedAt": "2026-10-21T19:50:49.000Z",
+                      "uid": "35240-1cf3deae-d6e0-47d2-ae9f-c8449b5d18af"
+                    }
+                  ],
+                  "createdAt": "2026-10-21T19:50:49.000Z",
+                  "updatedAt": "2026-10-21T19:50:49.000Z",
+                  "uid": "35240-b58ab1f6-5bff-4cb4-b486-014b7fdda0fa"
+                }
+              ],
+              "id": "dafb384b-46b6-4c32-a2e5-2c6988a97628",
+              "createdAt": "2026-10-21T19:50:49.000Z",
+              "updatedAt": "2026-10-21T19:50:49.000Z",
+              "uid": "35240-dafb384b-46b6-4c32-a2e5-2c6988a97628"
+            }
+          ],
+          "id": "ba21e657-8bb7-42fe-a59f-fe26aaef26cd",
+          "createdAt": "2026-10-21T19:50:49.000Z",
+          "updatedAt": "2026-10-21T19:50:49.000Z",
+          "uid": "35240-ba21e657-8bb7-42fe-a59f-fe26aaef26cd"
+        }
+      ],
+      "id": "3e020e03-7a7f-4a23-b24f-541bfc62cd88",
+      "createdAt": "2026-10-21T19:50:49.000Z",
+      "updatedAt": "2026-10-21T19:50:49.000Z",
+      "uid": "35240-3e020e03-7a7f-4a23-b24f-541bfc62cd88"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://insurance-app.goodlord.co/"
+    }
+  ]
+}

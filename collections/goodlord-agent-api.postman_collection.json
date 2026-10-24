@@ -1,0 +1,1282 @@
+{
+  "info": {
+    "_postman_id": "35d3373d-c498-466f-8245-a16aff70206e",
+    "name": "Insurance App Agent API",
+    "description": "Resource 'Agent' operations.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T19:49:39.000Z",
+    "updatedAt": "2026-10-21T19:49:39.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-35d3373d-c498-466f-8245-a16aff70206e"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "agents",
+              "item": [
+                {
+                  "name": "{id}",
+                  "item": [
+                    {
+                      "name": "Retrieves a Agent resource",
+                      "id": "6daf9cd8-d0af-44f7-b3b0-210b4b1d197c",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/agents/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "agents",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "279de7fe-4e14-4577-9a5f-67505e50c7d2",
+                              "key": "id",
+                              "value": "<string>",
+                              "description": "(Required) Agent identifier"
+                            }
+                          ]
+                        },
+                        "description": "Retrieves a Agent resource."
+                      },
+                      "response": [
+                        {
+                          "id": "84b8c052-cc38-465a-8266-de4a1836d7d1",
+                          "name": "Agent resource",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/vnd.api+json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/agents/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "agents",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string>\",\n  \"email\": \"<string>\",\n  \"roleGroups\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companies\": [\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string,null>\"\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string,null>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-10-21T19:49:39.000Z",
+                          "updatedAt": "2026-10-21T19:49:39.000Z",
+                          "uid": "35240-84b8c052-cc38-465a-8266-de4a1836d7d1"
+                        },
+                        {
+                          "id": "f5d932fd-5769-42e6-a972-e349ce91d121",
+                          "name": "Forbidden",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/vnd.api+json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/agents/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "agents",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string,null>\",\n  \"title\": \"<string,null>\",\n  \"detail\": \"<string,null>\",\n  \"status\": 400,\n  \"instance\": \"<string,null>\",\n  \"type\": \"<string>\",\n  \"meta\": {},\n  \"source\": {\n    \"pointer\": \"<string>\",\n    \"parameter\": \"<string>\",\n    \"header\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-10-21T19:49:39.000Z",
+                          "updatedAt": "2026-10-21T19:49:39.000Z",
+                          "uid": "35240-f5d932fd-5769-42e6-a972-e349ce91d121"
+                        },
+                        {
+                          "id": "50132391-fc84-4c1d-8a86-e3a8f339e0a9",
+                          "name": "Not found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/vnd.api+json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/agents/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "agents",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string,null>\",\n  \"title\": \"<string,null>\",\n  \"detail\": \"<string,null>\",\n  \"status\": 400,\n  \"instance\": \"<string,null>\",\n  \"type\": \"<string>\",\n  \"meta\": {},\n  \"source\": {\n    \"pointer\": \"<string>\",\n    \"parameter\": \"<string>\",\n    \"header\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-10-21T19:49:39.000Z",
+                          "updatedAt": "2026-10-21T19:49:39.000Z",
+                          "uid": "35240-50132391-fc84-4c1d-8a86-e3a8f339e0a9"
+                        }
+                      ],
+                      "createdAt": "2026-10-21T19:49:39.000Z",
+                      "updatedAt": "2026-10-21T19:49:39.000Z",
+                      "uid": "35240-6daf9cd8-d0af-44f7-b3b0-210b4b1d197c"
+                    },
+                    {
+                      "name": "Updates the Agent resource",
+                      "id": "ef103f03-494d-4359-9818-1658126322ab",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/vnd.api+json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"id\": \"<string>\",\n      \"email\": \"<string>\",\n      \"roles\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"roleGroups\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"companies\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"relationships\": {\n      \"companies\": {\n        \"data\": [\n          {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\"\n          },\n          {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\"\n          }\n        ]\n      }\n    }\n  },\n  \"included\": [\n    {\n      \"data\": {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"attributes\": {\n          \"id\": \"<uuid>\",\n          \"name\": \"<string,null>\",\n          \"externalId\": \"<string>\"\n        }\n      }\n    },\n    {\n      \"data\": {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"attributes\": {\n          \"id\": \"<uuid>\",\n          \"name\": \"<string,null>\",\n          \"externalId\": \"<string>\"\n        }\n      }\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/agents/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "agents",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "d3c3d400-8413-495c-a120-64c6156f0891",
+                              "key": "id",
+                              "value": "<string>",
+                              "description": "(Required) Agent identifier"
+                            }
+                          ]
+                        },
+                        "description": "Updates the Agent resource."
+                      },
+                      "response": [
+                        {
+                          "id": "4aafe675-2f5a-4ad7-8913-7aa96a74195a",
+                          "name": "Agent resource updated",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/vnd.api+json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/vnd.api+json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"id\": \"<string>\",\n      \"email\": \"<string>\",\n      \"roles\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"roleGroups\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"companies\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"relationships\": {\n      \"companies\": {\n        \"data\": [\n          {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\"\n          },\n          {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\"\n          }\n        ]\n      }\n    }\n  },\n  \"included\": [\n    {\n      \"data\": {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"attributes\": {\n          \"id\": \"<uuid>\",\n          \"name\": \"<string,null>\",\n          \"externalId\": \"<string>\"\n        }\n      }\n    },\n    {\n      \"data\": {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"attributes\": {\n          \"id\": \"<uuid>\",\n          \"name\": \"<string,null>\",\n          \"externalId\": \"<string>\"\n        }\n      }\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/agents/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "agents",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string>\",\n  \"email\": \"<string>\",\n  \"roles\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"roleGroups\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companies\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "createdAt": "2026-10-21T19:49:39.000Z",
+                          "updatedAt": "2026-10-21T19:49:39.000Z",
+                          "uid": "35240-4aafe675-2f5a-4ad7-8913-7aa96a74195a"
+                        },
+                        {
+                          "id": "005089ae-c20d-48c2-9c41-733228bdfa63",
+                          "name": "Invalid input",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/vnd.api+json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/vnd.api+json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"id\": \"<string>\",\n      \"email\": \"<string>\",\n      \"roles\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"roleGroups\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"companies\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"relationships\": {\n      \"companies\": {\n        \"data\": [\n          {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\"\n          },\n          {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\"\n          }\n        ]\n      }\n    }\n  },\n  \"included\": [\n    {\n      \"data\": {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"attributes\": {\n          \"id\": \"<uuid>\",\n          \"name\": \"<string,null>\",\n          \"externalId\": \"<string>\"\n        }\n      }\n    },\n    {\n      \"data\": {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"attributes\": {\n          \"id\": \"<uuid>\",\n          \"name\": \"<string,null>\",\n          \"externalId\": \"<string>\"\n        }\n      }\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/agents/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "agents",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string,null>\",\n  \"title\": \"<string,null>\",\n  \"detail\": \"<string,null>\",\n  \"status\": 400,\n  \"instance\": \"<string,null>\",\n  \"type\": \"<string>\",\n  \"meta\": {},\n  \"source\": {\n    \"pointer\": \"<string>\",\n    \"parameter\": \"<string>\",\n    \"header\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-10-21T19:49:39.000Z",
+                          "updatedAt": "2026-10-21T19:49:39.000Z",
+                          "uid": "35240-005089ae-c20d-48c2-9c41-733228bdfa63"
+                        },
+                        {
+                          "id": "a0b7bf23-ffa0-491e-8f31-4a1cd7a1d29e",
+                          "name": "Forbidden",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/vnd.api+json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/vnd.api+json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"id\": \"<string>\",\n      \"email\": \"<string>\",\n      \"roles\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"roleGroups\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"companies\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"relationships\": {\n      \"companies\": {\n        \"data\": [\n          {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\"\n          },\n          {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\"\n          }\n        ]\n      }\n    }\n  },\n  \"included\": [\n    {\n      \"data\": {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"attributes\": {\n          \"id\": \"<uuid>\",\n          \"name\": \"<string,null>\",\n          \"externalId\": \"<string>\"\n        }\n      }\n    },\n    {\n      \"data\": {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"attributes\": {\n          \"id\": \"<uuid>\",\n          \"name\": \"<string,null>\",\n          \"externalId\": \"<string>\"\n        }\n      }\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/agents/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "agents",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string,null>\",\n  \"title\": \"<string,null>\",\n  \"detail\": \"<string,null>\",\n  \"status\": 400,\n  \"instance\": \"<string,null>\",\n  \"type\": \"<string>\",\n  \"meta\": {},\n  \"source\": {\n    \"pointer\": \"<string>\",\n    \"parameter\": \"<string>\",\n    \"header\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-10-21T19:49:39.000Z",
+                          "updatedAt": "2026-10-21T19:49:39.000Z",
+                          "uid": "35240-a0b7bf23-ffa0-491e-8f31-4a1cd7a1d29e"
+                        },
+                        {
+                          "id": "d5917093-6285-48c2-aaff-7558896793a7",
+                          "name": "Not found",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/vnd.api+json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/vnd.api+json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"id\": \"<string>\",\n      \"email\": \"<string>\",\n      \"roles\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"roleGroups\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"companies\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"relationships\": {\n      \"companies\": {\n        \"data\": [\n          {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\"\n          },\n          {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\"\n          }\n        ]\n      }\n    }\n  },\n  \"included\": [\n    {\n      \"data\": {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"attributes\": {\n          \"id\": \"<uuid>\",\n          \"name\": \"<string,null>\",\n          \"externalId\": \"<string>\"\n        }\n      }\n    },\n    {\n      \"data\": {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"attributes\": {\n          \"id\": \"<uuid>\",\n          \"name\": \"<string,null>\",\n          \"externalId\": \"<string>\"\n        }\n      }\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/agents/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "agents",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string,null>\",\n  \"title\": \"<string,null>\",\n  \"detail\": \"<string,null>\",\n  \"status\": 400,\n  \"instance\": \"<string,null>\",\n  \"type\": \"<string>\",\n  \"meta\": {},\n  \"source\": {\n    \"pointer\": \"<string>\",\n    \"parameter\": \"<string>\",\n    \"header\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-10-21T19:49:39.000Z",
+                          "updatedAt": "2026-10-21T19:49:39.000Z",
+                          "uid": "35240-d5917093-6285-48c2-aaff-7558896793a7"
+                        },
+                        {
+                          "id": "2d2f005d-33e7-4ef8-806b-139e8565ca63",
+                          "name": "An error occurred",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/vnd.api+json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/vnd.api+json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"id\": \"<string>\",\n      \"email\": \"<string>\",\n      \"roles\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"roleGroups\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"companies\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"relationships\": {\n      \"companies\": {\n        \"data\": [\n          {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\"\n          },\n          {\n            \"type\": \"<string>\",\n            \"id\": \"<string>\"\n          }\n        ]\n      }\n    }\n  },\n  \"included\": [\n    {\n      \"data\": {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"attributes\": {\n          \"id\": \"<uuid>\",\n          \"name\": \"<string,null>\",\n          \"externalId\": \"<string>\"\n        }\n      }\n    },\n    {\n      \"data\": {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"attributes\": {\n          \"id\": \"<uuid>\",\n          \"name\": \"<string,null>\",\n          \"externalId\": \"<string>\"\n        }\n      }\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/agents/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "agents",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"status\": 422,\n  \"detail\": \"<string>\",\n  \"type\": \"<string>\",\n  \"title\": \"<string,null>\",\n  \"instance\": \"<string,null>\"\n}",
+                          "createdAt": "2026-10-21T19:49:39.000Z",
+                          "updatedAt": "2026-10-21T19:49:39.000Z",
+                          "uid": "35240-2d2f005d-33e7-4ef8-806b-139e8565ca63"
+                        }
+                      ],
+                      "createdAt": "2026-10-21T19:49:39.000Z",
+                      "updatedAt": "2026-10-21T19:49:39.000Z",
+                      "uid": "35240-ef103f03-494d-4359-9818-1658126322ab"
+                    }
+                  ],
+                  "id": "f201cb8f-757f-4eae-8d4e-93323cf2cb3c",
+                  "createdAt": "2026-10-21T19:49:39.000Z",
+                  "updatedAt": "2026-10-21T19:49:39.000Z",
+                  "uid": "35240-f201cb8f-757f-4eae-8d4e-93323cf2cb3c"
+                },
+                {
+                  "name": "Retrieves the collection of Agent resources",
+                  "id": "4cdacfc9-92e0-4570-99ce-4141fd5dff56",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/v1/agents?page=1&itemsPerPage=50",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "agents"
+                      ],
+                      "query": [
+                        {
+                          "description": "The collection page number",
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "description": "The number of items per page",
+                          "key": "itemsPerPage",
+                          "value": "50"
+                        }
+                      ]
+                    },
+                    "description": "Retrieves the collection of Agent resources."
+                  },
+                  "response": [
+                    {
+                      "id": "f6c39549-941b-492b-957b-d81f72e82aa2",
+                      "name": "Agent collection",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/agents?page=1&itemsPerPage=50",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "agents"
+                          ],
+                          "query": [
+                            {
+                              "description": "The collection page number",
+                              "key": "page",
+                              "value": "1"
+                            },
+                            {
+                              "description": "The number of items per page",
+                              "key": "itemsPerPage",
+                              "value": "50"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "[\n  {\n    \"id\": \"<string>\",\n    \"email\": \"<string>\",\n    \"roleGroups\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"companies\": [\n      {\n        \"id\": \"<uuid>\",\n        \"name\": \"<string,null>\"\n      },\n      {\n        \"id\": \"<uuid>\",\n        \"name\": \"<string,null>\"\n      }\n    ]\n  },\n  {\n    \"id\": \"<string>\",\n    \"email\": \"<string>\",\n    \"roleGroups\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"companies\": [\n      {\n        \"id\": \"<uuid>\",\n        \"name\": \"<string,null>\"\n      },\n      {\n        \"id\": \"<uuid>\",\n        \"name\": \"<string,null>\"\n      }\n    ]\n  }\n]",
+                      "createdAt": "2026-10-21T19:49:39.000Z",
+                      "updatedAt": "2026-10-21T19:49:39.000Z",
+                      "uid": "35240-f6c39549-941b-492b-957b-d81f72e82aa2"
+                    },
+                    {
+                      "id": "8e5b3612-d99d-4117-9b53-921e59c605c5",
+                      "name": "Forbidden",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/agents?page=1&itemsPerPage=50",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "agents"
+                          ],
+                          "query": [
+                            {
+                              "description": "The collection page number",
+                              "key": "page",
+                              "value": "1"
+                            },
+                            {
+                              "description": "The number of items per page",
+                              "key": "itemsPerPage",
+                              "value": "50"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string,null>\",\n  \"title\": \"<string,null>\",\n  \"detail\": \"<string,null>\",\n  \"status\": 400,\n  \"instance\": \"<string,null>\",\n  \"type\": \"<string>\",\n  \"meta\": {},\n  \"source\": {\n    \"pointer\": \"<string>\",\n    \"parameter\": \"<string>\",\n    \"header\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-21T19:49:39.000Z",
+                      "updatedAt": "2026-10-21T19:49:39.000Z",
+                      "uid": "35240-8e5b3612-d99d-4117-9b53-921e59c605c5"
+                    }
+                  ],
+                  "createdAt": "2026-10-21T19:49:39.000Z",
+                  "updatedAt": "2026-10-21T19:49:39.000Z",
+                  "uid": "35240-4cdacfc9-92e0-4570-99ce-4141fd5dff56"
+                },
+                {
+                  "name": "Creates a Agent resource",
+                  "id": "cb704120-4f8e-4b55-b117-135cfc731d64",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"id\": \"<string>\",\n  \"email\": \"<string>\",\n  \"roles\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"roleGroups\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companies\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/v1/agents",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "agents"
+                      ]
+                    },
+                    "description": "Creates a Agent resource."
+                  },
+                  "response": [
+                    {
+                      "id": "938d80c8-a28d-470f-b272-380931a1fcd0",
+                      "name": "Agent resource created",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"id\": \"<string>\",\n  \"email\": \"<string>\",\n  \"roles\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"roleGroups\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companies\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/agents",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "agents"
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"email\": \"<string>\",\n  \"roles\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"roleGroups\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companies\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                      "createdAt": "2026-10-21T19:49:39.000Z",
+                      "updatedAt": "2026-10-21T19:49:39.000Z",
+                      "uid": "35240-938d80c8-a28d-470f-b272-380931a1fcd0"
+                    },
+                    {
+                      "id": "dc9d8bb5-81e2-4885-91b6-70959bc5e677",
+                      "name": "Invalid input",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"id\": \"<string>\",\n  \"email\": \"<string>\",\n  \"roles\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"roleGroups\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companies\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/agents",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "agents"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string,null>\",\n  \"title\": \"<string,null>\",\n  \"detail\": \"<string,null>\",\n  \"status\": 400,\n  \"instance\": \"<string,null>\",\n  \"type\": \"<string>\",\n  \"meta\": {},\n  \"source\": {\n    \"pointer\": \"<string>\",\n    \"parameter\": \"<string>\",\n    \"header\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-21T19:49:39.000Z",
+                      "updatedAt": "2026-10-21T19:49:39.000Z",
+                      "uid": "35240-dc9d8bb5-81e2-4885-91b6-70959bc5e677"
+                    },
+                    {
+                      "id": "5c484423-d56c-461c-a54a-3c9a621dbf34",
+                      "name": "Forbidden",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"id\": \"<string>\",\n  \"email\": \"<string>\",\n  \"roles\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"roleGroups\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companies\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/agents",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "agents"
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string,null>\",\n  \"title\": \"<string,null>\",\n  \"detail\": \"<string,null>\",\n  \"status\": 400,\n  \"instance\": \"<string,null>\",\n  \"type\": \"<string>\",\n  \"meta\": {},\n  \"source\": {\n    \"pointer\": \"<string>\",\n    \"parameter\": \"<string>\",\n    \"header\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-21T19:49:39.000Z",
+                      "updatedAt": "2026-10-21T19:49:39.000Z",
+                      "uid": "35240-5c484423-d56c-461c-a54a-3c9a621dbf34"
+                    },
+                    {
+                      "id": "c67f0a10-872f-4ce4-b611-3d8436125b39",
+                      "name": "An error occurred",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"id\": \"<string>\",\n  \"email\": \"<string>\",\n  \"roles\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"roleGroups\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"companies\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/agents",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "agents"
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": 422,\n  \"detail\": \"<string>\",\n  \"type\": \"<string>\",\n  \"title\": \"<string,null>\",\n  \"instance\": \"<string,null>\"\n}",
+                      "createdAt": "2026-10-21T19:49:39.000Z",
+                      "updatedAt": "2026-10-21T19:49:39.000Z",
+                      "uid": "35240-c67f0a10-872f-4ce4-b611-3d8436125b39"
+                    }
+                  ],
+                  "createdAt": "2026-10-21T19:49:39.000Z",
+                  "updatedAt": "2026-10-21T19:49:39.000Z",
+                  "uid": "35240-cb704120-4f8e-4b55-b117-135cfc731d64"
+                }
+              ],
+              "id": "5af0734f-1012-4a9c-ac82-01ef390a12f5",
+              "createdAt": "2026-10-21T19:49:39.000Z",
+              "updatedAt": "2026-10-21T19:49:39.000Z",
+              "uid": "35240-5af0734f-1012-4a9c-ac82-01ef390a12f5"
+            },
+            {
+              "name": "me",
+              "item": [
+                {
+                  "name": "Retrieves a Agent resource",
+                  "id": "84b050b3-33bb-4122-bc0e-6feb95db8e0b",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/v1/me?include=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "me"
+                      ],
+                      "query": [
+                        {
+                          "description": "Agent include",
+                          "key": "include",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "description": "Retrieves a Agent resource."
+                  },
+                  "response": [
+                    {
+                      "id": "b17aed74-3c51-4749-b6f9-54fd2c3c16e1",
+                      "name": "Agent resource",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/me?include=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "me"
+                          ],
+                          "query": [
+                            {
+                              "description": "Agent include",
+                              "key": "include",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"user\": {\n    \"id\": \"<string>\",\n    \"email\": \"<string>\",\n    \"roles\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"roleGroups\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"companies\": [\n      {\n        \"id\": \"<uuid>\",\n        \"name\": \"<string,null>\"\n      },\n      {\n        \"id\": \"<uuid>\",\n        \"name\": \"<string,null>\"\n      }\n    ]\n  },\n  \"companies\": [\n    \"<string,null>\",\n    \"<string,null>\"\n  ],\n  \"userRoles\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"userTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                      "createdAt": "2026-10-21T19:49:39.000Z",
+                      "updatedAt": "2026-10-21T19:49:39.000Z",
+                      "uid": "35240-b17aed74-3c51-4749-b6f9-54fd2c3c16e1"
+                    },
+                    {
+                      "id": "e7ca134b-04e2-4650-8442-027c51b8b9b1",
+                      "name": "Forbidden",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/me?include=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "me"
+                          ],
+                          "query": [
+                            {
+                              "description": "Agent include",
+                              "key": "include",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string,null>\",\n  \"title\": \"<string,null>\",\n  \"detail\": \"<string,null>\",\n  \"status\": 400,\n  \"instance\": \"<string,null>\",\n  \"type\": \"<string>\",\n  \"meta\": {},\n  \"source\": {\n    \"pointer\": \"<string>\",\n    \"parameter\": \"<string>\",\n    \"header\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-21T19:49:39.000Z",
+                      "updatedAt": "2026-10-21T19:49:39.000Z",
+                      "uid": "35240-e7ca134b-04e2-4650-8442-027c51b8b9b1"
+                    },
+                    {
+                      "id": "1a565932-9a00-4486-a4ab-14f6c4ee79f5",
+                      "name": "Not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/me?include=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "me"
+                          ],
+                          "query": [
+                            {
+                              "description": "Agent include",
+                              "key": "include",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string,null>\",\n  \"title\": \"<string,null>\",\n  \"detail\": \"<string,null>\",\n  \"status\": 400,\n  \"instance\": \"<string,null>\",\n  \"type\": \"<string>\",\n  \"meta\": {},\n  \"source\": {\n    \"pointer\": \"<string>\",\n    \"parameter\": \"<string>\",\n    \"header\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-21T19:49:39.000Z",
+                      "updatedAt": "2026-10-21T19:49:39.000Z",
+                      "uid": "35240-1a565932-9a00-4486-a4ab-14f6c4ee79f5"
+                    }
+                  ],
+                  "createdAt": "2026-10-21T19:49:39.000Z",
+                  "updatedAt": "2026-10-21T19:49:39.000Z",
+                  "uid": "35240-84b050b3-33bb-4122-bc0e-6feb95db8e0b"
+                }
+              ],
+              "id": "ab6b805b-3fdf-4dde-8a27-ff1654f5c172",
+              "createdAt": "2026-10-21T19:49:39.000Z",
+              "updatedAt": "2026-10-21T19:49:39.000Z",
+              "uid": "35240-ab6b805b-3fdf-4dde-8a27-ff1654f5c172"
+            }
+          ],
+          "id": "f97e4453-6b9b-4e0c-81f2-9565723e9940",
+          "createdAt": "2026-10-21T19:49:39.000Z",
+          "updatedAt": "2026-10-21T19:49:39.000Z",
+          "uid": "35240-f97e4453-6b9b-4e0c-81f2-9565723e9940"
+        }
+      ],
+      "id": "f4daa25f-a06f-437f-9e31-b901b254e529",
+      "createdAt": "2026-10-21T19:49:39.000Z",
+      "updatedAt": "2026-10-21T19:49:39.000Z",
+      "uid": "35240-f4daa25f-a06f-437f-9e31-b901b254e529"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://insurance-app.goodlord.co/"
+    }
+  ]
+}

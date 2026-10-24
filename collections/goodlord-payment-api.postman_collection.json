@@ -1,0 +1,490 @@
+{
+  "info": {
+    "_postman_id": "418555f7-0726-4aeb-9e35-cf189eaeb10f",
+    "name": "Insurance App Payment API",
+    "description": "Resource 'Payment' operations.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T19:50:17.000Z",
+    "updatedAt": "2026-10-21T19:50:18.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-418555f7-0726-4aeb-9e35-cf189eaeb10f"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "insurance_claims",
+              "item": [
+                {
+                  "name": "{insuranceClaimId}",
+                  "item": [
+                    {
+                      "name": "payments",
+                      "item": [
+                        {
+                          "name": "{id}",
+                          "item": [
+                            {
+                              "name": "Retrieves a Payment resource",
+                              "id": "ea1135b8-8374-405d-94e0-dd653bf7df74",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/vnd.api+json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/insurance_claims/:insuranceClaimId/payments/:id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "insurance_claims",
+                                    ":insuranceClaimId",
+                                    "payments",
+                                    ":id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "8129aff2-aa5d-4444-bd29-ed2f3b9ade91",
+                                      "key": "insuranceClaimId",
+                                      "value": "<string>",
+                                      "description": "(Required) Payment identifier"
+                                    },
+                                    {
+                                      "id": "14f58c37-252e-45b2-a080-8ef59e545657",
+                                      "key": "id",
+                                      "value": "<string>",
+                                      "description": "(Required) Payment identifier"
+                                    }
+                                  ]
+                                },
+                                "description": "Retrieves a Payment resource."
+                              },
+                              "response": [
+                                {
+                                  "id": "57af6635-92c7-4e36-af27-47410643dfe0",
+                                  "name": "Payment resource",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/vnd.api+json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: apikey",
+                                        "key": "Authorization",
+                                        "value": "<API Key>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/insurance_claims/:insuranceClaimId/payments/:id",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "insurance_claims",
+                                        ":insuranceClaimId",
+                                        "payments",
+                                        ":id"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "insuranceClaimId"
+                                        },
+                                        {
+                                          "key": "id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"id\": \"<string>\",\n  \"referenceNumber\": \"<string>\",\n  \"paymentStatusIdentifier\": \"<string>\",\n  \"paymentStatusDescription\": \"<string>\",\n  \"insurer\": \"<string,null>\",\n  \"paymentDate\": \"<string,null-date-time>\",\n  \"paymentCreatedAt\": \"<string,null-date-time>\",\n  \"paymentSubmittedAt\": \"<string,null-date-time>\",\n  \"paymentPaidAt\": \"<string,null-date-time>\",\n  \"refundDueAmount\": \"<object,null>\",\n  \"customerPaymentUpdate\": \"<string,null>\",\n  \"paymentAmount\": \"<object,null>\",\n  \"createdAt\": \"<string,null-date-time>\",\n  \"insuranceClaim\": \"<string>\"\n}",
+                                  "createdAt": "2026-10-21T19:50:18.000Z",
+                                  "updatedAt": "2026-10-21T19:50:18.000Z",
+                                  "uid": "35240-57af6635-92c7-4e36-af27-47410643dfe0"
+                                },
+                                {
+                                  "id": "34255e9c-d0c0-4083-8acb-59c7114e94f7",
+                                  "name": "Forbidden",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/vnd.api+json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: apikey",
+                                        "key": "Authorization",
+                                        "value": "<API Key>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/insurance_claims/:insuranceClaimId/payments/:id",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "insurance_claims",
+                                        ":insuranceClaimId",
+                                        "payments",
+                                        ":id"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "insuranceClaimId"
+                                        },
+                                        {
+                                          "key": "id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Forbidden",
+                                  "code": 403,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"id\": \"<string,null>\",\n  \"title\": \"<string,null>\",\n  \"detail\": \"<string,null>\",\n  \"status\": 400,\n  \"instance\": \"<string,null>\",\n  \"type\": \"<string>\",\n  \"meta\": {},\n  \"source\": {\n    \"pointer\": \"<string>\",\n    \"parameter\": \"<string>\",\n    \"header\": \"<string>\"\n  }\n}",
+                                  "createdAt": "2026-10-21T19:50:18.000Z",
+                                  "updatedAt": "2026-10-21T19:50:18.000Z",
+                                  "uid": "35240-34255e9c-d0c0-4083-8acb-59c7114e94f7"
+                                },
+                                {
+                                  "id": "1bd2042d-61c3-4c7f-b333-acfba8d08178",
+                                  "name": "Not found",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/vnd.api+json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: apikey",
+                                        "key": "Authorization",
+                                        "value": "<API Key>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/insurance_claims/:insuranceClaimId/payments/:id",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "insurance_claims",
+                                        ":insuranceClaimId",
+                                        "payments",
+                                        ":id"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "insuranceClaimId"
+                                        },
+                                        {
+                                          "key": "id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Not Found",
+                                  "code": 404,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"id\": \"<string,null>\",\n  \"title\": \"<string,null>\",\n  \"detail\": \"<string,null>\",\n  \"status\": 400,\n  \"instance\": \"<string,null>\",\n  \"type\": \"<string>\",\n  \"meta\": {},\n  \"source\": {\n    \"pointer\": \"<string>\",\n    \"parameter\": \"<string>\",\n    \"header\": \"<string>\"\n  }\n}",
+                                  "createdAt": "2026-10-21T19:50:18.000Z",
+                                  "updatedAt": "2026-10-21T19:50:18.000Z",
+                                  "uid": "35240-1bd2042d-61c3-4c7f-b333-acfba8d08178"
+                                }
+                              ],
+                              "createdAt": "2026-10-21T19:50:18.000Z",
+                              "updatedAt": "2026-10-21T19:50:18.000Z",
+                              "uid": "35240-ea1135b8-8374-405d-94e0-dd653bf7df74"
+                            }
+                          ],
+                          "id": "eaaa5bb1-ab16-4592-a455-892167e31f0e",
+                          "createdAt": "2026-10-21T19:50:18.000Z",
+                          "updatedAt": "2026-10-21T19:50:18.000Z",
+                          "uid": "35240-eaaa5bb1-ab16-4592-a455-892167e31f0e"
+                        },
+                        {
+                          "name": "Retrieves the collection of Payment resources",
+                          "id": "628b476a-b962-4842-b28f-9b792aaad390",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/vnd.api+json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/insurance_claims/:insuranceClaimId/payments?page=1&itemsPerPage=50",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "insurance_claims",
+                                ":insuranceClaimId",
+                                "payments"
+                              ],
+                              "query": [
+                                {
+                                  "description": "The collection page number",
+                                  "key": "page",
+                                  "value": "1"
+                                },
+                                {
+                                  "description": "The number of items per page",
+                                  "key": "itemsPerPage",
+                                  "value": "50"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "b44573a5-e329-45a8-9fc2-4517b1977eea",
+                                  "key": "insuranceClaimId",
+                                  "value": "<string>",
+                                  "description": "(Required) Payment identifier"
+                                }
+                              ]
+                            },
+                            "description": "Retrieves the collection of Payment resources."
+                          },
+                          "response": [
+                            {
+                              "id": "06bbef85-15f4-4c84-8085-19c580829895",
+                              "name": "Payment collection",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/vnd.api+json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/insurance_claims/:insuranceClaimId/payments?page=1&itemsPerPage=50",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "insurance_claims",
+                                    ":insuranceClaimId",
+                                    "payments"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "The collection page number",
+                                      "key": "page",
+                                      "value": "1"
+                                    },
+                                    {
+                                      "description": "The number of items per page",
+                                      "key": "itemsPerPage",
+                                      "value": "50"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "insuranceClaimId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "[\n  {\n    \"id\": \"<string>\",\n    \"referenceNumber\": \"<string>\",\n    \"paymentStatusIdentifier\": \"<string>\",\n    \"paymentStatusDescription\": \"<string>\",\n    \"insurer\": \"<string,null>\",\n    \"paymentDate\": \"<string,null-date-time>\",\n    \"paymentCreatedAt\": \"<string,null-date-time>\",\n    \"paymentSubmittedAt\": \"<string,null-date-time>\",\n    \"paymentPaidAt\": \"<string,null-date-time>\",\n    \"refundDueAmount\": \"<object,null>\",\n    \"customerPaymentUpdate\": \"<string,null>\",\n    \"paymentAmount\": \"<object,null>\",\n    \"createdAt\": \"<string,null-date-time>\",\n    \"insuranceClaim\": \"<string>\"\n  },\n  {\n    \"id\": \"<string>\",\n    \"referenceNumber\": \"<string>\",\n    \"paymentStatusIdentifier\": \"<string>\",\n    \"paymentStatusDescription\": \"<string>\",\n    \"insurer\": \"<string,null>\",\n    \"paymentDate\": \"<string,null-date-time>\",\n    \"paymentCreatedAt\": \"<string,null-date-time>\",\n    \"paymentSubmittedAt\": \"<string,null-date-time>\",\n    \"paymentPaidAt\": \"<string,null-date-time>\",\n    \"refundDueAmount\": \"<object,null>\",\n    \"customerPaymentUpdate\": \"<string,null>\",\n    \"paymentAmount\": \"<object,null>\",\n    \"createdAt\": \"<string,null-date-time>\",\n    \"insuranceClaim\": \"<string>\"\n  }\n]",
+                              "createdAt": "2026-10-21T19:50:18.000Z",
+                              "updatedAt": "2026-10-21T19:50:18.000Z",
+                              "uid": "35240-06bbef85-15f4-4c84-8085-19c580829895"
+                            },
+                            {
+                              "id": "5d3e6e44-0fcb-4ed9-a492-dbe348b4d7e5",
+                              "name": "Forbidden",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/vnd.api+json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/insurance_claims/:insuranceClaimId/payments?page=1&itemsPerPage=50",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "insurance_claims",
+                                    ":insuranceClaimId",
+                                    "payments"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "The collection page number",
+                                      "key": "page",
+                                      "value": "1"
+                                    },
+                                    {
+                                      "description": "The number of items per page",
+                                      "key": "itemsPerPage",
+                                      "value": "50"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "insuranceClaimId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Forbidden",
+                              "code": 403,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"id\": \"<string,null>\",\n  \"title\": \"<string,null>\",\n  \"detail\": \"<string,null>\",\n  \"status\": 400,\n  \"instance\": \"<string,null>\",\n  \"type\": \"<string>\",\n  \"meta\": {},\n  \"source\": {\n    \"pointer\": \"<string>\",\n    \"parameter\": \"<string>\",\n    \"header\": \"<string>\"\n  }\n}",
+                              "createdAt": "2026-10-21T19:50:18.000Z",
+                              "updatedAt": "2026-10-21T19:50:18.000Z",
+                              "uid": "35240-5d3e6e44-0fcb-4ed9-a492-dbe348b4d7e5"
+                            }
+                          ],
+                          "createdAt": "2026-10-21T19:50:18.000Z",
+                          "updatedAt": "2026-10-21T19:50:18.000Z",
+                          "uid": "35240-628b476a-b962-4842-b28f-9b792aaad390"
+                        }
+                      ],
+                      "id": "6db9ec2d-6255-4c45-adb9-90eacda3f366",
+                      "createdAt": "2026-10-21T19:50:18.000Z",
+                      "updatedAt": "2026-10-21T19:50:18.000Z",
+                      "uid": "35240-6db9ec2d-6255-4c45-adb9-90eacda3f366"
+                    }
+                  ],
+                  "id": "50a302b4-0163-4f9c-8e2d-c0fd6b83af89",
+                  "createdAt": "2026-10-21T19:50:18.000Z",
+                  "updatedAt": "2026-10-21T19:50:18.000Z",
+                  "uid": "35240-50a302b4-0163-4f9c-8e2d-c0fd6b83af89"
+                }
+              ],
+              "id": "be8332cf-397b-413a-835a-9d423d43dce6",
+              "createdAt": "2026-10-21T19:50:18.000Z",
+              "updatedAt": "2026-10-21T19:50:18.000Z",
+              "uid": "35240-be8332cf-397b-413a-835a-9d423d43dce6"
+            }
+          ],
+          "id": "d223d064-6549-4f80-896f-3c30fe7809a6",
+          "createdAt": "2026-10-21T19:50:18.000Z",
+          "updatedAt": "2026-10-21T19:50:18.000Z",
+          "uid": "35240-d223d064-6549-4f80-896f-3c30fe7809a6"
+        }
+      ],
+      "id": "391eb052-4ff7-474c-abc0-1c5abf5a2eb2",
+      "createdAt": "2026-10-21T19:50:18.000Z",
+      "updatedAt": "2026-10-21T19:50:18.000Z",
+      "uid": "35240-391eb052-4ff7-474c-abc0-1c5abf5a2eb2"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://insurance-app.goodlord.co/"
+    }
+  ]
+}

@@ -1,0 +1,1476 @@
+{
+  "info": {
+    "_postman_id": "5ce9ac74-d65d-46da-8642-ce84d979543f",
+    "name": "Insurance App Insurance Claim API",
+    "description": "Resource 'InsuranceClaim' operations.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T19:50:06.000Z",
+    "updatedAt": "2026-10-21T19:50:07.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-5ce9ac74-d65d-46da-8642-ce84d979543f"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "insurance_claims",
+              "item": [
+                {
+                  "name": "{id}",
+                  "item": [
+                    {
+                      "name": "submit",
+                      "item": [
+                        {
+                          "name": "Submit an insurance claim",
+                          "id": "c4e3dbf7-9656-499c-adf3-7ee6dee20d3e",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/vnd.api+json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/vnd.api+json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/insurance_claims/:id/submit",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "insurance_claims",
+                                ":id",
+                                "submit"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "1091e3fb-d1db-49ef-a3b3-b5d9b64bc52e",
+                                  "key": "id",
+                                  "value": "<string>",
+                                  "description": "(Required) InsuranceClaim identifier"
+                                }
+                              ]
+                            },
+                            "description": "Creates a InsuranceClaim resource."
+                          },
+                          "response": [
+                            {
+                              "id": "2aa27ebf-841c-4950-a0cf-deebb7a4fc6c",
+                              "name": "InsuranceClaim resource created",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/vnd.api+json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/vnd.api+json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/insurance_claims/:id/submit",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "insurance_claims",
+                                    ":id",
+                                    "submit"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Created",
+                              "code": 201,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"id\": \"<string>\",\n  \"externalId\": \"<string>\",\n  \"createdAt\": \"<string,null-date-time>\",\n  \"updatedAt\": \"<string,null-date-time>\",\n  \"propertyAddress\": {\n    \"consequat_dd0\": \"<string,null>\"\n  },\n  \"claimStatus\": \"<string>\",\n  \"totalPaymentAmount\": {\n    \"quis_a28\": \"<integer>\"\n  },\n  \"claimReference\": \"<string>\",\n  \"firstArrearsDate\": \"<string,null-date-time>\",\n  \"mediationResponse\": \"<string,null>\",\n  \"claimStatusDescription\": \"<string>\",\n  \"claimDate\": \"<dateTime>\",\n  \"policyId\": \"<integer>\",\n  \"company\": \"<string>\",\n  \"tenancyId\": \"<string,null>\",\n  \"legalStatus\": \"<string,null>\",\n  \"latestPaymentDate\": \"<string,null-date-time>\",\n  \"solicitorsClaimReference\": \"<string,null>\",\n  \"firmInstructed\": \"<string,null>\",\n  \"dateLegalInstructed\": \"<string,null-date-time>\",\n  \"section8DateServed\": \"<string,null-date-time>\",\n  \"section8DateExpired\": \"<string,null-date-time>\",\n  \"section21DateServed\": \"<string,null-date-time>\",\n  \"section21DateExpired\": \"<string,null-date-time>\",\n  \"dateProceedingsIssued\": \"<string,null-date-time>\",\n  \"dateOfHearing\": \"<string,null-date-time>\",\n  \"court\": \"<string,null>\",\n  \"hearingOutcome\": \"<string,null>\",\n  \"possessionDate\": \"<string,null-date-time>\",\n  \"warrantsAppliedFor\": \"<string,null>\",\n  \"dateOfEviction\": \"<string,null-date-time>\",\n  \"typeOfClaim\": \"<string,null>\",\n  \"rentScheduleStatus\": \"<string,null>\",\n  \"rentSchedule\": \"<string,null>\",\n  \"files\": \"<array,null>\",\n  \"payments\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"rpiUniqueReferenceNumber\": \"<string,null>\",\n  \"agencyName\": \"<string,null>\",\n  \"agentName\": \"<string,null>\",\n  \"agencyEmail\": \"<string,null>\",\n  \"agencyPhone\": \"<string,null>\",\n  \"lettingAgentRegistrationNumber\": \"<string,null>\",\n  \"tenants\": \"<array,null>\",\n  \"guarantors\": \"<array,null>\",\n  \"landlords\": \"<array,null>\",\n  \"landlordRegistrationNumber\": \"<string,null>\",\n  \"permittedOccupiersName\": \"<string,null>\",\n  \"isTenancyCreatedOnGoodlord\": \"<string,null>\",\n  \"isTenancyRemovedAndNowOnFixedTerm\": \"<string,null>\",\n  \"dateBecamePeriodic\": \"<string,null-date-time>\",\n  \"referencingCompletedByGoodlord\": \"<string,null>\",\n  \"isGasAtProperty\": \"<string,null>\",\n  \"didUploadEpcToGoodlord\": \"<string,null>\",\n  \"dateEpcWasProvidedToTenant\": \"<string,null-date-time>\",\n  \"howEpcWasGivenToTenant\": \"<string,null>\",\n  \"isEicrOnGoodlord\": \"<string,null>\",\n  \"depositType\": \"<string,null>\",\n  \"depositCollectedByGoodlord\": \"<string,null>\",\n  \"depositPaidBy\": \"<string,null>\",\n  \"dateDepositWasPaid\": \"<string,null-date-time>\",\n  \"isDepositCertificateOnGoodlord\": \"<string,null>\",\n  \"dateDepositProtected\": \"<string,null-date-time>\",\n  \"prescribedInformationGiven\": \"<string,null>\",\n  \"depositReplacementCoverLevel\": \"<string,null>\",\n  \"propertyRequiresLicense\": \"<string,null>\",\n  \"dateOfRentArrears\": \"<string,null-date-time>\",\n  \"rentOutstanding\": \"<object,null>\",\n  \"reasonForNonPayment\": \"<string,null>\",\n  \"tenantsInDebtRespiteScheme\": \"<string,null>\",\n  \"detailsOfBreach\": \"<string,null>\",\n  \"dateAwareOfBreach\": \"<string,null-date-time>\",\n  \"worksBeingClaimedForDamage\": \"<string,null>\",\n  \"depositUsedFor\": \"<string,null>\",\n  \"datePropertyDamageIdentified\": \"<string,null-date-time>\",\n  \"currentDisputeInfo\": \"<string,null>\",\n  \"dateAwareOfDispute\": \"<string,null-date-time>\",\n  \"trespassOrNuisanceInfo\": \"<string,null>\",\n  \"dateAwareOfTrespassOrNuisance\": \"<string,null-date-time>\",\n  \"isPropertyStillOccupied\": \"<string,null>\",\n  \"verificationTenantIsStillOccupyingProperty\": \"<string,null>\",\n  \"dateLastInspection\": \"<string,null-date-time>\",\n  \"dateTenantVacated\": \"<string,null-date-time>\",\n  \"isClaimAgainstDepositFinalisedByDepositScheme\": \"<string,null>\",\n  \"isClaimAgainstDepositReplacementFinalised\": \"<string,null>\",\n  \"amountAwardedForRentArrears\": \"<object,null>\",\n  \"depositUseBreakdown\": \"<string,null>\",\n  \"howDepositClaimWasSettled\": \"<string,null>\",\n  \"depositReplacementUseBreakdown\": \"<string,null>\",\n  \"forwardingAddress\": \"<string,null>\",\n  \"agencyInstructedToReLet\": \"<string,null>\",\n  \"isPropertyAlreadyReLet\": \"<string,null>\",\n  \"dateNewTenancy\": \"<string,null-date-time>\",\n  \"possessionNoticesServed\": \"<string,null>\",\n  \"otherNoticesServed\": \"<string,null>\",\n  \"disputesBetweenTenantAndLandlord\": \"<string,null>\",\n  \"detailsOfDisputesBetweenTenantAndLandlord\": \"<string,null>\",\n  \"otherRelevantClaimInfo\": \"<string,null>\",\n  \"noticesServedToLandlord\": \"<string,null>\",\n  \"agencyAccountName\": \"<string,null>\",\n  \"agencyAccountNumber\": \"<string,null>\",\n  \"agencySortCode\": \"<string,null>\",\n  \"remittanceEmail\": \"<string,null>\",\n  \"gasSafetyCertificates\": \"<array,null>\",\n  \"howToRentGuides\": \"<array,null>\",\n  \"tribunalNotificationDate\": \"<string,null-date-time>\",\n  \"marketValueExplanation\": \"<string,null>\",\n  \"firstMonthRentRequestedViaGoodlord\": \"<string,null>\",\n  \"keysHandedOverDate\": \"<string,null-date-time>\",\n  \"tenantOccupationDate\": \"<string,null-date-time>\",\n  \"detailsOfAntiSocialBehaviour\": \"<string,null>\",\n  \"dateAwareOfAntiSocialBehaviour\": \"<string,null-date-time>\",\n  \"rraInfoSheetIssueDate\": \"<string,null-date-time>\",\n  \"rraInfoSheetIssueMethod\": \"<string,null>\",\n  \"statementOfTermsInTenancyAgreement\": \"<string,null>\",\n  \"statementOfTermsIssuedDate\": \"<string,null-date-time>\",\n  \"statementOfTermsIssuedMethod\": \"<string,null>\",\n  \"firstMonthRentRequestedBeforeSigning\": \"<string,null>\",\n  \"firstMonthRentRequestedDate\": \"<string,null-date-time>\",\n  \"originalTenancyStartDate\": \"<string,null-date-time>\"\n}",
+                              "createdAt": "2026-10-21T19:50:07.000Z",
+                              "updatedAt": "2026-10-21T19:50:07.000Z",
+                              "uid": "35240-2aa27ebf-841c-4950-a0cf-deebb7a4fc6c"
+                            },
+                            {
+                              "id": "5649a117-d6fa-4463-830f-980698108d21",
+                              "name": "Invalid input",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/vnd.api+json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/vnd.api+json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/insurance_claims/:id/submit",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "insurance_claims",
+                                    ":id",
+                                    "submit"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"id\": \"<string,null>\",\n  \"title\": \"<string,null>\",\n  \"detail\": \"<string,null>\",\n  \"status\": 400,\n  \"instance\": \"<string,null>\",\n  \"type\": \"<string>\",\n  \"meta\": {},\n  \"source\": {\n    \"pointer\": \"<string>\",\n    \"parameter\": \"<string>\",\n    \"header\": \"<string>\"\n  }\n}",
+                              "createdAt": "2026-10-21T19:50:07.000Z",
+                              "updatedAt": "2026-10-21T19:50:07.000Z",
+                              "uid": "35240-5649a117-d6fa-4463-830f-980698108d21"
+                            },
+                            {
+                              "id": "28231c05-b8d7-4285-b6d3-f2f7217ebc20",
+                              "name": "Forbidden",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/vnd.api+json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/vnd.api+json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/insurance_claims/:id/submit",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "insurance_claims",
+                                    ":id",
+                                    "submit"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Forbidden",
+                              "code": 403,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"id\": \"<string,null>\",\n  \"title\": \"<string,null>\",\n  \"detail\": \"<string,null>\",\n  \"status\": 400,\n  \"instance\": \"<string,null>\",\n  \"type\": \"<string>\",\n  \"meta\": {},\n  \"source\": {\n    \"pointer\": \"<string>\",\n    \"parameter\": \"<string>\",\n    \"header\": \"<string>\"\n  }\n}",
+                              "createdAt": "2026-10-21T19:50:07.000Z",
+                              "updatedAt": "2026-10-21T19:50:07.000Z",
+                              "uid": "35240-28231c05-b8d7-4285-b6d3-f2f7217ebc20"
+                            },
+                            {
+                              "id": "86d745da-b19c-4ccf-a122-04b19092ce5e",
+                              "name": "An error occurred",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/vnd.api+json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/vnd.api+json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/insurance_claims/:id/submit",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "insurance_claims",
+                                    ":id",
+                                    "submit"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                              "code": 422,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"status\": 422,\n  \"detail\": \"<string>\",\n  \"type\": \"<string>\",\n  \"title\": \"<string,null>\",\n  \"instance\": \"<string,null>\"\n}",
+                              "createdAt": "2026-10-21T19:50:07.000Z",
+                              "updatedAt": "2026-10-21T19:50:07.000Z",
+                              "uid": "35240-86d745da-b19c-4ccf-a122-04b19092ce5e"
+                            }
+                          ],
+                          "createdAt": "2026-10-21T19:50:07.000Z",
+                          "updatedAt": "2026-10-21T19:50:07.000Z",
+                          "uid": "35240-c4e3dbf7-9656-499c-adf3-7ee6dee20d3e"
+                        }
+                      ],
+                      "id": "daa0884f-79db-4022-83a2-c5839d041a18",
+                      "createdAt": "2026-10-21T19:50:07.000Z",
+                      "updatedAt": "2026-10-21T19:50:07.000Z",
+                      "uid": "35240-daa0884f-79db-4022-83a2-c5839d041a18"
+                    },
+                    {
+                      "name": "Retrieves a InsuranceClaim resource",
+                      "id": "c1325d41-488d-4bdb-9d66-cf777b0effa6",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/insurance_claims/:id?include=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "insurance_claims",
+                            ":id"
+                          ],
+                          "query": [
+                            {
+                              "description": "Which relations to include in the response",
+                              "key": "include",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "d2271d25-7db2-44d4-8c27-93a1acb6f6fd",
+                              "key": "id",
+                              "value": "<string>",
+                              "description": "(Required) InsuranceClaim identifier"
+                            }
+                          ]
+                        },
+                        "description": "Retrieves a InsuranceClaim resource."
+                      },
+                      "response": [
+                        {
+                          "id": "5277b84d-3470-4b11-ab49-5d14956b1c04",
+                          "name": "InsuranceClaim resource",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/vnd.api+json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/insurance_claims/:id?include=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "insurance_claims",
+                                ":id"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Which relations to include in the response",
+                                  "key": "include",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string>\",\n  \"externalId\": \"<string>\",\n  \"createdAt\": \"<string,null-date-time>\",\n  \"updatedAt\": \"<string,null-date-time>\",\n  \"propertyAddress\": {\n    \"nisi35b\": \"<string,null>\",\n    \"et67\": \"<string,null>\"\n  },\n  \"claimStatus\": \"<string>\",\n  \"totalPaymentAmount\": {\n    \"reprehenderit_d8c\": \"<integer>\",\n    \"exercitation_e\": \"<integer>\"\n  },\n  \"claimReference\": \"<string>\",\n  \"firstArrearsDate\": \"<string,null-date-time>\",\n  \"mediationResponse\": \"<string,null>\",\n  \"claimStatusDescription\": \"<string>\",\n  \"claimDate\": \"<dateTime>\",\n  \"policyId\": \"<integer>\",\n  \"company\": {\n    \"id\": \"<uuid>\",\n    \"name\": \"<string,null>\",\n    \"externalId\": \"<string>\"\n  },\n  \"tenancyId\": \"<string,null>\",\n  \"legalStatus\": \"<string,null>\",\n  \"latestPaymentDate\": \"<string,null-date-time>\",\n  \"solicitorsClaimReference\": \"<string,null>\",\n  \"firmInstructed\": \"<string,null>\",\n  \"dateLegalInstructed\": \"<string,null-date-time>\",\n  \"section8DateServed\": \"<string,null-date-time>\",\n  \"section8DateExpired\": \"<string,null-date-time>\",\n  \"section21DateServed\": \"<string,null-date-time>\",\n  \"section21DateExpired\": \"<string,null-date-time>\",\n  \"dateProceedingsIssued\": \"<string,null-date-time>\",\n  \"dateOfHearing\": \"<string,null-date-time>\",\n  \"court\": \"<string,null>\",\n  \"hearingOutcome\": \"<string,null>\",\n  \"possessionDate\": \"<string,null-date-time>\",\n  \"warrantsAppliedFor\": \"<string,null>\",\n  \"dateOfEviction\": \"<string,null-date-time>\",\n  \"typeOfClaim\": \"<string,null>\",\n  \"rentScheduleStatus\": \"<string,null>\",\n  \"rentSchedule\": \"<string,null>\",\n  \"files\": [\n    {\n      \"id\": \"<string>\",\n      \"fileName\": \"<string>\",\n      \"originalFileName\": \"<string>\",\n      \"fileSize\": \"<integer,null>\",\n      \"mimeType\": \"<string,null>\",\n      \"fileType\": \"<string,null>\",\n      \"createdAt\": \"<string,null-date-time>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"fileName\": \"<string>\",\n      \"originalFileName\": \"<string>\",\n      \"fileSize\": \"<integer,null>\",\n      \"mimeType\": \"<string,null>\",\n      \"fileType\": \"<string,null>\",\n      \"createdAt\": \"<string,null-date-time>\"\n    }\n  ],\n  \"payments\": [\n    {\n      \"id\": \"<string>\",\n      \"referenceNumber\": \"<string>\",\n      \"paymentStatusIdentifier\": \"<string>\",\n      \"paymentStatusDescription\": \"<string>\",\n      \"insurer\": \"<string,null>\",\n      \"paymentDate\": \"<string,null-date-time>\",\n      \"paymentCreatedAt\": \"<string,null-date-time>\",\n      \"paymentSubmittedAt\": \"<string,null-date-time>\",\n      \"paymentPaidAt\": \"<string,null-date-time>\",\n      \"refundDueAmount\": \"<object,null>\",\n      \"customerPaymentUpdate\": \"<string,null>\",\n      \"paymentAmount\": \"<object,null>\",\n      \"createdAt\": \"<string,null-date-time>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"referenceNumber\": \"<string>\",\n      \"paymentStatusIdentifier\": \"<string>\",\n      \"paymentStatusDescription\": \"<string>\",\n      \"insurer\": \"<string,null>\",\n      \"paymentDate\": \"<string,null-date-time>\",\n      \"paymentCreatedAt\": \"<string,null-date-time>\",\n      \"paymentSubmittedAt\": \"<string,null-date-time>\",\n      \"paymentPaidAt\": \"<string,null-date-time>\",\n      \"refundDueAmount\": \"<object,null>\",\n      \"customerPaymentUpdate\": \"<string,null>\",\n      \"paymentAmount\": \"<object,null>\",\n      \"createdAt\": \"<string,null-date-time>\"\n    }\n  ],\n  \"rpiUniqueReferenceNumber\": \"<string,null>\",\n  \"agencyName\": \"<string,null>\",\n  \"agentName\": \"<string,null>\",\n  \"agencyEmail\": \"<string,null>\",\n  \"agencyPhone\": \"<string,null>\",\n  \"lettingAgentRegistrationNumber\": \"<string,null>\",\n  \"tenants\": \"<array,null>\",\n  \"guarantors\": \"<array,null>\",\n  \"landlords\": \"<array,null>\",\n  \"landlordRegistrationNumber\": \"<string,null>\",\n  \"permittedOccupiersName\": \"<string,null>\",\n  \"isTenancyCreatedOnGoodlord\": \"<string,null>\",\n  \"isTenancyRemovedAndNowOnFixedTerm\": \"<string,null>\",\n  \"dateBecamePeriodic\": \"<string,null-date-time>\",\n  \"referencingCompletedByGoodlord\": \"<string,null>\",\n  \"isGasAtProperty\": \"<string,null>\",\n  \"didUploadEpcToGoodlord\": \"<string,null>\",\n  \"dateEpcWasProvidedToTenant\": \"<string,null-date-time>\",\n  \"howEpcWasGivenToTenant\": \"<string,null>\",\n  \"isEicrOnGoodlord\": \"<string,null>\",\n  \"depositType\": \"<string,null>\",\n  \"depositCollectedByGoodlord\": \"<string,null>\",\n  \"depositPaidBy\": \"<string,null>\",\n  \"dateDepositWasPaid\": \"<string,null-date-time>\",\n  \"isDepositCertificateOnGoodlord\": \"<string,null>\",\n  \"dateDepositProtected\": \"<string,null-date-time>\",\n  \"prescribedInformationGiven\": \"<string,null>\",\n  \"depositReplacementCoverLevel\": \"<string,null>\",\n  \"propertyRequiresLicense\": \"<string,null>\",\n  \"dateOfRentArrears\": \"<string,null-date-time>\",\n  \"rentOutstanding\": \"<object,null>\",\n  \"reasonForNonPayment\": \"<string,null>\",\n  \"tenantsInDebtRespiteScheme\": \"<string,null>\",\n  \"detailsOfBreach\": \"<string,null>\",\n  \"dateAwareOfBreach\": \"<string,null-date-time>\",\n  \"worksBeingClaimedForDamage\": \"<string,null>\",\n  \"depositUsedFor\": \"<string,null>\",\n  \"datePropertyDamageIdentified\": \"<string,null-date-time>\",\n  \"currentDisputeInfo\": \"<string,null>\",\n  \"dateAwareOfDispute\": \"<string,null-date-time>\",\n  \"trespassOrNuisanceInfo\": \"<string,null>\",\n  \"dateAwareOfTrespassOrNuisance\": \"<string,null-date-time>\",\n  \"isPropertyStillOccupied\": \"<string,null>\",\n  \"verificationTenantIsStillOccupyingProperty\": \"<string,null>\",\n  \"dateLastInspection\": \"<string,null-date-time>\",\n  \"dateTenantVacated\": \"<string,null-date-time>\",\n  \"isClaimAgainstDepositFinalisedByDepositScheme\": \"<string,null>\",\n  \"isClaimAgainstDepositReplacementFinalised\": \"<string,null>\",\n  \"amountAwardedForRentArrears\": \"<object,null>\",\n  \"depositUseBreakdown\": \"<string,null>\",\n  \"howDepositClaimWasSettled\": \"<string,null>\",\n  \"depositReplacementUseBreakdown\": \"<string,null>\",\n  \"forwardingAddress\": \"<string,null>\",\n  \"agencyInstructedToReLet\": \"<string,null>\",\n  \"isPropertyAlreadyReLet\": \"<string,null>\",\n  \"dateNewTenancy\": \"<string,null-date-time>\",\n  \"possessionNoticesServed\": \"<string,null>\",\n  \"otherNoticesServed\": \"<string,null>\",\n  \"disputesBetweenTenantAndLandlord\": \"<string,null>\",\n  \"detailsOfDisputesBetweenTenantAndLandlord\": \"<string,null>\",\n  \"otherRelevantClaimInfo\": \"<string,null>\",\n  \"noticesServedToLandlord\": \"<string,null>\",\n  \"agencyAccountName\": \"<string,null>\",\n  \"agencyAccountNumber\": \"<string,null>\",\n  \"agencySortCode\": \"<string,null>\",\n  \"remittanceEmail\": \"<string,null>\",\n  \"gasSafetyCertificates\": \"<array,null>\",\n  \"howToRentGuides\": \"<array,null>\",\n  \"tribunalNotificationDate\": \"<string,null-date-time>\",\n  \"marketValueExplanation\": \"<string,null>\",\n  \"firstMonthRentRequestedViaGoodlord\": \"<string,null>\",\n  \"keysHandedOverDate\": \"<string,null-date-time>\",\n  \"tenantOccupationDate\": \"<string,null-date-time>\",\n  \"detailsOfAntiSocialBehaviour\": \"<string,null>\",\n  \"dateAwareOfAntiSocialBehaviour\": \"<string,null-date-time>\",\n  \"rraInfoSheetIssueDate\": \"<string,null-date-time>\",\n  \"rraInfoSheetIssueMethod\": \"<string,null>\",\n  \"statementOfTermsInTenancyAgreement\": \"<string,null>\",\n  \"statementOfTermsIssuedDate\": \"<string,null-date-time>\",\n  \"statementOfTermsIssuedMethod\": \"<string,null>\",\n  \"firstMonthRentRequestedBeforeSigning\": \"<string,null>\",\n  \"firstMonthRentRequestedDate\": \"<string,null-date-time>\",\n  \"originalTenancyStartDate\": \"<string,null-date-time>\"\n}",
+                          "createdAt": "2026-10-21T19:50:07.000Z",
+                          "updatedAt": "2026-10-21T19:50:07.000Z",
+                          "uid": "35240-5277b84d-3470-4b11-ab49-5d14956b1c04"
+                        },
+                        {
+                          "id": "5a753553-d269-4f44-987a-f303d49d3a2b",
+                          "name": "Forbidden",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/vnd.api+json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/insurance_claims/:id?include=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "insurance_claims",
+                                ":id"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Which relations to include in the response",
+                                  "key": "include",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string,null>\",\n  \"title\": \"<string,null>\",\n  \"detail\": \"<string,null>\",\n  \"status\": 400,\n  \"instance\": \"<string,null>\",\n  \"type\": \"<string>\",\n  \"meta\": {},\n  \"source\": {\n    \"pointer\": \"<string>\",\n    \"parameter\": \"<string>\",\n    \"header\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-10-21T19:50:07.000Z",
+                          "updatedAt": "2026-10-21T19:50:07.000Z",
+                          "uid": "35240-5a753553-d269-4f44-987a-f303d49d3a2b"
+                        },
+                        {
+                          "id": "935720e8-1766-49a3-acef-a57412ef959e",
+                          "name": "Not found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/vnd.api+json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/insurance_claims/:id?include=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "insurance_claims",
+                                ":id"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Which relations to include in the response",
+                                  "key": "include",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string,null>\",\n  \"title\": \"<string,null>\",\n  \"detail\": \"<string,null>\",\n  \"status\": 400,\n  \"instance\": \"<string,null>\",\n  \"type\": \"<string>\",\n  \"meta\": {},\n  \"source\": {\n    \"pointer\": \"<string>\",\n    \"parameter\": \"<string>\",\n    \"header\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-10-21T19:50:07.000Z",
+                          "updatedAt": "2026-10-21T19:50:07.000Z",
+                          "uid": "35240-935720e8-1766-49a3-acef-a57412ef959e"
+                        }
+                      ],
+                      "createdAt": "2026-10-21T19:50:07.000Z",
+                      "updatedAt": "2026-10-21T19:50:07.000Z",
+                      "uid": "35240-c1325d41-488d-4bdb-9d66-cf777b0effa6"
+                    },
+                    {
+                      "name": "Update insurance claim details",
+                      "id": "201a6777-9b23-494a-97b4-3ebd40375c14",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/vnd.api+json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "null",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/insurance_claims/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "insurance_claims",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "17b25441-1bbe-453a-b790-0f9986d4b87b",
+                              "key": "id",
+                              "value": "<string>",
+                              "description": "(Required) InsuranceClaimUpdate identifier"
+                            }
+                          ]
+                        },
+                        "description": "Partially update an insurance claim. Only included fields are modified."
+                      },
+                      "response": [
+                        {
+                          "id": "dc9734a4-b61b-4f6b-b403-b7f6c94145ea",
+                          "name": "InsuranceClaimUpdate resource updated",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/vnd.api+json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/vnd.api+json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "null",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/insurance_claims/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "insurance_claims",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string>\",\n  \"externalId\": \"<string>\",\n  \"createdAt\": \"<string,null-date-time>\",\n  \"updatedAt\": \"<string,null-date-time>\",\n  \"propertyAddress\": {\n    \"nisi35b\": \"<string,null>\",\n    \"et67\": \"<string,null>\"\n  },\n  \"claimStatus\": \"<string>\",\n  \"totalPaymentAmount\": {\n    \"reprehenderit_d8c\": \"<integer>\",\n    \"exercitation_e\": \"<integer>\"\n  },\n  \"claimReference\": \"<string>\",\n  \"firstArrearsDate\": \"<string,null-date-time>\",\n  \"mediationResponse\": \"<string,null>\",\n  \"claimStatusDescription\": \"<string>\",\n  \"claimDate\": \"<dateTime>\",\n  \"policyId\": \"<integer>\",\n  \"company\": {\n    \"id\": \"<uuid>\",\n    \"name\": \"<string,null>\",\n    \"externalId\": \"<string>\"\n  },\n  \"tenancyId\": \"<string,null>\",\n  \"legalStatus\": \"<string,null>\",\n  \"latestPaymentDate\": \"<string,null-date-time>\",\n  \"solicitorsClaimReference\": \"<string,null>\",\n  \"firmInstructed\": \"<string,null>\",\n  \"dateLegalInstructed\": \"<string,null-date-time>\",\n  \"section8DateServed\": \"<string,null-date-time>\",\n  \"section8DateExpired\": \"<string,null-date-time>\",\n  \"section21DateServed\": \"<string,null-date-time>\",\n  \"section21DateExpired\": \"<string,null-date-time>\",\n  \"dateProceedingsIssued\": \"<string,null-date-time>\",\n  \"dateOfHearing\": \"<string,null-date-time>\",\n  \"court\": \"<string,null>\",\n  \"hearingOutcome\": \"<string,null>\",\n  \"possessionDate\": \"<string,null-date-time>\",\n  \"warrantsAppliedFor\": \"<string,null>\",\n  \"dateOfEviction\": \"<string,null-date-time>\",\n  \"typeOfClaim\": \"<string,null>\",\n  \"rentScheduleStatus\": \"<string,null>\",\n  \"rentSchedule\": \"<string,null>\",\n  \"files\": [\n    {\n      \"id\": \"<string>\",\n      \"fileName\": \"<string>\",\n      \"originalFileName\": \"<string>\",\n      \"fileSize\": \"<integer,null>\",\n      \"mimeType\": \"<string,null>\",\n      \"fileType\": \"<string,null>\",\n      \"createdAt\": \"<string,null-date-time>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"fileName\": \"<string>\",\n      \"originalFileName\": \"<string>\",\n      \"fileSize\": \"<integer,null>\",\n      \"mimeType\": \"<string,null>\",\n      \"fileType\": \"<string,null>\",\n      \"createdAt\": \"<string,null-date-time>\"\n    }\n  ],\n  \"payments\": [\n    {\n      \"id\": \"<string>\",\n      \"referenceNumber\": \"<string>\",\n      \"paymentStatusIdentifier\": \"<string>\",\n      \"paymentStatusDescription\": \"<string>\",\n      \"insurer\": \"<string,null>\",\n      \"paymentDate\": \"<string,null-date-time>\",\n      \"paymentCreatedAt\": \"<string,null-date-time>\",\n      \"paymentSubmittedAt\": \"<string,null-date-time>\",\n      \"paymentPaidAt\": \"<string,null-date-time>\",\n      \"refundDueAmount\": \"<object,null>\",\n      \"customerPaymentUpdate\": \"<string,null>\",\n      \"paymentAmount\": \"<object,null>\",\n      \"createdAt\": \"<string,null-date-time>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"referenceNumber\": \"<string>\",\n      \"paymentStatusIdentifier\": \"<string>\",\n      \"paymentStatusDescription\": \"<string>\",\n      \"insurer\": \"<string,null>\",\n      \"paymentDate\": \"<string,null-date-time>\",\n      \"paymentCreatedAt\": \"<string,null-date-time>\",\n      \"paymentSubmittedAt\": \"<string,null-date-time>\",\n      \"paymentPaidAt\": \"<string,null-date-time>\",\n      \"refundDueAmount\": \"<object,null>\",\n      \"customerPaymentUpdate\": \"<string,null>\",\n      \"paymentAmount\": \"<object,null>\",\n      \"createdAt\": \"<string,null-date-time>\"\n    }\n  ],\n  \"rpiUniqueReferenceNumber\": \"<string,null>\",\n  \"agencyName\": \"<string,null>\",\n  \"agentName\": \"<string,null>\",\n  \"agencyEmail\": \"<string,null>\",\n  \"agencyPhone\": \"<string,null>\",\n  \"lettingAgentRegistrationNumber\": \"<string,null>\",\n  \"tenants\": \"<array,null>\",\n  \"guarantors\": \"<array,null>\",\n  \"landlords\": \"<array,null>\",\n  \"landlordRegistrationNumber\": \"<string,null>\",\n  \"permittedOccupiersName\": \"<string,null>\",\n  \"isTenancyCreatedOnGoodlord\": \"<string,null>\",\n  \"isTenancyRemovedAndNowOnFixedTerm\": \"<string,null>\",\n  \"dateBecamePeriodic\": \"<string,null-date-time>\",\n  \"referencingCompletedByGoodlord\": \"<string,null>\",\n  \"isGasAtProperty\": \"<string,null>\",\n  \"didUploadEpcToGoodlord\": \"<string,null>\",\n  \"dateEpcWasProvidedToTenant\": \"<string,null-date-time>\",\n  \"howEpcWasGivenToTenant\": \"<string,null>\",\n  \"isEicrOnGoodlord\": \"<string,null>\",\n  \"depositType\": \"<string,null>\",\n  \"depositCollectedByGoodlord\": \"<string,null>\",\n  \"depositPaidBy\": \"<string,null>\",\n  \"dateDepositWasPaid\": \"<string,null-date-time>\",\n  \"isDepositCertificateOnGoodlord\": \"<string,null>\",\n  \"dateDepositProtected\": \"<string,null-date-time>\",\n  \"prescribedInformationGiven\": \"<string,null>\",\n  \"depositReplacementCoverLevel\": \"<string,null>\",\n  \"propertyRequiresLicense\": \"<string,null>\",\n  \"dateOfRentArrears\": \"<string,null-date-time>\",\n  \"rentOutstanding\": \"<object,null>\",\n  \"reasonForNonPayment\": \"<string,null>\",\n  \"tenantsInDebtRespiteScheme\": \"<string,null>\",\n  \"detailsOfBreach\": \"<string,null>\",\n  \"dateAwareOfBreach\": \"<string,null-date-time>\",\n  \"worksBeingClaimedForDamage\": \"<string,null>\",\n  \"depositUsedFor\": \"<string,null>\",\n  \"datePropertyDamageIdentified\": \"<string,null-date-time>\",\n  \"currentDisputeInfo\": \"<string,null>\",\n  \"dateAwareOfDispute\": \"<string,null-date-time>\",\n  \"trespassOrNuisanceInfo\": \"<string,null>\",\n  \"dateAwareOfTrespassOrNuisance\": \"<string,null-date-time>\",\n  \"isPropertyStillOccupied\": \"<string,null>\",\n  \"verificationTenantIsStillOccupyingProperty\": \"<string,null>\",\n  \"dateLastInspection\": \"<string,null-date-time>\",\n  \"dateTenantVacated\": \"<string,null-date-time>\",\n  \"isClaimAgainstDepositFinalisedByDepositScheme\": \"<string,null>\",\n  \"isClaimAgainstDepositReplacementFinalised\": \"<string,null>\",\n  \"amountAwardedForRentArrears\": \"<object,null>\",\n  \"depositUseBreakdown\": \"<string,null>\",\n  \"howDepositClaimWasSettled\": \"<string,null>\",\n  \"depositReplacementUseBreakdown\": \"<string,null>\",\n  \"forwardingAddress\": \"<string,null>\",\n  \"agencyInstructedToReLet\": \"<string,null>\",\n  \"isPropertyAlreadyReLet\": \"<string,null>\",\n  \"dateNewTenancy\": \"<string,null-date-time>\",\n  \"possessionNoticesServed\": \"<string,null>\",\n  \"otherNoticesServed\": \"<string,null>\",\n  \"disputesBetweenTenantAndLandlord\": \"<string,null>\",\n  \"detailsOfDisputesBetweenTenantAndLandlord\": \"<string,null>\",\n  \"otherRelevantClaimInfo\": \"<string,null>\",\n  \"noticesServedToLandlord\": \"<string,null>\",\n  \"agencyAccountName\": \"<string,null>\",\n  \"agencyAccountNumber\": \"<string,null>\",\n  \"agencySortCode\": \"<string,null>\",\n  \"remittanceEmail\": \"<string,null>\",\n  \"gasSafetyCertificates\": \"<array,null>\",\n  \"howToRentGuides\": \"<array,null>\",\n  \"tribunalNotificationDate\": \"<string,null-date-time>\",\n  \"marketValueExplanation\": \"<string,null>\",\n  \"firstMonthRentRequestedViaGoodlord\": \"<string,null>\",\n  \"keysHandedOverDate\": \"<string,null-date-time>\",\n  \"tenantOccupationDate\": \"<string,null-date-time>\",\n  \"detailsOfAntiSocialBehaviour\": \"<string,null>\",\n  \"dateAwareOfAntiSocialBehaviour\": \"<string,null-date-time>\",\n  \"rraInfoSheetIssueDate\": \"<string,null-date-time>\",\n  \"rraInfoSheetIssueMethod\": \"<string,null>\",\n  \"statementOfTermsInTenancyAgreement\": \"<string,null>\",\n  \"statementOfTermsIssuedDate\": \"<string,null-date-time>\",\n  \"statementOfTermsIssuedMethod\": \"<string,null>\",\n  \"firstMonthRentRequestedBeforeSigning\": \"<string,null>\",\n  \"firstMonthRentRequestedDate\": \"<string,null-date-time>\",\n  \"originalTenancyStartDate\": \"<string,null-date-time>\"\n}",
+                          "createdAt": "2026-10-21T19:50:07.000Z",
+                          "updatedAt": "2026-10-21T19:50:07.000Z",
+                          "uid": "35240-dc9734a4-b61b-4f6b-b403-b7f6c94145ea"
+                        },
+                        {
+                          "id": "cca74f17-7fe4-4615-9812-790ad28d1b71",
+                          "name": "Invalid input",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/vnd.api+json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/vnd.api+json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "null",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/insurance_claims/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "insurance_claims",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string,null>\",\n  \"title\": \"<string,null>\",\n  \"detail\": \"<string,null>\",\n  \"status\": 400,\n  \"instance\": \"<string,null>\",\n  \"type\": \"<string>\",\n  \"meta\": {},\n  \"source\": {\n    \"pointer\": \"<string>\",\n    \"parameter\": \"<string>\",\n    \"header\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-10-21T19:50:07.000Z",
+                          "updatedAt": "2026-10-21T19:50:07.000Z",
+                          "uid": "35240-cca74f17-7fe4-4615-9812-790ad28d1b71"
+                        },
+                        {
+                          "id": "a590716e-c736-4631-83ef-7dee2048e6fd",
+                          "name": "Not found",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/vnd.api+json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/vnd.api+json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "null",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/insurance_claims/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "insurance_claims",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string,null>\",\n  \"title\": \"<string,null>\",\n  \"detail\": \"<string,null>\",\n  \"status\": 400,\n  \"instance\": \"<string,null>\",\n  \"type\": \"<string>\",\n  \"meta\": {},\n  \"source\": {\n    \"pointer\": \"<string>\",\n    \"parameter\": \"<string>\",\n    \"header\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-10-21T19:50:07.000Z",
+                          "updatedAt": "2026-10-21T19:50:07.000Z",
+                          "uid": "35240-a590716e-c736-4631-83ef-7dee2048e6fd"
+                        },
+                        {
+                          "id": "a8a66159-0f29-4b63-83a1-6e552bb3ba6d",
+                          "name": "An error occurred",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/vnd.api+json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/vnd.api+json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "null",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/insurance_claims/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "insurance_claims",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"status\": 422,\n  \"detail\": \"<string>\",\n  \"type\": \"<string>\",\n  \"title\": \"<string,null>\",\n  \"instance\": \"<string,null>\"\n}",
+                          "createdAt": "2026-10-21T19:50:07.000Z",
+                          "updatedAt": "2026-10-21T19:50:07.000Z",
+                          "uid": "35240-a8a66159-0f29-4b63-83a1-6e552bb3ba6d"
+                        }
+                      ],
+                      "createdAt": "2026-10-21T19:50:07.000Z",
+                      "updatedAt": "2026-10-21T19:50:07.000Z",
+                      "uid": "35240-201a6777-9b23-494a-97b4-3ebd40375c14"
+                    }
+                  ],
+                  "id": "909cd5ad-5757-407a-8892-58eeb6e6cefe",
+                  "createdAt": "2026-10-21T19:50:07.000Z",
+                  "updatedAt": "2026-10-21T19:50:07.000Z",
+                  "uid": "35240-909cd5ad-5757-407a-8892-58eeb6e6cefe"
+                },
+                {
+                  "name": "Retrieves the collection of InsuranceClaim resources",
+                  "id": "d8326b00-6aaf-4a37-9ee6-a2f9dc3cba98",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/v1/insurance_claims?page=1&itemsPerPage=50&company.externalId=<string>&company.externalId[]=<string>&company.externalId[]=<string>&policyUniqueReferenceNumber[]=<string>&policyUniqueReferenceNumber[]=<string>&policyUniqueReferenceNumber=<string>&propertyAddress=<string>&claimStatus[]=<string>&claimStatus[]=<string>&claimStatus=<string>&order[totalPaymentAmount]=asc&order[claimDate]=asc&order[latestPaymentDate]=asc&include=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "insurance_claims"
+                      ],
+                      "query": [
+                        {
+                          "description": "The collection page number",
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "description": "The number of items per page",
+                          "key": "itemsPerPage",
+                          "value": "50"
+                        },
+                        {
+                          "key": "company.externalId",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "company.externalId[]",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "company.externalId[]",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter insurance claims by policy unique reference number (RPI ref)",
+                          "key": "policyUniqueReferenceNumber[]",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter insurance claims by policy unique reference number (RPI ref)",
+                          "key": "policyUniqueReferenceNumber[]",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter insurance claims by policy unique reference number (RPI ref)",
+                          "key": "policyUniqueReferenceNumber",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter insurance claims by address",
+                          "key": "propertyAddress",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter insurance claims by status",
+                          "key": "claimStatus[]",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter insurance claims by status",
+                          "key": "claimStatus[]",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter insurance claims by status",
+                          "key": "claimStatus",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "order[totalPaymentAmount]",
+                          "value": "asc"
+                        },
+                        {
+                          "key": "order[claimDate]",
+                          "value": "asc"
+                        },
+                        {
+                          "key": "order[latestPaymentDate]",
+                          "value": "asc"
+                        },
+                        {
+                          "description": "Which relations to include in the response",
+                          "key": "include",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "description": "Retrieves the collection of InsuranceClaim resources."
+                  },
+                  "response": [
+                    {
+                      "id": "85b03565-ede2-4234-a621-a462b862a8fa",
+                      "name": "InsuranceClaim collection",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/insurance_claims?page=1&itemsPerPage=50&company.externalId=<string>&company.externalId[]=<string>&policyUniqueReferenceNumber[]=<string>&policyUniqueReferenceNumber=<string>&propertyAddress=<string>&claimStatus[]=<string>&claimStatus=<string>&order[totalPaymentAmount]=asc&order[claimDate]=asc&order[latestPaymentDate]=asc&include=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "insurance_claims"
+                          ],
+                          "query": [
+                            {
+                              "description": "The collection page number",
+                              "key": "page",
+                              "value": "1"
+                            },
+                            {
+                              "description": "The number of items per page",
+                              "key": "itemsPerPage",
+                              "value": "50"
+                            },
+                            {
+                              "key": "company.externalId",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "company.externalId[]",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Filter insurance claims by policy unique reference number (RPI ref)",
+                              "key": "policyUniqueReferenceNumber[]",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Filter insurance claims by policy unique reference number (RPI ref)",
+                              "key": "policyUniqueReferenceNumber",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Filter insurance claims by address",
+                              "key": "propertyAddress",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Filter insurance claims by status",
+                              "key": "claimStatus[]",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Filter insurance claims by status",
+                              "key": "claimStatus",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "order[totalPaymentAmount]",
+                              "value": "asc"
+                            },
+                            {
+                              "key": "order[claimDate]",
+                              "value": "asc"
+                            },
+                            {
+                              "key": "order[latestPaymentDate]",
+                              "value": "asc"
+                            },
+                            {
+                              "description": "Which relations to include in the response",
+                              "key": "include",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "[\n  {\n    \"id\": \"<string>\",\n    \"externalId\": \"<string>\",\n    \"createdAt\": \"<string,null-date-time>\",\n    \"updatedAt\": \"<string,null-date-time>\",\n    \"propertyAddress\": {\n      \"laboris_e1\": \"<string,null>\",\n      \"dolor49\": \"<string,null>\",\n      \"idd\": \"<string,null>\"\n    },\n    \"claimStatus\": \"<string>\",\n    \"totalPaymentAmount\": {\n      \"ut_f\": \"<integer>\",\n      \"eu_0e\": \"<integer>\",\n      \"nostrud_41\": \"<integer>\"\n    },\n    \"claimReference\": \"<string>\",\n    \"firstArrearsDate\": \"<string,null-date-time>\",\n    \"mediationResponse\": \"<string,null>\",\n    \"claimStatusDescription\": \"<string>\",\n    \"claimDate\": \"<dateTime>\",\n    \"policyId\": \"<integer>\",\n    \"company\": {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string,null>\",\n      \"externalId\": \"<string>\"\n    },\n    \"tenancyId\": \"<string,null>\",\n    \"legalStatus\": \"<string,null>\",\n    \"latestPaymentDate\": \"<string,null-date-time>\",\n    \"solicitorsClaimReference\": \"<string,null>\",\n    \"firmInstructed\": \"<string,null>\",\n    \"dateLegalInstructed\": \"<string,null-date-time>\",\n    \"section8DateServed\": \"<string,null-date-time>\",\n    \"section8DateExpired\": \"<string,null-date-time>\",\n    \"section21DateServed\": \"<string,null-date-time>\",\n    \"section21DateExpired\": \"<string,null-date-time>\",\n    \"dateProceedingsIssued\": \"<string,null-date-time>\",\n    \"dateOfHearing\": \"<string,null-date-time>\",\n    \"court\": \"<string,null>\",\n    \"hearingOutcome\": \"<string,null>\",\n    \"possessionDate\": \"<string,null-date-time>\",\n    \"warrantsAppliedFor\": \"<string,null>\",\n    \"dateOfEviction\": \"<string,null-date-time>\",\n    \"typeOfClaim\": \"<string,null>\",\n    \"rentScheduleStatus\": \"<string,null>\",\n    \"rentSchedule\": \"<string,null>\",\n    \"files\": [\n      {\n        \"id\": \"<string>\",\n        \"fileName\": \"<string>\",\n        \"originalFileName\": \"<string>\",\n        \"fileSize\": \"<integer,null>\",\n        \"mimeType\": \"<string,null>\",\n        \"fileType\": \"<string,null>\",\n        \"createdAt\": \"<string,null-date-time>\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"fileName\": \"<string>\",\n        \"originalFileName\": \"<string>\",\n        \"fileSize\": \"<integer,null>\",\n        \"mimeType\": \"<string,null>\",\n        \"fileType\": \"<string,null>\",\n        \"createdAt\": \"<string,null-date-time>\"\n      }\n    ],\n    \"payments\": [\n      {\n        \"id\": \"<string>\",\n        \"referenceNumber\": \"<string>\",\n        \"paymentStatusIdentifier\": \"<string>\",\n        \"paymentStatusDescription\": \"<string>\",\n        \"insurer\": \"<string,null>\",\n        \"paymentDate\": \"<string,null-date-time>\",\n        \"paymentCreatedAt\": \"<string,null-date-time>\",\n        \"paymentSubmittedAt\": \"<string,null-date-time>\",\n        \"paymentPaidAt\": \"<string,null-date-time>\",\n        \"refundDueAmount\": \"<object,null>\",\n        \"customerPaymentUpdate\": \"<string,null>\",\n        \"paymentAmount\": \"<object,null>\",\n        \"createdAt\": \"<string,null-date-time>\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"referenceNumber\": \"<string>\",\n        \"paymentStatusIdentifier\": \"<string>\",\n        \"paymentStatusDescription\": \"<string>\",\n        \"insurer\": \"<string,null>\",\n        \"paymentDate\": \"<string,null-date-time>\",\n        \"paymentCreatedAt\": \"<string,null-date-time>\",\n        \"paymentSubmittedAt\": \"<string,null-date-time>\",\n        \"paymentPaidAt\": \"<string,null-date-time>\",\n        \"refundDueAmount\": \"<object,null>\",\n        \"customerPaymentUpdate\": \"<string,null>\",\n        \"paymentAmount\": \"<object,null>\",\n        \"createdAt\": \"<string,null-date-time>\"\n      }\n    ],\n    \"rpiUniqueReferenceNumber\": \"<string,null>\",\n    \"agencyName\": \"<string,null>\",\n    \"agentName\": \"<string,null>\",\n    \"agencyEmail\": \"<string,null>\",\n    \"agencyPhone\": \"<string,null>\",\n    \"lettingAgentRegistrationNumber\": \"<string,null>\",\n    \"tenants\": \"<array,null>\",\n    \"guarantors\": \"<array,null>\",\n    \"landlords\": \"<array,null>\",\n    \"landlordRegistrationNumber\": \"<string,null>\",\n    \"permittedOccupiersName\": \"<string,null>\",\n    \"isTenancyCreatedOnGoodlord\": \"<string,null>\",\n    \"isTenancyRemovedAndNowOnFixedTerm\": \"<string,null>\",\n    \"dateBecamePeriodic\": \"<string,null-date-time>\",\n    \"referencingCompletedByGoodlord\": \"<string,null>\",\n    \"isGasAtProperty\": \"<string,null>\",\n    \"didUploadEpcToGoodlord\": \"<string,null>\",\n    \"dateEpcWasProvidedToTenant\": \"<string,null-date-time>\",\n    \"howEpcWasGivenToTenant\": \"<string,null>\",\n    \"isEicrOnGoodlord\": \"<string,null>\",\n    \"depositType\": \"<string,null>\",\n    \"depositCollectedByGoodlord\": \"<string,null>\",\n    \"depositPaidBy\": \"<string,null>\",\n    \"dateDepositWasPaid\": \"<string,null-date-time>\",\n    \"isDepositCertificateOnGoodlord\": \"<string,null>\",\n    \"dateDepositProtected\": \"<string,null-date-time>\",\n    \"prescribedInformationGiven\": \"<string,null>\",\n    \"depositReplacementCoverLevel\": \"<string,null>\",\n    \"propertyRequiresLicense\": \"<string,null>\",\n    \"dateOfRentArrears\": \"<string,null-date-time>\",\n    \"rentOutstanding\": \"<object,null>\",\n    \"reasonForNonPayment\": \"<string,null>\",\n    \"tenantsInDebtRespiteScheme\": \"<string,null>\",\n    \"detailsOfBreach\": \"<string,null>\",\n    \"dateAwareOfBreach\": \"<string,null-date-time>\",\n    \"worksBeingClaimedForDamage\": \"<string,null>\",\n    \"depositUsedFor\": \"<string,null>\",\n    \"datePropertyDamageIdentified\": \"<string,null-date-time>\",\n    \"currentDisputeInfo\": \"<string,null>\",\n    \"dateAwareOfDispute\": \"<string,null-date-time>\",\n    \"trespassOrNuisanceInfo\": \"<string,null>\",\n    \"dateAwareOfTrespassOrNuisance\": \"<string,null-date-time>\",\n    \"isPropertyStillOccupied\": \"<string,null>\",\n    \"verificationTenantIsStillOccupyingProperty\": \"<string,null>\",\n    \"dateLastInspection\": \"<string,null-date-time>\",\n    \"dateTenantVacated\": \"<string,null-date-time>\",\n    \"isClaimAgainstDepositFinalisedByDepositScheme\": \"<string,null>\",\n    \"isClaimAgainstDepositReplacementFinalised\": \"<string,null>\",\n    \"amountAwardedForRentArrears\": \"<object,null>\",\n    \"depositUseBreakdown\": \"<string,null>\",\n    \"howDepositClaimWasSettled\": \"<string,null>\",\n    \"depositReplacementUseBreakdown\": \"<string,null>\",\n    \"forwardingAddress\": \"<string,null>\",\n    \"agencyInstructedToReLet\": \"<string,null>\",\n    \"isPropertyAlreadyReLet\": \"<string,null>\",\n    \"dateNewTenancy\": \"<string,null-date-time>\",\n    \"possessionNoticesServed\": \"<string,null>\",\n    \"otherNoticesServed\": \"<string,null>\",\n    \"disputesBetweenTenantAndLandlord\": \"<string,null>\",\n    \"detailsOfDisputesBetweenTenantAndLandlord\": \"<string,null>\",\n    \"otherRelevantClaimInfo\": \"<string,null>\",\n    \"noticesServedToLandlord\": \"<string,null>\",\n    \"agencyAccountName\": \"<string,null>\",\n    \"agencyAccountNumber\": \"<string,null>\",\n    \"agencySortCode\": \"<string,null>\",\n    \"remittanceEmail\": \"<string,null>\",\n    \"gasSafetyCertificates\": \"<array,null>\",\n    \"howToRentGuides\": \"<array,null>\",\n    \"tribunalNotificationDate\": \"<string,null-date-time>\",\n    \"marketValueExplanation\": \"<string,null>\",\n    \"firstMonthRentRequestedViaGoodlord\": \"<string,null>\",\n    \"keysHandedOverDate\": \"<string,null-date-time>\",\n    \"tenantOccupationDate\": \"<string,null-date-time>\",\n    \"detailsOfAntiSocialBehaviour\": \"<string,null>\",\n    \"dateAwareOfAntiSocialBehaviour\": \"<string,null-date-time>\",\n    \"rraInfoSheetIssueDate\": \"<string,null-date-time>\",\n    \"rraInfoSheetIssueMethod\": \"<string,null>\",\n    \"statementOfTermsInTenancyAgreement\": \"<string,null>\",\n    \"statementOfTermsIssuedDate\": \"<string,null-date-time>\",\n    \"statementOfTermsIssuedMethod\": \"<string,null>\",\n    \"firstMonthRentRequestedBeforeSigning\": \"<string,null>\",\n    \"firstMonthRentRequestedDate\": \"<string,null-date-time>\",\n    \"originalTenancyStartDate\": \"<string,null-date-time>\"\n  },\n  {\n    \"id\": \"<string>\",\n    \"externalId\": \"<string>\",\n    \"createdAt\": \"<string,null-date-time>\",\n    \"updatedAt\": \"<string,null-date-time>\",\n    \"propertyAddress\": {\n      \"sit_c1\": \"<string,null>\",\n      \"consectetur_ff\": \"<string,null>\"\n    },\n    \"claimStatus\": \"<string>\",\n    \"totalPaymentAmount\": {\n      \"sint_0\": \"<integer>\",\n      \"exercitation90\": \"<integer>\",\n      \"et_6c\": \"<integer>\"\n    },\n    \"claimReference\": \"<string>\",\n    \"firstArrearsDate\": \"<string,null-date-time>\",\n    \"mediationResponse\": \"<string,null>\",\n    \"claimStatusDescription\": \"<string>\",\n    \"claimDate\": \"<dateTime>\",\n    \"policyId\": \"<integer>\",\n    \"company\": {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string,null>\",\n      \"externalId\": \"<string>\"\n    },\n    \"tenancyId\": \"<string,null>\",\n    \"legalStatus\": \"<string,null>\",\n    \"latestPaymentDate\": \"<string,null-date-time>\",\n    \"solicitorsClaimReference\": \"<string,null>\",\n    \"firmInstructed\": \"<string,null>\",\n    \"dateLegalInstructed\": \"<string,null-date-time>\",\n    \"section8DateServed\": \"<string,null-date-time>\",\n    \"section8DateExpired\": \"<string,null-date-time>\",\n    \"section21DateServed\": \"<string,null-date-time>\",\n    \"section21DateExpired\": \"<string,null-date-time>\",\n    \"dateProceedingsIssued\": \"<string,null-date-time>\",\n    \"dateOfHearing\": \"<string,null-date-time>\",\n    \"court\": \"<string,null>\",\n    \"hearingOutcome\": \"<string,null>\",\n    \"possessionDate\": \"<string,null-date-time>\",\n    \"warrantsAppliedFor\": \"<string,null>\",\n    \"dateOfEviction\": \"<string,null-date-time>\",\n    \"typeOfClaim\": \"<string,null>\",\n    \"rentScheduleStatus\": \"<string,null>\",\n    \"rentSchedule\": \"<string,null>\",\n    \"files\": [\n      {\n        \"id\": \"<string>\",\n        \"fileName\": \"<string>\",\n        \"originalFileName\": \"<string>\",\n        \"fileSize\": \"<integer,null>\",\n        \"mimeType\": \"<string,null>\",\n        \"fileType\": \"<string,null>\",\n        \"createdAt\": \"<string,null-date-time>\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"fileName\": \"<string>\",\n        \"originalFileName\": \"<string>\",\n        \"fileSize\": \"<integer,null>\",\n        \"mimeType\": \"<string,null>\",\n        \"fileType\": \"<string,null>\",\n        \"createdAt\": \"<string,null-date-time>\"\n      }\n    ],\n    \"payments\": [\n      {\n        \"id\": \"<string>\",\n        \"referenceNumber\": \"<string>\",\n        \"paymentStatusIdentifier\": \"<string>\",\n        \"paymentStatusDescription\": \"<string>\",\n        \"insurer\": \"<string,null>\",\n        \"paymentDate\": \"<string,null-date-time>\",\n        \"paymentCreatedAt\": \"<string,null-date-time>\",\n        \"paymentSubmittedAt\": \"<string,null-date-time>\",\n        \"paymentPaidAt\": \"<string,null-date-time>\",\n        \"refundDueAmount\": \"<object,null>\",\n        \"customerPaymentUpdate\": \"<string,null>\",\n        \"paymentAmount\": \"<object,null>\",\n        \"createdAt\": \"<string,null-date-time>\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"referenceNumber\": \"<string>\",\n        \"paymentStatusIdentifier\": \"<string>\",\n        \"paymentStatusDescription\": \"<string>\",\n        \"insurer\": \"<string,null>\",\n        \"paymentDate\": \"<string,null-date-time>\",\n        \"paymentCreatedAt\": \"<string,null-date-time>\",\n        \"paymentSubmittedAt\": \"<string,null-date-time>\",\n        \"paymentPaidAt\": \"<string,null-date-time>\",\n        \"refundDueAmount\": \"<object,null>\",\n        \"customerPaymentUpdate\": \"<string,null>\",\n        \"paymentAmount\": \"<object,null>\",\n        \"createdAt\": \"<string,null-date-time>\"\n      }\n    ],\n    \"rpiUniqueReferenceNumber\": \"<string,null>\",\n    \"agencyName\": \"<string,null>\",\n    \"agentName\": \"<string,null>\",\n    \"agencyEmail\": \"<string,null>\",\n    \"agencyPhone\": \"<string,null>\",\n    \"lettingAgentRegistrationNumber\": \"<string,null>\",\n    \"tenants\": \"<array,null>\",\n    \"guarantors\": \"<array,null>\",\n    \"landlords\": \"<array,null>\",\n    \"landlordRegistrationNumber\": \"<string,null>\",\n    \"permittedOccupiersName\": \"<string,null>\",\n    \"isTenancyCreatedOnGoodlord\": \"<string,null>\",\n    \"isTenancyRemovedAndNowOnFixedTerm\": \"<string,null>\",\n    \"dateBecamePeriodic\": \"<string,null-date-time>\",\n    \"referencingCompletedByGoodlord\": \"<string,null>\",\n    \"isGasAtProperty\": \"<string,null>\",\n    \"didUploadEpcToGoodlord\": \"<string,null>\",\n    \"dateEpcWasProvidedToTenant\": \"<string,null-date-time>\",\n    \"howEpcWasGivenToTenant\": \"<string,null>\",\n    \"isEicrOnGoodlord\": \"<string,null>\",\n    \"depositType\": \"<string,null>\",\n    \"depositCollectedByGoodlord\": \"<string,null>\",\n    \"depositPaidBy\": \"<string,null>\",\n    \"dateDepositWasPaid\": \"<string,null-date-time>\",\n    \"isDepositCertificateOnGoodlord\": \"<string,null>\",\n    \"dateDepositProtected\": \"<string,null-date-time>\",\n    \"prescribedInformationGiven\": \"<string,null>\",\n    \"depositReplacementCoverLevel\": \"<string,null>\",\n    \"propertyRequiresLicense\": \"<string,null>\",\n    \"dateOfRentArrears\": \"<string,null-date-time>\",\n    \"rentOutstanding\": \"<object,null>\",\n    \"reasonForNonPayment\": \"<string,null>\",\n    \"tenantsInDebtRespiteScheme\": \"<string,null>\",\n    \"detailsOfBreach\": \"<string,null>\",\n    \"dateAwareOfBreach\": \"<string,null-date-time>\",\n    \"worksBeingClaimedForDamage\": \"<string,null>\",\n    \"depositUsedFor\": \"<string,null>\",\n    \"datePropertyDamageIdentified\": \"<string,null-date-time>\",\n    \"currentDisputeInfo\": \"<string,null>\",\n    \"dateAwareOfDispute\": \"<string,null-date-time>\",\n    \"trespassOrNuisanceInfo\": \"<string,null>\",\n    \"dateAwareOfTrespassOrNuisance\": \"<string,null-date-time>\",\n    \"isPropertyStillOccupied\": \"<string,null>\",\n    \"verificationTenantIsStillOccupyingProperty\": \"<string,null>\",\n    \"dateLastInspection\": \"<string,null-date-time>\",\n    \"dateTenantVacated\": \"<string,null-date-time>\",\n    \"isClaimAgainstDepositFinalisedByDepositScheme\": \"<string,null>\",\n    \"isClaimAgainstDepositReplacementFinalised\": \"<string,null>\",\n    \"amountAwardedForRentArrears\": \"<object,null>\",\n    \"depositUseBreakdown\": \"<string,null>\",\n    \"howDepositClaimWasSettled\": \"<string,null>\",\n    \"depositReplacementUseBreakdown\": \"<string,null>\",\n    \"forwardingAddress\": \"<string,null>\",\n    \"agencyInstructedToReLet\": \"<string,null>\",\n    \"isPropertyAlreadyReLet\": \"<string,null>\",\n    \"dateNewTenancy\": \"<string,null-date-time>\",\n    \"possessionNoticesServed\": \"<string,null>\",\n    \"otherNoticesServed\": \"<string,null>\",\n    \"disputesBetweenTenantAndLandlord\": \"<string,null>\",\n    \"detailsOfDisputesBetweenTenantAndLandlord\": \"<string,null>\",\n    \"otherRelevantClaimInfo\": \"<string,null>\",\n    \"noticesServedToLandlord\": \"<string,null>\",\n    \"agencyAccountName\": \"<string,null>\",\n    \"agencyAccountNumber\": \"<string,null>\",\n    \"agencySortCode\": \"<string,null>\",\n    \"remittanceEmail\": \"<string,null>\",\n    \"gasSafetyCertificates\": \"<array,null>\",\n    \"howToRentGuides\": \"<array,null>\",\n    \"tribunalNotificationDate\": \"<string,null-date-time>\",\n    \"marketValueExplanation\": \"<string,null>\",\n    \"firstMonthRentRequestedViaGoodlord\": \"<string,null>\",\n    \"keysHandedOverDate\": \"<string,null-date-time>\",\n    \"tenantOccupationDate\": \"<string,null-date-time>\",\n    \"detailsOfAntiSocialBehaviour\": \"<string,null>\",\n    \"dateAwareOfAntiSocialBehaviour\": \"<string,null-date-time>\",\n    \"rraInfoSheetIssueDate\": \"<string,null-date-time>\",\n    \"rraInfoSheetIssueMethod\": \"<string,null>\",\n    \"statementOfTermsInTenancyAgreement\": \"<string,null>\",\n    \"statementOfTermsIssuedDate\": \"<string,null-date-time>\",\n    \"statementOfTermsIssuedMethod\": \"<string,null>\",\n    \"firstMonthRentRequestedBeforeSigning\": \"<string,null>\",\n    \"firstMonthRentRequestedDate\": \"<string,null-date-time>\",\n    \"originalTenancyStartDate\": \"<string,null-date-time>\"\n  }\n]",
+                      "createdAt": "2026-10-21T19:50:07.000Z",
+                      "updatedAt": "2026-10-21T19:50:07.000Z",
+                      "uid": "35240-85b03565-ede2-4234-a621-a462b862a8fa"
+                    },
+                    {
+                      "id": "2505a0e9-173d-48f7-bf79-dba6caab8b96",
+                      "name": "Forbidden",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/insurance_claims?page=1&itemsPerPage=50&company.externalId=<string>&company.externalId[]=<string>&policyUniqueReferenceNumber[]=<string>&policyUniqueReferenceNumber=<string>&propertyAddress=<string>&claimStatus[]=<string>&claimStatus=<string>&order[totalPaymentAmount]=asc&order[claimDate]=asc&order[latestPaymentDate]=asc&include=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "insurance_claims"
+                          ],
+                          "query": [
+                            {
+                              "description": "The collection page number",
+                              "key": "page",
+                              "value": "1"
+                            },
+                            {
+                              "description": "The number of items per page",
+                              "key": "itemsPerPage",
+                              "value": "50"
+                            },
+                            {
+                              "key": "company.externalId",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "company.externalId[]",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Filter insurance claims by policy unique reference number (RPI ref)",
+                              "key": "policyUniqueReferenceNumber[]",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Filter insurance claims by policy unique reference number (RPI ref)",
+                              "key": "policyUniqueReferenceNumber",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Filter insurance claims by address",
+                              "key": "propertyAddress",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Filter insurance claims by status",
+                              "key": "claimStatus[]",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Filter insurance claims by status",
+                              "key": "claimStatus",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "order[totalPaymentAmount]",
+                              "value": "asc"
+                            },
+                            {
+                              "key": "order[claimDate]",
+                              "value": "asc"
+                            },
+                            {
+                              "key": "order[latestPaymentDate]",
+                              "value": "asc"
+                            },
+                            {
+                              "description": "Which relations to include in the response",
+                              "key": "include",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string,null>\",\n  \"title\": \"<string,null>\",\n  \"detail\": \"<string,null>\",\n  \"status\": 400,\n  \"instance\": \"<string,null>\",\n  \"type\": \"<string>\",\n  \"meta\": {},\n  \"source\": {\n    \"pointer\": \"<string>\",\n    \"parameter\": \"<string>\",\n    \"header\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-21T19:50:07.000Z",
+                      "updatedAt": "2026-10-21T19:50:07.000Z",
+                      "uid": "35240-2505a0e9-173d-48f7-bf79-dba6caab8b96"
+                    }
+                  ],
+                  "createdAt": "2026-10-21T19:50:07.000Z",
+                  "updatedAt": "2026-10-21T19:50:07.000Z",
+                  "uid": "35240-d8326b00-6aaf-4a37-9ee6-a2f9dc3cba98"
+                },
+                {
+                  "name": "Creates a InsuranceClaimCreate resource",
+                  "id": "8c9bb436-bb3c-42bd-ad43-e9e5a3470202",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/vnd.api+json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "null",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/v1/insurance_claims",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "insurance_claims"
+                      ]
+                    },
+                    "description": "Creates a InsuranceClaimCreate resource."
+                  },
+                  "response": [
+                    {
+                      "id": "3e45b23c-2927-4600-bd25-da4719311ba5",
+                      "name": "InsuranceClaimCreate resource created",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/vnd.api+json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "null",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/insurance_claims",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "insurance_claims"
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"externalId\": \"<string>\",\n  \"createdAt\": \"<string,null-date-time>\",\n  \"updatedAt\": \"<string,null-date-time>\",\n  \"propertyAddress\": {\n    \"nisi35b\": \"<string,null>\",\n    \"et67\": \"<string,null>\"\n  },\n  \"claimStatus\": \"<string>\",\n  \"totalPaymentAmount\": {\n    \"reprehenderit_d8c\": \"<integer>\",\n    \"exercitation_e\": \"<integer>\"\n  },\n  \"claimReference\": \"<string>\",\n  \"firstArrearsDate\": \"<string,null-date-time>\",\n  \"mediationResponse\": \"<string,null>\",\n  \"claimStatusDescription\": \"<string>\",\n  \"claimDate\": \"<dateTime>\",\n  \"policyId\": \"<integer>\",\n  \"company\": {\n    \"id\": \"<uuid>\",\n    \"name\": \"<string,null>\",\n    \"externalId\": \"<string>\"\n  },\n  \"tenancyId\": \"<string,null>\",\n  \"legalStatus\": \"<string,null>\",\n  \"latestPaymentDate\": \"<string,null-date-time>\",\n  \"solicitorsClaimReference\": \"<string,null>\",\n  \"firmInstructed\": \"<string,null>\",\n  \"dateLegalInstructed\": \"<string,null-date-time>\",\n  \"section8DateServed\": \"<string,null-date-time>\",\n  \"section8DateExpired\": \"<string,null-date-time>\",\n  \"section21DateServed\": \"<string,null-date-time>\",\n  \"section21DateExpired\": \"<string,null-date-time>\",\n  \"dateProceedingsIssued\": \"<string,null-date-time>\",\n  \"dateOfHearing\": \"<string,null-date-time>\",\n  \"court\": \"<string,null>\",\n  \"hearingOutcome\": \"<string,null>\",\n  \"possessionDate\": \"<string,null-date-time>\",\n  \"warrantsAppliedFor\": \"<string,null>\",\n  \"dateOfEviction\": \"<string,null-date-time>\",\n  \"typeOfClaim\": \"<string,null>\",\n  \"rentScheduleStatus\": \"<string,null>\",\n  \"rentSchedule\": \"<string,null>\",\n  \"files\": [\n    {\n      \"id\": \"<string>\",\n      \"fileName\": \"<string>\",\n      \"originalFileName\": \"<string>\",\n      \"fileSize\": \"<integer,null>\",\n      \"mimeType\": \"<string,null>\",\n      \"fileType\": \"<string,null>\",\n      \"createdAt\": \"<string,null-date-time>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"fileName\": \"<string>\",\n      \"originalFileName\": \"<string>\",\n      \"fileSize\": \"<integer,null>\",\n      \"mimeType\": \"<string,null>\",\n      \"fileType\": \"<string,null>\",\n      \"createdAt\": \"<string,null-date-time>\"\n    }\n  ],\n  \"payments\": [\n    {\n      \"id\": \"<string>\",\n      \"referenceNumber\": \"<string>\",\n      \"paymentStatusIdentifier\": \"<string>\",\n      \"paymentStatusDescription\": \"<string>\",\n      \"insurer\": \"<string,null>\",\n      \"paymentDate\": \"<string,null-date-time>\",\n      \"paymentCreatedAt\": \"<string,null-date-time>\",\n      \"paymentSubmittedAt\": \"<string,null-date-time>\",\n      \"paymentPaidAt\": \"<string,null-date-time>\",\n      \"refundDueAmount\": \"<object,null>\",\n      \"customerPaymentUpdate\": \"<string,null>\",\n      \"paymentAmount\": \"<object,null>\",\n      \"createdAt\": \"<string,null-date-time>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"referenceNumber\": \"<string>\",\n      \"paymentStatusIdentifier\": \"<string>\",\n      \"paymentStatusDescription\": \"<string>\",\n      \"insurer\": \"<string,null>\",\n      \"paymentDate\": \"<string,null-date-time>\",\n      \"paymentCreatedAt\": \"<string,null-date-time>\",\n      \"paymentSubmittedAt\": \"<string,null-date-time>\",\n      \"paymentPaidAt\": \"<string,null-date-time>\",\n      \"refundDueAmount\": \"<object,null>\",\n      \"customerPaymentUpdate\": \"<string,null>\",\n      \"paymentAmount\": \"<object,null>\",\n      \"createdAt\": \"<string,null-date-time>\"\n    }\n  ],\n  \"rpiUniqueReferenceNumber\": \"<string,null>\",\n  \"agencyName\": \"<string,null>\",\n  \"agentName\": \"<string,null>\",\n  \"agencyEmail\": \"<string,null>\",\n  \"agencyPhone\": \"<string,null>\",\n  \"lettingAgentRegistrationNumber\": \"<string,null>\",\n  \"tenants\": \"<array,null>\",\n  \"guarantors\": \"<array,null>\",\n  \"landlords\": \"<array,null>\",\n  \"landlordRegistrationNumber\": \"<string,null>\",\n  \"permittedOccupiersName\": \"<string,null>\",\n  \"isTenancyCreatedOnGoodlord\": \"<string,null>\",\n  \"isTenancyRemovedAndNowOnFixedTerm\": \"<string,null>\",\n  \"dateBecamePeriodic\": \"<string,null-date-time>\",\n  \"referencingCompletedByGoodlord\": \"<string,null>\",\n  \"isGasAtProperty\": \"<string,null>\",\n  \"didUploadEpcToGoodlord\": \"<string,null>\",\n  \"dateEpcWasProvidedToTenant\": \"<string,null-date-time>\",\n  \"howEpcWasGivenToTenant\": \"<string,null>\",\n  \"isEicrOnGoodlord\": \"<string,null>\",\n  \"depositType\": \"<string,null>\",\n  \"depositCollectedByGoodlord\": \"<string,null>\",\n  \"depositPaidBy\": \"<string,null>\",\n  \"dateDepositWasPaid\": \"<string,null-date-time>\",\n  \"isDepositCertificateOnGoodlord\": \"<string,null>\",\n  \"dateDepositProtected\": \"<string,null-date-time>\",\n  \"prescribedInformationGiven\": \"<string,null>\",\n  \"depositReplacementCoverLevel\": \"<string,null>\",\n  \"propertyRequiresLicense\": \"<string,null>\",\n  \"dateOfRentArrears\": \"<string,null-date-time>\",\n  \"rentOutstanding\": \"<object,null>\",\n  \"reasonForNonPayment\": \"<string,null>\",\n  \"tenantsInDebtRespiteScheme\": \"<string,null>\",\n  \"detailsOfBreach\": \"<string,null>\",\n  \"dateAwareOfBreach\": \"<string,null-date-time>\",\n  \"worksBeingClaimedForDamage\": \"<string,null>\",\n  \"depositUsedFor\": \"<string,null>\",\n  \"datePropertyDamageIdentified\": \"<string,null-date-time>\",\n  \"currentDisputeInfo\": \"<string,null>\",\n  \"dateAwareOfDispute\": \"<string,null-date-time>\",\n  \"trespassOrNuisanceInfo\": \"<string,null>\",\n  \"dateAwareOfTrespassOrNuisance\": \"<string,null-date-time>\",\n  \"isPropertyStillOccupied\": \"<string,null>\",\n  \"verificationTenantIsStillOccupyingProperty\": \"<string,null>\",\n  \"dateLastInspection\": \"<string,null-date-time>\",\n  \"dateTenantVacated\": \"<string,null-date-time>\",\n  \"isClaimAgainstDepositFinalisedByDepositScheme\": \"<string,null>\",\n  \"isClaimAgainstDepositReplacementFinalised\": \"<string,null>\",\n  \"amountAwardedForRentArrears\": \"<object,null>\",\n  \"depositUseBreakdown\": \"<string,null>\",\n  \"howDepositClaimWasSettled\": \"<string,null>\",\n  \"depositReplacementUseBreakdown\": \"<string,null>\",\n  \"forwardingAddress\": \"<string,null>\",\n  \"agencyInstructedToReLet\": \"<string,null>\",\n  \"isPropertyAlreadyReLet\": \"<string,null>\",\n  \"dateNewTenancy\": \"<string,null-date-time>\",\n  \"possessionNoticesServed\": \"<string,null>\",\n  \"otherNoticesServed\": \"<string,null>\",\n  \"disputesBetweenTenantAndLandlord\": \"<string,null>\",\n  \"detailsOfDisputesBetweenTenantAndLandlord\": \"<string,null>\",\n  \"otherRelevantClaimInfo\": \"<string,null>\",\n  \"noticesServedToLandlord\": \"<string,null>\",\n  \"agencyAccountName\": \"<string,null>\",\n  \"agencyAccountNumber\": \"<string,null>\",\n  \"agencySortCode\": \"<string,null>\",\n  \"remittanceEmail\": \"<string,null>\",\n  \"gasSafetyCertificates\": \"<array,null>\",\n  \"howToRentGuides\": \"<array,null>\",\n  \"tribunalNotificationDate\": \"<string,null-date-time>\",\n  \"marketValueExplanation\": \"<string,null>\",\n  \"firstMonthRentRequestedViaGoodlord\": \"<string,null>\",\n  \"keysHandedOverDate\": \"<string,null-date-time>\",\n  \"tenantOccupationDate\": \"<string,null-date-time>\",\n  \"detailsOfAntiSocialBehaviour\": \"<string,null>\",\n  \"dateAwareOfAntiSocialBehaviour\": \"<string,null-date-time>\",\n  \"rraInfoSheetIssueDate\": \"<string,null-date-time>\",\n  \"rraInfoSheetIssueMethod\": \"<string,null>\",\n  \"statementOfTermsInTenancyAgreement\": \"<string,null>\",\n  \"statementOfTermsIssuedDate\": \"<string,null-date-time>\",\n  \"statementOfTermsIssuedMethod\": \"<string,null>\",\n  \"firstMonthRentRequestedBeforeSigning\": \"<string,null>\",\n  \"firstMonthRentRequestedDate\": \"<string,null-date-time>\",\n  \"originalTenancyStartDate\": \"<string,null-date-time>\"\n}",
+                      "createdAt": "2026-10-21T19:50:07.000Z",
+                      "updatedAt": "2026-10-21T19:50:07.000Z",
+                      "uid": "35240-3e45b23c-2927-4600-bd25-da4719311ba5"
+                    },
+                    {
+                      "id": "af81d76c-80f7-4d10-8778-7575d6174be9",
+                      "name": "Invalid input",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/vnd.api+json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "null",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/insurance_claims",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "insurance_claims"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string,null>\",\n  \"title\": \"<string,null>\",\n  \"detail\": \"<string,null>\",\n  \"status\": 400,\n  \"instance\": \"<string,null>\",\n  \"type\": \"<string>\",\n  \"meta\": {},\n  \"source\": {\n    \"pointer\": \"<string>\",\n    \"parameter\": \"<string>\",\n    \"header\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-21T19:50:07.000Z",
+                      "updatedAt": "2026-10-21T19:50:07.000Z",
+                      "uid": "35240-af81d76c-80f7-4d10-8778-7575d6174be9"
+                    },
+                    {
+                      "id": "3c39c03b-c395-44ce-a092-a73b418f5cc6",
+                      "name": "An error occurred",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/vnd.api+json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "null",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/insurance_claims",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "insurance_claims"
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"status\": 422,\n  \"detail\": \"<string>\",\n  \"type\": \"<string>\",\n  \"title\": \"<string,null>\",\n  \"instance\": \"<string,null>\"\n}",
+                      "createdAt": "2026-10-21T19:50:07.000Z",
+                      "updatedAt": "2026-10-21T19:50:07.000Z",
+                      "uid": "35240-3c39c03b-c395-44ce-a092-a73b418f5cc6"
+                    }
+                  ],
+                  "createdAt": "2026-10-21T19:50:07.000Z",
+                  "updatedAt": "2026-10-21T19:50:07.000Z",
+                  "uid": "35240-8c9bb436-bb3c-42bd-ad43-e9e5a3470202"
+                }
+              ],
+              "id": "22896a68-dcfc-4629-acfc-63fbc6fbdc54",
+              "createdAt": "2026-10-21T19:50:07.000Z",
+              "updatedAt": "2026-10-21T19:50:07.000Z",
+              "uid": "35240-22896a68-dcfc-4629-acfc-63fbc6fbdc54"
+            }
+          ],
+          "id": "d3eed6ae-0855-42ee-9d3a-da851f551b8d",
+          "createdAt": "2026-10-21T19:50:07.000Z",
+          "updatedAt": "2026-10-21T19:50:07.000Z",
+          "uid": "35240-d3eed6ae-0855-42ee-9d3a-da851f551b8d"
+        }
+      ],
+      "id": "37bd2267-cbf3-499e-ae6c-d38094fe7d83",
+      "createdAt": "2026-10-21T19:50:07.000Z",
+      "updatedAt": "2026-10-21T19:50:07.000Z",
+      "uid": "35240-37bd2267-cbf3-499e-ae6c-d38094fe7d83"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://insurance-app.goodlord.co/"
+    }
+  ]
+}

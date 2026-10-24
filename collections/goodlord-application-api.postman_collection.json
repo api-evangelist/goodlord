@@ -1,0 +1,1155 @@
+{
+  "info": {
+    "_postman_id": "e15a3c02-dbcf-4a20-bf3c-b305f5254a51",
+    "name": "Referencing Application API",
+    "description": "Here you can find the Public API information of the Goodlord Referencing product. This API will allow you to create rental applications, assess Applicants and Guarantors through the rental process and manage them along the way.\n\nContact Support:\n Name: Goodlord\n Email: devs@vouch.co.uk",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T19:49:45.000Z",
+    "updatedAt": "2026-10-21T19:49:46.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-e15a3c02-dbcf-4a20-bf3c-b305f5254a51"
+  },
+  "item": [
+    {
+      "name": "referencing",
+      "item": [
+        {
+          "name": "application",
+          "item": [
+            {
+              "name": "{applicationId}",
+              "item": [
+                {
+                  "name": "Get Application",
+                  "id": "904a6898-036c-4c63-807a-794fb4633ad3",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "(Required) A unique GUID identifying your company, issued alongside your API keys. This value may differ between production and sandbox environments. This is a mandatory header for all application and subject endpoints.",
+                        "key": "Company-ID",
+                        "value": "<uuid>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/referencing/application/:applicationId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "referencing",
+                        "application",
+                        ":applicationId"
+                      ],
+                      "variable": [
+                        {
+                          "id": "3b94f161-5a73-4f4c-ad8b-806151a1e56d",
+                          "key": "applicationId",
+                          "value": "<string>",
+                          "description": "(Required) The applicationId of the application you wish to retrieve"
+                        }
+                      ]
+                    },
+                    "description": "Retrieve a copy of an application which you have already created"
+                  },
+                  "response": [
+                    {
+                      "id": "d088e5e2-d730-4352-8fe3-983a71e8a27a",
+                      "name": "Successful operation",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "(Required) A unique GUID identifying your company, issued alongside your API keys. This value may differ between production and sandbox environments. This is a mandatory header for all application and subject endpoints.",
+                            "key": "Company-ID",
+                            "value": "<uuid>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/referencing/application/:applicationId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "referencing",
+                            "application",
+                            ":applicationId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "applicationId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"tenancy\": {\n    \"moveInDate\": \"<string>\",\n    \"term\": \"<number>\",\n    \"monthlyCost\": \"<number>\",\n    \"address\": {\n      \"line1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"postcode\": \"<string>\",\n      \"country\": \"<string>\"\n    }\n  },\n  \"subjects\": [\n    {\n      \"externalId\": \"<string>\",\n      \"rentalDetails\": {\n        \"priceShare\": \"<number>\",\n        \"affordabilityRatio\": \"<number>\"\n      },\n      \"context\": {\n        \"name\": \"<string>\",\n        \"firstName\": \"<string>\",\n        \"lastName\": \"<string>\",\n        \"email\": \"<string>\",\n        \"mobile\": \"<string>\",\n        \"redirectUrlOnJourneyComplete\": \"<string>\",\n        \"tenancyRenewal\": \"<boolean>\",\n        \"product\": \"<string>\",\n        \"addresses\": [\n          {\n            \"id\": \"<string>\",\n            \"addressType\": \"<string>\",\n            \"bedroomIdentifier\": \"<string>\",\n            \"name\": \"<string>\",\n            \"startDate\": \"<string>\",\n            \"status\": \"<string>\",\n            \"line1\": \"<string>\",\n            \"normalizedLine1\": \"<string>\",\n            \"line2\": \"<string>\",\n            \"city\": \"<string>\",\n            \"county\": {},\n            \"postcode\": \"<string>\",\n            \"country\": \"<string>\",\n            \"countryCodeAlpha2\": \"<string>\",\n            \"referee\": {\n              \"id\": \"<string>\",\n              \"name\": \"<string>\",\n              \"email\": \"<string>\",\n              \"mobile\": \"<string>\",\n              \"createdAt\": \"<string>\"\n            }\n          },\n          {\n            \"id\": \"<string>\",\n            \"addressType\": \"<string>\",\n            \"bedroomIdentifier\": \"<string>\",\n            \"name\": \"<string>\",\n            \"startDate\": \"<string>\",\n            \"status\": \"<string>\",\n            \"line1\": \"<string>\",\n            \"normalizedLine1\": \"<string>\",\n            \"line2\": \"<string>\",\n            \"city\": \"<string>\",\n            \"county\": {},\n            \"postcode\": \"<string>\",\n            \"country\": \"<string>\",\n            \"countryCodeAlpha2\": \"<string>\",\n            \"referee\": {\n              \"id\": \"<string>\",\n              \"name\": \"<string>\",\n              \"email\": \"<string>\",\n              \"mobile\": \"<string>\",\n              \"createdAt\": \"<string>\"\n            }\n          }\n        ],\n        \"incomes\": [\n          {\n            \"company\": \"<string>\",\n            \"position\": \"<string>\",\n            \"contractType\": \"<string>\",\n            \"contractSchedule\": \"<string>\",\n            \"guaranteedBonus\": {},\n            \"startDate\": \"<string>\",\n            \"endDate\": {},\n            \"address\": {\n              \"id\": {},\n              \"addressType\": \"<string>\",\n              \"name\": {},\n              \"startDate\": {},\n              \"status\": {},\n              \"line1\": \"<string>\",\n              \"normalizedLine1\": \"<string>\",\n              \"line2\": \"<string>\",\n              \"line3\": {},\n              \"city\": \"<string>\",\n              \"county\": {},\n              \"postcode\": \"<string>\",\n              \"country\": \"<string>\",\n              \"countryCodeAlpha2\": {}\n            },\n            \"referee\": {\n              \"id\": \"<string>\",\n              \"name\": \"<string>\",\n              \"email\": \"<string>\",\n              \"mobile\": \"<string>\",\n              \"createdAt\": \"<string>\",\n              \"isNonProfessionalEmail\": \"<boolean>\"\n            },\n            \"type\": \"<string>\",\n            \"evidenceType\": \"<string>\",\n            \"income\": {\n              \"value\": \"<number>\",\n              \"currency\": \"<string>\",\n              \"frequency\": \"<string>\"\n            },\n            \"id\": \"<string>\"\n          },\n          {\n            \"company\": \"<string>\",\n            \"position\": \"<string>\",\n            \"contractType\": \"<string>\",\n            \"contractSchedule\": \"<string>\",\n            \"guaranteedBonus\": {},\n            \"startDate\": \"<string>\",\n            \"endDate\": {},\n            \"address\": {\n              \"id\": {},\n              \"addressType\": \"<string>\",\n              \"name\": {},\n              \"startDate\": {},\n              \"status\": {},\n              \"line1\": \"<string>\",\n              \"normalizedLine1\": \"<string>\",\n              \"line2\": \"<string>\",\n              \"line3\": {},\n              \"city\": \"<string>\",\n              \"county\": {},\n              \"postcode\": \"<string>\",\n              \"country\": \"<string>\",\n              \"countryCodeAlpha2\": {}\n            },\n            \"referee\": {\n              \"id\": \"<string>\",\n              \"name\": \"<string>\",\n              \"email\": \"<string>\",\n              \"mobile\": \"<string>\",\n              \"createdAt\": \"<string>\",\n              \"isNonProfessionalEmail\": \"<boolean>\"\n            },\n            \"type\": \"<string>\",\n            \"evidenceType\": \"<string>\",\n            \"income\": {\n              \"value\": \"<number>\",\n              \"currency\": \"<string>\",\n              \"frequency\": \"<string>\"\n            },\n            \"id\": \"<string>\"\n          }\n        ],\n        \"incomeSummary\": {\n          \"totalIncome\": \"<number>\",\n          \"totalVerifiedIncome\": \"<number>\",\n          \"maximumAffordabilityPercentage\": \"<number>\",\n          \"openBanking\": {\n            \"provider\": \"<string>\",\n            \"status\": \"<string>\",\n            \"outcome\": {\n              \"estimatedAnnualNetIncome\": \"<number>\",\n              \"estimatedAnnualGrossIncome\": \"<number>\"\n            },\n            \"optOutReason\": {\n              \"category\": \"incomeAccuracy\",\n              \"additionalInformation\": \"<string>\"\n            }\n          }\n        },\n        \"credit\": {\n          \"hasAdverseCredit\": \"<boolean>\",\n          \"adverseCreditDeclared\": \"<boolean>\"\n        },\n        \"documents\": [\n          {\n            \"id\": \"<string>\",\n            \"fileName\": \"<string>\",\n            \"thumbnail\": \"<string>\",\n            \"documentType\": \"<string>\"\n          },\n          {\n            \"id\": \"<string>\",\n            \"fileName\": \"<string>\",\n            \"thumbnail\": \"<string>\",\n            \"documentType\": \"<string>\"\n          }\n        ],\n        \"communicationPreferences\": {\n          \"sendInitialTenantEmail\": \"<boolean>\",\n          \"disableRentProtectionComms\": \"<boolean>\",\n          \"disableTCLIComms\": \"<boolean>\",\n          \"disableTenancyServicesComms\": \"<boolean>\"\n        },\n        \"guarantorCollection\": {\n          \"required\": \"<boolean>\",\n          \"product\": \"Priority\",\n          \"affordabilityRatio\": \"<number>\"\n        },\n        \"identity\": {\n          \"nationality\": \"<string>\",\n          \"nationalInsuranceNumber\": \"<string>\",\n          \"r2rShareCode\": \"<string>\",\n          \"idvt\": {\n            \"idCheckStatus\": \"Fail\",\n            \"r2rCheckStatus\": \"Fail\"\n          },\n          \"pepsSanctions\": {\n            \"pepsStatus\": \"Match\",\n            \"sanctionsStatus\": \"ActionRequired\"\n          }\n        }\n      },\n      \"outcome\": {\n        \"status\": \"<string>\",\n        \"comments\": \"<string>\",\n        \"rpi\": {\n          \"eligibility\": \"<string>\",\n          \"comments\": \"<string>\"\n        },\n        \"sections\": [\n          {\n            \"name\": \"<string>\",\n            \"status\": \"<string>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"status\": \"<string>\"\n          }\n        ]\n      },\n      \"id\": \"<string>\",\n      \"type\": \"applicant\",\n      \"attachedSubjects\": [\n        {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\"\n        }\n      ],\n      \"milestones\": [\n        {\n          \"type\": \"<string>\",\n          \"event\": \"<string>\",\n          \"createdAt\": \"<string>\",\n          \"updatedAt\": \"<string>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"event\": \"<string>\",\n          \"createdAt\": \"<string>\",\n          \"updatedAt\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"externalId\": \"<string>\",\n      \"rentalDetails\": {\n        \"priceShare\": \"<number>\",\n        \"affordabilityRatio\": \"<number>\"\n      },\n      \"context\": {\n        \"name\": \"<string>\",\n        \"firstName\": \"<string>\",\n        \"lastName\": \"<string>\",\n        \"email\": \"<string>\",\n        \"mobile\": \"<string>\",\n        \"redirectUrlOnJourneyComplete\": \"<string>\",\n        \"tenancyRenewal\": \"<boolean>\",\n        \"product\": \"<string>\",\n        \"addresses\": [\n          {\n            \"id\": \"<string>\",\n            \"addressType\": \"<string>\",\n            \"bedroomIdentifier\": \"<string>\",\n            \"name\": \"<string>\",\n            \"startDate\": \"<string>\",\n            \"status\": \"<string>\",\n            \"line1\": \"<string>\",\n            \"normalizedLine1\": \"<string>\",\n            \"line2\": \"<string>\",\n            \"city\": \"<string>\",\n            \"county\": {},\n            \"postcode\": \"<string>\",\n            \"country\": \"<string>\",\n            \"countryCodeAlpha2\": \"<string>\",\n            \"referee\": {\n              \"id\": \"<string>\",\n              \"name\": \"<string>\",\n              \"email\": \"<string>\",\n              \"mobile\": \"<string>\",\n              \"createdAt\": \"<string>\"\n            }\n          },\n          {\n            \"id\": \"<string>\",\n            \"addressType\": \"<string>\",\n            \"bedroomIdentifier\": \"<string>\",\n            \"name\": \"<string>\",\n            \"startDate\": \"<string>\",\n            \"status\": \"<string>\",\n            \"line1\": \"<string>\",\n            \"normalizedLine1\": \"<string>\",\n            \"line2\": \"<string>\",\n            \"city\": \"<string>\",\n            \"county\": {},\n            \"postcode\": \"<string>\",\n            \"country\": \"<string>\",\n            \"countryCodeAlpha2\": \"<string>\",\n            \"referee\": {\n              \"id\": \"<string>\",\n              \"name\": \"<string>\",\n              \"email\": \"<string>\",\n              \"mobile\": \"<string>\",\n              \"createdAt\": \"<string>\"\n            }\n          }\n        ],\n        \"incomes\": [\n          {\n            \"company\": \"<string>\",\n            \"position\": \"<string>\",\n            \"contractType\": \"<string>\",\n            \"contractSchedule\": \"<string>\",\n            \"guaranteedBonus\": {},\n            \"startDate\": \"<string>\",\n            \"endDate\": {},\n            \"address\": {\n              \"id\": {},\n              \"addressType\": \"<string>\",\n              \"name\": {},\n              \"startDate\": {},\n              \"status\": {},\n              \"line1\": \"<string>\",\n              \"normalizedLine1\": \"<string>\",\n              \"line2\": \"<string>\",\n              \"line3\": {},\n              \"city\": \"<string>\",\n              \"county\": {},\n              \"postcode\": \"<string>\",\n              \"country\": \"<string>\",\n              \"countryCodeAlpha2\": {}\n            },\n            \"referee\": {\n              \"id\": \"<string>\",\n              \"name\": \"<string>\",\n              \"email\": \"<string>\",\n              \"mobile\": \"<string>\",\n              \"createdAt\": \"<string>\",\n              \"isNonProfessionalEmail\": \"<boolean>\"\n            },\n            \"type\": \"<string>\",\n            \"evidenceType\": \"<string>\",\n            \"income\": {\n              \"value\": \"<number>\",\n              \"currency\": \"<string>\",\n              \"frequency\": \"<string>\"\n            },\n            \"id\": \"<string>\"\n          },\n          {\n            \"company\": \"<string>\",\n            \"position\": \"<string>\",\n            \"contractType\": \"<string>\",\n            \"contractSchedule\": \"<string>\",\n            \"guaranteedBonus\": {},\n            \"startDate\": \"<string>\",\n            \"endDate\": {},\n            \"address\": {\n              \"id\": {},\n              \"addressType\": \"<string>\",\n              \"name\": {},\n              \"startDate\": {},\n              \"status\": {},\n              \"line1\": \"<string>\",\n              \"normalizedLine1\": \"<string>\",\n              \"line2\": \"<string>\",\n              \"line3\": {},\n              \"city\": \"<string>\",\n              \"county\": {},\n              \"postcode\": \"<string>\",\n              \"country\": \"<string>\",\n              \"countryCodeAlpha2\": {}\n            },\n            \"referee\": {\n              \"id\": \"<string>\",\n              \"name\": \"<string>\",\n              \"email\": \"<string>\",\n              \"mobile\": \"<string>\",\n              \"createdAt\": \"<string>\",\n              \"isNonProfessionalEmail\": \"<boolean>\"\n            },\n            \"type\": \"<string>\",\n            \"evidenceType\": \"<string>\",\n            \"income\": {\n              \"value\": \"<number>\",\n              \"currency\": \"<string>\",\n              \"frequency\": \"<string>\"\n            },\n            \"id\": \"<string>\"\n          }\n        ],\n        \"incomeSummary\": {\n          \"totalIncome\": \"<number>\",\n          \"totalVerifiedIncome\": \"<number>\",\n          \"maximumAffordabilityPercentage\": \"<number>\",\n          \"openBanking\": {\n            \"provider\": \"<string>\",\n            \"status\": \"<string>\",\n            \"outcome\": {\n              \"estimatedAnnualNetIncome\": \"<number>\",\n              \"estimatedAnnualGrossIncome\": \"<number>\"\n            },\n            \"optOutReason\": {\n              \"category\": \"userOptedOut\",\n              \"additionalInformation\": \"<string>\"\n            }\n          }\n        },\n        \"credit\": {\n          \"hasAdverseCredit\": \"<boolean>\",\n          \"adverseCreditDeclared\": \"<boolean>\"\n        },\n        \"documents\": [\n          {\n            \"id\": \"<string>\",\n            \"fileName\": \"<string>\",\n            \"thumbnail\": \"<string>\",\n            \"documentType\": \"<string>\"\n          },\n          {\n            \"id\": \"<string>\",\n            \"fileName\": \"<string>\",\n            \"thumbnail\": \"<string>\",\n            \"documentType\": \"<string>\"\n          }\n        ],\n        \"communicationPreferences\": {\n          \"sendInitialTenantEmail\": \"<boolean>\",\n          \"disableRentProtectionComms\": \"<boolean>\",\n          \"disableTCLIComms\": \"<boolean>\",\n          \"disableTenancyServicesComms\": \"<boolean>\"\n        },\n        \"guarantorCollection\": {\n          \"required\": \"<boolean>\",\n          \"product\": \"Priority\",\n          \"affordabilityRatio\": \"<number>\"\n        },\n        \"identity\": {\n          \"nationality\": \"<string>\",\n          \"nationalInsuranceNumber\": \"<string>\",\n          \"r2rShareCode\": \"<string>\",\n          \"idvt\": {\n            \"idCheckStatus\": \"Fail\",\n            \"r2rCheckStatus\": \"NotPerformed\"\n          },\n          \"pepsSanctions\": {\n            \"pepsStatus\": \"ActionRequired\",\n            \"sanctionsStatus\": \"Match\"\n          }\n        }\n      },\n      \"outcome\": {\n        \"status\": \"<string>\",\n        \"comments\": \"<string>\",\n        \"rpi\": {\n          \"eligibility\": \"<string>\",\n          \"comments\": \"<string>\"\n        },\n        \"sections\": [\n          {\n            \"name\": \"<string>\",\n            \"status\": \"<string>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"status\": \"<string>\"\n          }\n        ]\n      },\n      \"id\": \"<string>\",\n      \"type\": \"guarantor\",\n      \"attachedSubjects\": [\n        {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\"\n        }\n      ],\n      \"milestones\": [\n        {\n          \"type\": \"<string>\",\n          \"event\": \"<string>\",\n          \"createdAt\": \"<string>\",\n          \"updatedAt\": \"<string>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"event\": \"<string>\",\n          \"createdAt\": \"<string>\",\n          \"updatedAt\": \"<string>\"\n        }\n      ]\n    }\n  ],\n  \"agency\": {\n    \"companyName\": \"<string>\",\n    \"agentName\": \"<string>\",\n    \"agentMobile\": \"<string>\",\n    \"agentEmail\": \"<string>\"\n  },\n  \"createdAt\": \"<string>\"\n}",
+                      "createdAt": "2026-10-21T19:49:46.000Z",
+                      "updatedAt": "2026-10-21T19:49:46.000Z",
+                      "uid": "35240-d088e5e2-d730-4352-8fe3-983a71e8a27a"
+                    },
+                    {
+                      "id": "37380dc2-145f-4af1-9b37-4fbb80751f2b",
+                      "name": "Bad Request",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "(Required) A unique GUID identifying your company, issued alongside your API keys. This value may differ between production and sandbox environments. This is a mandatory header for all application and subject endpoints.",
+                            "key": "Company-ID",
+                            "value": "<uuid>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/referencing/application/:applicationId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "referencing",
+                            "application",
+                            ":applicationId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "applicationId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"reason\": \"<string>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"reason\": \"<string>\",\n      \"description\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-21T19:49:46.000Z",
+                      "updatedAt": "2026-10-21T19:49:46.000Z",
+                      "uid": "35240-37380dc2-145f-4af1-9b37-4fbb80751f2b"
+                    },
+                    {
+                      "id": "10c63fbd-c566-487b-b30f-275b2a9a432b",
+                      "name": "Not Found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "(Required) A unique GUID identifying your company, issued alongside your API keys. This value may differ between production and sandbox environments. This is a mandatory header for all application and subject endpoints.",
+                            "key": "Company-ID",
+                            "value": "<uuid>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/referencing/application/:applicationId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "referencing",
+                            "application",
+                            ":applicationId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "applicationId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-10-21T19:49:46.000Z",
+                      "updatedAt": "2026-10-21T19:49:46.000Z",
+                      "uid": "35240-10c63fbd-c566-487b-b30f-275b2a9a432b"
+                    },
+                    {
+                      "id": "52a7026f-a550-485f-b4ee-86e53f66b243",
+                      "name": "Internal Server Error",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "(Required) A unique GUID identifying your company, issued alongside your API keys. This value may differ between production and sandbox environments. This is a mandatory header for all application and subject endpoints.",
+                            "key": "Company-ID",
+                            "value": "<uuid>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/referencing/application/:applicationId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "referencing",
+                            "application",
+                            ":applicationId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "applicationId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-10-21T19:49:46.000Z",
+                      "updatedAt": "2026-10-21T19:49:46.000Z",
+                      "uid": "35240-52a7026f-a550-485f-b4ee-86e53f66b243"
+                    }
+                  ],
+                  "createdAt": "2026-10-21T19:49:46.000Z",
+                  "updatedAt": "2026-10-21T19:49:46.000Z",
+                  "uid": "35240-904a6898-036c-4c63-807a-794fb4633ad3"
+                },
+                {
+                  "name": "Patch Application",
+                  "id": "4c0f354a-6482-4e01-a7f4-cee28ccb357a",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "description": "(Required) A unique GUID identifying your company, issued alongside your API keys. This value may differ between production and sandbox environments. This is a mandatory header for all application and subject endpoints.",
+                        "key": "Company-ID",
+                        "value": "<uuid>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"tenancy\": {\n    \"moveInDate\": \"<string>\",\n    \"term\": \"<number>\",\n    \"monthlyCost\": \"<number>\",\n    \"address\": {\n      \"line1\": \"<string>\",\n      \"country\": \"<string>\",\n      \"postcode\": \"<string>\",\n      \"city\": \"<string>\",\n      \"line2\": \"<string>\"\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/referencing/application/:applicationId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "referencing",
+                        "application",
+                        ":applicationId"
+                      ],
+                      "variable": [
+                        {
+                          "id": "9fd3ac12-b692-403b-a7f7-d2bacb1d12a0",
+                          "key": "applicationId",
+                          "value": "<string>",
+                          "description": "(Required) The applicationId of the application you wish to retrieve"
+                        }
+                      ]
+                    },
+                    "description": "Patch an application which you have previously created"
+                  },
+                  "response": [
+                    {
+                      "id": "f09b2714-3ad9-42ff-9220-2c9347392ba1",
+                      "name": "Successful operation",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "description": "(Required) A unique GUID identifying your company, issued alongside your API keys. This value may differ between production and sandbox environments. This is a mandatory header for all application and subject endpoints.",
+                            "key": "Company-ID",
+                            "value": "<uuid>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"tenancy\": {\n    \"moveInDate\": \"<string>\",\n    \"term\": \"<number>\",\n    \"monthlyCost\": \"<number>\",\n    \"address\": {\n      \"line1\": \"<string>\",\n      \"country\": \"<string>\",\n      \"postcode\": \"<string>\",\n      \"city\": \"<string>\",\n      \"line2\": \"<string>\"\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/referencing/application/:applicationId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "referencing",
+                            "application",
+                            ":applicationId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "applicationId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"tenancy\": {\n    \"moveInDate\": \"<string>\",\n    \"term\": \"<number>\",\n    \"monthlyCost\": \"<number>\",\n    \"address\": {\n      \"line1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"postcode\": \"<string>\",\n      \"country\": \"<string>\"\n    }\n  },\n  \"subjects\": [\n    {\n      \"externalId\": \"<string>\",\n      \"rentalDetails\": {\n        \"priceShare\": \"<number>\",\n        \"affordabilityRatio\": \"<number>\"\n      },\n      \"context\": {\n        \"name\": \"<string>\",\n        \"firstName\": \"<string>\",\n        \"lastName\": \"<string>\",\n        \"email\": \"<string>\",\n        \"mobile\": \"<string>\",\n        \"redirectUrlOnJourneyComplete\": \"<string>\",\n        \"tenancyRenewal\": \"<boolean>\",\n        \"product\": \"<string>\",\n        \"addresses\": [\n          {\n            \"id\": \"<string>\",\n            \"addressType\": \"<string>\",\n            \"bedroomIdentifier\": \"<string>\",\n            \"name\": \"<string>\",\n            \"startDate\": \"<string>\",\n            \"status\": \"<string>\",\n            \"line1\": \"<string>\",\n            \"normalizedLine1\": \"<string>\",\n            \"line2\": \"<string>\",\n            \"city\": \"<string>\",\n            \"county\": {},\n            \"postcode\": \"<string>\",\n            \"country\": \"<string>\",\n            \"countryCodeAlpha2\": \"<string>\",\n            \"referee\": {\n              \"id\": \"<string>\",\n              \"name\": \"<string>\",\n              \"email\": \"<string>\",\n              \"mobile\": \"<string>\",\n              \"createdAt\": \"<string>\"\n            }\n          },\n          {\n            \"id\": \"<string>\",\n            \"addressType\": \"<string>\",\n            \"bedroomIdentifier\": \"<string>\",\n            \"name\": \"<string>\",\n            \"startDate\": \"<string>\",\n            \"status\": \"<string>\",\n            \"line1\": \"<string>\",\n            \"normalizedLine1\": \"<string>\",\n            \"line2\": \"<string>\",\n            \"city\": \"<string>\",\n            \"county\": {},\n            \"postcode\": \"<string>\",\n            \"country\": \"<string>\",\n            \"countryCodeAlpha2\": \"<string>\",\n            \"referee\": {\n              \"id\": \"<string>\",\n              \"name\": \"<string>\",\n              \"email\": \"<string>\",\n              \"mobile\": \"<string>\",\n              \"createdAt\": \"<string>\"\n            }\n          }\n        ],\n        \"incomes\": [\n          {\n            \"company\": \"<string>\",\n            \"position\": \"<string>\",\n            \"contractType\": \"<string>\",\n            \"contractSchedule\": \"<string>\",\n            \"guaranteedBonus\": {},\n            \"startDate\": \"<string>\",\n            \"endDate\": {},\n            \"address\": {\n              \"id\": {},\n              \"addressType\": \"<string>\",\n              \"name\": {},\n              \"startDate\": {},\n              \"status\": {},\n              \"line1\": \"<string>\",\n              \"normalizedLine1\": \"<string>\",\n              \"line2\": \"<string>\",\n              \"line3\": {},\n              \"city\": \"<string>\",\n              \"county\": {},\n              \"postcode\": \"<string>\",\n              \"country\": \"<string>\",\n              \"countryCodeAlpha2\": {}\n            },\n            \"referee\": {\n              \"id\": \"<string>\",\n              \"name\": \"<string>\",\n              \"email\": \"<string>\",\n              \"mobile\": \"<string>\",\n              \"createdAt\": \"<string>\",\n              \"isNonProfessionalEmail\": \"<boolean>\"\n            },\n            \"type\": \"<string>\",\n            \"evidenceType\": \"<string>\",\n            \"income\": {\n              \"value\": \"<number>\",\n              \"currency\": \"<string>\",\n              \"frequency\": \"<string>\"\n            },\n            \"id\": \"<string>\"\n          },\n          {\n            \"company\": \"<string>\",\n            \"position\": \"<string>\",\n            \"contractType\": \"<string>\",\n            \"contractSchedule\": \"<string>\",\n            \"guaranteedBonus\": {},\n            \"startDate\": \"<string>\",\n            \"endDate\": {},\n            \"address\": {\n              \"id\": {},\n              \"addressType\": \"<string>\",\n              \"name\": {},\n              \"startDate\": {},\n              \"status\": {},\n              \"line1\": \"<string>\",\n              \"normalizedLine1\": \"<string>\",\n              \"line2\": \"<string>\",\n              \"line3\": {},\n              \"city\": \"<string>\",\n              \"county\": {},\n              \"postcode\": \"<string>\",\n              \"country\": \"<string>\",\n              \"countryCodeAlpha2\": {}\n            },\n            \"referee\": {\n              \"id\": \"<string>\",\n              \"name\": \"<string>\",\n              \"email\": \"<string>\",\n              \"mobile\": \"<string>\",\n              \"createdAt\": \"<string>\",\n              \"isNonProfessionalEmail\": \"<boolean>\"\n            },\n            \"type\": \"<string>\",\n            \"evidenceType\": \"<string>\",\n            \"income\": {\n              \"value\": \"<number>\",\n              \"currency\": \"<string>\",\n              \"frequency\": \"<string>\"\n            },\n            \"id\": \"<string>\"\n          }\n        ],\n        \"incomeSummary\": {\n          \"totalIncome\": \"<number>\",\n          \"totalVerifiedIncome\": \"<number>\",\n          \"maximumAffordabilityPercentage\": \"<number>\",\n          \"openBanking\": {\n            \"provider\": \"<string>\",\n            \"status\": \"<string>\",\n            \"outcome\": {\n              \"estimatedAnnualNetIncome\": \"<number>\",\n              \"estimatedAnnualGrossIncome\": \"<number>\"\n            },\n            \"optOutReason\": {\n              \"category\": \"incomeAccuracy\",\n              \"additionalInformation\": \"<string>\"\n            }\n          }\n        },\n        \"credit\": {\n          \"hasAdverseCredit\": \"<boolean>\",\n          \"adverseCreditDeclared\": \"<boolean>\"\n        },\n        \"documents\": [\n          {\n            \"id\": \"<string>\",\n            \"fileName\": \"<string>\",\n            \"thumbnail\": \"<string>\",\n            \"documentType\": \"<string>\"\n          },\n          {\n            \"id\": \"<string>\",\n            \"fileName\": \"<string>\",\n            \"thumbnail\": \"<string>\",\n            \"documentType\": \"<string>\"\n          }\n        ],\n        \"communicationPreferences\": {\n          \"sendInitialTenantEmail\": \"<boolean>\",\n          \"disableRentProtectionComms\": \"<boolean>\",\n          \"disableTCLIComms\": \"<boolean>\",\n          \"disableTenancyServicesComms\": \"<boolean>\"\n        },\n        \"guarantorCollection\": {\n          \"required\": \"<boolean>\",\n          \"product\": \"Priority\",\n          \"affordabilityRatio\": \"<number>\"\n        },\n        \"identity\": {\n          \"nationality\": \"<string>\",\n          \"nationalInsuranceNumber\": \"<string>\",\n          \"r2rShareCode\": \"<string>\",\n          \"idvt\": {\n            \"idCheckStatus\": \"Fail\",\n            \"r2rCheckStatus\": \"Fail\"\n          },\n          \"pepsSanctions\": {\n            \"pepsStatus\": \"Match\",\n            \"sanctionsStatus\": \"ActionRequired\"\n          }\n        }\n      },\n      \"outcome\": {\n        \"status\": \"<string>\",\n        \"comments\": \"<string>\",\n        \"rpi\": {\n          \"eligibility\": \"<string>\",\n          \"comments\": \"<string>\"\n        },\n        \"sections\": [\n          {\n            \"name\": \"<string>\",\n            \"status\": \"<string>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"status\": \"<string>\"\n          }\n        ]\n      },\n      \"id\": \"<string>\",\n      \"type\": \"applicant\",\n      \"attachedSubjects\": [\n        {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\"\n        }\n      ],\n      \"milestones\": [\n        {\n          \"type\": \"<string>\",\n          \"event\": \"<string>\",\n          \"createdAt\": \"<string>\",\n          \"updatedAt\": \"<string>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"event\": \"<string>\",\n          \"createdAt\": \"<string>\",\n          \"updatedAt\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"externalId\": \"<string>\",\n      \"rentalDetails\": {\n        \"priceShare\": \"<number>\",\n        \"affordabilityRatio\": \"<number>\"\n      },\n      \"context\": {\n        \"name\": \"<string>\",\n        \"firstName\": \"<string>\",\n        \"lastName\": \"<string>\",\n        \"email\": \"<string>\",\n        \"mobile\": \"<string>\",\n        \"redirectUrlOnJourneyComplete\": \"<string>\",\n        \"tenancyRenewal\": \"<boolean>\",\n        \"product\": \"<string>\",\n        \"addresses\": [\n          {\n            \"id\": \"<string>\",\n            \"addressType\": \"<string>\",\n            \"bedroomIdentifier\": \"<string>\",\n            \"name\": \"<string>\",\n            \"startDate\": \"<string>\",\n            \"status\": \"<string>\",\n            \"line1\": \"<string>\",\n            \"normalizedLine1\": \"<string>\",\n            \"line2\": \"<string>\",\n            \"city\": \"<string>\",\n            \"county\": {},\n            \"postcode\": \"<string>\",\n            \"country\": \"<string>\",\n            \"countryCodeAlpha2\": \"<string>\",\n            \"referee\": {\n              \"id\": \"<string>\",\n              \"name\": \"<string>\",\n              \"email\": \"<string>\",\n              \"mobile\": \"<string>\",\n              \"createdAt\": \"<string>\"\n            }\n          },\n          {\n            \"id\": \"<string>\",\n            \"addressType\": \"<string>\",\n            \"bedroomIdentifier\": \"<string>\",\n            \"name\": \"<string>\",\n            \"startDate\": \"<string>\",\n            \"status\": \"<string>\",\n            \"line1\": \"<string>\",\n            \"normalizedLine1\": \"<string>\",\n            \"line2\": \"<string>\",\n            \"city\": \"<string>\",\n            \"county\": {},\n            \"postcode\": \"<string>\",\n            \"country\": \"<string>\",\n            \"countryCodeAlpha2\": \"<string>\",\n            \"referee\": {\n              \"id\": \"<string>\",\n              \"name\": \"<string>\",\n              \"email\": \"<string>\",\n              \"mobile\": \"<string>\",\n              \"createdAt\": \"<string>\"\n            }\n          }\n        ],\n        \"incomes\": [\n          {\n            \"company\": \"<string>\",\n            \"position\": \"<string>\",\n            \"contractType\": \"<string>\",\n            \"contractSchedule\": \"<string>\",\n            \"guaranteedBonus\": {},\n            \"startDate\": \"<string>\",\n            \"endDate\": {},\n            \"address\": {\n              \"id\": {},\n              \"addressType\": \"<string>\",\n              \"name\": {},\n              \"startDate\": {},\n              \"status\": {},\n              \"line1\": \"<string>\",\n              \"normalizedLine1\": \"<string>\",\n              \"line2\": \"<string>\",\n              \"line3\": {},\n              \"city\": \"<string>\",\n              \"county\": {},\n              \"postcode\": \"<string>\",\n              \"country\": \"<string>\",\n              \"countryCodeAlpha2\": {}\n            },\n            \"referee\": {\n              \"id\": \"<string>\",\n              \"name\": \"<string>\",\n              \"email\": \"<string>\",\n              \"mobile\": \"<string>\",\n              \"createdAt\": \"<string>\",\n              \"isNonProfessionalEmail\": \"<boolean>\"\n            },\n            \"type\": \"<string>\",\n            \"evidenceType\": \"<string>\",\n            \"income\": {\n              \"value\": \"<number>\",\n              \"currency\": \"<string>\",\n              \"frequency\": \"<string>\"\n            },\n            \"id\": \"<string>\"\n          },\n          {\n            \"company\": \"<string>\",\n            \"position\": \"<string>\",\n            \"contractType\": \"<string>\",\n            \"contractSchedule\": \"<string>\",\n            \"guaranteedBonus\": {},\n            \"startDate\": \"<string>\",\n            \"endDate\": {},\n            \"address\": {\n              \"id\": {},\n              \"addressType\": \"<string>\",\n              \"name\": {},\n              \"startDate\": {},\n              \"status\": {},\n              \"line1\": \"<string>\",\n              \"normalizedLine1\": \"<string>\",\n              \"line2\": \"<string>\",\n              \"line3\": {},\n              \"city\": \"<string>\",\n              \"county\": {},\n              \"postcode\": \"<string>\",\n              \"country\": \"<string>\",\n              \"countryCodeAlpha2\": {}\n            },\n            \"referee\": {\n              \"id\": \"<string>\",\n              \"name\": \"<string>\",\n              \"email\": \"<string>\",\n              \"mobile\": \"<string>\",\n              \"createdAt\": \"<string>\",\n              \"isNonProfessionalEmail\": \"<boolean>\"\n            },\n            \"type\": \"<string>\",\n            \"evidenceType\": \"<string>\",\n            \"income\": {\n              \"value\": \"<number>\",\n              \"currency\": \"<string>\",\n              \"frequency\": \"<string>\"\n            },\n            \"id\": \"<string>\"\n          }\n        ],\n        \"incomeSummary\": {\n          \"totalIncome\": \"<number>\",\n          \"totalVerifiedIncome\": \"<number>\",\n          \"maximumAffordabilityPercentage\": \"<number>\",\n          \"openBanking\": {\n            \"provider\": \"<string>\",\n            \"status\": \"<string>\",\n            \"outcome\": {\n              \"estimatedAnnualNetIncome\": \"<number>\",\n              \"estimatedAnnualGrossIncome\": \"<number>\"\n            },\n            \"optOutReason\": {\n              \"category\": \"userOptedOut\",\n              \"additionalInformation\": \"<string>\"\n            }\n          }\n        },\n        \"credit\": {\n          \"hasAdverseCredit\": \"<boolean>\",\n          \"adverseCreditDeclared\": \"<boolean>\"\n        },\n        \"documents\": [\n          {\n            \"id\": \"<string>\",\n            \"fileName\": \"<string>\",\n            \"thumbnail\": \"<string>\",\n            \"documentType\": \"<string>\"\n          },\n          {\n            \"id\": \"<string>\",\n            \"fileName\": \"<string>\",\n            \"thumbnail\": \"<string>\",\n            \"documentType\": \"<string>\"\n          }\n        ],\n        \"communicationPreferences\": {\n          \"sendInitialTenantEmail\": \"<boolean>\",\n          \"disableRentProtectionComms\": \"<boolean>\",\n          \"disableTCLIComms\": \"<boolean>\",\n          \"disableTenancyServicesComms\": \"<boolean>\"\n        },\n        \"guarantorCollection\": {\n          \"required\": \"<boolean>\",\n          \"product\": \"Priority\",\n          \"affordabilityRatio\": \"<number>\"\n        },\n        \"identity\": {\n          \"nationality\": \"<string>\",\n          \"nationalInsuranceNumber\": \"<string>\",\n          \"r2rShareCode\": \"<string>\",\n          \"idvt\": {\n            \"idCheckStatus\": \"Fail\",\n            \"r2rCheckStatus\": \"NotPerformed\"\n          },\n          \"pepsSanctions\": {\n            \"pepsStatus\": \"ActionRequired\",\n            \"sanctionsStatus\": \"Match\"\n          }\n        }\n      },\n      \"outcome\": {\n        \"status\": \"<string>\",\n        \"comments\": \"<string>\",\n        \"rpi\": {\n          \"eligibility\": \"<string>\",\n          \"comments\": \"<string>\"\n        },\n        \"sections\": [\n          {\n            \"name\": \"<string>\",\n            \"status\": \"<string>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"status\": \"<string>\"\n          }\n        ]\n      },\n      \"id\": \"<string>\",\n      \"type\": \"guarantor\",\n      \"attachedSubjects\": [\n        {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\"\n        }\n      ],\n      \"milestones\": [\n        {\n          \"type\": \"<string>\",\n          \"event\": \"<string>\",\n          \"createdAt\": \"<string>\",\n          \"updatedAt\": \"<string>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"event\": \"<string>\",\n          \"createdAt\": \"<string>\",\n          \"updatedAt\": \"<string>\"\n        }\n      ]\n    }\n  ],\n  \"agency\": {\n    \"companyName\": \"<string>\",\n    \"agentName\": \"<string>\",\n    \"agentMobile\": \"<string>\",\n    \"agentEmail\": \"<string>\"\n  },\n  \"createdAt\": \"<string>\"\n}",
+                      "createdAt": "2026-10-21T19:49:46.000Z",
+                      "updatedAt": "2026-10-21T19:49:46.000Z",
+                      "uid": "35240-f09b2714-3ad9-42ff-9220-2c9347392ba1"
+                    },
+                    {
+                      "id": "f582bb79-d6ac-445e-9608-8d2a395153d6",
+                      "name": "Bad Request",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "description": "(Required) A unique GUID identifying your company, issued alongside your API keys. This value may differ between production and sandbox environments. This is a mandatory header for all application and subject endpoints.",
+                            "key": "Company-ID",
+                            "value": "<uuid>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"tenancy\": {\n    \"moveInDate\": \"<string>\",\n    \"term\": \"<number>\",\n    \"monthlyCost\": \"<number>\",\n    \"address\": {\n      \"line1\": \"<string>\",\n      \"country\": \"<string>\",\n      \"postcode\": \"<string>\",\n      \"city\": \"<string>\",\n      \"line2\": \"<string>\"\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/referencing/application/:applicationId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "referencing",
+                            "application",
+                            ":applicationId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "applicationId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"reason\": \"<string>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"reason\": \"<string>\",\n      \"description\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-21T19:49:46.000Z",
+                      "updatedAt": "2026-10-21T19:49:46.000Z",
+                      "uid": "35240-f582bb79-d6ac-445e-9608-8d2a395153d6"
+                    },
+                    {
+                      "id": "2c6458cf-00b2-4f60-a0c3-c146d4d239e0",
+                      "name": "Not Found",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "description": "(Required) A unique GUID identifying your company, issued alongside your API keys. This value may differ between production and sandbox environments. This is a mandatory header for all application and subject endpoints.",
+                            "key": "Company-ID",
+                            "value": "<uuid>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"tenancy\": {\n    \"moveInDate\": \"<string>\",\n    \"term\": \"<number>\",\n    \"monthlyCost\": \"<number>\",\n    \"address\": {\n      \"line1\": \"<string>\",\n      \"country\": \"<string>\",\n      \"postcode\": \"<string>\",\n      \"city\": \"<string>\",\n      \"line2\": \"<string>\"\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/referencing/application/:applicationId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "referencing",
+                            "application",
+                            ":applicationId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "applicationId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-10-21T19:49:46.000Z",
+                      "updatedAt": "2026-10-21T19:49:46.000Z",
+                      "uid": "35240-2c6458cf-00b2-4f60-a0c3-c146d4d239e0"
+                    },
+                    {
+                      "id": "358476f2-b9a5-472d-8720-1e3901b5ce55",
+                      "name": "Internal Server Error",
+                      "originalRequest": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "description": "(Required) A unique GUID identifying your company, issued alongside your API keys. This value may differ between production and sandbox environments. This is a mandatory header for all application and subject endpoints.",
+                            "key": "Company-ID",
+                            "value": "<uuid>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"tenancy\": {\n    \"moveInDate\": \"<string>\",\n    \"term\": \"<number>\",\n    \"monthlyCost\": \"<number>\",\n    \"address\": {\n      \"line1\": \"<string>\",\n      \"country\": \"<string>\",\n      \"postcode\": \"<string>\",\n      \"city\": \"<string>\",\n      \"line2\": \"<string>\"\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/referencing/application/:applicationId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "referencing",
+                            "application",
+                            ":applicationId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "applicationId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-10-21T19:49:46.000Z",
+                      "updatedAt": "2026-10-21T19:49:46.000Z",
+                      "uid": "35240-358476f2-b9a5-472d-8720-1e3901b5ce55"
+                    }
+                  ],
+                  "createdAt": "2026-10-21T19:49:46.000Z",
+                  "updatedAt": "2026-10-21T19:49:46.000Z",
+                  "uid": "35240-4c0f354a-6482-4e01-a7f4-cee28ccb357a"
+                },
+                {
+                  "name": "Delete Application",
+                  "id": "b80da6dc-3d55-42d6-a876-60813a03b31b",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "(Required) A unique GUID identifying your company, issued alongside your API keys. This value may differ between production and sandbox environments. This is a mandatory header for all application and subject endpoints.",
+                        "key": "Company-ID",
+                        "value": "<uuid>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/referencing/application/:applicationId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "referencing",
+                        "application",
+                        ":applicationId"
+                      ],
+                      "variable": [
+                        {
+                          "id": "f84cf407-a5d9-4991-aa39-7bc554042d8f",
+                          "key": "applicationId",
+                          "value": "<string>",
+                          "description": "(Required) The applicationId of the application you wish to retrieve"
+                        }
+                      ]
+                    },
+                    "description": "Delete an application which you have already created"
+                  },
+                  "response": [
+                    {
+                      "id": "539379c7-5f8f-4bd6-9c7e-481f53669f08",
+                      "name": "Successful operation",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "(Required) A unique GUID identifying your company, issued alongside your API keys. This value may differ between production and sandbox environments. This is a mandatory header for all application and subject endpoints.",
+                            "key": "Company-ID",
+                            "value": "<uuid>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/referencing/application/:applicationId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "referencing",
+                            "application",
+                            ":applicationId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "applicationId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"tenancy\": {\n    \"moveInDate\": \"<string>\",\n    \"term\": \"<number>\",\n    \"monthlyCost\": \"<number>\",\n    \"address\": {\n      \"line1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"postcode\": \"<string>\",\n      \"country\": \"<string>\"\n    }\n  },\n  \"subjects\": [\n    {\n      \"externalId\": \"<string>\",\n      \"rentalDetails\": {\n        \"priceShare\": \"<number>\",\n        \"affordabilityRatio\": \"<number>\"\n      },\n      \"context\": {\n        \"name\": \"<string>\",\n        \"firstName\": \"<string>\",\n        \"lastName\": \"<string>\",\n        \"email\": \"<string>\",\n        \"mobile\": \"<string>\",\n        \"redirectUrlOnJourneyComplete\": \"<string>\",\n        \"tenancyRenewal\": \"<boolean>\",\n        \"product\": \"<string>\",\n        \"addresses\": [\n          {\n            \"id\": \"<string>\",\n            \"addressType\": \"<string>\",\n            \"bedroomIdentifier\": \"<string>\",\n            \"name\": \"<string>\",\n            \"startDate\": \"<string>\",\n            \"status\": \"<string>\",\n            \"line1\": \"<string>\",\n            \"normalizedLine1\": \"<string>\",\n            \"line2\": \"<string>\",\n            \"city\": \"<string>\",\n            \"county\": {},\n            \"postcode\": \"<string>\",\n            \"country\": \"<string>\",\n            \"countryCodeAlpha2\": \"<string>\",\n            \"referee\": {\n              \"id\": \"<string>\",\n              \"name\": \"<string>\",\n              \"email\": \"<string>\",\n              \"mobile\": \"<string>\",\n              \"createdAt\": \"<string>\"\n            }\n          },\n          {\n            \"id\": \"<string>\",\n            \"addressType\": \"<string>\",\n            \"bedroomIdentifier\": \"<string>\",\n            \"name\": \"<string>\",\n            \"startDate\": \"<string>\",\n            \"status\": \"<string>\",\n            \"line1\": \"<string>\",\n            \"normalizedLine1\": \"<string>\",\n            \"line2\": \"<string>\",\n            \"city\": \"<string>\",\n            \"county\": {},\n            \"postcode\": \"<string>\",\n            \"country\": \"<string>\",\n            \"countryCodeAlpha2\": \"<string>\",\n            \"referee\": {\n              \"id\": \"<string>\",\n              \"name\": \"<string>\",\n              \"email\": \"<string>\",\n              \"mobile\": \"<string>\",\n              \"createdAt\": \"<string>\"\n            }\n          }\n        ],\n        \"incomes\": [\n          {\n            \"company\": \"<string>\",\n            \"position\": \"<string>\",\n            \"contractType\": \"<string>\",\n            \"contractSchedule\": \"<string>\",\n            \"guaranteedBonus\": {},\n            \"startDate\": \"<string>\",\n            \"endDate\": {},\n            \"address\": {\n              \"id\": {},\n              \"addressType\": \"<string>\",\n              \"name\": {},\n              \"startDate\": {},\n              \"status\": {},\n              \"line1\": \"<string>\",\n              \"normalizedLine1\": \"<string>\",\n              \"line2\": \"<string>\",\n              \"line3\": {},\n              \"city\": \"<string>\",\n              \"county\": {},\n              \"postcode\": \"<string>\",\n              \"country\": \"<string>\",\n              \"countryCodeAlpha2\": {}\n            },\n            \"referee\": {\n              \"id\": \"<string>\",\n              \"name\": \"<string>\",\n              \"email\": \"<string>\",\n              \"mobile\": \"<string>\",\n              \"createdAt\": \"<string>\",\n              \"isNonProfessionalEmail\": \"<boolean>\"\n            },\n            \"type\": \"<string>\",\n            \"evidenceType\": \"<string>\",\n            \"income\": {\n              \"value\": \"<number>\",\n              \"currency\": \"<string>\",\n              \"frequency\": \"<string>\"\n            },\n            \"id\": \"<string>\"\n          },\n          {\n            \"company\": \"<string>\",\n            \"position\": \"<string>\",\n            \"contractType\": \"<string>\",\n            \"contractSchedule\": \"<string>\",\n            \"guaranteedBonus\": {},\n            \"startDate\": \"<string>\",\n            \"endDate\": {},\n            \"address\": {\n              \"id\": {},\n              \"addressType\": \"<string>\",\n              \"name\": {},\n              \"startDate\": {},\n              \"status\": {},\n              \"line1\": \"<string>\",\n              \"normalizedLine1\": \"<string>\",\n              \"line2\": \"<string>\",\n              \"line3\": {},\n              \"city\": \"<string>\",\n              \"county\": {},\n              \"postcode\": \"<string>\",\n              \"country\": \"<string>\",\n              \"countryCodeAlpha2\": {}\n            },\n            \"referee\": {\n              \"id\": \"<string>\",\n              \"name\": \"<string>\",\n              \"email\": \"<string>\",\n              \"mobile\": \"<string>\",\n              \"createdAt\": \"<string>\",\n              \"isNonProfessionalEmail\": \"<boolean>\"\n            },\n            \"type\": \"<string>\",\n            \"evidenceType\": \"<string>\",\n            \"income\": {\n              \"value\": \"<number>\",\n              \"currency\": \"<string>\",\n              \"frequency\": \"<string>\"\n            },\n            \"id\": \"<string>\"\n          }\n        ],\n        \"incomeSummary\": {\n          \"totalIncome\": \"<number>\",\n          \"totalVerifiedIncome\": \"<number>\",\n          \"maximumAffordabilityPercentage\": \"<number>\",\n          \"openBanking\": {\n            \"provider\": \"<string>\",\n            \"status\": \"<string>\",\n            \"outcome\": {\n              \"estimatedAnnualNetIncome\": \"<number>\",\n              \"estimatedAnnualGrossIncome\": \"<number>\"\n            },\n            \"optOutReason\": {\n              \"category\": \"incomeAccuracy\",\n              \"additionalInformation\": \"<string>\"\n            }\n          }\n        },\n        \"credit\": {\n          \"hasAdverseCredit\": \"<boolean>\",\n          \"adverseCreditDeclared\": \"<boolean>\"\n        },\n        \"documents\": [\n          {\n            \"id\": \"<string>\",\n            \"fileName\": \"<string>\",\n            \"thumbnail\": \"<string>\",\n            \"documentType\": \"<string>\"\n          },\n          {\n            \"id\": \"<string>\",\n            \"fileName\": \"<string>\",\n            \"thumbnail\": \"<string>\",\n            \"documentType\": \"<string>\"\n          }\n        ],\n        \"communicationPreferences\": {\n          \"sendInitialTenantEmail\": \"<boolean>\",\n          \"disableRentProtectionComms\": \"<boolean>\",\n          \"disableTCLIComms\": \"<boolean>\",\n          \"disableTenancyServicesComms\": \"<boolean>\"\n        },\n        \"guarantorCollection\": {\n          \"required\": \"<boolean>\",\n          \"product\": \"Priority\",\n          \"affordabilityRatio\": \"<number>\"\n        },\n        \"identity\": {\n          \"nationality\": \"<string>\",\n          \"nationalInsuranceNumber\": \"<string>\",\n          \"r2rShareCode\": \"<string>\",\n          \"idvt\": {\n            \"idCheckStatus\": \"Fail\",\n            \"r2rCheckStatus\": \"Fail\"\n          },\n          \"pepsSanctions\": {\n            \"pepsStatus\": \"Match\",\n            \"sanctionsStatus\": \"ActionRequired\"\n          }\n        }\n      },\n      \"outcome\": {\n        \"status\": \"<string>\",\n        \"comments\": \"<string>\",\n        \"rpi\": {\n          \"eligibility\": \"<string>\",\n          \"comments\": \"<string>\"\n        },\n        \"sections\": [\n          {\n            \"name\": \"<string>\",\n            \"status\": \"<string>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"status\": \"<string>\"\n          }\n        ]\n      },\n      \"id\": \"<string>\",\n      \"type\": \"applicant\",\n      \"attachedSubjects\": [\n        {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\"\n        }\n      ],\n      \"milestones\": [\n        {\n          \"type\": \"<string>\",\n          \"event\": \"<string>\",\n          \"createdAt\": \"<string>\",\n          \"updatedAt\": \"<string>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"event\": \"<string>\",\n          \"createdAt\": \"<string>\",\n          \"updatedAt\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"externalId\": \"<string>\",\n      \"rentalDetails\": {\n        \"priceShare\": \"<number>\",\n        \"affordabilityRatio\": \"<number>\"\n      },\n      \"context\": {\n        \"name\": \"<string>\",\n        \"firstName\": \"<string>\",\n        \"lastName\": \"<string>\",\n        \"email\": \"<string>\",\n        \"mobile\": \"<string>\",\n        \"redirectUrlOnJourneyComplete\": \"<string>\",\n        \"tenancyRenewal\": \"<boolean>\",\n        \"product\": \"<string>\",\n        \"addresses\": [\n          {\n            \"id\": \"<string>\",\n            \"addressType\": \"<string>\",\n            \"bedroomIdentifier\": \"<string>\",\n            \"name\": \"<string>\",\n            \"startDate\": \"<string>\",\n            \"status\": \"<string>\",\n            \"line1\": \"<string>\",\n            \"normalizedLine1\": \"<string>\",\n            \"line2\": \"<string>\",\n            \"city\": \"<string>\",\n            \"county\": {},\n            \"postcode\": \"<string>\",\n            \"country\": \"<string>\",\n            \"countryCodeAlpha2\": \"<string>\",\n            \"referee\": {\n              \"id\": \"<string>\",\n              \"name\": \"<string>\",\n              \"email\": \"<string>\",\n              \"mobile\": \"<string>\",\n              \"createdAt\": \"<string>\"\n            }\n          },\n          {\n            \"id\": \"<string>\",\n            \"addressType\": \"<string>\",\n            \"bedroomIdentifier\": \"<string>\",\n            \"name\": \"<string>\",\n            \"startDate\": \"<string>\",\n            \"status\": \"<string>\",\n            \"line1\": \"<string>\",\n            \"normalizedLine1\": \"<string>\",\n            \"line2\": \"<string>\",\n            \"city\": \"<string>\",\n            \"county\": {},\n            \"postcode\": \"<string>\",\n            \"country\": \"<string>\",\n            \"countryCodeAlpha2\": \"<string>\",\n            \"referee\": {\n              \"id\": \"<string>\",\n              \"name\": \"<string>\",\n              \"email\": \"<string>\",\n              \"mobile\": \"<string>\",\n              \"createdAt\": \"<string>\"\n            }\n          }\n        ],\n        \"incomes\": [\n          {\n            \"company\": \"<string>\",\n            \"position\": \"<string>\",\n            \"contractType\": \"<string>\",\n            \"contractSchedule\": \"<string>\",\n            \"guaranteedBonus\": {},\n            \"startDate\": \"<string>\",\n            \"endDate\": {},\n            \"address\": {\n              \"id\": {},\n              \"addressType\": \"<string>\",\n              \"name\": {},\n              \"startDate\": {},\n              \"status\": {},\n              \"line1\": \"<string>\",\n              \"normalizedLine1\": \"<string>\",\n              \"line2\": \"<string>\",\n              \"line3\": {},\n              \"city\": \"<string>\",\n              \"county\": {},\n              \"postcode\": \"<string>\",\n              \"country\": \"<string>\",\n              \"countryCodeAlpha2\": {}\n            },\n            \"referee\": {\n              \"id\": \"<string>\",\n              \"name\": \"<string>\",\n              \"email\": \"<string>\",\n              \"mobile\": \"<string>\",\n              \"createdAt\": \"<string>\",\n              \"isNonProfessionalEmail\": \"<boolean>\"\n            },\n            \"type\": \"<string>\",\n            \"evidenceType\": \"<string>\",\n            \"income\": {\n              \"value\": \"<number>\",\n              \"currency\": \"<string>\",\n              \"frequency\": \"<string>\"\n            },\n            \"id\": \"<string>\"\n          },\n          {\n            \"company\": \"<string>\",\n            \"position\": \"<string>\",\n            \"contractType\": \"<string>\",\n            \"contractSchedule\": \"<string>\",\n            \"guaranteedBonus\": {},\n            \"startDate\": \"<string>\",\n            \"endDate\": {},\n            \"address\": {\n              \"id\": {},\n              \"addressType\": \"<string>\",\n              \"name\": {},\n              \"startDate\": {},\n              \"status\": {},\n              \"line1\": \"<string>\",\n              \"normalizedLine1\": \"<string>\",\n              \"line2\": \"<string>\",\n              \"line3\": {},\n              \"city\": \"<string>\",\n              \"county\": {},\n              \"postcode\": \"<string>\",\n              \"country\": \"<string>\",\n              \"countryCodeAlpha2\": {}\n            },\n            \"referee\": {\n              \"id\": \"<string>\",\n              \"name\": \"<string>\",\n              \"email\": \"<string>\",\n              \"mobile\": \"<string>\",\n              \"createdAt\": \"<string>\",\n              \"isNonProfessionalEmail\": \"<boolean>\"\n            },\n            \"type\": \"<string>\",\n            \"evidenceType\": \"<string>\",\n            \"income\": {\n              \"value\": \"<number>\",\n              \"currency\": \"<string>\",\n              \"frequency\": \"<string>\"\n            },\n            \"id\": \"<string>\"\n          }\n        ],\n        \"incomeSummary\": {\n          \"totalIncome\": \"<number>\",\n          \"totalVerifiedIncome\": \"<number>\",\n          \"maximumAffordabilityPercentage\": \"<number>\",\n          \"openBanking\": {\n            \"provider\": \"<string>\",\n            \"status\": \"<string>\",\n            \"outcome\": {\n              \"estimatedAnnualNetIncome\": \"<number>\",\n              \"estimatedAnnualGrossIncome\": \"<number>\"\n            },\n            \"optOutReason\": {\n              \"category\": \"userOptedOut\",\n              \"additionalInformation\": \"<string>\"\n            }\n          }\n        },\n        \"credit\": {\n          \"hasAdverseCredit\": \"<boolean>\",\n          \"adverseCreditDeclared\": \"<boolean>\"\n        },\n        \"documents\": [\n          {\n            \"id\": \"<string>\",\n            \"fileName\": \"<string>\",\n            \"thumbnail\": \"<string>\",\n            \"documentType\": \"<string>\"\n          },\n          {\n            \"id\": \"<string>\",\n            \"fileName\": \"<string>\",\n            \"thumbnail\": \"<string>\",\n            \"documentType\": \"<string>\"\n          }\n        ],\n        \"communicationPreferences\": {\n          \"sendInitialTenantEmail\": \"<boolean>\",\n          \"disableRentProtectionComms\": \"<boolean>\",\n          \"disableTCLIComms\": \"<boolean>\",\n          \"disableTenancyServicesComms\": \"<boolean>\"\n        },\n        \"guarantorCollection\": {\n          \"required\": \"<boolean>\",\n          \"product\": \"Priority\",\n          \"affordabilityRatio\": \"<number>\"\n        },\n        \"identity\": {\n          \"nationality\": \"<string>\",\n          \"nationalInsuranceNumber\": \"<string>\",\n          \"r2rShareCode\": \"<string>\",\n          \"idvt\": {\n            \"idCheckStatus\": \"Fail\",\n            \"r2rCheckStatus\": \"NotPerformed\"\n          },\n          \"pepsSanctions\": {\n            \"pepsStatus\": \"ActionRequired\",\n            \"sanctionsStatus\": \"Match\"\n          }\n        }\n      },\n      \"outcome\": {\n        \"status\": \"<string>\",\n        \"comments\": \"<string>\",\n        \"rpi\": {\n          \"eligibility\": \"<string>\",\n          \"comments\": \"<string>\"\n        },\n        \"sections\": [\n          {\n            \"name\": \"<string>\",\n            \"status\": \"<string>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"status\": \"<string>\"\n          }\n        ]\n      },\n      \"id\": \"<string>\",\n      \"type\": \"guarantor\",\n      \"attachedSubjects\": [\n        {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\"\n        }\n      ],\n      \"milestones\": [\n        {\n          \"type\": \"<string>\",\n          \"event\": \"<string>\",\n          \"createdAt\": \"<string>\",\n          \"updatedAt\": \"<string>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"event\": \"<string>\",\n          \"createdAt\": \"<string>\",\n          \"updatedAt\": \"<string>\"\n        }\n      ]\n    }\n  ],\n  \"agency\": {\n    \"companyName\": \"<string>\",\n    \"agentName\": \"<string>\",\n    \"agentMobile\": \"<string>\",\n    \"agentEmail\": \"<string>\"\n  },\n  \"createdAt\": \"<string>\"\n}",
+                      "createdAt": "2026-10-21T19:49:46.000Z",
+                      "updatedAt": "2026-10-21T19:49:46.000Z",
+                      "uid": "35240-539379c7-5f8f-4bd6-9c7e-481f53669f08"
+                    },
+                    {
+                      "id": "55802787-a2ce-4545-a618-9f8075e2c1fa",
+                      "name": "Bad Request",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "(Required) A unique GUID identifying your company, issued alongside your API keys. This value may differ between production and sandbox environments. This is a mandatory header for all application and subject endpoints.",
+                            "key": "Company-ID",
+                            "value": "<uuid>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/referencing/application/:applicationId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "referencing",
+                            "application",
+                            ":applicationId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "applicationId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"reason\": \"<string>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"reason\": \"<string>\",\n      \"description\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-21T19:49:46.000Z",
+                      "updatedAt": "2026-10-21T19:49:46.000Z",
+                      "uid": "35240-55802787-a2ce-4545-a618-9f8075e2c1fa"
+                    },
+                    {
+                      "id": "e081585d-02ea-4329-bf75-0ed189f92422",
+                      "name": "Not Found",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "(Required) A unique GUID identifying your company, issued alongside your API keys. This value may differ between production and sandbox environments. This is a mandatory header for all application and subject endpoints.",
+                            "key": "Company-ID",
+                            "value": "<uuid>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/referencing/application/:applicationId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "referencing",
+                            "application",
+                            ":applicationId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "applicationId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-10-21T19:49:46.000Z",
+                      "updatedAt": "2026-10-21T19:49:46.000Z",
+                      "uid": "35240-e081585d-02ea-4329-bf75-0ed189f92422"
+                    },
+                    {
+                      "id": "89346351-1ea7-41d4-9035-e4fcfc4d1aa0",
+                      "name": "Internal Server Error",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "(Required) A unique GUID identifying your company, issued alongside your API keys. This value may differ between production and sandbox environments. This is a mandatory header for all application and subject endpoints.",
+                            "key": "Company-ID",
+                            "value": "<uuid>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/referencing/application/:applicationId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "referencing",
+                            "application",
+                            ":applicationId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "applicationId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-10-21T19:49:46.000Z",
+                      "updatedAt": "2026-10-21T19:49:46.000Z",
+                      "uid": "35240-89346351-1ea7-41d4-9035-e4fcfc4d1aa0"
+                    }
+                  ],
+                  "createdAt": "2026-10-21T19:49:46.000Z",
+                  "updatedAt": "2026-10-21T19:49:46.000Z",
+                  "uid": "35240-b80da6dc-3d55-42d6-a876-60813a03b31b"
+                }
+              ],
+              "id": "da69bb56-07ea-4d6d-8676-ab4100a0d63c",
+              "createdAt": "2026-10-21T19:49:46.000Z",
+              "updatedAt": "2026-10-21T19:49:46.000Z",
+              "uid": "35240-da69bb56-07ea-4d6d-8676-ab4100a0d63c"
+            },
+            {
+              "name": "Create a new application",
+              "id": "5a72cbd9-b7a4-4a45-b821-28216d8f4bb1",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) A unique GUID identifying your company, issued alongside your API keys. This value may differ between production and sandbox environments. This is a mandatory header for all application and subject endpoints.",
+                    "key": "Company-ID",
+                    "value": "<uuid>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tenancy\": {\n    \"moveInDate\": \"<string>\",\n    \"term\": \"<number>\",\n    \"monthlyCost\": \"<number>\",\n    \"address\": {\n      \"line1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"postcode\": \"<string>\",\n      \"country\": \"<string>\"\n    }\n  },\n  \"agency\": {\n    \"companyName\": \"<string>\",\n    \"agentName\": \"<string>\",\n    \"agentMobile\": \"<string>\",\n    \"agentEmail\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/referencing/application",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "referencing",
+                    "application"
+                  ]
+                },
+                "description": "Create a new rental application to reference tenants and guarantors"
+              },
+              "response": [
+                {
+                  "id": "8e0e75f4-7181-4dd5-a9a9-ae24cee840ef",
+                  "name": "Successful operation",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "(Required) A unique GUID identifying your company, issued alongside your API keys. This value may differ between production and sandbox environments. This is a mandatory header for all application and subject endpoints.",
+                        "key": "Company-ID",
+                        "value": "<uuid>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"tenancy\": {\n    \"moveInDate\": \"<string>\",\n    \"term\": \"<number>\",\n    \"monthlyCost\": \"<number>\",\n    \"address\": {\n      \"line1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"postcode\": \"<string>\",\n      \"country\": \"<string>\"\n    }\n  },\n  \"agency\": {\n    \"companyName\": \"<string>\",\n    \"agentName\": \"<string>\",\n    \"agentMobile\": \"<string>\",\n    \"agentEmail\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/referencing/application",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "referencing",
+                        "application"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"tenancy\": {\n    \"moveInDate\": \"<string>\",\n    \"term\": \"<number>\",\n    \"monthlyCost\": \"<number>\",\n    \"address\": {\n      \"line1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"postcode\": \"<string>\",\n      \"country\": \"<string>\"\n    }\n  },\n  \"subjects\": [\n    {\n      \"externalId\": \"<string>\",\n      \"rentalDetails\": {\n        \"priceShare\": \"<number>\",\n        \"affordabilityRatio\": \"<number>\"\n      },\n      \"context\": {\n        \"name\": \"<string>\",\n        \"firstName\": \"<string>\",\n        \"lastName\": \"<string>\",\n        \"email\": \"<string>\",\n        \"mobile\": \"<string>\",\n        \"redirectUrlOnJourneyComplete\": \"<string>\",\n        \"tenancyRenewal\": \"<boolean>\",\n        \"product\": \"<string>\",\n        \"addresses\": [\n          {\n            \"id\": \"<string>\",\n            \"addressType\": \"<string>\",\n            \"bedroomIdentifier\": \"<string>\",\n            \"name\": \"<string>\",\n            \"startDate\": \"<string>\",\n            \"status\": \"<string>\",\n            \"line1\": \"<string>\",\n            \"normalizedLine1\": \"<string>\",\n            \"line2\": \"<string>\",\n            \"city\": \"<string>\",\n            \"county\": {},\n            \"postcode\": \"<string>\",\n            \"country\": \"<string>\",\n            \"countryCodeAlpha2\": \"<string>\",\n            \"referee\": {\n              \"id\": \"<string>\",\n              \"name\": \"<string>\",\n              \"email\": \"<string>\",\n              \"mobile\": \"<string>\",\n              \"createdAt\": \"<string>\"\n            }\n          },\n          {\n            \"id\": \"<string>\",\n            \"addressType\": \"<string>\",\n            \"bedroomIdentifier\": \"<string>\",\n            \"name\": \"<string>\",\n            \"startDate\": \"<string>\",\n            \"status\": \"<string>\",\n            \"line1\": \"<string>\",\n            \"normalizedLine1\": \"<string>\",\n            \"line2\": \"<string>\",\n            \"city\": \"<string>\",\n            \"county\": {},\n            \"postcode\": \"<string>\",\n            \"country\": \"<string>\",\n            \"countryCodeAlpha2\": \"<string>\",\n            \"referee\": {\n              \"id\": \"<string>\",\n              \"name\": \"<string>\",\n              \"email\": \"<string>\",\n              \"mobile\": \"<string>\",\n              \"createdAt\": \"<string>\"\n            }\n          }\n        ],\n        \"incomes\": [\n          {\n            \"company\": \"<string>\",\n            \"position\": \"<string>\",\n            \"contractType\": \"<string>\",\n            \"contractSchedule\": \"<string>\",\n            \"guaranteedBonus\": {},\n            \"startDate\": \"<string>\",\n            \"endDate\": {},\n            \"address\": {\n              \"id\": {},\n              \"addressType\": \"<string>\",\n              \"name\": {},\n              \"startDate\": {},\n              \"status\": {},\n              \"line1\": \"<string>\",\n              \"normalizedLine1\": \"<string>\",\n              \"line2\": \"<string>\",\n              \"line3\": {},\n              \"city\": \"<string>\",\n              \"county\": {},\n              \"postcode\": \"<string>\",\n              \"country\": \"<string>\",\n              \"countryCodeAlpha2\": {}\n            },\n            \"referee\": {\n              \"id\": \"<string>\",\n              \"name\": \"<string>\",\n              \"email\": \"<string>\",\n              \"mobile\": \"<string>\",\n              \"createdAt\": \"<string>\",\n              \"isNonProfessionalEmail\": \"<boolean>\"\n            },\n            \"type\": \"<string>\",\n            \"evidenceType\": \"<string>\",\n            \"income\": {\n              \"value\": \"<number>\",\n              \"currency\": \"<string>\",\n              \"frequency\": \"<string>\"\n            },\n            \"id\": \"<string>\"\n          },\n          {\n            \"company\": \"<string>\",\n            \"position\": \"<string>\",\n            \"contractType\": \"<string>\",\n            \"contractSchedule\": \"<string>\",\n            \"guaranteedBonus\": {},\n            \"startDate\": \"<string>\",\n            \"endDate\": {},\n            \"address\": {\n              \"id\": {},\n              \"addressType\": \"<string>\",\n              \"name\": {},\n              \"startDate\": {},\n              \"status\": {},\n              \"line1\": \"<string>\",\n              \"normalizedLine1\": \"<string>\",\n              \"line2\": \"<string>\",\n              \"line3\": {},\n              \"city\": \"<string>\",\n              \"county\": {},\n              \"postcode\": \"<string>\",\n              \"country\": \"<string>\",\n              \"countryCodeAlpha2\": {}\n            },\n            \"referee\": {\n              \"id\": \"<string>\",\n              \"name\": \"<string>\",\n              \"email\": \"<string>\",\n              \"mobile\": \"<string>\",\n              \"createdAt\": \"<string>\",\n              \"isNonProfessionalEmail\": \"<boolean>\"\n            },\n            \"type\": \"<string>\",\n            \"evidenceType\": \"<string>\",\n            \"income\": {\n              \"value\": \"<number>\",\n              \"currency\": \"<string>\",\n              \"frequency\": \"<string>\"\n            },\n            \"id\": \"<string>\"\n          }\n        ],\n        \"incomeSummary\": {\n          \"totalIncome\": \"<number>\",\n          \"totalVerifiedIncome\": \"<number>\",\n          \"maximumAffordabilityPercentage\": \"<number>\",\n          \"openBanking\": {\n            \"provider\": \"<string>\",\n            \"status\": \"<string>\",\n            \"outcome\": {\n              \"estimatedAnnualNetIncome\": \"<number>\",\n              \"estimatedAnnualGrossIncome\": \"<number>\"\n            },\n            \"optOutReason\": {\n              \"category\": \"incomeAccuracy\",\n              \"additionalInformation\": \"<string>\"\n            }\n          }\n        },\n        \"credit\": {\n          \"hasAdverseCredit\": \"<boolean>\",\n          \"adverseCreditDeclared\": \"<boolean>\"\n        },\n        \"documents\": [\n          {\n            \"id\": \"<string>\",\n            \"fileName\": \"<string>\",\n            \"thumbnail\": \"<string>\",\n            \"documentType\": \"<string>\"\n          },\n          {\n            \"id\": \"<string>\",\n            \"fileName\": \"<string>\",\n            \"thumbnail\": \"<string>\",\n            \"documentType\": \"<string>\"\n          }\n        ],\n        \"communicationPreferences\": {\n          \"sendInitialTenantEmail\": \"<boolean>\",\n          \"disableRentProtectionComms\": \"<boolean>\",\n          \"disableTCLIComms\": \"<boolean>\",\n          \"disableTenancyServicesComms\": \"<boolean>\"\n        },\n        \"guarantorCollection\": {\n          \"required\": \"<boolean>\",\n          \"product\": \"Priority\",\n          \"affordabilityRatio\": \"<number>\"\n        },\n        \"identity\": {\n          \"nationality\": \"<string>\",\n          \"nationalInsuranceNumber\": \"<string>\",\n          \"r2rShareCode\": \"<string>\",\n          \"idvt\": {\n            \"idCheckStatus\": \"Fail\",\n            \"r2rCheckStatus\": \"Fail\"\n          },\n          \"pepsSanctions\": {\n            \"pepsStatus\": \"Match\",\n            \"sanctionsStatus\": \"ActionRequired\"\n          }\n        }\n      },\n      \"outcome\": {\n        \"status\": \"<string>\",\n        \"comments\": \"<string>\",\n        \"rpi\": {\n          \"eligibility\": \"<string>\",\n          \"comments\": \"<string>\"\n        },\n        \"sections\": [\n          {\n            \"name\": \"<string>\",\n            \"status\": \"<string>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"status\": \"<string>\"\n          }\n        ]\n      },\n      \"id\": \"<string>\",\n      \"type\": \"applicant\",\n      \"attachedSubjects\": [\n        {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\"\n        }\n      ],\n      \"milestones\": [\n        {\n          \"type\": \"<string>\",\n          \"event\": \"<string>\",\n          \"createdAt\": \"<string>\",\n          \"updatedAt\": \"<string>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"event\": \"<string>\",\n          \"createdAt\": \"<string>\",\n          \"updatedAt\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"externalId\": \"<string>\",\n      \"rentalDetails\": {\n        \"priceShare\": \"<number>\",\n        \"affordabilityRatio\": \"<number>\"\n      },\n      \"context\": {\n        \"name\": \"<string>\",\n        \"firstName\": \"<string>\",\n        \"lastName\": \"<string>\",\n        \"email\": \"<string>\",\n        \"mobile\": \"<string>\",\n        \"redirectUrlOnJourneyComplete\": \"<string>\",\n        \"tenancyRenewal\": \"<boolean>\",\n        \"product\": \"<string>\",\n        \"addresses\": [\n          {\n            \"id\": \"<string>\",\n            \"addressType\": \"<string>\",\n            \"bedroomIdentifier\": \"<string>\",\n            \"name\": \"<string>\",\n            \"startDate\": \"<string>\",\n            \"status\": \"<string>\",\n            \"line1\": \"<string>\",\n            \"normalizedLine1\": \"<string>\",\n            \"line2\": \"<string>\",\n            \"city\": \"<string>\",\n            \"county\": {},\n            \"postcode\": \"<string>\",\n            \"country\": \"<string>\",\n            \"countryCodeAlpha2\": \"<string>\",\n            \"referee\": {\n              \"id\": \"<string>\",\n              \"name\": \"<string>\",\n              \"email\": \"<string>\",\n              \"mobile\": \"<string>\",\n              \"createdAt\": \"<string>\"\n            }\n          },\n          {\n            \"id\": \"<string>\",\n            \"addressType\": \"<string>\",\n            \"bedroomIdentifier\": \"<string>\",\n            \"name\": \"<string>\",\n            \"startDate\": \"<string>\",\n            \"status\": \"<string>\",\n            \"line1\": \"<string>\",\n            \"normalizedLine1\": \"<string>\",\n            \"line2\": \"<string>\",\n            \"city\": \"<string>\",\n            \"county\": {},\n            \"postcode\": \"<string>\",\n            \"country\": \"<string>\",\n            \"countryCodeAlpha2\": \"<string>\",\n            \"referee\": {\n              \"id\": \"<string>\",\n              \"name\": \"<string>\",\n              \"email\": \"<string>\",\n              \"mobile\": \"<string>\",\n              \"createdAt\": \"<string>\"\n            }\n          }\n        ],\n        \"incomes\": [\n          {\n            \"company\": \"<string>\",\n            \"position\": \"<string>\",\n            \"contractType\": \"<string>\",\n            \"contractSchedule\": \"<string>\",\n            \"guaranteedBonus\": {},\n            \"startDate\": \"<string>\",\n            \"endDate\": {},\n            \"address\": {\n              \"id\": {},\n              \"addressType\": \"<string>\",\n              \"name\": {},\n              \"startDate\": {},\n              \"status\": {},\n              \"line1\": \"<string>\",\n              \"normalizedLine1\": \"<string>\",\n              \"line2\": \"<string>\",\n              \"line3\": {},\n              \"city\": \"<string>\",\n              \"county\": {},\n              \"postcode\": \"<string>\",\n              \"country\": \"<string>\",\n              \"countryCodeAlpha2\": {}\n            },\n            \"referee\": {\n              \"id\": \"<string>\",\n              \"name\": \"<string>\",\n              \"email\": \"<string>\",\n              \"mobile\": \"<string>\",\n              \"createdAt\": \"<string>\",\n              \"isNonProfessionalEmail\": \"<boolean>\"\n            },\n            \"type\": \"<string>\",\n            \"evidenceType\": \"<string>\",\n            \"income\": {\n              \"value\": \"<number>\",\n              \"currency\": \"<string>\",\n              \"frequency\": \"<string>\"\n            },\n            \"id\": \"<string>\"\n          },\n          {\n            \"company\": \"<string>\",\n            \"position\": \"<string>\",\n            \"contractType\": \"<string>\",\n            \"contractSchedule\": \"<string>\",\n            \"guaranteedBonus\": {},\n            \"startDate\": \"<string>\",\n            \"endDate\": {},\n            \"address\": {\n              \"id\": {},\n              \"addressType\": \"<string>\",\n              \"name\": {},\n              \"startDate\": {},\n              \"status\": {},\n              \"line1\": \"<string>\",\n              \"normalizedLine1\": \"<string>\",\n              \"line2\": \"<string>\",\n              \"line3\": {},\n              \"city\": \"<string>\",\n              \"county\": {},\n              \"postcode\": \"<string>\",\n              \"country\": \"<string>\",\n              \"countryCodeAlpha2\": {}\n            },\n            \"referee\": {\n              \"id\": \"<string>\",\n              \"name\": \"<string>\",\n              \"email\": \"<string>\",\n              \"mobile\": \"<string>\",\n              \"createdAt\": \"<string>\",\n              \"isNonProfessionalEmail\": \"<boolean>\"\n            },\n            \"type\": \"<string>\",\n            \"evidenceType\": \"<string>\",\n            \"income\": {\n              \"value\": \"<number>\",\n              \"currency\": \"<string>\",\n              \"frequency\": \"<string>\"\n            },\n            \"id\": \"<string>\"\n          }\n        ],\n        \"incomeSummary\": {\n          \"totalIncome\": \"<number>\",\n          \"totalVerifiedIncome\": \"<number>\",\n          \"maximumAffordabilityPercentage\": \"<number>\",\n          \"openBanking\": {\n            \"provider\": \"<string>\",\n            \"status\": \"<string>\",\n            \"outcome\": {\n              \"estimatedAnnualNetIncome\": \"<number>\",\n              \"estimatedAnnualGrossIncome\": \"<number>\"\n            },\n            \"optOutReason\": {\n              \"category\": \"userOptedOut\",\n              \"additionalInformation\": \"<string>\"\n            }\n          }\n        },\n        \"credit\": {\n          \"hasAdverseCredit\": \"<boolean>\",\n          \"adverseCreditDeclared\": \"<boolean>\"\n        },\n        \"documents\": [\n          {\n            \"id\": \"<string>\",\n            \"fileName\": \"<string>\",\n            \"thumbnail\": \"<string>\",\n            \"documentType\": \"<string>\"\n          },\n          {\n            \"id\": \"<string>\",\n            \"fileName\": \"<string>\",\n            \"thumbnail\": \"<string>\",\n            \"documentType\": \"<string>\"\n          }\n        ],\n        \"communicationPreferences\": {\n          \"sendInitialTenantEmail\": \"<boolean>\",\n          \"disableRentProtectionComms\": \"<boolean>\",\n          \"disableTCLIComms\": \"<boolean>\",\n          \"disableTenancyServicesComms\": \"<boolean>\"\n        },\n        \"guarantorCollection\": {\n          \"required\": \"<boolean>\",\n          \"product\": \"Priority\",\n          \"affordabilityRatio\": \"<number>\"\n        },\n        \"identity\": {\n          \"nationality\": \"<string>\",\n          \"nationalInsuranceNumber\": \"<string>\",\n          \"r2rShareCode\": \"<string>\",\n          \"idvt\": {\n            \"idCheckStatus\": \"Fail\",\n            \"r2rCheckStatus\": \"NotPerformed\"\n          },\n          \"pepsSanctions\": {\n            \"pepsStatus\": \"ActionRequired\",\n            \"sanctionsStatus\": \"Match\"\n          }\n        }\n      },\n      \"outcome\": {\n        \"status\": \"<string>\",\n        \"comments\": \"<string>\",\n        \"rpi\": {\n          \"eligibility\": \"<string>\",\n          \"comments\": \"<string>\"\n        },\n        \"sections\": [\n          {\n            \"name\": \"<string>\",\n            \"status\": \"<string>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"status\": \"<string>\"\n          }\n        ]\n      },\n      \"id\": \"<string>\",\n      \"type\": \"guarantor\",\n      \"attachedSubjects\": [\n        {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\"\n        }\n      ],\n      \"milestones\": [\n        {\n          \"type\": \"<string>\",\n          \"event\": \"<string>\",\n          \"createdAt\": \"<string>\",\n          \"updatedAt\": \"<string>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"event\": \"<string>\",\n          \"createdAt\": \"<string>\",\n          \"updatedAt\": \"<string>\"\n        }\n      ]\n    }\n  ],\n  \"agency\": {\n    \"companyName\": \"<string>\",\n    \"agentName\": \"<string>\",\n    \"agentMobile\": \"<string>\",\n    \"agentEmail\": \"<string>\"\n  },\n  \"createdAt\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T19:49:46.000Z",
+                  "updatedAt": "2026-10-21T19:49:46.000Z",
+                  "uid": "35240-8e0e75f4-7181-4dd5-a9a9-ae24cee840ef"
+                },
+                {
+                  "id": "d5ba6fa9-a6e1-4129-b938-1b9f13d9a52b",
+                  "name": "Bad Request",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "(Required) A unique GUID identifying your company, issued alongside your API keys. This value may differ between production and sandbox environments. This is a mandatory header for all application and subject endpoints.",
+                        "key": "Company-ID",
+                        "value": "<uuid>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"tenancy\": {\n    \"moveInDate\": \"<string>\",\n    \"term\": \"<number>\",\n    \"monthlyCost\": \"<number>\",\n    \"address\": {\n      \"line1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"postcode\": \"<string>\",\n      \"country\": \"<string>\"\n    }\n  },\n  \"agency\": {\n    \"companyName\": \"<string>\",\n    \"agentName\": \"<string>\",\n    \"agentMobile\": \"<string>\",\n    \"agentEmail\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/referencing/application",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "referencing",
+                        "application"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"reason\": \"<string>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"reason\": \"<string>\",\n      \"description\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T19:49:46.000Z",
+                  "updatedAt": "2026-10-21T19:49:46.000Z",
+                  "uid": "35240-d5ba6fa9-a6e1-4129-b938-1b9f13d9a52b"
+                },
+                {
+                  "id": "1e7226fe-b6e1-42d8-ada9-619c7fa34af5",
+                  "name": "Internal Server Error",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "(Required) A unique GUID identifying your company, issued alongside your API keys. This value may differ between production and sandbox environments. This is a mandatory header for all application and subject endpoints.",
+                        "key": "Company-ID",
+                        "value": "<uuid>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"tenancy\": {\n    \"moveInDate\": \"<string>\",\n    \"term\": \"<number>\",\n    \"monthlyCost\": \"<number>\",\n    \"address\": {\n      \"line1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"postcode\": \"<string>\",\n      \"country\": \"<string>\"\n    }\n  },\n  \"agency\": {\n    \"companyName\": \"<string>\",\n    \"agentName\": \"<string>\",\n    \"agentMobile\": \"<string>\",\n    \"agentEmail\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/referencing/application",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "referencing",
+                        "application"
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T19:49:46.000Z",
+                  "updatedAt": "2026-10-21T19:49:46.000Z",
+                  "uid": "35240-1e7226fe-b6e1-42d8-ada9-619c7fa34af5"
+                }
+              ],
+              "createdAt": "2026-10-21T19:49:46.000Z",
+              "updatedAt": "2026-10-21T19:49:46.000Z",
+              "uid": "35240-5a72cbd9-b7a4-4a45-b821-28216d8f4bb1"
+            }
+          ],
+          "id": "36fd08b0-8d50-40f6-8915-987c9b11c6cb",
+          "createdAt": "2026-10-21T19:49:46.000Z",
+          "updatedAt": "2026-10-21T19:49:46.000Z",
+          "uid": "35240-36fd08b0-8d50-40f6-8915-987c9b11c6cb"
+        }
+      ],
+      "id": "d8fc54ef-4ce2-4a12-bc82-e2731a6b2a13",
+      "createdAt": "2026-10-21T19:49:46.000Z",
+      "updatedAt": "2026-10-21T19:49:46.000Z",
+      "uid": "35240-d8fc54ef-4ce2-4a12-bc82-e2731a6b2a13"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "accessTokenUrl",
+        "value": "https://api.goodoverlord.com/auth/token",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "client_credentials",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.goodoverlord.com"
+    }
+  ]
+}

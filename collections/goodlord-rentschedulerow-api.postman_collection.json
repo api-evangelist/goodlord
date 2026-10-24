@@ -1,0 +1,607 @@
+{
+  "info": {
+    "_postman_id": "eb939a1d-1aba-4284-ad9b-62c6ed7a30c8",
+    "name": "Insurance App Rent Schedule Row API",
+    "description": "Resource 'RentScheduleRow' operations.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T19:50:31.000Z",
+    "updatedAt": "2026-10-21T19:50:32.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-eb939a1d-1aba-4284-ad9b-62c6ed7a30c8"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "insurance_claims",
+              "item": [
+                {
+                  "name": "{insuranceClaimId}",
+                  "item": [
+                    {
+                      "name": "rent_schedule",
+                      "item": [
+                        {
+                          "name": "{rentScheduleId}",
+                          "item": [
+                            {
+                              "name": "rent_schedule_row",
+                              "item": [
+                                {
+                                  "name": "{id}",
+                                  "item": [
+                                    {
+                                      "name": "Retrieves a RentScheduleRow resource",
+                                      "id": "4e708461-1c37-4135-b6cd-2dd2bd610af6",
+                                      "protocolProfileBehavior": {
+                                        "disableBodyPruning": true
+                                      },
+                                      "request": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/vnd.api+json"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/api/v1/insurance_claims/:insuranceClaimId/rent_schedule/:rentScheduleId/rent_schedule_row/:id?include=<string>",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "api",
+                                            "v1",
+                                            "insurance_claims",
+                                            ":insuranceClaimId",
+                                            "rent_schedule",
+                                            ":rentScheduleId",
+                                            "rent_schedule_row",
+                                            ":id"
+                                          ],
+                                          "query": [
+                                            {
+                                              "description": "Which relations to include in the response",
+                                              "key": "include",
+                                              "value": "<string>"
+                                            }
+                                          ],
+                                          "variable": [
+                                            {
+                                              "id": "9b666663-b25c-42f1-b0be-12cdcab4d60d",
+                                              "key": "insuranceClaimId",
+                                              "value": "<string>",
+                                              "description": "(Required) RentScheduleRow identifier"
+                                            },
+                                            {
+                                              "id": "f73a19f1-9cd4-4b57-b60d-b381935d9f67",
+                                              "key": "rentScheduleId",
+                                              "value": "<string>",
+                                              "description": "(Required) RentScheduleRow identifier"
+                                            },
+                                            {
+                                              "id": "9dfb0c26-efaa-4d49-a18d-06d317224e1b",
+                                              "key": "id",
+                                              "value": "<string>",
+                                              "description": "(Required) RentScheduleRow identifier"
+                                            }
+                                          ]
+                                        },
+                                        "description": "Retrieves a RentScheduleRow resource."
+                                      },
+                                      "response": [
+                                        {
+                                          "id": "11f26362-6a1c-4ee3-aa8c-0f450e6ece39",
+                                          "name": "RentScheduleRow resource",
+                                          "originalRequest": {
+                                            "method": "GET",
+                                            "header": [
+                                              {
+                                                "key": "Accept",
+                                                "value": "application/vnd.api+json"
+                                              },
+                                              {
+                                                "description": "Added as a part of security scheme: apikey",
+                                                "key": "Authorization",
+                                                "value": "<API Key>"
+                                              }
+                                            ],
+                                            "url": {
+                                              "raw": "{{baseUrl}}/api/v1/insurance_claims/:insuranceClaimId/rent_schedule/:rentScheduleId/rent_schedule_row/:id?include=<string>",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "api",
+                                                "v1",
+                                                "insurance_claims",
+                                                ":insuranceClaimId",
+                                                "rent_schedule",
+                                                ":rentScheduleId",
+                                                "rent_schedule_row",
+                                                ":id"
+                                              ],
+                                              "query": [
+                                                {
+                                                  "description": "Which relations to include in the response",
+                                                  "key": "include",
+                                                  "value": "<string>"
+                                                }
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "insuranceClaimId"
+                                                },
+                                                {
+                                                  "key": "rentScheduleId"
+                                                },
+                                                {
+                                                  "key": "id"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "OK",
+                                          "code": 200,
+                                          "_postman_previewlanguage": "json",
+                                          "header": [
+                                            {
+                                              "key": "Content-Type",
+                                              "value": "application/json"
+                                            }
+                                          ],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": "{\n  \"audits\": [\n    {\n      \"type\": \"<string>\",\n      \"text\": \"<string>\",\n      \"changedBy\": \"<string,null>\",\n      \"changedAt\": \"<dateTime>\",\n      \"changes\": \"<object,null>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"text\": \"<string>\",\n      \"changedBy\": \"<string,null>\",\n      \"changedAt\": \"<dateTime>\",\n      \"changes\": \"<object,null>\"\n    }\n  ],\n  \"id\": \"<string>\",\n  \"rowType\": \"<string>\",\n  \"date\": \"<dateTime>\",\n  \"amount\": {\n    \"amount\": \"<integer>\",\n    \"currency\": \"<string>\"\n  },\n  \"note\": \"<string,null>\",\n  \"submittedAt\": \"<string,null-date-time>\",\n  \"createdAt\": \"<dateTime>\",\n  \"updatedAt\": \"<dateTime>\",\n  \"deletedAt\": \"<string,null-date-time>\",\n  \"rentSchedule\": {\n    \"id\": \"<string>\",\n    \"submittedAt\": \"<string,null-date-time>\",\n    \"syncedAt\": \"<string,null-date-time>\",\n    \"deletedAt\": \"<string,null-date-time>\",\n    \"createdAt\": \"<dateTime>\",\n    \"updatedAt\": \"<dateTime>\"\n  },\n  \"insuranceClaim\": {\n    \"id\": \"<string>\",\n    \"externalId\": \"<string>\",\n    \"claimStatus\": \"<string>\",\n    \"totalPaymentAmount\": {\n      \"do_e_\": \"<integer>\",\n      \"culpa_e7\": \"<integer>\"\n    },\n    \"claimReference\": \"<string>\",\n    \"firstArrearsDate\": \"<string,null-date-time>\",\n    \"mediationResponse\": \"<string,null>\",\n    \"claimStatusDescription\": \"<string>\",\n    \"claimDate\": \"<dateTime>\",\n    \"policyId\": \"<integer>\",\n    \"company\": \"<string>\",\n    \"tenancyId\": \"<string,null>\",\n    \"legalStatus\": \"<string,null>\",\n    \"latestPaymentDate\": \"<string,null-date-time>\",\n    \"solicitorsClaimReference\": \"<string,null>\",\n    \"firmInstructed\": \"<string,null>\",\n    \"dateLegalInstructed\": \"<string,null-date-time>\",\n    \"section8DateServed\": \"<string,null-date-time>\",\n    \"section8DateExpired\": \"<string,null-date-time>\",\n    \"section21DateServed\": \"<string,null-date-time>\",\n    \"section21DateExpired\": \"<string,null-date-time>\",\n    \"dateProceedingsIssued\": \"<string,null-date-time>\",\n    \"dateOfHearing\": \"<string,null-date-time>\",\n    \"court\": \"<string,null>\",\n    \"hearingOutcome\": \"<string,null>\",\n    \"possessionDate\": \"<string,null-date-time>\",\n    \"warrantsAppliedFor\": \"<string,null>\",\n    \"dateOfEviction\": \"<string,null-date-time>\",\n    \"typeOfClaim\": \"<string,null>\",\n    \"rentScheduleStatus\": \"<string,null>\",\n    \"rpiUniqueReferenceNumber\": \"<string,null>\"\n  },\n  \"insuranceClaimId\": \"<string>\"\n}",
+                                          "createdAt": "2026-10-21T19:50:32.000Z",
+                                          "updatedAt": "2026-10-21T19:50:32.000Z",
+                                          "uid": "35240-11f26362-6a1c-4ee3-aa8c-0f450e6ece39"
+                                        },
+                                        {
+                                          "id": "5cb3b326-fce8-4007-9db0-eca4ba8359ea",
+                                          "name": "Forbidden",
+                                          "originalRequest": {
+                                            "method": "GET",
+                                            "header": [
+                                              {
+                                                "key": "Accept",
+                                                "value": "application/vnd.api+json"
+                                              },
+                                              {
+                                                "description": "Added as a part of security scheme: apikey",
+                                                "key": "Authorization",
+                                                "value": "<API Key>"
+                                              }
+                                            ],
+                                            "url": {
+                                              "raw": "{{baseUrl}}/api/v1/insurance_claims/:insuranceClaimId/rent_schedule/:rentScheduleId/rent_schedule_row/:id?include=<string>",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "api",
+                                                "v1",
+                                                "insurance_claims",
+                                                ":insuranceClaimId",
+                                                "rent_schedule",
+                                                ":rentScheduleId",
+                                                "rent_schedule_row",
+                                                ":id"
+                                              ],
+                                              "query": [
+                                                {
+                                                  "description": "Which relations to include in the response",
+                                                  "key": "include",
+                                                  "value": "<string>"
+                                                }
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "insuranceClaimId"
+                                                },
+                                                {
+                                                  "key": "rentScheduleId"
+                                                },
+                                                {
+                                                  "key": "id"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "Forbidden",
+                                          "code": 403,
+                                          "_postman_previewlanguage": "json",
+                                          "header": [
+                                            {
+                                              "key": "Content-Type",
+                                              "value": "application/json"
+                                            }
+                                          ],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": "{\n  \"id\": \"<string,null>\",\n  \"title\": \"<string,null>\",\n  \"detail\": \"<string,null>\",\n  \"status\": 400,\n  \"instance\": \"<string,null>\",\n  \"type\": \"<string>\",\n  \"meta\": {},\n  \"source\": {\n    \"pointer\": \"<string>\",\n    \"parameter\": \"<string>\",\n    \"header\": \"<string>\"\n  }\n}",
+                                          "createdAt": "2026-10-21T19:50:32.000Z",
+                                          "updatedAt": "2026-10-21T19:50:32.000Z",
+                                          "uid": "35240-5cb3b326-fce8-4007-9db0-eca4ba8359ea"
+                                        },
+                                        {
+                                          "id": "d4a6f26a-cce4-4173-9705-4c27d4e2ab5e",
+                                          "name": "Not found",
+                                          "originalRequest": {
+                                            "method": "GET",
+                                            "header": [
+                                              {
+                                                "key": "Accept",
+                                                "value": "application/vnd.api+json"
+                                              },
+                                              {
+                                                "description": "Added as a part of security scheme: apikey",
+                                                "key": "Authorization",
+                                                "value": "<API Key>"
+                                              }
+                                            ],
+                                            "url": {
+                                              "raw": "{{baseUrl}}/api/v1/insurance_claims/:insuranceClaimId/rent_schedule/:rentScheduleId/rent_schedule_row/:id?include=<string>",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "api",
+                                                "v1",
+                                                "insurance_claims",
+                                                ":insuranceClaimId",
+                                                "rent_schedule",
+                                                ":rentScheduleId",
+                                                "rent_schedule_row",
+                                                ":id"
+                                              ],
+                                              "query": [
+                                                {
+                                                  "description": "Which relations to include in the response",
+                                                  "key": "include",
+                                                  "value": "<string>"
+                                                }
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "insuranceClaimId"
+                                                },
+                                                {
+                                                  "key": "rentScheduleId"
+                                                },
+                                                {
+                                                  "key": "id"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "Not Found",
+                                          "code": 404,
+                                          "_postman_previewlanguage": "json",
+                                          "header": [
+                                            {
+                                              "key": "Content-Type",
+                                              "value": "application/json"
+                                            }
+                                          ],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": "{\n  \"id\": \"<string,null>\",\n  \"title\": \"<string,null>\",\n  \"detail\": \"<string,null>\",\n  \"status\": 400,\n  \"instance\": \"<string,null>\",\n  \"type\": \"<string>\",\n  \"meta\": {},\n  \"source\": {\n    \"pointer\": \"<string>\",\n    \"parameter\": \"<string>\",\n    \"header\": \"<string>\"\n  }\n}",
+                                          "createdAt": "2026-10-21T19:50:32.000Z",
+                                          "updatedAt": "2026-10-21T19:50:32.000Z",
+                                          "uid": "35240-d4a6f26a-cce4-4173-9705-4c27d4e2ab5e"
+                                        }
+                                      ],
+                                      "createdAt": "2026-10-21T19:50:32.000Z",
+                                      "updatedAt": "2026-10-21T19:50:32.000Z",
+                                      "uid": "35240-4e708461-1c37-4135-b6cd-2dd2bd610af6"
+                                    },
+                                    {
+                                      "name": "Removes the RentScheduleRow resource",
+                                      "id": "50f937cd-d171-4a5f-ac27-7b5c86119aea",
+                                      "protocolProfileBehavior": {
+                                        "disableBodyPruning": true
+                                      },
+                                      "request": {
+                                        "method": "DELETE",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/vnd.api+json"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/api/v1/insurance_claims/:insuranceClaimId/rent_schedule/:rentScheduleId/rent_schedule_row/:id",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "api",
+                                            "v1",
+                                            "insurance_claims",
+                                            ":insuranceClaimId",
+                                            "rent_schedule",
+                                            ":rentScheduleId",
+                                            "rent_schedule_row",
+                                            ":id"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "id": "ee764a17-27af-44e6-9fc7-3cf9f554d597",
+                                              "key": "insuranceClaimId",
+                                              "value": "<string>",
+                                              "description": "(Required) RentScheduleRow identifier"
+                                            },
+                                            {
+                                              "id": "f1b783a5-cd8b-4ad1-ae67-9239a4a4fe5b",
+                                              "key": "rentScheduleId",
+                                              "value": "<string>",
+                                              "description": "(Required) RentScheduleRow identifier"
+                                            },
+                                            {
+                                              "id": "20c34438-4c50-4caa-b789-c0128ced3f17",
+                                              "key": "id",
+                                              "value": "<string>",
+                                              "description": "(Required) RentScheduleRow identifier"
+                                            }
+                                          ]
+                                        },
+                                        "description": "Removes the RentScheduleRow resource."
+                                      },
+                                      "response": [
+                                        {
+                                          "id": "7482b098-dd81-4b59-a588-3b35a6e1ff1c",
+                                          "name": "RentScheduleRow resource deleted",
+                                          "originalRequest": {
+                                            "method": "DELETE",
+                                            "header": [
+                                              {
+                                                "description": "Added as a part of security scheme: apikey",
+                                                "key": "Authorization",
+                                                "value": "<API Key>"
+                                              }
+                                            ],
+                                            "url": {
+                                              "raw": "{{baseUrl}}/api/v1/insurance_claims/:insuranceClaimId/rent_schedule/:rentScheduleId/rent_schedule_row/:id",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "api",
+                                                "v1",
+                                                "insurance_claims",
+                                                ":insuranceClaimId",
+                                                "rent_schedule",
+                                                ":rentScheduleId",
+                                                "rent_schedule_row",
+                                                ":id"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "insuranceClaimId"
+                                                },
+                                                {
+                                                  "key": "rentScheduleId"
+                                                },
+                                                {
+                                                  "key": "id"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "No Content",
+                                          "code": 204,
+                                          "_postman_previewlanguage": "text",
+                                          "header": [],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": null,
+                                          "createdAt": "2026-10-21T19:50:32.000Z",
+                                          "updatedAt": "2026-10-21T19:50:32.000Z",
+                                          "uid": "35240-7482b098-dd81-4b59-a588-3b35a6e1ff1c"
+                                        },
+                                        {
+                                          "id": "9cb6a6f6-2b62-4bd4-90f3-491c4d89fe1f",
+                                          "name": "Forbidden",
+                                          "originalRequest": {
+                                            "method": "DELETE",
+                                            "header": [
+                                              {
+                                                "key": "Accept",
+                                                "value": "application/vnd.api+json"
+                                              },
+                                              {
+                                                "description": "Added as a part of security scheme: apikey",
+                                                "key": "Authorization",
+                                                "value": "<API Key>"
+                                              }
+                                            ],
+                                            "url": {
+                                              "raw": "{{baseUrl}}/api/v1/insurance_claims/:insuranceClaimId/rent_schedule/:rentScheduleId/rent_schedule_row/:id",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "api",
+                                                "v1",
+                                                "insurance_claims",
+                                                ":insuranceClaimId",
+                                                "rent_schedule",
+                                                ":rentScheduleId",
+                                                "rent_schedule_row",
+                                                ":id"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "insuranceClaimId"
+                                                },
+                                                {
+                                                  "key": "rentScheduleId"
+                                                },
+                                                {
+                                                  "key": "id"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "Forbidden",
+                                          "code": 403,
+                                          "_postman_previewlanguage": "json",
+                                          "header": [
+                                            {
+                                              "key": "Content-Type",
+                                              "value": "application/json"
+                                            }
+                                          ],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": "{\n  \"id\": \"<string,null>\",\n  \"title\": \"<string,null>\",\n  \"detail\": \"<string,null>\",\n  \"status\": 400,\n  \"instance\": \"<string,null>\",\n  \"type\": \"<string>\",\n  \"meta\": {},\n  \"source\": {\n    \"pointer\": \"<string>\",\n    \"parameter\": \"<string>\",\n    \"header\": \"<string>\"\n  }\n}",
+                                          "createdAt": "2026-10-21T19:50:32.000Z",
+                                          "updatedAt": "2026-10-21T19:50:32.000Z",
+                                          "uid": "35240-9cb6a6f6-2b62-4bd4-90f3-491c4d89fe1f"
+                                        },
+                                        {
+                                          "id": "ea638c87-94ef-44c5-b3d9-1f0be68ab4e9",
+                                          "name": "Not found",
+                                          "originalRequest": {
+                                            "method": "DELETE",
+                                            "header": [
+                                              {
+                                                "key": "Accept",
+                                                "value": "application/vnd.api+json"
+                                              },
+                                              {
+                                                "description": "Added as a part of security scheme: apikey",
+                                                "key": "Authorization",
+                                                "value": "<API Key>"
+                                              }
+                                            ],
+                                            "url": {
+                                              "raw": "{{baseUrl}}/api/v1/insurance_claims/:insuranceClaimId/rent_schedule/:rentScheduleId/rent_schedule_row/:id",
+                                              "host": [
+                                                "{{baseUrl}}"
+                                              ],
+                                              "path": [
+                                                "api",
+                                                "v1",
+                                                "insurance_claims",
+                                                ":insuranceClaimId",
+                                                "rent_schedule",
+                                                ":rentScheduleId",
+                                                "rent_schedule_row",
+                                                ":id"
+                                              ],
+                                              "variable": [
+                                                {
+                                                  "key": "insuranceClaimId"
+                                                },
+                                                {
+                                                  "key": "rentScheduleId"
+                                                },
+                                                {
+                                                  "key": "id"
+                                                }
+                                              ]
+                                            }
+                                          },
+                                          "status": "Not Found",
+                                          "code": 404,
+                                          "_postman_previewlanguage": "json",
+                                          "header": [
+                                            {
+                                              "key": "Content-Type",
+                                              "value": "application/json"
+                                            }
+                                          ],
+                                          "cookie": [],
+                                          "responseTime": null,
+                                          "body": "{\n  \"id\": \"<string,null>\",\n  \"title\": \"<string,null>\",\n  \"detail\": \"<string,null>\",\n  \"status\": 400,\n  \"instance\": \"<string,null>\",\n  \"type\": \"<string>\",\n  \"meta\": {},\n  \"source\": {\n    \"pointer\": \"<string>\",\n    \"parameter\": \"<string>\",\n    \"header\": \"<string>\"\n  }\n}",
+                                          "createdAt": "2026-10-21T19:50:32.000Z",
+                                          "updatedAt": "2026-10-21T19:50:32.000Z",
+                                          "uid": "35240-ea638c87-94ef-44c5-b3d9-1f0be68ab4e9"
+                                        }
+                                      ],
+                                      "createdAt": "2026-10-21T19:50:32.000Z",
+                                      "updatedAt": "2026-10-21T19:50:32.000Z",
+                                      "uid": "35240-50f937cd-d171-4a5f-ac27-7b5c86119aea"
+                                    }
+                                  ],
+                                  "id": "f957216b-8bdb-4c52-b966-9e67bc00f7f5",
+                                  "createdAt": "2026-10-21T19:50:32.000Z",
+                                  "updatedAt": "2026-10-21T19:50:32.000Z",
+                                  "uid": "35240-f957216b-8bdb-4c52-b966-9e67bc00f7f5"
+                                }
+                              ],
+                              "id": "5b65e63c-1e70-42b4-a41c-8a6cc69700c2",
+                              "createdAt": "2026-10-21T19:50:32.000Z",
+                              "updatedAt": "2026-10-21T19:50:32.000Z",
+                              "uid": "35240-5b65e63c-1e70-42b4-a41c-8a6cc69700c2"
+                            }
+                          ],
+                          "id": "1e3d4bb6-872e-4a2d-a8dc-6f3dc1cb3b51",
+                          "createdAt": "2026-10-21T19:50:32.000Z",
+                          "updatedAt": "2026-10-21T19:50:32.000Z",
+                          "uid": "35240-1e3d4bb6-872e-4a2d-a8dc-6f3dc1cb3b51"
+                        }
+                      ],
+                      "id": "3b206220-d0e5-43bf-a11c-242e8c10c503",
+                      "createdAt": "2026-10-21T19:50:32.000Z",
+                      "updatedAt": "2026-10-21T19:50:32.000Z",
+                      "uid": "35240-3b206220-d0e5-43bf-a11c-242e8c10c503"
+                    }
+                  ],
+                  "id": "87a90495-d217-4585-af83-21cb705f4c5f",
+                  "createdAt": "2026-10-21T19:50:32.000Z",
+                  "updatedAt": "2026-10-21T19:50:32.000Z",
+                  "uid": "35240-87a90495-d217-4585-af83-21cb705f4c5f"
+                }
+              ],
+              "id": "8ee4bcc0-22be-4199-8876-392ff0d38f24",
+              "createdAt": "2026-10-21T19:50:32.000Z",
+              "updatedAt": "2026-10-21T19:50:32.000Z",
+              "uid": "35240-8ee4bcc0-22be-4199-8876-392ff0d38f24"
+            }
+          ],
+          "id": "0656fe21-2e0c-439c-a76a-a97928e271b5",
+          "createdAt": "2026-10-21T19:50:32.000Z",
+          "updatedAt": "2026-10-21T19:50:32.000Z",
+          "uid": "35240-0656fe21-2e0c-439c-a76a-a97928e271b5"
+        }
+      ],
+      "id": "209eab77-def0-408b-9383-8c7b8fbe82df",
+      "createdAt": "2026-10-21T19:50:32.000Z",
+      "updatedAt": "2026-10-21T19:50:32.000Z",
+      "uid": "35240-209eab77-def0-408b-9383-8c7b8fbe82df"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://insurance-app.goodlord.co/"
+    }
+  ]
+}

@@ -1,0 +1,425 @@
+{
+  "info": {
+    "_postman_id": "31e5d74d-1322-49f1-81de-e4723bc18d88",
+    "name": "Insurance App Company API",
+    "description": "Resource 'Company' operations.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T19:49:57.000Z",
+    "updatedAt": "2026-10-21T19:49:57.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-31e5d74d-1322-49f1-81de-e4723bc18d88"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "companies",
+              "item": [
+                {
+                  "name": "{id}",
+                  "item": [
+                    {
+                      "name": "Retrieves a Company resource",
+                      "id": "931def51-bf45-4a94-82d0-0139c9282a9b",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/companies/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "companies",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "6fcb7b3a-b7e5-482c-82cf-877d331ee4d4",
+                              "key": "id",
+                              "value": "<string>",
+                              "description": "(Required) Company identifier"
+                            }
+                          ]
+                        },
+                        "description": "Retrieves a Company resource."
+                      },
+                      "response": [
+                        {
+                          "id": "5d7c945e-66dd-4269-838a-0bab3e6a9326",
+                          "name": "Company resource",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/vnd.api+json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/companies/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "companies",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<uuid>\",\n  \"name\": \"<string,null>\",\n  \"externalId\": \"<string>\"\n}",
+                          "createdAt": "2026-10-21T19:49:58.000Z",
+                          "updatedAt": "2026-10-21T19:49:58.000Z",
+                          "uid": "35240-5d7c945e-66dd-4269-838a-0bab3e6a9326"
+                        },
+                        {
+                          "id": "bd0f96d3-bc59-4cb8-a3cb-955ac930d066",
+                          "name": "Forbidden",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/vnd.api+json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/companies/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "companies",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string,null>\",\n  \"title\": \"<string,null>\",\n  \"detail\": \"<string,null>\",\n  \"status\": 400,\n  \"instance\": \"<string,null>\",\n  \"type\": \"<string>\",\n  \"meta\": {},\n  \"source\": {\n    \"pointer\": \"<string>\",\n    \"parameter\": \"<string>\",\n    \"header\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-10-21T19:49:58.000Z",
+                          "updatedAt": "2026-10-21T19:49:58.000Z",
+                          "uid": "35240-bd0f96d3-bc59-4cb8-a3cb-955ac930d066"
+                        },
+                        {
+                          "id": "7d8c98c5-f5e0-4b31-b21b-ad56628e41dc",
+                          "name": "Not found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/vnd.api+json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/companies/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "companies",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string,null>\",\n  \"title\": \"<string,null>\",\n  \"detail\": \"<string,null>\",\n  \"status\": 400,\n  \"instance\": \"<string,null>\",\n  \"type\": \"<string>\",\n  \"meta\": {},\n  \"source\": {\n    \"pointer\": \"<string>\",\n    \"parameter\": \"<string>\",\n    \"header\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-10-21T19:49:58.000Z",
+                          "updatedAt": "2026-10-21T19:49:58.000Z",
+                          "uid": "35240-7d8c98c5-f5e0-4b31-b21b-ad56628e41dc"
+                        }
+                      ],
+                      "createdAt": "2026-10-21T19:49:58.000Z",
+                      "updatedAt": "2026-10-21T19:49:58.000Z",
+                      "uid": "35240-931def51-bf45-4a94-82d0-0139c9282a9b"
+                    }
+                  ],
+                  "id": "9112cba9-4c63-4769-b6a4-cfdb1f13232e",
+                  "createdAt": "2026-10-21T19:49:58.000Z",
+                  "updatedAt": "2026-10-21T19:49:58.000Z",
+                  "uid": "35240-9112cba9-4c63-4769-b6a4-cfdb1f13232e"
+                },
+                {
+                  "name": "Retrieves the collection of Company resources",
+                  "id": "4d35dc94-1cb2-4a3b-bf65-3b7f90ac5835",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/vnd.api+json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/v1/companies?page=1&itemsPerPage=50",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "companies"
+                      ],
+                      "query": [
+                        {
+                          "description": "The collection page number",
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "description": "The number of items per page",
+                          "key": "itemsPerPage",
+                          "value": "50"
+                        }
+                      ]
+                    },
+                    "description": "Retrieves the collection of Company resources."
+                  },
+                  "response": [
+                    {
+                      "id": "2c320a47-3925-40f5-a506-ceeb8ba3f775",
+                      "name": "Company collection",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/companies?page=1&itemsPerPage=50",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "companies"
+                          ],
+                          "query": [
+                            {
+                              "description": "The collection page number",
+                              "key": "page",
+                              "value": "1"
+                            },
+                            {
+                              "description": "The number of items per page",
+                              "key": "itemsPerPage",
+                              "value": "50"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "[\n  {\n    \"id\": \"<uuid>\",\n    \"name\": \"<string,null>\",\n    \"externalId\": \"<string>\"\n  },\n  {\n    \"id\": \"<uuid>\",\n    \"name\": \"<string,null>\",\n    \"externalId\": \"<string>\"\n  }\n]",
+                      "createdAt": "2026-10-21T19:49:58.000Z",
+                      "updatedAt": "2026-10-21T19:49:58.000Z",
+                      "uid": "35240-2c320a47-3925-40f5-a506-ceeb8ba3f775"
+                    },
+                    {
+                      "id": "d43a26a6-d6a0-41e0-b4e6-e6d255b9c2d0",
+                      "name": "Forbidden",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/vnd.api+json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/companies?page=1&itemsPerPage=50",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "companies"
+                          ],
+                          "query": [
+                            {
+                              "description": "The collection page number",
+                              "key": "page",
+                              "value": "1"
+                            },
+                            {
+                              "description": "The number of items per page",
+                              "key": "itemsPerPage",
+                              "value": "50"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string,null>\",\n  \"title\": \"<string,null>\",\n  \"detail\": \"<string,null>\",\n  \"status\": 400,\n  \"instance\": \"<string,null>\",\n  \"type\": \"<string>\",\n  \"meta\": {},\n  \"source\": {\n    \"pointer\": \"<string>\",\n    \"parameter\": \"<string>\",\n    \"header\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-21T19:49:58.000Z",
+                      "updatedAt": "2026-10-21T19:49:58.000Z",
+                      "uid": "35240-d43a26a6-d6a0-41e0-b4e6-e6d255b9c2d0"
+                    }
+                  ],
+                  "createdAt": "2026-10-21T19:49:58.000Z",
+                  "updatedAt": "2026-10-21T19:49:58.000Z",
+                  "uid": "35240-4d35dc94-1cb2-4a3b-bf65-3b7f90ac5835"
+                }
+              ],
+              "id": "a5244cad-a5a8-4982-aaf9-1da812a5dab5",
+              "createdAt": "2026-10-21T19:49:58.000Z",
+              "updatedAt": "2026-10-21T19:49:58.000Z",
+              "uid": "35240-a5244cad-a5a8-4982-aaf9-1da812a5dab5"
+            }
+          ],
+          "id": "021a6130-d975-4c0b-82d3-3ea1026ce822",
+          "createdAt": "2026-10-21T19:49:58.000Z",
+          "updatedAt": "2026-10-21T19:49:58.000Z",
+          "uid": "35240-021a6130-d975-4c0b-82d3-3ea1026ce822"
+        }
+      ],
+      "id": "d594247d-e47d-4910-8340-6b3a74bb697c",
+      "createdAt": "2026-10-21T19:49:58.000Z",
+      "updatedAt": "2026-10-21T19:49:58.000Z",
+      "uid": "35240-d594247d-e47d-4910-8340-6b3a74bb697c"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://insurance-app.goodlord.co/"
+    }
+  ]
+}

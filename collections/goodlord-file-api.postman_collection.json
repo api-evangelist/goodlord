@@ -1,0 +1,1044 @@
+{
+  "info": {
+    "_postman_id": "7b00778d-e73e-49d6-ae41-8c9c0942c6f0",
+    "name": "Insurance App File API",
+    "description": "Resource 'File' operations.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T19:50:00.000Z",
+    "updatedAt": "2026-10-21T19:50:01.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-7b00778d-e73e-49d6-ae41-8c9c0942c6f0"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "insurance_claims",
+              "item": [
+                {
+                  "name": "{insuranceClaimId}",
+                  "item": [
+                    {
+                      "name": "files",
+                      "item": [
+                        {
+                          "name": "{id}",
+                          "item": [
+                            {
+                              "name": "Retrieves a File resource",
+                              "id": "cb06ba6a-1d04-4603-8d51-15f9eaba798d",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/vnd.api+json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/insurance_claims/:insuranceClaimId/files/:id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "insurance_claims",
+                                    ":insuranceClaimId",
+                                    "files",
+                                    ":id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "98459d61-650e-4741-ac20-61d49ab62531",
+                                      "key": "insuranceClaimId",
+                                      "value": "<string>",
+                                      "description": "(Required) File identifier"
+                                    },
+                                    {
+                                      "id": "4d60856a-db3c-4b26-aceb-a11dbc6f6440",
+                                      "key": "id",
+                                      "value": "<string>",
+                                      "description": "(Required) File identifier"
+                                    }
+                                  ]
+                                },
+                                "description": "Retrieves a File resource."
+                              },
+                              "response": [
+                                {
+                                  "id": "49f4160c-f83d-4b11-aa68-07fe5e7dc679",
+                                  "name": "File resource",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/vnd.api+json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: apikey",
+                                        "key": "Authorization",
+                                        "value": "<API Key>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/insurance_claims/:insuranceClaimId/files/:id",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "insurance_claims",
+                                        ":insuranceClaimId",
+                                        "files",
+                                        ":id"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "insuranceClaimId"
+                                        },
+                                        {
+                                          "key": "id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"id\": \"<string>\",\n  \"fileName\": \"<string>\",\n  \"originalFileName\": \"<string>\",\n  \"fileSize\": \"<integer,null>\",\n  \"mimeType\": \"<string,null>\",\n  \"fileType\": \"<string,null>\",\n  \"createdAt\": \"<string,null-date-time>\",\n  \"podioFileId\": \"<string,null>\",\n  \"insuranceClaim\": \"<string,null>\"\n}",
+                                  "createdAt": "2026-10-21T19:50:01.000Z",
+                                  "updatedAt": "2026-10-21T19:50:01.000Z",
+                                  "uid": "35240-49f4160c-f83d-4b11-aa68-07fe5e7dc679"
+                                },
+                                {
+                                  "id": "f5908f28-e5a1-44cf-a8e8-b38a6c01e279",
+                                  "name": "Forbidden",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/vnd.api+json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: apikey",
+                                        "key": "Authorization",
+                                        "value": "<API Key>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/insurance_claims/:insuranceClaimId/files/:id",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "insurance_claims",
+                                        ":insuranceClaimId",
+                                        "files",
+                                        ":id"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "insuranceClaimId"
+                                        },
+                                        {
+                                          "key": "id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Forbidden",
+                                  "code": 403,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"id\": \"<string,null>\",\n  \"title\": \"<string,null>\",\n  \"detail\": \"<string,null>\",\n  \"status\": 400,\n  \"instance\": \"<string,null>\",\n  \"type\": \"<string>\",\n  \"meta\": {},\n  \"source\": {\n    \"pointer\": \"<string>\",\n    \"parameter\": \"<string>\",\n    \"header\": \"<string>\"\n  }\n}",
+                                  "createdAt": "2026-10-21T19:50:01.000Z",
+                                  "updatedAt": "2026-10-21T19:50:01.000Z",
+                                  "uid": "35240-f5908f28-e5a1-44cf-a8e8-b38a6c01e279"
+                                },
+                                {
+                                  "id": "6d728984-c9c4-428b-ba79-ca6e375d1dbe",
+                                  "name": "Not found",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/vnd.api+json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: apikey",
+                                        "key": "Authorization",
+                                        "value": "<API Key>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/insurance_claims/:insuranceClaimId/files/:id",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "insurance_claims",
+                                        ":insuranceClaimId",
+                                        "files",
+                                        ":id"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "insuranceClaimId"
+                                        },
+                                        {
+                                          "key": "id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Not Found",
+                                  "code": 404,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"id\": \"<string,null>\",\n  \"title\": \"<string,null>\",\n  \"detail\": \"<string,null>\",\n  \"status\": 400,\n  \"instance\": \"<string,null>\",\n  \"type\": \"<string>\",\n  \"meta\": {},\n  \"source\": {\n    \"pointer\": \"<string>\",\n    \"parameter\": \"<string>\",\n    \"header\": \"<string>\"\n  }\n}",
+                                  "createdAt": "2026-10-21T19:50:01.000Z",
+                                  "updatedAt": "2026-10-21T19:50:01.000Z",
+                                  "uid": "35240-6d728984-c9c4-428b-ba79-ca6e375d1dbe"
+                                }
+                              ],
+                              "createdAt": "2026-10-21T19:50:01.000Z",
+                              "updatedAt": "2026-10-21T19:50:01.000Z",
+                              "uid": "35240-cb06ba6a-1d04-4603-8d51-15f9eaba798d"
+                            },
+                            {
+                              "name": "Removes the File resource",
+                              "id": "c1c4a8fa-884e-4efc-9b16-cfb79b97fe88",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/vnd.api+json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/insurance_claims/:insuranceClaimId/files/:id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "insurance_claims",
+                                    ":insuranceClaimId",
+                                    "files",
+                                    ":id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "83022612-fa0e-48d1-98ae-0ccbac975339",
+                                      "key": "insuranceClaimId",
+                                      "value": "<string>",
+                                      "description": "(Required) File identifier"
+                                    },
+                                    {
+                                      "id": "d2d99089-9702-4a93-ac77-ae1ef0d95c8e",
+                                      "key": "id",
+                                      "value": "<string>",
+                                      "description": "(Required) File identifier"
+                                    }
+                                  ]
+                                },
+                                "description": "Removes the File resource."
+                              },
+                              "response": [
+                                {
+                                  "id": "56b683d2-c2a4-4ea1-95be-9cf17084a796",
+                                  "name": "File resource deleted",
+                                  "originalRequest": {
+                                    "method": "DELETE",
+                                    "header": [
+                                      {
+                                        "description": "Added as a part of security scheme: apikey",
+                                        "key": "Authorization",
+                                        "value": "<API Key>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/insurance_claims/:insuranceClaimId/files/:id",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "insurance_claims",
+                                        ":insuranceClaimId",
+                                        "files",
+                                        ":id"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "insuranceClaimId"
+                                        },
+                                        {
+                                          "key": "id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "No Content",
+                                  "code": 204,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-10-21T19:50:01.000Z",
+                                  "updatedAt": "2026-10-21T19:50:01.000Z",
+                                  "uid": "35240-56b683d2-c2a4-4ea1-95be-9cf17084a796"
+                                },
+                                {
+                                  "id": "fef3ff01-1440-4347-84df-ccb8c691261f",
+                                  "name": "Forbidden",
+                                  "originalRequest": {
+                                    "method": "DELETE",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/vnd.api+json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: apikey",
+                                        "key": "Authorization",
+                                        "value": "<API Key>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/insurance_claims/:insuranceClaimId/files/:id",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "insurance_claims",
+                                        ":insuranceClaimId",
+                                        "files",
+                                        ":id"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "insuranceClaimId"
+                                        },
+                                        {
+                                          "key": "id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Forbidden",
+                                  "code": 403,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"id\": \"<string,null>\",\n  \"title\": \"<string,null>\",\n  \"detail\": \"<string,null>\",\n  \"status\": 400,\n  \"instance\": \"<string,null>\",\n  \"type\": \"<string>\",\n  \"meta\": {},\n  \"source\": {\n    \"pointer\": \"<string>\",\n    \"parameter\": \"<string>\",\n    \"header\": \"<string>\"\n  }\n}",
+                                  "createdAt": "2026-10-21T19:50:01.000Z",
+                                  "updatedAt": "2026-10-21T19:50:01.000Z",
+                                  "uid": "35240-fef3ff01-1440-4347-84df-ccb8c691261f"
+                                },
+                                {
+                                  "id": "e50a24f8-6b8f-464f-9e82-abc3a4305127",
+                                  "name": "Not found",
+                                  "originalRequest": {
+                                    "method": "DELETE",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/vnd.api+json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: apikey",
+                                        "key": "Authorization",
+                                        "value": "<API Key>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/insurance_claims/:insuranceClaimId/files/:id",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "insurance_claims",
+                                        ":insuranceClaimId",
+                                        "files",
+                                        ":id"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "insuranceClaimId"
+                                        },
+                                        {
+                                          "key": "id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Not Found",
+                                  "code": 404,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"id\": \"<string,null>\",\n  \"title\": \"<string,null>\",\n  \"detail\": \"<string,null>\",\n  \"status\": 400,\n  \"instance\": \"<string,null>\",\n  \"type\": \"<string>\",\n  \"meta\": {},\n  \"source\": {\n    \"pointer\": \"<string>\",\n    \"parameter\": \"<string>\",\n    \"header\": \"<string>\"\n  }\n}",
+                                  "createdAt": "2026-10-21T19:50:01.000Z",
+                                  "updatedAt": "2026-10-21T19:50:01.000Z",
+                                  "uid": "35240-e50a24f8-6b8f-464f-9e82-abc3a4305127"
+                                }
+                              ],
+                              "createdAt": "2026-10-21T19:50:01.000Z",
+                              "updatedAt": "2026-10-21T19:50:01.000Z",
+                              "uid": "35240-c1c4a8fa-884e-4efc-9b16-cfb79b97fe88"
+                            }
+                          ],
+                          "id": "e1e7e979-28e8-46ab-8ab3-3a15103b16b6",
+                          "createdAt": "2026-10-21T19:50:01.000Z",
+                          "updatedAt": "2026-10-21T19:50:01.000Z",
+                          "uid": "35240-e1e7e979-28e8-46ab-8ab3-3a15103b16b6"
+                        },
+                        {
+                          "name": "Retrieves the collection of File resources",
+                          "id": "dea48007-8458-45bb-9409-6efaf62ce34d",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/vnd.api+json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/insurance_claims/:insuranceClaimId/files?page=1&itemsPerPage=50",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "insurance_claims",
+                                ":insuranceClaimId",
+                                "files"
+                              ],
+                              "query": [
+                                {
+                                  "description": "The collection page number",
+                                  "key": "page",
+                                  "value": "1"
+                                },
+                                {
+                                  "description": "The number of items per page",
+                                  "key": "itemsPerPage",
+                                  "value": "50"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "e97a2aa8-f8d1-4d89-9214-1de4c83125f2",
+                                  "key": "insuranceClaimId",
+                                  "value": "<string>",
+                                  "description": "(Required) File identifier"
+                                }
+                              ]
+                            },
+                            "description": "Retrieves the collection of File resources."
+                          },
+                          "response": [
+                            {
+                              "id": "f7ef6cb0-b9c1-4ea0-9704-81fbbb356eb4",
+                              "name": "File collection",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/vnd.api+json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/insurance_claims/:insuranceClaimId/files?page=1&itemsPerPage=50",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "insurance_claims",
+                                    ":insuranceClaimId",
+                                    "files"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "The collection page number",
+                                      "key": "page",
+                                      "value": "1"
+                                    },
+                                    {
+                                      "description": "The number of items per page",
+                                      "key": "itemsPerPage",
+                                      "value": "50"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "insuranceClaimId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "[\n  {\n    \"id\": \"<string>\",\n    \"fileName\": \"<string>\",\n    \"originalFileName\": \"<string>\",\n    \"fileSize\": \"<integer,null>\",\n    \"mimeType\": \"<string,null>\",\n    \"fileType\": \"<string,null>\",\n    \"createdAt\": \"<string,null-date-time>\",\n    \"podioFileId\": \"<string,null>\",\n    \"insuranceClaim\": \"<string,null>\"\n  },\n  {\n    \"id\": \"<string>\",\n    \"fileName\": \"<string>\",\n    \"originalFileName\": \"<string>\",\n    \"fileSize\": \"<integer,null>\",\n    \"mimeType\": \"<string,null>\",\n    \"fileType\": \"<string,null>\",\n    \"createdAt\": \"<string,null-date-time>\",\n    \"podioFileId\": \"<string,null>\",\n    \"insuranceClaim\": \"<string,null>\"\n  }\n]",
+                              "createdAt": "2026-10-21T19:50:01.000Z",
+                              "updatedAt": "2026-10-21T19:50:01.000Z",
+                              "uid": "35240-f7ef6cb0-b9c1-4ea0-9704-81fbbb356eb4"
+                            },
+                            {
+                              "id": "15d09d3e-238a-43b8-9fbe-c8d7743d737b",
+                              "name": "Forbidden",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/vnd.api+json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/insurance_claims/:insuranceClaimId/files?page=1&itemsPerPage=50",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "insurance_claims",
+                                    ":insuranceClaimId",
+                                    "files"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "The collection page number",
+                                      "key": "page",
+                                      "value": "1"
+                                    },
+                                    {
+                                      "description": "The number of items per page",
+                                      "key": "itemsPerPage",
+                                      "value": "50"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "insuranceClaimId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Forbidden",
+                              "code": 403,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"id\": \"<string,null>\",\n  \"title\": \"<string,null>\",\n  \"detail\": \"<string,null>\",\n  \"status\": 400,\n  \"instance\": \"<string,null>\",\n  \"type\": \"<string>\",\n  \"meta\": {},\n  \"source\": {\n    \"pointer\": \"<string>\",\n    \"parameter\": \"<string>\",\n    \"header\": \"<string>\"\n  }\n}",
+                              "createdAt": "2026-10-21T19:50:01.000Z",
+                              "updatedAt": "2026-10-21T19:50:01.000Z",
+                              "uid": "35240-15d09d3e-238a-43b8-9fbe-c8d7743d737b"
+                            }
+                          ],
+                          "createdAt": "2026-10-21T19:50:01.000Z",
+                          "updatedAt": "2026-10-21T19:50:01.000Z",
+                          "uid": "35240-dea48007-8458-45bb-9409-6efaf62ce34d"
+                        },
+                        {
+                          "name": "Upload a file to an insurance claim",
+                          "id": "9c81a228-e106-4069-a25c-5fe8477df512",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "multipart/form-data"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/vnd.api+json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "formdata",
+                              "formdata": [
+                                {
+                                  "description": "(Required) The file to upload",
+                                  "key": "file",
+                                  "type": "file",
+                                  "value": null
+                                },
+                                {
+                                  "description": "(Required) The type of file being uploaded (This can only be one of tenancy-agreement-original,rent-schedule,supporting-document)",
+                                  "key": "file_type",
+                                  "value": "tenancy-agreement-original",
+                                  "type": "text"
+                                }
+                              ]
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/insurance_claims/:insuranceClaimId/files",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "insurance_claims",
+                                ":insuranceClaimId",
+                                "files"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "b1eb7061-31d8-490b-8b65-ed183a833db5",
+                                  "key": "insuranceClaimId",
+                                  "value": "<string>",
+                                  "description": "(Required) FileCreate identifier"
+                                }
+                              ]
+                            },
+                            "description": "Upload a file (tenancy agreement, rent schedule, or supporting document)\nto an insurance claim. The file will be stored and synced to Podio."
+                          },
+                          "response": [
+                            {
+                              "id": "0377875c-e885-4973-8643-560684eaf3b3",
+                              "name": "FileCreate resource created",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "multipart/form-data"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/vnd.api+json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "formdata",
+                                  "formdata": [
+                                    {
+                                      "description": "(Required) The file to upload",
+                                      "key": "file",
+                                      "type": "file"
+                                    },
+                                    {
+                                      "description": "(Required) The type of file being uploaded (This can only be one of tenancy-agreement-original,rent-schedule,supporting-document)",
+                                      "key": "file_type",
+                                      "value": "tenancy-agreement-original",
+                                      "type": "text"
+                                    }
+                                  ]
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/insurance_claims/:insuranceClaimId/files",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "insurance_claims",
+                                    ":insuranceClaimId",
+                                    "files"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "insuranceClaimId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Created",
+                              "code": 201,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/vnd.api+json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"id\": \"<string>\",\n      \"fileName\": \"<string>\",\n      \"originalFileName\": \"<string>\",\n      \"fileSize\": \"<integer,null>\",\n      \"mimeType\": \"<string,null>\",\n      \"fileType\": \"<string,null>\",\n      \"createdAt\": \"<string,null-date-time>\",\n      \"podioFileId\": \"<string,null>\",\n      \"insuranceClaim\": \"<string,null>\"\n    }\n  }\n}",
+                              "createdAt": "2026-10-21T19:50:01.000Z",
+                              "updatedAt": "2026-10-21T19:50:01.000Z",
+                              "uid": "35240-0377875c-e885-4973-8643-560684eaf3b3"
+                            },
+                            {
+                              "id": "e332e947-5cc9-4de7-90a7-306e7e0c895e",
+                              "name": "Invalid input",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "multipart/form-data"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/vnd.api+json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "formdata",
+                                  "formdata": [
+                                    {
+                                      "description": "(Required) The file to upload",
+                                      "key": "file",
+                                      "type": "file"
+                                    },
+                                    {
+                                      "description": "(Required) The type of file being uploaded (This can only be one of tenancy-agreement-original,rent-schedule,supporting-document)",
+                                      "key": "file_type",
+                                      "value": "tenancy-agreement-original",
+                                      "type": "text"
+                                    }
+                                  ]
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/insurance_claims/:insuranceClaimId/files",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "insurance_claims",
+                                    ":insuranceClaimId",
+                                    "files"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "insuranceClaimId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"id\": \"<string,null>\",\n  \"title\": \"<string,null>\",\n  \"detail\": \"<string,null>\",\n  \"status\": 400,\n  \"instance\": \"<string,null>\",\n  \"type\": \"<string>\",\n  \"meta\": {},\n  \"source\": {\n    \"pointer\": \"<string>\",\n    \"parameter\": \"<string>\",\n    \"header\": \"<string>\"\n  }\n}",
+                              "createdAt": "2026-10-21T19:50:01.000Z",
+                              "updatedAt": "2026-10-21T19:50:01.000Z",
+                              "uid": "35240-e332e947-5cc9-4de7-90a7-306e7e0c895e"
+                            },
+                            {
+                              "id": "ce46b4da-023c-4bb2-adfe-d221f3328d15",
+                              "name": "Forbidden",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "multipart/form-data"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/vnd.api+json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "formdata",
+                                  "formdata": [
+                                    {
+                                      "description": "(Required) The file to upload",
+                                      "key": "file",
+                                      "type": "file"
+                                    },
+                                    {
+                                      "description": "(Required) The type of file being uploaded (This can only be one of tenancy-agreement-original,rent-schedule,supporting-document)",
+                                      "key": "file_type",
+                                      "value": "tenancy-agreement-original",
+                                      "type": "text"
+                                    }
+                                  ]
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/insurance_claims/:insuranceClaimId/files",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "insurance_claims",
+                                    ":insuranceClaimId",
+                                    "files"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "insuranceClaimId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Forbidden",
+                              "code": 403,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"id\": \"<string,null>\",\n  \"title\": \"<string,null>\",\n  \"detail\": \"<string,null>\",\n  \"status\": 400,\n  \"instance\": \"<string,null>\",\n  \"type\": \"<string>\",\n  \"meta\": {},\n  \"source\": {\n    \"pointer\": \"<string>\",\n    \"parameter\": \"<string>\",\n    \"header\": \"<string>\"\n  }\n}",
+                              "createdAt": "2026-10-21T19:50:01.000Z",
+                              "updatedAt": "2026-10-21T19:50:01.000Z",
+                              "uid": "35240-ce46b4da-023c-4bb2-adfe-d221f3328d15"
+                            },
+                            {
+                              "id": "a31fab15-6e75-4342-a1f6-3b70f90bd73e",
+                              "name": "An error occurred",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "multipart/form-data"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/vnd.api+json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "Authorization",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "formdata",
+                                  "formdata": [
+                                    {
+                                      "description": "(Required) The file to upload",
+                                      "key": "file",
+                                      "type": "file"
+                                    },
+                                    {
+                                      "description": "(Required) The type of file being uploaded (This can only be one of tenancy-agreement-original,rent-schedule,supporting-document)",
+                                      "key": "file_type",
+                                      "value": "tenancy-agreement-original",
+                                      "type": "text"
+                                    }
+                                  ]
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/insurance_claims/:insuranceClaimId/files",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "insurance_claims",
+                                    ":insuranceClaimId",
+                                    "files"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "insuranceClaimId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                              "code": 422,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"status\": 422,\n  \"detail\": \"<string>\",\n  \"type\": \"<string>\",\n  \"title\": \"<string,null>\",\n  \"instance\": \"<string,null>\"\n}",
+                              "createdAt": "2026-10-21T19:50:01.000Z",
+                              "updatedAt": "2026-10-21T19:50:01.000Z",
+                              "uid": "35240-a31fab15-6e75-4342-a1f6-3b70f90bd73e"
+                            }
+                          ],
+                          "createdAt": "2026-10-21T19:50:01.000Z",
+                          "updatedAt": "2026-10-21T19:50:01.000Z",
+                          "uid": "35240-9c81a228-e106-4069-a25c-5fe8477df512"
+                        }
+                      ],
+                      "id": "b1640bcf-04d8-4597-b069-6fb6407fd6f8",
+                      "createdAt": "2026-10-21T19:50:01.000Z",
+                      "updatedAt": "2026-10-21T19:50:01.000Z",
+                      "uid": "35240-b1640bcf-04d8-4597-b069-6fb6407fd6f8"
+                    }
+                  ],
+                  "id": "f5401910-1c34-48e0-845c-c373deb85599",
+                  "createdAt": "2026-10-21T19:50:01.000Z",
+                  "updatedAt": "2026-10-21T19:50:01.000Z",
+                  "uid": "35240-f5401910-1c34-48e0-845c-c373deb85599"
+                }
+              ],
+              "id": "15226cc5-b0d3-455b-bdf3-9d0a1ce32890",
+              "createdAt": "2026-10-21T19:50:01.000Z",
+              "updatedAt": "2026-10-21T19:50:01.000Z",
+              "uid": "35240-15226cc5-b0d3-455b-bdf3-9d0a1ce32890"
+            }
+          ],
+          "id": "4f6041a7-488c-493e-ad14-34593dfae4af",
+          "createdAt": "2026-10-21T19:50:01.000Z",
+          "updatedAt": "2026-10-21T19:50:01.000Z",
+          "uid": "35240-4f6041a7-488c-493e-ad14-34593dfae4af"
+        }
+      ],
+      "id": "bcb1ef6b-29b7-4b1e-bd97-7de327092640",
+      "createdAt": "2026-10-21T19:50:01.000Z",
+      "updatedAt": "2026-10-21T19:50:01.000Z",
+      "uid": "35240-bcb1ef6b-29b7-4b1e-bd97-7de327092640"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://insurance-app.goodlord.co/"
+    }
+  ]
+}
